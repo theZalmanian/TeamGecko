@@ -1,0 +1,87 @@
+<!--? Levi's Contact Page :) -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact Information</title>
+    <link rel="icon" type="image/x-icon" href="/images/geckos-logo.svg">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/gecko.css">
+</head>
+<body>
+<!--Start of Nav-->
+<nav class="navbar sticky-top navbar-expand-md">
+    <div class="container">
+        <a class="navbar-brand" href="/index.html">
+            <img src="/images/geckos-logo.svg" height="40px" alt="A logo of a green gecko">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/index.html">
+                    Home
+                </a>
+                <div class="nav-item dropdown">
+                    <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sprint 1
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/sprint-1/requirements.html">
+                            Requirements
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a class="dropdown-item" href="/sprint-1/experience.html">
+                            Experience Survey
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a class="dropdown-item active" href="/sprint-1/contact.html" aria-current="page">
+                            Contact
+                        </a>
+                    </div>
+                </div>
+                <a class="nav-link" href="#">
+                    Sprint 2
+                </a>
+                <a class="nav-link" href="#">
+                    Sprint 3
+                </a>
+                <a class="nav-link" href="#">
+                    Sprint 4
+                </a>
+                <a class="nav-link" href="#">
+                    Sprint 5
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+<!--End of Nav-->
+<div class="container">
+    <form action="/vardump.php" method="post">
+        <div class="contact">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Name"  name="name" required>
+        </div>
+        <div class="contact">
+            <label for="email">Email Address</label>
+            <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+        </div>
+        <div class="contact">
+            <label for="phone">Phone Number</label>
+            <input type="tel" class="form-control" id="phone" placeholder="Phone Number" name="phone" required>
+        </div>
+        <div class="contact">
+            <label for="message">Message</label>
+            <textarea class="form-control" id="message" rows="3" name="message" required></textarea>
+        </div>
+        <button type="submit" class="button">Submit</button>
+    </form>
+</div>
+</body>
+</html>

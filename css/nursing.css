@@ -1,0 +1,50 @@
+:root {
+    --nursingFirstPrimaryColor: #60a144;
+    --nursingFirstPrimaryColorVariant: #a7cf8c;
+    --nursingSecondPrimaryColor: #fdfdfd;
+    --nursingSecondPrimaryColorVariant: #e0edd8;
+
+    --nursingFirstSecondaryColor: #0d4722;
+    --nursingSecondSecondaryColor: #333333;
+
+    --nursingAccentColor: #69b345;
+}
+
+body {
+    background: var(--nursingFirstPrimaryColor);
+}
+
+nav.navbar {
+    background: var(--nursingFirstSecondaryColor);
+    box-shadow: 0 0 4px 0 var(--nursingAccentColor);
+}
+
+div.navbar-nav > a.nav-link {
+    color: var(--nursingAccentColor);
+    font-weight: bold;
+}
+
+div.navbar-nav > .nav-link:hover {
+    color: var(--nursingFirstPrimaryColor) !important;
+}
+
+ul.list-group {
+    --bs-list-group-border-color: var(--nursingFirstSecondaryColor);
+}
+
+table.requirement-data tr > td.p-0,
+table.requirement-data ul.list-group.list-group-flush > li.list-group-item {
+    background: var(--nursingFirstPrimaryColorVariant);
+}
+
+table.requirement-data ul.list-group.list-group-flush > li.list-group-item:nth-of-type(even) {
+    background: var(--nursingSecondPrimaryColorVariant
+    );
+}
+
+
+table.requirement-data th,
+table.requirement-data th.table-or-column,
+table.requirement-data td.table-or-column {
+    background: var(--nursingFirstPrimaryColor);
+}

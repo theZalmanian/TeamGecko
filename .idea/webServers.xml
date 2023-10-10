@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="26c38652-a335-49ba-8750-5f8f7ea2c7d4" name="GreenRiverDev" url="http://geckos.greenriverdev.com">
+        <fileTransfer rootFolder="/home/geckosgr/public_html" accessType="SFTP" host="geckos.greenriverdev.com" port="18765" sshConfigId="0c0f6f1e-b598-499e-956a-7304251e661c" sshConfig="geckosgr@geckos.greenriverdev.com:18765 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
