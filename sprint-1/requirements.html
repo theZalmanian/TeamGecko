@@ -11,432 +11,501 @@
     <link rel="stylesheet" href="/css/nursing.css">
 </head>
 <body>
-    <!--Start of Nav-->
-    <nav class="navbar sticky-top navbar-expand-md">
-        <div class="container">
-            <div class="navbar-brand">
-                <img src="/nursing-images/nursing-logo.png" height="75px" alt="GRC Nursing Program founded 1965">
-            </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-nav"
-                    aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse flex-row-reverse" id="navbar-nav">
-                <div class="navbar-nav">
-                    <a class="nav-link active" href="/sprint-1/requirements.html" aria-current="page">
-                        Clinical Requirements
-                    </a>
-                    <a class="nav-link" href="/sprint-1/experience.html">
-                        Experience Survey
-                    </a>
-                    <a class="nav-link" href="/sprint-1/contact.html">
-                        Contact
-                    </a>
+    <header>
+        <!--Start of Nav-->
+        <nav class="navbar sticky-top navbar-expand-md">
+            <div class="container">
+                <div class="navbar-brand">
+                    <img src="/nursing-images/nursing-logo.png" height="75" alt="GRC Nursing Program founded 1965">
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-nav"
+                        aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse flex-row-reverse" id="navbar-nav">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" href="/sprint-1/requirements.html" aria-current="page">
+                            Clinical Requirements
+                        </a>
+                        <a class="nav-link" href="/sprint-1/experience.html">
+                            Experience Survey
+                        </a>
+                        <a class="nav-link" href="/sprint-1/contact.html">
+                            Contact
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
-    <!--End of Nav-->
+        </nav>
+        <!--End of Nav-->
+    </header>
 
     <h1 class="text-center my-3">
         Clinical Requirements
     </h1>
+    <div class="container requirements">
+        <div class="row">
+            <div class="col-md-1 col-lg-2">
+            </div>
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="card my-2" id="general-notes">
+                    <ul class="list-group list-group-flush text-center">
+                        <li class="list-group-item text-break px-2">
+                            <b>2660*All vaccination proof must include full name, date of birth, and date of vaccine, titer (blood draw), or test</b>
+                        </li>
+                        <li class="list-group-item text-break px-2">
+                            <b>If you have any questions about the requirements, you can email me at csavage@greenriver.edu</b>
+                        </li>
+                    </ul>
+                </div> 
+                <div class="accordion mb-4" id="requirements-accordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#tuberculosis-test-info"
+                                    aria-expanded="false" aria-controls="tuberculosis-test-info">
+                                Tuberculosis Test
+                            </button>
+                        </h2>
+                        <div class="accordion-collapse collapse" id="tuberculosis-test-info">
+                            <div class="accordion-body p-0">
+                                <ul class="list-group list-group-flush text-center requirement-notes">
+                                    <li class="list-group-item">
+                                        <b>Expires Yearly</b>
+                                    </li>
+                                </ul>
+                                <table class="table m-0 align-middle requirement-data">
+                                    <tbody class="text-center">
+                                        <tr>
+                                            <th class="col-5">
+                                                2-step PPD
+                                            </th>
+                                            <th class="col-1 border-0 table-or-column">
+                                            </th>
+                                            <th class="col-5">
+                                                QuantiFERON
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td class="border p-0">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        Must be two separate 2-step PPD tests done initially done
+                                                        approximately 2 weeks apart
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        Document must show induration in millimeter, date placed,
+                                                        and date read
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td class="table-or-column">
+                                                <h3>
+                                                    <b>OR</b>
+                                                </h3>
+                                            </td>
+                                            <td class="border p-0">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        Results must be negative
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#hepatitis-b-titer-info"
+                                    aria-expanded="false" aria-controls="hepatitis-b-titer-info">
+                                    Hepatitis B Titer
+                            </button>
+                        </h2>
+                        <div class="accordion-collapse collapse" id="hepatitis-b-titer-info">
+                            <div class="accordion-body p-0">
+                                <table class="table m-0 align-middle requirement-data">
+                                    <tbody class="text-center">
+                                        <tr>
+                                            <th class="col-5">
+                                                Titer
+                                            </th>
+                                            <th class="col-1 border-0 table-or-column">
+                                            </th>
+                                            <th class="col-5">
+                                                Declination Form
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td class="border p-0">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        Only Anti-HBs or HepB SaB test are accepted
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td class="table-or-column">
+                                                <h3>
+                                                    <b>OR</b>
+                                                </h3>
+                                            </td>
+                                            <td class="border p-0">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        If currently in process of vaccine series or titer, or if non-converter
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#mmr-vaccine-titer-info"
+                                    aria-expanded="false" aria-controls="mmr-vaccine-titer-info">
+                                    MMR Vaccine or Titer
+                            </button>
+                        </h2>
+                        <div class="accordion-collapse collapse" id="mmr-vaccine-titer-info">
+                            <div class="accordion-body p-0">
+                                <table class="table m-0 align-middle requirement-data">
+                                    <tbody class="text-center">
+                                        <tr>
+                                            <th class="col-5">
+                                                2 documented vaccine dates
+                                            </th>
+                                            <th class="col-1 border-0 table-or-column">
+                                            </th>
+                                            <th class="col-5">
+                                                Titer
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td class="border p-0">
+                                            </td>
+                                            <td class="table-or-column">
+                                                <h3>
+                                                    <b>OR</b>
+                                                </h3>
+                                            </td>
+                                            <td class="border p-0">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        Separate titer needed for Measles, Mumps, and Rubella
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        If result is negative/low/equivocal must get booster dose
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#varicella-vaccine-titer-info"
+                                    aria-expanded="false" aria-controls="varicella-vaccine-titer-info">
+                                Varicella Vaccine or Titer
+                            </button>
+                        </h2>
+                        <div class="accordion-collapse collapse" id="varicella-vaccine-titer-info">
+                            <div class="accordion-body p-0">
+                                <ul class="list-group list-group-flush text-center requirement-notes">
+                                    <li class="list-group-item">
+                                        <b>History of Chickenpox not accepted</b>
+                                    </li>
+                                </ul>
+                                <table class="table m-0 align-middle requirement-data">
+                                    <tbody class="text-center">
+                                        <tr>
+                                            <th class="col-5">
+                                                2 documented vaccine dates
+                                            </th>
+                                            <th class="col-1 border-0 table-or-column">
+                                            </th>
+                                            <th class="col-5">
+                                                Titer
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td class="border p-0">
+                                            </td>
+                                            <td class="table-or-column">
+                                                <h3>
+                                                    <b>OR</b>
+                                                </h3>
+                                            </td>
+                                            <td class="border p-0">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        If result is negative/low/equivocal must get booster dose
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#tdap-vaccine-info"
+                                    aria-expanded="false" aria-controls="tdap-vaccine-info">
+                                Tdap Vaccine
+                            </button>
+                        </h2>
+                        <div class="accordion-collapse collapse" id="tdap-vaccine-info">
+                            <div class="accordion-body p-0">
+                                <table class="table m-0 align-middle requirement-data">
+                                    <tbody class="text-center">
+                                        <tr>
+                                            <td class="border p-0">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        Date must be within last 10 years
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flu-vaccine-info"
+                                    aria-expanded="false" aria-controls="flu-vaccine-info">
+                                Flu Vaccine
+                            </button>
+                        </h2>
+                        <div class="accordion-collapse collapse" id="flu-vaccine-info">
+                            <div class="accordion-body p-0">
+                                <ul class="list-group list-group-flush text-center requirement-notes">
+                                    <li class="list-group-item">
+                                        <b>Expires Yearly</b>
+                                    </li>
+                                </ul>
+                                <table class="table m-0 align-middle requirement-data">
+                                    <tbody class="text-center">
+                                        <tr>
+                                            <td class="border p-0">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        Vaccine must be for current season (Sept thru August)
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#covid19-vaccine-info"
+                                    aria-expanded="false" aria-controls="covid19-vaccine-info">
+                                Covid 19 Vaccine Series
+                            </button>
+                        </h2>
+                        <div class="accordion-collapse collapse" id="covid19-vaccine-info">
+                            <div class="accordion-body p-0">
+                                <table class="table m-0 align-middle requirement-data">
+                                    <tbody class="text-center">
+                                        <tr>
+                                            <td class="border p-0">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        <b>Proof must include manufacturer</b>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        Pfizer, Moderna, and Janssen are the only ones we accept currently
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#covid-booster-info"
+                                    aria-expanded="false" aria-controls="covid-booster-info">
+                                Covid Booster
+                            </button>
+                        </h2>
+                        <div class="accordion-collapse collapse" id="covid-booster-info">
+                            <div class="accordion-body p-0">
+                                <table class="table m-0 align-middle requirement-data">
+                                    <tbody class="text-center">
+                                        <tr>
+                                            <td class="border p-0">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        <b>Proof must include manufacturer</b>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        Only one dose required currently, but may change in the future
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#cpr-card-info"
+                                    aria-expanded="false" aria-controls="cpr-card-info">
+                                CPR Card
+                            </button>
+                        </h2>
+                        <div class="accordion-collapse collapse" id="cpr-card-info">
+                            <div class="accordion-body p-0">
+                                <table class="table m-0 align-middle requirement-data">
+                                    <tbody class="text-center">
+                                        <tr>
+                                            <td class="border p-0">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        Must be American Heart Association Basic Life Support
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#professional-liability-info"
+                                    aria-expanded="false" aria-controls="professional-liability-info">
+                                    Professional Liability
+                            </button>
+                        </h2>
+                        <div class="accordion-collapse collapse" id="professional-liability-info">
+                            <div class="accordion-body p-0">
+                                <table class="table m-0 align-middle requirement-data">
+                                    <tbody class="text-center">
+                                        <tr>
+                                            <td class="border p-0">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        <b>CANNOT</b> attend lab or clinical prior to purchasing
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        Expires end of each school year (08/31)
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        Purchase at <b>Cashier’s Office</b> 253-833-9111 ext. 3399
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 col-lg-2">
+            </div>
+        </div>
+    </div>
 
-    <table class="table mb-0">
-        <tr>
-            <td>
-                <button class="btn col-12" type="button"
-                        data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-target="#tuberculosis-test-info" aria-controls="tuberculosis-test-info">
-                    Tuberculosis Test
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                    </svg>
-                    <br>
-                    (Expires Yearly)
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="collapse p-0" id="tuberculosis-test-info">
-                <table class="table m-0 align-middle requirement-data">
-                    <tbody class="text-center">
-                        <tr>
-                            <th class="col-5">
-                                2-step PPD
-                            </th>
-                            <th class="col-1 border-0 table-or-column">
-                            </th>
-                            <th class="col-5">
-                                QuantiFERON
-                            </th>
-                        </tr>
-                        <tr>
-                            <td class="border p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        Must be two separate 2-step PPD tests done initially done
-                                        approximately 2 weeks apart
-                                    </li>
-                                    <li class="list-group-item">
-                                        Document must show induration in millimeter, date placed,
-                                        and date read
-                                    </li>
-                                </ul>
-                            </td>
-                            <td class="table-or-column">
-                                <h3>
-                                    <b>OR</b>
-                                </h3>
-                            </td>
-                            <td class="border p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        Results must be negative
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button class="btn col-12" type="button"
-                        data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-target="#hepatitis-b-titer-info" aria-controls="hepatitis-b-titer-info">
-                    Hepatitis B Titer
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                    </svg>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="collapse p-0" id="hepatitis-b-titer-info">
-                <table class="table m-0 align-middle requirement-data">
-                    <tbody class="text-center">
-                    <tr>
-                        <th class="col-5">
-                            Titer
-                        </th>
-                        <th class="col-1 border-0 table-or-column">
-                        </th>
-                        <th class="col-5">
-                            Declination Form
-                        </th>
-                    </tr>
-                    <tr>
-                        <td class="border p-0">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    Only Anti-HBs or HepB SaB test are accepted
-                                </li>
-                            </ul>
-                        </td>
-                        <td class="table-or-column">
-                            <h3>
-                                <b>OR</b>
-                            </h3>
-                        </td>
-                        <td class="border p-0">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    If currently in process of vaccine series or titer, or if non-converter
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button class="btn col-12" type="button"
-                        data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-target="#mmr-vaccine-or-titer-info" aria-controls="mmr-vaccine-or-titer-info">
-                    MMR Vaccine or Titer
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                    </svg>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="collapse p-0" id="mmr-vaccine-or-titer-info">
-                <table class="table m-0 align-middle requirement-data">
-                    <tbody class="text-center">
-                        <tr>
-                            <th class="col-5">
-                                2 documented vaccine dates
-                            </th>
-                            <th class="col-1 border-0 table-or-column">
-                            </th>
-                            <th class="col-5">
-                                Titer
-                            </th>
-                        </tr>
-                        <tr>
-                            <td class="border p-0">
-                            </td>
-                            <td class="table-or-column">
-                                <h3>
-                                    <b>OR</b>
-                                </h3>
-                            </td>
-                            <td class="border p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        Separate titer needed for Measles, Mumps, and Rubella
-                                    </li>
-                                    <li class="list-group-item">
-                                        If result is negative/low/equivocal must get booster dose
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button class="btn col-12" type="button"
-                        data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-target="#varicella-vaccine-or-titer-info" aria-controls="varicella-vaccine-or-titer-info">
-                    Varicella Vaccine or Titer
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                    </svg>
-                    <br>
-                    (History of Chickenpox not accepted)
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="collapse p-0" id="varicella-vaccine-or-titer-info">
-                <table class="table m-0 align-middle requirement-data">
-                    <tbody class="text-center">
-                        <tr>
-                            <th class="col-5">
-                                2 documented vaccine dates
-                            </th>
-                            <th class="col-1 border-0 table-or-column">
-                            </th>
-                            <th class="col-5">
-                                Titer
-                            </th>
-                        </tr>
-                        <tr>
-                            <td class="border p-0">
-                            </td>
-                            <td class="table-or-column">
-                                <h3>
-                                    <b>OR</b>
-                                </h3>
-                            </td>
-                            <td class="border p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        If result is negative/low/equivocal must get booster dose
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button class="btn col-12" type="button"
-                        data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-target="#tdap-vaccine-info" aria-controls="tdap-vaccine-info">
-                    Tdap Vaccine
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                    </svg>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="collapse p-0" id="tdap-vaccine-info">
-                <table class="table m-0 align-middle requirement-data">
-                    <tbody class="text-center">
-                        <tr>
-                            <td class="border p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        Date must be within last 10 years
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button class="btn col-12" type="button"
-                        data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-target="#flu-vaccine-info" aria-controls="flu-vaccine-info">
-                    Flu Vaccine
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                    </svg>
-                    <br>
-                    (Expires Yearly)
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="collapse p-0" id="flu-vaccine-info">
-                <table class="table m-0 align-middle requirement-data">
-                    <tbody class="text-center">
-                        <tr>
-                            <td class="border p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        Vaccine must be for current season (Sept thru August)
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button class="btn col-12" type="button"
-                        data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-target="#covid19-vaccine-info" aria-controls="covid19-vaccine-info">
-                    Covid 19 Vaccine Series
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                    </svg>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="collapse p-0" id="covid19-vaccine-info">
-                <table class="table m-0 align-middle requirement-data">
-                    <tbody class="text-center">
-                        <tr>
-                            <td class="border p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <b>Proof must include manufacturer</b>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Pfizer, Moderna, and Janssen are the only ones we accept currently
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button class="btn col-12" type="button"
-                        data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-target="#covid-booster-info" aria-controls="covid-booster-info">
-                    Covid Booster
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                    </svg>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="collapse p-0" id="covid-booster-info">
-                <table class="table m-0 align-middle requirement-data">
-                    <tbody class="text-center">
-                        <tr>
-                            <td class="border p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <b>Proof must include manufacturer</b>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Only one dose required currently, but may change in the future
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button class="btn col-12" type="button"
-                        data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-target="#cpr-card-info" aria-controls="cpr-card-info">
-                    CPR Card
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                    </svg>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="collapse p-0" id="cpr-card-info">
-                <table class="table m-0 align-middle requirement-data">
-                    <tbody class="text-center">
-                        <tr>
-                            <td class="border p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        Must be American Heart Association Basic Life Support
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button class="btn col-12" type="button"
-                        data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-target="#professional-liability-info" aria-controls="professional-liability-info">
-                    Professional Liability
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                    </svg>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="collapse p-0" id="professional-liability-info">
-                <table class="table m-0 align-middle requirement-data">
-                    <tbody class="text-center">
-                        <tr>
-                            <td class="border p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <b>CANNOT</b> attend lab or clinical prior to purchasing
-                                    </li>
-                                    <li class="list-group-item">
-                                        Expires end of each school year (08/31)
-                                    </li>
-                                    <li class="list-group-item">
-                                        Purchase at <b>Cashier’s Office</b> 253-833-9111 ext. 3399
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-    </table>
+    <script>
+        "use strict"; // make JS be more like Java
+
+        // when the page loads
+        window.addEventListener('load', function () {
+            // setup accordion to respond to page resizing 
+            window.addEventListener('resize', toggleResponsiveAccordion);
+
+            // setup accordion when page first loads, in case user is on mobile
+            toggleResponsiveAccordion();
+        })
+        
+        /**
+         * The standard mobile breakpoint is 576px
+         */ 
+        const MOBILE_BREAKPOINT = 576;
+
+        /**
+         * Returns true if the current window is <= 576px; otherwise false
+         */ 
+        function screenIsMobile() {
+            return window.innerWidth < MOBILE_BREAKPOINT;
+        }
+
+        /**
+         * All accordion items in the requirements accordion
+         */
+        const accordionItems = getByID('requirements-accordion').querySelectorAll('.accordion-item');
+        
+        /**
+         * If the screen is currently mobile sized, closes all accordion items in the requirements accordion.
+         * Otherwise, opens or keeps all accordion items open.
+         */
+        function toggleResponsiveAccordion() {            
+            // run through all items in the accordion
+            accordionItems.forEach((currItem) => {
+                // get the button that handles the collapse from the current item
+                const collapseButton = currItem.querySelector('.accordion-button')
+
+                // get the div that handles the collapse from the current item
+                const collapseDiv = currItem.querySelector('.accordion-collapse')
+
+                // if the screen is currently mobile-sized
+                if (screenIsMobile()) {
+                    // close the current accordion item
+                    collapseButton.classList.add('collapsed');
+                    collapseDiv.classList.remove('show');
+
+                } 
+                
+                // if the screen size changed, but is not small enough to be considered mobile 
+                else {
+                    // open the current accordion item
+                    collapseButton.classList.remove('collapsed');
+                    collapseDiv.classList.add('show');
+                }
+            });
+        }
+
+        /**
+         * Shortened form of the document.getElementById method
+         * @param elementID The element's id
+         * @returns The corresponding HTML Element
+         */
+        function getByID(elementID) {
+            return document.getElementById(elementID);
+        }
+    </script>
 </body>
 </html>
