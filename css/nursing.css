@@ -28,6 +28,18 @@ div.navbar-nav > .nav-link:hover {
     color: var(--nursingFirstPrimaryColor) !important;
 }
 
+button.accordion-button.collapsed {
+    background: var(--nursingFirstSecondaryColor);
+    color: var(--nursingFirstPrimaryColorVariant);
+    font-size: x-large;
+}
+
+button.accordion-button:not(.collapsed) {
+    background: var(--nursingSecondSecondaryColor);
+    color: var(--nursingFirstPrimaryColorVariant);
+    font-size: x-large;
+}
+
 ul.list-group {
     --bs-list-group-border-color: var(--nursingFirstSecondaryColor);
 }
@@ -42,7 +54,7 @@ table.requirement-data ul.list-group.list-group-flush > li.list-group-item:nth-o
     );
 }
 
-
+div.requirement-notes,
 table.requirement-data th,
 table.requirement-data th.table-or-column,
 table.requirement-data td.table-or-column {
