@@ -15,7 +15,7 @@
         Clinical Requirements
     </h1>
 
-    <div class="accordion" id="tuberculosis-test-accordion">
+    <div class="accordion" id="requirements-accordion">
         <div class="accordion-item">
             <h2 class="accordion-header" id="tuberculosis-test-heading">
                 <button class="accordion-button" type="button"
@@ -24,7 +24,7 @@
                     Tuberculosis Test
                 </button>
             </h2>
-            <div class="accordion-collapse collapse show" id="tuberculosis-test-info"
+            <div class="accordion-collapse collapse" id="tuberculosis-test-info"
                  aria-labelledby="tuberculosis-test-heading">
                 <div class="accordion-body p-0">
                     <div>
@@ -81,7 +81,7 @@
                     Varicella Vaccine or Titer
                 </button>
             </h2>
-            <div class="accordion-collapse collapse show" id="varicella-vaccine-or-titer-info"
+            <div class="accordion-collapse collapse" id="varicella-vaccine-or-titer-info"
                  aria-labelledby="tuberculosis-test-heading">
                 <div class="accordion-body p-0">
                     <div>
@@ -89,37 +89,100 @@
                     </div>
                     <table class="table m-0 align-middle requirement-data">
                         <tbody class="text-center">
-                        <tr>
-                            <th class="col-5">
-                                2 documented vaccine dates
-                            </th>
-                            <th class="col-1 border-0 table-or-column">
-                            </th>
-                            <th class="col-5">
-                                Titer
-                            </th>
-                        </tr>
-                        <tr>
-                            <td class="border p-0">
-                            </td>
-                            <td class="table-or-column">
-                                <h3>
-                                    <b>OR</b>
-                                </h3>
-                            </td>
-                            <td class="border p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        If result is negative/low/equivocal must get booster dose
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
+                            <tr>
+                                <th class="col-5">
+                                    2 documented vaccine dates
+                                </th>
+                                <th class="col-1 border-0 table-or-column">
+                                </th>
+                                <th class="col-5">
+                                    Titer
+                                </th>
+                            </tr>
+                            <tr>
+                                <td class="border p-0">
+                                </td>
+                                <td class="table-or-column">
+                                    <h3>
+                                        <b>OR</b>
+                                    </h3>
+                                </td>
+                                <td class="border p-0">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            If result is negative/low/equivocal must get booster dose
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        "use strict"; // make JS be more like Java
+
+        // when the page loads
+        window.addEventListener('load', function () {
+            // setup accordion to respond to page resizing 
+            window.addEventListener('resize', toggleResponsiveAccordion);
+
+            // setup accordion when page first loads, in case user is on mobile
+            toggleResponsiveAccordion();
+        })
+        
+        /**
+         * The standard mobile breakpoint is 576px
+         */ 
+        const MOBILE_BREAKPOINT = 576;
+
+        /**
+         * Returns true if the current window is <= 576px; otherwise false
+         */ 
+        function screenIsMobile() {
+            return window.innerWidth < MOBILE_BREAKPOINT;
+        }
+
+        /**
+         * All accordion items in the requirements accordion
+         */
+        const accordionItems = getByID('requirements-accordion').querySelectorAll('.accordion-item');
+        
+        /**
+         * If the screen is currently mobile sized, opens all accordion items in the requirements accordion.
+         * Otherwise, closes or keeps all accordion items closed.
+         */
+        function toggleResponsiveAccordion() {            
+            // run through all items in the accordion
+            accordionItems.forEach((currItem) => {
+                // get the div that handles the collapse from the current item
+                let collapseDiv = currItem.querySelector('.accordion-collapse')
+
+                // if the screen is currently mobile-sized
+                if (screenIsMobile()) {
+                    // open the current accordion item
+                    collapseDiv.classList.add('show');
+                } 
+                
+                // if the screen size changed, but is not small enough to be considered mobile 
+                else {
+                    // close the current accordion item
+                    collapseDiv.classList.remove('show');
+                }
+            });
+        }
+
+        /**
+         * Shortened form of the document.getElementById method
+         * @param elementID The element's id
+         * @returns The corresponding HTML Element
+         */
+        function getByID(elementID) {
+            return document.getElementById(elementID);
+        }
+    </script>
 </body>
 </html>
