@@ -28,16 +28,23 @@ div.navbar-nav > .nav-link:hover {
     color: var(--nursingFirstPrimaryColor) !important;
 }
 
-button.accordion-button.collapsed {
-    background: var(--nursingFirstSecondaryColor);
+button.accordion-button.collapsed,
+button.accordion-button:not(.collapsed) {
     color: var(--nursingFirstPrimaryColorVariant);
     font-size: x-large;
 }
 
+button.accordion-button.collapsed {
+    background: var(--nursingFirstSecondaryColor);
+}
+
 button.accordion-button:not(.collapsed) {
     background: var(--nursingSecondSecondaryColor);
-    color: var(--nursingFirstPrimaryColorVariant);
-    font-size: x-large;
+}
+
+button.accordion-button::after,
+button.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23a7cf8c'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
 }
 
 ul.list-group {
@@ -50,8 +57,7 @@ table.requirement-data ul.list-group.list-group-flush > li.list-group-item {
 }
 
 table.requirement-data ul.list-group.list-group-flush > li.list-group-item:nth-of-type(even) {
-    background: var(--nursingSecondPrimaryColorVariant
-    );
+    background: var(--nursingSecondPrimaryColorVariant);
 }
 
 ul.requirement-notes > li.list-group-item,
