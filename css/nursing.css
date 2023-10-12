@@ -54,7 +54,7 @@ table.requirement-data ul.list-group.list-group-flush > li.list-group-item:nth-o
     );
 }
 
-div.requirement-notes,
+ul.requirement-notes > li.list-group-item,
 table.requirement-data th,
 table.requirement-data th.table-or-column,
 table.requirement-data td.table-or-column {

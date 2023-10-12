@@ -31,6 +31,11 @@
                     <div class="accordion-collapse collapse" id="tuberculosis-test-info"
                          aria-labelledby="tuberculosis-test-heading">
                         <div class="accordion-body p-0">
+                            <ul class="list-group list-group-flush text-center requirement-notes">
+                                <li class="list-group-item">
+                                    <b>Expires Yearly</b>
+                                </li>
+                            </ul>
                             <table class="table m-0 align-middle requirement-data">
                                 <tbody class="text-center">
                                     <tr>
@@ -163,18 +168,23 @@
         function toggleResponsiveAccordion() {            
             // run through all items in the accordion
             accordionItems.forEach((currItem) => {
+                // get the button that handles the collapse from the current item
+                const collapseButton = currItem.querySelector('.accordion-button')
+
                 // get the div that handles the collapse from the current item
                 const collapseDiv = currItem.querySelector('.accordion-collapse')
 
                 // if the screen is currently mobile-sized
                 if (screenIsMobile()) {
                     // open the current accordion item
+                    collapseButton.classList.remove('collapsed');
                     collapseDiv.classList.add('show');
                 } 
                 
                 // if the screen size changed, but is not small enough to be considered mobile 
                 else {
                     // close the current accordion item
+                    collapseButton.classList.add('collapsed');
                     collapseDiv.classList.remove('show');
                 }
             });
