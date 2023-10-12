@@ -75,7 +75,7 @@
 <!--End of Nav-->
 <div class="container">
     <h1>Pizza Shop</h1>
-    <form action="/vardump.php" method="post">
+    <form id="pizza-shop" action="/vardump.php" method="post">
         <label for="size"> Size: </label>
         <input type="text" id="size" name="size">
 
@@ -83,20 +83,51 @@
         <input type="text" id="customer" name="customer">
 
         <h1> Toppings </h1>
-        <input type="checkbox" class="btn-check" id="btn-check-3" autocomplete="off">
+        <input class="btn-check" type="checkbox" id="btn-check-3">
         <label class="btn" for="btn-check-3">No Cheese</label>
 
-        <input type="checkbox" name="cheese" class="btn-check" id="btn-check" autocomplete="off">
+        <input class="btn-check" type="checkbox" name="cheese" id="btn-check">
         <label class="btn" for="btn-check">Cheese</label>
 
-        <input type="checkbox" class="btn-check" id="btn-check-2" autocomplete="off">
+        <input class="btn-check" type="checkbox" id="btn-check-2">
         <label class="btn" for="btn-check-2">Half Cheese</label>
-
-        <input type="checkbox" class="btn-check" id="btn-check-4" autocomplete="off">
+        
+        <input class="btn-check"  type="checkbox" id="btn-check-4">
         <label class="btn" for="btn-check-4">Parmesan</label>
 
         <button type="submit" id="submit">Submit</button>
     </form>
 </div>
+
+<script>
+// when the page loads
+    window.addEventListener('load', function () {
+        let submitButton = document.getElementById('submit');
+        submitButton.addEventListener("click", validateCheckBox);
+    })
+
+    // just checking in
+    function validateCheckBox(){
+        // get all topping checkboxes
+        let toppingsCheckBoxes = document.querySelectorAll('.btn-check')
+        
+        let count = 0; // setup counter
+
+        // run through all checkboxes on page
+        toppingsCheckBoxes.forEach((currentCheckBox) => {
+            // if the current checkbox is checked
+            if(currentCheckBox.checked) {
+                count++;
+            }
+        })
+
+        if(count !== 2) {
+            alert("Must choose two toppings!");
+            let form = document.getElementById('pizza-shop');
+            form.setAttribute('method', '');
+            form.setAttribute('action', '')
+        }
+    }
+</script>
 </body>
 </html>
