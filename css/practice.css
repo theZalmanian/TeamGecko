@@ -1,0 +1,42 @@
+:root {
+    --geckoPrimaryColor: #a3e38b;
+    --geckoSecondaryColor: #5abc34;
+    --geckoAccentColor: #107010;
+}
+
+body {
+    background: var(--geckoPrimaryColor);
+}
+
+nav, .dropdown-menu, .card, .list-group-item {
+    background: var(--geckoSecondaryColor);
+    box-shadow: 0 0 4px 0 var(--geckoAccentColor);
+}
+
+.navbar-nav .nav-link,
+.nav-item .dropdown-item {
+    color: var(--geckoAccentColor);
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link:hover,
+.nav-item .dropdown-item:hover {
+    color: var(--geckoPrimaryColor) !important;
+}
+
+.nav-item .dropdown-item:hover {
+    background: var(--geckoAccentColor) !important;
+}
+
+.nav-item .dropdown-item:focus {
+    background: none;
+}
+
+.nav-item .dropdown-item.active {
+    background: none;
+    color: black;
+}
+
+a {
+    text-decoration: none;
+}
