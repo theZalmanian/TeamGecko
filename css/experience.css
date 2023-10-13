@@ -19,7 +19,7 @@
    
 }
   
-.radio{
+.radio::before{
     content: "★";
     display: inline-block;
     font-size: 30px;
