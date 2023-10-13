@@ -1,4 +1,4 @@
-
+@import url("https://fontawesome.com/icons/star?f=classic&s=regular");
 .star-rating
 {
     display: flex;
@@ -20,7 +20,7 @@
 }
   
 .radio::before{
-    content: "★";
+    content: "\f005";
     display: inline-block;
     font-size: 30px;
 }
