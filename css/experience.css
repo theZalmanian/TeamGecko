@@ -1,5 +1,5 @@
 
-.star-rating-2, .star-rating-3, .star-rating-4, .star-rating-5, .star-rating-6, .star-rating-7, .star-rating-8
+.star-rating
 {
     display: flex;
     flex-direction: row-reverse;
@@ -11,7 +11,7 @@
     display: none;
 }
   
-.radio-2, .radio-3, .radio-4, .radio-5, .radio-6, .radio-7, .radio-8{
+.radio{
     cursor: pointer;
     font-size: 0;
     color: rgb(241, 240, 240);
@@ -19,37 +19,13 @@
    
 }
   
-.radio-2:before, .radio-3:before, .radio-4::before, .radio-5::before, .radio-6::before, .radio-7::before, .radio-8::before{
+.radio{
     content: "★";
     display: inline-block;
     font-size: 30px;
 }
 
-.star-rating-2 .radio-input:checked ~ .radio-2 {
-    color: #ffc700;
-    color: gold;
-}
-.star-rating-3 .radio-input:checked ~ .radio-3 {
-    color: #ffc700;
-    color: gold;
-}
-.star-rating-4 .radio-input:checked ~ .radio-4 {
-    color: #ffc700;
-    color: gold;
-}
-.star-rating-5 .radio-input:checked ~ .radio-5{
-    color: #ffc700;
-    color: gold;
-}
-.star-rating-6 .radio-input:checked ~ .radio-6{
-    color: #ffc700;
-    color: gold;
-}
-.star-rating-7 .radio-input:checked ~ .radio-7{
-    color: #ffc700;
-    color: gold;
-}
-.star-rating-8 .radio-input:checked ~ .radio-8{
+.radio-input:checked ~ .radio {
     color: #ffc700;
     color: gold;
 }
