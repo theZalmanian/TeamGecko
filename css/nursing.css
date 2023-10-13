@@ -10,6 +10,10 @@
     --nursingAccentColor: #69b345;
 }
 
+[data-bs-theme=dark] {
+    --nursingFirstPrimaryColor: #22321b;
+}
+
 body {
     background: var(--nursingFirstPrimaryColor);
 }
