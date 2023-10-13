@@ -11,137 +11,163 @@
     <link rel="stylesheet" href="/css/practice.css">
 </head>
 <body>
-<!--Start of Nav-->
-<nav class="navbar sticky-top navbar-expand-md mb-3">
-    <div class="container">
-        <a class="navbar-brand" href="/index.html">
-            <img src="/gecko-images/geckos-logo.svg" height="40px" alt="A logo of a green gecko">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon">
-                </span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <div class="navbar-nav">
-                <a class="nav-link" aria-current="page" href="/index.html">
-                    Home
-                </a>
-                <div class="nav-item dropdown">
-                    <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Practice
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item active" href="/practice/pizza-ordering/index.html">
-                            Pizza Ordering
-                        </a>
+    <!--Start of Nav-->
+    <nav class="navbar sticky-top navbar-expand-md mb-3">
+        <div class="container">
+            <a class="navbar-brand" href="/index.html">
+                <img src="/gecko-images/geckos-logo.svg" height="40" alt="A logo of a green gecko">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                    </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <div class="navbar-nav">
+                    <a class="nav-link" aria-current="page" href="/index.html">
+                        Home
+                    </a>
+                    <div class="nav-item dropdown">
+                        <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Practice
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item active" href="/practice/pizza-ordering/index.html">
+                                Pizza Ordering
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sprint 1
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/sprint-1/requirements.html">
-                            Clinical Requirements
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a class="dropdown-item" href="/sprint-1/experience.html">
-                            Experience Survey
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a class="dropdown-item" href="/sprint-1/contact.html">
-                            Contact
-                        </a>
+                    <div class="nav-item dropdown">
+                        <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sprint 1
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/sprint-1/requirements.html">
+                                Clinical Requirements
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a class="dropdown-item" href="/sprint-1/experience.html">
+                                Experience Survey
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a class="dropdown-item" href="/sprint-1/contact.html">
+                                Contact
+                            </a>
+                        </div>
                     </div>
+                    <a class="nav-link" href="#">
+                        Sprint 2
+                    </a>
+                    <a class="nav-link" href="#">
+                        Sprint 3
+                    </a>
+                    <a class="nav-link" href="#">
+                        Sprint 4
+                    </a>
+                    <a class="nav-link" href="#">
+                        Sprint 5
+                    </a>
                 </div>
-                <a class="nav-link" href="#">
-                    Sprint 2
-                </a>
-                <a class="nav-link" href="#">
-                    Sprint 3
-                </a>
-                <a class="nav-link" href="#">
-                    Sprint 4
-                </a>
-                <a class="nav-link" href="#">
-                    Sprint 5
-                </a>
+            </div>
+        </div>
+    </nav>
+    <!--End of Nav-->
+
+    <div class="container requirements">
+        <div class="row">
+            <div class="col-md-1 col-lg-2">
+            </div>
+            <div class="col-12 col-md-10 col-lg-8 text-center">
+                <form id="pizza-shop" action="/vardump.php" target="_blank" method="post">     
+                    <div class="card p-3">
+                        <h1>2x Cheese Pizza Shop</h1>
+                        <div class="form-floating my-2">
+                            <input type="text" class="form-control" id="pizza-size" name="pizza-size" 
+                                    placeholder="Pizza Size" required>
+                            <label for="pizza-size">Pizza Size</label>
+                        </div>
+                        <div class="form-floating my-2">
+                            <input type="text" class="form-control" id="customer-name" name="customer-name" 
+                                    placeholder="" required>
+                            <label for="customer-name">Customer Name</label>
+                        </div>
+                        <div class="container">
+                            <div class="row input-group-text justify-content-center py-2 my-2">
+                                <input class="btn-check" id="no-cheese" type="checkbox" name="no-cheese">
+                                <label class="btn col-4 col-lg-2 m-2" for="no-cheese">No Cheese</label>
+                
+                                <input class="btn-check" id="half-cheese" type="checkbox" name="half-cheese">
+                                <label class="btn col-4 col-lg-2 m-2" for="half-cheese">Half Cheese</label>
+        
+                                <input class="btn-check" id="cheese" type="checkbox" name="cheese">
+                                <label class="btn col-4 col-lg-2 m-2" for="cheese">Cheese</label>
+                                
+                                <input class="btn-check" id="parmesan" type="checkbox" name="parmesan-cheese">
+                                <label class="btn col-4 col-lg-2 m-2" for="parmesan">Parmesan</label>
+                            </div>
+                        </div>
+                        <button class="btn btn-success w-100 py-2 my-2" type="submit" id="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-1 col-lg-2">
             </div>
         </div>
     </div>
-</nav>
-<!--End of Nav-->
 
-<div class="container requirements">
-    <div class="row">
-        <div class="col-md-1 col-lg-2">
-        </div>
-        <div class="col-12 col-md-10 col-lg-8 text-center">
-            <h1>Pizza Shop</h1>
-            <form id="pizza-shop" action="/vardump.php" target="_blank" method="post">     
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="pizza-size" name="pizza-size" placeholder="Pizza Size">
-                    <label for="pizza-size">Pizza Size</label>
-                </div>
-
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="customer-name" name="customer-name" placeholder="Name">
-                    <label for="customer-name">Name</label>
-                </div>
-
-                <div class="container">
-                    <div class="row input-group-text text-center mb-3">
-                        <input class="btn-check" type="checkbox" name="no-cheese" id="btn-check-3">
-                        <label class="btn col-6 col-md-2 mx-2" for="btn-check-3">No Cheese</label>
-        
-                        <input class="btn-check" type="checkbox" name="half-cheese" id="btn-check-2">
-                        <label class="btn col-6 col-md-2 mx-2" for="btn-check-2">Half Cheese</label>
-
-                        <input class="btn-check" type="checkbox" name="cheese" id="btn-check">
-                        <label class="btn col-6 col-md-2 mx-2" for="btn-check">Cheese</label>
-                        
-                        <input class="btn-check"  type="checkbox" name="parmesan-cheese" id="btn-check-4">
-                        <label class="btn col-6 col-md-2 mx-2" for="btn-check-4">Parmesan</label>
-                    </div>
-                </div>
-
-                <button type="submit" id="submit">Submit</button>
-            </form>
-        </div>
-        <div class="col-md-1 col-lg-2">
-        </div>
-    </div>
-</div>
-
-<script>
-    // when the page loads
-    window.addEventListener('load', function () {
-        let submitButton = document.getElementById('submit');
-        // submitButton.addEventListener("click", validateCheckBox);
-    })
-
-    function validateCheckBox(){
-        // get all topping checkboxes
-        let toppingsCheckBoxes = document.querySelectorAll('.btn-check') 
-
-        // run through all checkboxes on page
-        let numChecked = 0;
-        toppingsCheckBoxes.forEach((currentCheckBox) => {
-            if(currentCheckBox.checked) {
-                numChecked++;
-            }
+    <script>
+        // when the page loads
+        window.addEventListener('load', function() {            
+            // setup onclick for the "Submit" button so it triggers form validation
+            setupButtonOnClick('submit', validateCheckBox);
         })
 
-        // user must choose exactly two toppings
-        if(numChecked !== 2) {
-            // display error
-            alert("Must choose two toppings!");
-            let form = document.getElementById('pizza-shop');
-            form.setAttribute('method', '');
-            form.setAttribute('action', '')
+        /**
+         * Ensures the user selected exactly two toppings. If not, form is not submitted
+         */
+        function validateCheckBox() {
+            // get all topping checkboxes
+            let toppingsCheckBoxes = document.querySelectorAll('.btn-check') 
+
+            // run through all checkboxes on page
+            let numChecked = 0;
+            toppingsCheckBoxes.forEach((currentCheckBox) => {
+                if(currentCheckBox.checked) {
+                    numChecked++;
+                }
+            })
+
+            // user must choose exactly two toppings
+            if(numChecked !== 2) {
+                // display error
+                alert("You must choose exactly two toppings!");
+                
+                // stop the form from being submitted
+                event.preventDefault();
+            }
         }
-    }
-</script>
+
+        /**
+         * Sets up an onclick event for the given button using the given function
+         * @param buttonID The button's id
+         * @param useFunction The function to be called when button is clicked
+         */
+        function setupButtonOnClick(buttonID, useFunction) {
+            // get the button
+            let button = getByID(buttonID);
+
+            // set it's onclick event
+            button.addEventListener("click", useFunction);
+        }
+
+        /**
+         * Shortened form of the document.getElementById method
+         * @param elementID The element's id
+         * @returns The corresponding HTML Element
+         */
+        function getByID(elementID) {
+            return document.getElementById(elementID);
+        }
+    </script>
 </body>
 </html>

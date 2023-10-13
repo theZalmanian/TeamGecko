@@ -40,3 +40,7 @@ nav, .dropdown-menu, .card, .list-group-item {
 a {
     text-decoration: none;
 }
+
+.input-group-text > label.btn:hover {
+    background: var(--geckoSecondaryColor) !important;
+}
