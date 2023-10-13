@@ -10,19 +10,14 @@
 .radio-input {
     display: none;
 }
-  
+    
 .radio{
+    margin: 0px 2px;
     cursor: pointer;
-    font-size: 0;
-    color: rgb(241, 240, 240);
-    transition: color 0.1s ease-in-out;
-   
-}
-  
-.radio::before{
     content: "\f005";
     display: inline-block;
     font-size: 30px;
+    transition: ease-in-out;
 }
 
 .radio-input:checked ~ .radio {
