@@ -1,0 +1,183 @@
+{
+    "description": "DO NOT DELETE THIS FILE. This file is used to keep track of which files have been synced in the most recent deployment. If you delete this file a resync will need to be done (which can take a while) - read more: https://github.com/SamKirkland/FTP-Deploy-Action",
+    "version": "1.0.0",
+    "generatedTime": 1697222588268,
+    "data": [
+        {
+            "type": "file",
+            "name": ".htaccess",
+            "size": 281,
+            "hash": "4d024ee5b452a31761deff0e8f6bce7a052c16116797133e64b1c71484f1c5ed"
+        },
+        {
+            "type": "folder",
+            "name": ".idea"
+        },
+        {
+            "type": "folder",
+            "name": "css"
+        },
+        {
+            "type": "folder",
+            "name": "gecko-images"
+        },
+        {
+            "type": "file",
+            "name": "index.html",
+            "size": 12740,
+            "hash": "6f3af17bb29f5de95c66f21eea18a1156cb008d611686710104a7e1f0c3932c6"
+        },
+        {
+            "type": "folder",
+            "name": "js"
+        },
+        {
+            "type": "folder",
+            "name": "nursing-images"
+        },
+        {
+            "type": "folder",
+            "name": "practice"
+        },
+        {
+            "type": "folder",
+            "name": "sprint-1"
+        },
+        {
+            "type": "file",
+            "name": "vardump.php",
+            "size": 245,
+            "hash": "29f32b7cf1fb68d65ecf360bfbdb26bff15a925b512774a802dd31ef3cc1c6e8"
+        },
+        {
+            "type": "file",
+            "name": ".idea/TeamGecko.iml",
+            "size": 281,
+            "hash": "e9c004d5beedb8d8501aa5456096bd5d18180f3081cd2f56e8196c44659838a2"
+        },
+        {
+            "type": "file",
+            "name": ".idea/deployment.xml",
+            "size": 598,
+            "hash": "da1abfc5f614c73883780c3bd5c4585f5e2756506ccdb7b5ef46bd02ef24ef35"
+        },
+        {
+            "type": "file",
+            "name": ".idea/modules.xml",
+            "size": 270,
+            "hash": "5311c4bcb2fe49d378043a85ba6b8bdf1cab1e6b13ae3494d774f22aec49cdcc"
+        },
+        {
+            "type": "file",
+            "name": ".idea/php.xml",
+            "size": 692,
+            "hash": "3bdc149493eaf8250212601a96f29443ac0245bf72e9bfd852f94f4fcb00646b"
+        },
+        {
+            "type": "file",
+            "name": ".idea/sshConfigs.xml",
+            "size": 343,
+            "hash": "16672c17b21db7f9b82398aff5e6cbdcb39d5d77c46c32db3e86a74f56254e9d"
+        },
+        {
+            "type": "file",
+            "name": ".idea/vcs.xml",
+            "size": 180,
+            "hash": "55768f1f84fb117f1d0fc383e180b5d0aa5e5e6584c8c4a2995c15b4237f0972"
+        },
+        {
+            "type": "file",
+            "name": ".idea/webServers.xml",
+            "size": 742,
+            "hash": "8391dda2a606b92c3b8ab1bf388120b01ae8c0e830c83fe5c190a30fd7463efe"
+        },
+        {
+            "type": "file",
+            "name": "css/gecko.css",
+            "size": 1014,
+            "hash": "a9e5cef90aca12a6b21745620ca713255d371d782a5c57b6586247cb981a763c"
+        },
+        {
+            "type": "file",
+            "name": "css/nursing.css",
+            "size": 2012,
+            "hash": "4bf8297e56ee0727d576d3c27de34be6c792437e689d64a751d3bd71462935d7"
+        },
+        {
+            "type": "file",
+            "name": "css/practice.css",
+            "size": 887,
+            "hash": "2aad123731b89f1f8da27f036d7266912879e15a808dd4a6179b5f7584121748"
+        },
+        {
+            "type": "file",
+            "name": "gecko-images/geckos-logo.svg",
+            "size": 3686,
+            "hash": "4a6935729387e29cd80844261bafc124cf33b9a4beaa6f5dcefee8ff0f539145"
+        },
+        {
+            "type": "file",
+            "name": "gecko-images/levi_photo.jpg",
+            "size": 24131,
+            "hash": "6245b5f8d4d3ce8f8986a4083db5c265e49141a1ab4b5b5142418520414d3389"
+        },
+        {
+            "type": "file",
+            "name": "gecko-images/tien_photo.jpg",
+            "size": 86665,
+            "hash": "d3264461bfb850922d6d1fd5e22f93a9b73da7aafb10629b83b447163d401d21"
+        },
+        {
+            "type": "file",
+            "name": "gecko-images/zalman_photo.jpg",
+            "size": 29259,
+            "hash": "6e54e2e773f9dd88f15464316b06e9434346e74f508845ece5a31c53b883bed7"
+        },
+        {
+            "type": "file",
+            "name": "js/theme-switcher.js",
+            "size": 1920,
+            "hash": "993a2ab123ef2213d4799886228852de652f079e65ea51708c8b00929dd6aa34"
+        },
+        {
+            "type": "file",
+            "name": "nursing-images/nursing-logo.png",
+            "size": 231822,
+            "hash": "bc87455e363667f833f240004a3b5e5ce9de2a32afe44b461aa37a9967f3c245"
+        },
+        {
+            "type": "folder",
+            "name": "practice/pizza-ordering"
+        },
+        {
+            "type": "file",
+            "name": "sprint-1/contact.html",
+            "size": 3198,
+            "hash": "8deed8a38f06ac549619a47f647097619511b79005d2360b03891761bee47061"
+        },
+        {
+            "type": "file",
+            "name": "sprint-1/experience.html",
+            "size": 1999,
+            "hash": "497d2f4760dcc96477a3e93fb44ec86f444bad428d0ef0f41c1d6dc6418385f0"
+        },
+        {
+            "type": "file",
+            "name": "sprint-1/requirements.html",
+            "size": 29050,
+            "hash": "1e6bca8ff54d6addeaa8cf3b5f837e0d339e2349a9f2e4eeb413ed0336757b10"
+        },
+        {
+            "type": "file",
+            "name": "practice/pizza-ordering/index.html",
+            "size": 7977,
+            "hash": "6af92c592d5c94b271497056fdd7afb5b9e253841160326749bf70947f579ceb"
+        },
+        {
+            "type": "file",
+            "name": "practice/pizza-ordering/script.js",
+            "size": 49,
+            "hash": "a5e101429afbb070babd4e4d460ee1c8f4cc5cb6430fab81f00411a33de2534c"
+        }
+    ]
+}
