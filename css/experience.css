@@ -7,6 +7,9 @@
     padding: 0px 15px;
    
 }
+.optional-question > label > span{
+    font-weight:900;
+}
 
 .radio-input {
     display: none;

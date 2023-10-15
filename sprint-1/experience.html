@@ -44,12 +44,12 @@
         <form action="https://geckos.greenriverdev.com/vardump.php" target="_blank" method="post" class="d-flex flex-column align-items-center">
             <div class="d-flex flex-column align-items-start" id="form-container">
 
-                <div class="info-form bg-light rounded my-3 p-4">
+                <div class="bg-light rounded my-3 p-4" id="info-form">
                     <p>Please fill out the following form to rate your experience on a scale of one to five stars at the clincal attended. Please be honest as we collect this data to be sure  we are sending our students to clincal will provide good learning environments and opportunities!</p>
                 </div>
                 <!-- Question 1 -->
-                <label for="">1. What Clinical Site did you attend? </label>
-                <input class="text-input" type="text" name="" id="">
+                <label for="question-1">1. What Clinical Site did you attend? </label>
+                <input class="text-input" type="text" name="question-1" id="question-1" required="required">
             
                 <!-- End of question 1 -->
 
@@ -186,8 +186,7 @@
                     <textarea name="question-8" id="question-textarea" placeholder="Input your answer here"></textarea>
                     <!-- end of question 8 -->
                 </div>
-                <button type="button" id="btn" class="my-3">Button</button>
-                
+                <button id="btn" class="my-3">Button</button>
             </div>
         </form>
     </div>
