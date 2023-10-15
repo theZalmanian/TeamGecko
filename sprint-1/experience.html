@@ -37,19 +37,19 @@
         </div>
     </nav>
     <!--End of Nav-->
-    <div class="container d-flex justify-content-center">
-        <form action="https://schrock.greenriverdev.com/vardump.php" target="_blank" method="post">
+    <div class="container">
+        <form action="https://schrock.greenriverdev.com/vardump.php" target="_blank" method="post" class="d-flex flex-column align-items-center">
             <!-- Question 1 -->
-            <div class="row">
-                <p>1.How was your experience</p>
-                <input type="text" name="" id="">
-            </div>
+                <div class="d-flex flex-column align-items-start">
+                <label for="">1.What Clinical Site did you attend? </label>
+                <input class="text-input" type="text" name="" id="">
+                
             <!-- End of question 1 -->
 
             <!-- question 2 -->
             <fieldset id="rating-question-2">
                 <div class="question2">
-                    <p>2. How was your experience</p>
+                    <p>2. I enjoyed my time at this clinical site.</p>
                 </div>
                 <div class="star-rating">
                     <input class="radio-input" type="radio" id="q2-star5" name="rating-question-2" value="5" required="required"/>
@@ -74,7 +74,7 @@
             <!-- questions 3 -->
             <fieldset id="rating-question-3">
                 <div class="question3">
-                    <p>3. How was your experience</p>
+                    <p>3. The clinical staff was supportive of my role.</p>
                 </div>
                 <div class="star-rating">
                     <input class="radio-input" type="radio" id="q3-star5" name="rating-question-3" value="5" required="required"/>
@@ -98,7 +98,7 @@
             <!-- question 4 -->
             <fieldset id="rating-question-4">
                 <div class="question4">
-                    <p>4. How was your experience</p>
+                    <p>4. The site helped facilitate my learning objectives.</p>
                 </div>
                 <div class="star-rating">
                     <input class="radio-input" type="radio" id="q4-star5" name="rating-question-4" value="5" required="required"/>
@@ -122,7 +122,7 @@
             <!-- question 5 -->
             <fieldset id="rating-question-5">
                 <div class="question5">
-                    <p>5. How was your experience</p>
+                    <p>5. My preceptor hekped facilitate my learning objectives.</p>
                 </div>
                 <div class="star-rating">
                     <input class="radio-input" type="radio" id="q5-star5" name="rating-question-5" value="5" required="required"/>
@@ -146,7 +146,7 @@
             <!-- question 6 -->
             <fieldset id="rating-question-6">
                 <div class="question6">
-                    <p>6. How was your experience</p>
+                    <p>6. I would recommend this site to another student.</p>
                 </div>
                 <div class="star-rating">
                     <input class="radio-input" type="radio" id="q6-star5" name="rating-question-6" value="5" required="required"/>
@@ -172,7 +172,10 @@
 
             <!-- question 8-->
             <!-- end of question 8 -->
-            <button>Submit</button>
+           
+            <button type="button" id="btn">Button</button>
+                
+                </div>
         </form>
     </div>
 </body>
