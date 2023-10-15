@@ -11,25 +11,55 @@
 .radio-input {
     display: none;
 }
-
 .radio{
-    margin: 0px 2px;
+    font-size: 0;
+}
+.radio:before{
+    content: "★";
+    margin: 0px 02px;
     cursor: pointer;
-    content: "\f005";
     display: inline-block;
     font-size: 30px;
     transition: ease-in-out;
 }
 
 .radio-input:checked ~ .radio {
-    color: #ffc700;
-    color: gold;
+
+    color: rgb(167, 236, 119);
 }
 
 .text-input{
     width: 100%;
     border-radius: 5px;
+    padding: 5px;
+    border: grey;
+
 }
 #btn{
     width:100%;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border:none;
 }
+#btn:hover{
+    cursor: pointer;
+    background-color: green;
+}
+
+#question-textarea{
+    height: 100px;
+    width: 100%;
+    border-radius: 10px;
+    border: solid .5mm green;
+    padding: 5px 5px;
+    margin: 10px 0px;
+}
+#form-container{
+    padding: 0px 300px;
+}
+
+@media screen and (max-width: 1000px) {
+    #form-container{
+        padding: 0px 0px;
+    }
+  }
