@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/experience.css">
     <link rel="stylesheet" href="/css/nursing.css">
     <link rel="stylesheet" href="https://fontawesome.com/icons/star?f=classic&s=solid">
+    <script src="/js/experience-theme.js"></script>
 </head>
 <body>
     <!--Start of Nav-->
@@ -43,12 +44,15 @@
         
         <form action="https://geckos.greenriverdev.com/vardump.php" target="_blank" method="post" class="d-flex flex-column align-items-center">
             <div class="d-flex flex-column align-items-start" id="form-container">
-
+                <button type="button" class="btn btn-outline-light" data-bs-toggle="button" id="theme-button">Theme Toggle</button>
                 <div class="bg-light rounded my-3 p-4" id="info-form">
-                    <p>Please fill out the following form to rate your experience on a scale of one to five stars at the clincal attended. Please be honest as we collect this data to be sure  we are sending our students to clincal will provide good learning environments and opportunities!</p>
+                    <p>Please fill out the following form to rate your experience on a scale of one to five stars at the clincal attended. Please be honest as we collect this data to be sure  we are sending our students to clincal will provide good learning environments and opportunities!
+
+                    </p>
+                    <p><span class="text-danger">*</span><b> Require to fill before submitting</b></p>
                 </div>
                 <!-- Question 1 -->
-                <label for="question-1">1. What Clinical Site did you attend? </label>
+                <label for="question-1">1. What Clinical Site did you attend? <span class="text-danger">*</span></label>
                 <input class="text-input" type="text" name="question-1" id="question-1" required="required">
             
                 <!-- End of question 1 -->
@@ -56,7 +60,7 @@
                 <!-- question 2 -->
                 <fieldset id="rating-question-2">
                     <div class="question2">
-                        <p>2. I enjoyed my time at this clinical site.</p>
+                        <p>2. I enjoyed my time at this clinical site. <span class="text-danger">*</span></p>
                     </div>
                     <div class="star-rating">
                         <input class="radio-input" type="radio" id="q2-star5" name="rating-question-2" value="5" required="required"/>
@@ -81,7 +85,7 @@
                 <!-- questions 3 -->
                 <fieldset id="rating-question-3">
                     <div class="question3">
-                        <p>3. The clinical staff was supportive of my role.</p>
+                        <p>3. The clinical staff was supportive of my role. <span class="text-danger">*</span></p>
                     </div>
                     <div class="star-rating">
                         <input class="radio-input" type="radio" id="q3-star5" name="rating-question-3" value="5" required="required"/>
@@ -105,7 +109,7 @@
                 <!-- question 4 -->
                 <fieldset id="rating-question-4">
                     <div class="question4">
-                        <p>4. The site helped facilitate my learning objectives.</p>
+                        <p>4. The site helped facilitate my learning objectives. <span class="text-danger">*</span></p>
                     </div>
                     <div class="star-rating">
                         <input class="radio-input" type="radio" id="q4-star5" name="rating-question-4" value="5" required="required"/>
@@ -129,7 +133,7 @@
                 <!-- question 5 -->
                 <fieldset id="rating-question-5">
                     <div class="question5">
-                        <p>5. My preceptor helped facilitate my learning objectives.</p>
+                        <p>5. My preceptor helped facilitate my learning objectives. <span class="text-danger">*</span></p>
                     </div>
                     <div class="star-rating">
                         <input class="radio-input" type="radio" id="q5-star5" name="rating-question-5" value="5" required="required"/>
@@ -153,7 +157,7 @@
                 <!-- question 6 -->
                 <fieldset id="rating-question-6">
                     <div class="question6">
-                        <p>6. I would recommend this site to another student.</p>
+                        <p>6. I would recommend this site to another student. <span class="text-danger">*</span></p>
                     </div>
                     <div class="star-rating">
                         <input class="radio-input" type="radio" id="q6-star5" name="rating-question-6" value="5" required="required"/>

@@ -60,6 +60,18 @@
 #form-container{
     padding: 0px 300px;
 }
+#theme-button{
+    margin-top: 10px;
+    padding:10px 0px;
+    width: 100%;
+}
+
+.dark-mode{
+    padding: 0px 300px;
+    background-color: rgb(8, 34, 8);
+    color: rgba(173, 209, 178, 0.536);
+}
+
 
 @media screen and (max-width: 1000px) {
     #form-container{
