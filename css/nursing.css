@@ -70,3 +70,7 @@ table.requirement-data th.table-or-column,
 table.requirement-data td.table-or-column {
     background: var(--nursingFirstPrimaryColor);
 }
+
+.form-floating > textarea.form-control {
+    height: 100px;
+}

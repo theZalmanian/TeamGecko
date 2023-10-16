@@ -47,22 +47,25 @@
    <form action="/vardump.php" method="post">
         <div class="text-center">
         <div class="contact form-floating my-2">
-
+            <input type="text" class="form-control" id="name" name="name"
+                placeholder="" required>
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Name"  name="name" required>
         </div>
         <div class="contact form-floating my-2">
+            <input type="email" class="form-control" id="email" name="email" 
+                placeholder="" required>
             <label for="email">Email Address</label>
-            <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
         </div>
         <div class="contact form-floating my-2">
+            <input type="tel" class="form-control" id="phone" name="phone" 
+                placeholder="" required>
             <label for="phone">Phone Number</label>
-            <input type="tel" class="form-control" id="phone" placeholder="Phone Number" name="phone" required>
         </div>
-            <div class="contact">
-            <label for="message">Message</label>
-            <textarea class="form-control" id="message" rows="3" name="message" required></textarea>
-        </div>
+            <div class="contact form-floating">
+                <textarea class="form-control" id="message" name="message"
+                    placeholder="" required></textarea>
+                <label for="message">Message</label>
+            </div>
         </div>
        <button class="btn btn-primary w-100 py-2 my-2" type="submit">Submit</button>
    </form>
