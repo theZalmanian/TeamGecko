@@ -74,3 +74,143 @@ table.requirement-data td.table-or-column {
 .form-floating > textarea.form-control {
     height: 100px;
 }
+
+
+
+
+
+
+
+
+
+
+
+/* TIEN CSS */
+
+
+.star-rating
+{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content:flex-end;
+    padding: 0px 15px;
+   
+}
+.optional-question > label > span{
+    font-weight:900;
+}
+
+.radio-input {
+    display: none;
+}
+.radio{
+    font-size: 0;
+}
+.radio:before{
+    content: "★";
+    margin: 0px 02px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 30px;
+    transition: ease-in-out;
+
+}
+
+.radio-input:checked ~ .radio {
+
+    color: rgb(167, 236, 119);
+}
+
+.text-input{
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+}
+.text-dark-mode{
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    background-color: #333333;
+    color: rgba(173, 209, 178, 0.536);
+}
+
+
+.no-input{
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+    border: red solid .5mm;
+
+}
+#btn{
+    width:100%;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border:none;
+}
+#btn:hover{
+    cursor: pointer;
+    background-color: green;
+}
+
+#question-textarea{
+    height: 100px;
+    width: 100%;
+    border-radius: 10px;
+    border: solid .5mm green;
+    padding: 5px 5px;
+    margin: 10px 0px;
+}
+.textarea-dark-mode
+{
+    background-color: #333333;
+    color: rgba(173, 209, 178, 0.536);
+}
+
+.no-input-textarea{
+    height: 100px;
+    width: 100%;
+    border-radius: 10px;
+    border: solid .5mm red;
+    padding: 5px 5px;
+    margin: 10px 0px;
+}
+
+.info-box{ 
+    border-radius: 10px;
+    padding: 30px;
+    margin: 10px 0px;
+    background-color:white;
+}
+
+.info-dark-mode{ 
+    background-color:#333333;
+    color: rgba(173, 209, 178, 0.536);
+}
+
+
+#form-container{
+    padding: 0px 300px;
+}
+/* #theme-button{
+    margin-top: 10px;
+    padding:10px 0px;
+    width: 100%;
+} */
+
+.dark-mode{
+    background-color:  #22321b;
+    color: rgba(173, 209, 178, 0.536);
+}
+
+
+@media screen and (max-width: 1500px) {
+    #form-container{
+        padding: 0px 0px;
+    }
+  }
+
+/* TIEN CSS
+ */

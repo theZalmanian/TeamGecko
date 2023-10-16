@@ -1,89 +1,8 @@
 
 
 
-/* :root {
-    --nursingFirstPrimaryColor: #60a144;
-    --nursingFirstPrimaryColorVariant: #a7cf8c;
-    --nursingSecondPrimaryColor: #fdfdfd;
-    --nursingSecondPrimaryColorVariant: #e0edd8;
-
-    --nursingFirstSecondaryColor: #0d4722;
-    --nursingSecondSecondaryColor: #333333;
-
-    --nursingAccentColor: #69b345;
-} */
-
-[data-bs-theme=dark] {
-    --nursingFirstPrimaryColor: #22321b;
-}
-
-body {
-    background: #60a144;
-}
-
-nav.navbar {
-    background: #0d4722;
-    box-shadow: 0 0 4px 0 #69b345;
-}
-
-div.navbar-nav > a.nav-link {
-    color: #69b345;
-    font-weight: bold;
-}
-
-div.navbar-nav > .nav-link:hover {
-    color: #60a144 !important;
-}
-
-button.accordion-button.collapsed,
-button.accordion-button:not(.collapsed) {
-    color:  #a7cf8c;
-    font-size: x-large;
-}
-
-button.accordion-button.collapsed {
-    background: #0d4722;
-}
-
-button.accordion-button:not(.collapsed) {
-    background:  #333333;
-}
-
-button.accordion-button::after,
-button.accordion-button:not(.collapsed)::after {
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23a7cf8c'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
-}
-
-ul.list-group {
-    --bs-list-group-border-color:  #0d4722;
-}
-
-table.requirement-data tr > td.p-0,
-table.requirement-data ul.list-group.list-group-flush > li.list-group-item {
-    background:  #a7cf8c;
-}
-
-table.requirement-data ul.list-group.list-group-flush > li.list-group-item:nth-of-type(even) {
-    background: #e0edd8;
-}
-
-ul.requirement-notes > li.list-group-item,
-table.requirement-data th,
-table.requirement-data th.table-or-column,
-table.requirement-data td.table-or-column {
-    background: #60a144;
-}
-
-.form-floating > textarea.form-control {
-    height: 100px;
-}
-
-
-
-
 
 /* TIEN CSS */
-
 
 
 .star-rating
