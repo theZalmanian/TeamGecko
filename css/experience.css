@@ -1,3 +1,91 @@
+
+
+
+:root {
+    --nursingFirstPrimaryColor: #60a144;
+    --nursingFirstPrimaryColorVariant: #a7cf8c;
+    --nursingSecondPrimaryColor: #fdfdfd;
+    --nursingSecondPrimaryColorVariant: #e0edd8;
+
+    --nursingFirstSecondaryColor: #0d4722;
+    --nursingSecondSecondaryColor: #333333;
+
+    --nursingAccentColor: #69b345;
+}
+
+[data-bs-theme=dark] {
+    --nursingFirstPrimaryColor: #22321b;
+}
+
+body {
+    background: var(--nursingFirstPrimaryColor);
+}
+
+nav.navbar {
+    background: var(--nursingFirstSecondaryColor);
+    box-shadow: 0 0 4px 0 var(--nursingAccentColor);
+}
+
+div.navbar-nav > a.nav-link {
+    color: var(--nursingAccentColor);
+    font-weight: bold;
+}
+
+div.navbar-nav > .nav-link:hover {
+    color: var(--nursingFirstPrimaryColor) !important;
+}
+
+button.accordion-button.collapsed,
+button.accordion-button:not(.collapsed) {
+    color: var(--nursingFirstPrimaryColorVariant);
+    font-size: x-large;
+}
+
+button.accordion-button.collapsed {
+    background: var(--nursingFirstSecondaryColor);
+}
+
+button.accordion-button:not(.collapsed) {
+    background: var(--nursingSecondSecondaryColor);
+}
+
+button.accordion-button::after,
+button.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23a7cf8c'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+}
+
+ul.list-group {
+    --bs-list-group-border-color: var(--nursingFirstSecondaryColor);
+}
+
+table.requirement-data tr > td.p-0,
+table.requirement-data ul.list-group.list-group-flush > li.list-group-item {
+    background: var(--nursingFirstPrimaryColorVariant);
+}
+
+table.requirement-data ul.list-group.list-group-flush > li.list-group-item:nth-of-type(even) {
+    background: var(--nursingSecondPrimaryColorVariant);
+}
+
+ul.requirement-notes > li.list-group-item,
+table.requirement-data th,
+table.requirement-data th.table-or-column,
+table.requirement-data td.table-or-column {
+    background: var(--nursingFirstPrimaryColor);
+}
+
+.form-floating > textarea.form-control {
+    height: 100px;
+}
+
+
+
+
+
+/* TIEN CSS */
+
+
+
 .star-rating
 {
     display: flex;
@@ -116,8 +204,11 @@
 }
 
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1500px) {
     #form-container{
         padding: 0px 0px;
     }
   }
+
+/* TIEN CSS
+ */
