@@ -43,26 +43,30 @@
     </div>
 </nav>
 <!--End of Nav-->
-<div class="container">
-    <form action="/vardump.php" method="post">
-        <div class="contact">
+<div class="container col-12 col-md-10 col-lg-8 text-center">
+   <form action="/vardump.php" method="post">
+        <div class="text-center">
+        <div class="contact form-floating my-2">
+
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" placeholder="Name"  name="name" required>
         </div>
-        <div class="contact">
+        <div class="contact form-floating my-2">
             <label for="email">Email Address</label>
             <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
         </div>
-        <div class="contact">
+        <div class="contact form-floating my-2">
             <label for="phone">Phone Number</label>
             <input type="tel" class="form-control" id="phone" placeholder="Phone Number" name="phone" required>
         </div>
-        <div class="contact">
+            <div class="contact">
             <label for="message">Message</label>
             <textarea class="form-control" id="message" rows="3" name="message" required></textarea>
         </div>
-        <button type="submit" class="button">Submit</button>
-    </form>
+        </div>
+       <button class="btn btn-primary w-100 py-2 my-2" type="submit">Submit</button>
+   </form>
+
 </div>
 </body>
 </html>
