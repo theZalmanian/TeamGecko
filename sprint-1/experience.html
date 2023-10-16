@@ -25,6 +25,7 @@
             </button>
             <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
                 <div class="navbar-nav">
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="button" id="theme-button">Theme Toggle</button>
                     <a class="nav-link" href="/sprint-1/requirements.html">
                         Clinical Requirements
                     </a>
@@ -40,12 +41,12 @@
     </nav>
     <!--End of Nav-->
 
-    <div class="container-md container-fluid"> 
+    <div class="container-fluid" id="main-container"> 
         
         <form action="https://geckos.greenriverdev.com/vardump.php" target="_blank" method="post" class="d-flex flex-column align-items-center">
-            <div class="d-flex flex-column align-items-start" id="form-container">
-                <button type="button" class="btn btn-outline-light" data-bs-toggle="button" id="theme-button">Theme Toggle</button>
-                <div class="bg-light rounded my-3 p-4" id="info-form">
+            <div class="d-flex flex-column align-items-start container" id="form-container">
+            
+                <div class="info-box" id="info-form">
                     <p>Please fill out the following form to rate your experience on a scale of one to five stars at the clincal attended. Please be honest as we collect this data to be sure  we are sending our students to clincal will provide good learning environments and opportunities!
 
                     </p>
