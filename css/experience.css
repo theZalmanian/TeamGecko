@@ -1,7 +1,7 @@
 
 
 
-:root {
+/* :root {
     --nursingFirstPrimaryColor: #60a144;
     --nursingFirstPrimaryColorVariant: #a7cf8c;
     --nursingSecondPrimaryColor: #fdfdfd;
@@ -11,42 +11,42 @@
     --nursingSecondSecondaryColor: #333333;
 
     --nursingAccentColor: #69b345;
-}
+} */
 
 [data-bs-theme=dark] {
     --nursingFirstPrimaryColor: #22321b;
 }
 
 body {
-    background: var(--nursingFirstPrimaryColor);
+    background: #60a144;
 }
 
 nav.navbar {
-    background: var(--nursingFirstSecondaryColor);
-    box-shadow: 0 0 4px 0 var(--nursingAccentColor);
+    background: #0d4722;
+    box-shadow: 0 0 4px 0 #69b345;
 }
 
 div.navbar-nav > a.nav-link {
-    color: var(--nursingAccentColor);
+    color: #69b345;
     font-weight: bold;
 }
 
 div.navbar-nav > .nav-link:hover {
-    color: var(--nursingFirstPrimaryColor) !important;
+    color: #60a144 !important;
 }
 
 button.accordion-button.collapsed,
 button.accordion-button:not(.collapsed) {
-    color: var(--nursingFirstPrimaryColorVariant);
+    color:  #a7cf8c;
     font-size: x-large;
 }
 
 button.accordion-button.collapsed {
-    background: var(--nursingFirstSecondaryColor);
+    background: #0d4722;
 }
 
 button.accordion-button:not(.collapsed) {
-    background: var(--nursingSecondSecondaryColor);
+    background:  #333333;
 }
 
 button.accordion-button::after,
@@ -55,23 +55,23 @@ button.accordion-button:not(.collapsed)::after {
 }
 
 ul.list-group {
-    --bs-list-group-border-color: var(--nursingFirstSecondaryColor);
+    --bs-list-group-border-color:  #0d4722;
 }
 
 table.requirement-data tr > td.p-0,
 table.requirement-data ul.list-group.list-group-flush > li.list-group-item {
-    background: var(--nursingFirstPrimaryColorVariant);
+    background:  #a7cf8c;
 }
 
 table.requirement-data ul.list-group.list-group-flush > li.list-group-item:nth-of-type(even) {
-    background: var(--nursingSecondPrimaryColorVariant);
+    background: #e0edd8;
 }
 
 ul.requirement-notes > li.list-group-item,
 table.requirement-data th,
 table.requirement-data th.table-or-column,
 table.requirement-data td.table-or-column {
-    background: var(--nursingFirstPrimaryColor);
+    background: #60a144;
 }
 
 .form-floating > textarea.form-control {
