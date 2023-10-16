@@ -378,7 +378,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="accordion my-2" id="requirements-accordion-1">
+                <div class="accordion my-2" id="requirements-accordion-2">
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button"
@@ -477,7 +477,13 @@
         /**
          * All accordion items in the requirements accordion
          */
-        const accordionItems = getByID('requirements-accordion').querySelectorAll('.accordion-item');
+        const accordionItems1 = getByID('requirements-accordion-1').querySelectorAll('.accordion-item');
+        
+        /**
+         * All accordion items in the requirements accordion
+         */
+        const accordionItems2 = getByID('requirements-accordion-2').querySelectorAll('.accordion-item');
+       
         
         /**
          * If the screen is currently mobile sized, closes all accordion items in the requirements accordion.
@@ -485,7 +491,30 @@
          */
         function toggleResponsiveAccordion() {            
             // run through all items in the accordion
-            accordionItems.forEach((currItem) => {
+            accordionItems1.forEach((currItem) => {
+                // get the button that handles the collapse from the current item
+                const collapseButton = currItem.querySelector('.accordion-button')
+
+                // get the div that handles the collapse from the current item
+                const collapseDiv = currItem.querySelector('.accordion-collapse')
+
+                // if the screen is currently mobile-sized
+                if (screenIsMobile()) {
+                    // close the current accordion item
+                    collapseButton.classList.add('collapsed');
+                    collapseDiv.classList.remove('show');
+
+                } 
+                
+                // if the screen size changed, but is not small enough to be considered mobile 
+                else {
+                    // open the current accordion item
+                    collapseButton.classList.remove('collapsed');
+                    collapseDiv.classList.add('show');
+                }
+            });
+        
+            accordionItems2.forEach((currItem) => {
                 // get the button that handles the collapse from the current item
                 const collapseButton = currItem.querySelector('.accordion-button')
 
