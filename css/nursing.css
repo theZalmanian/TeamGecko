@@ -1,49 +1,60 @@
 :root {
-    --nursingFirstPrimaryColor: #60a144;
-    --nursingFirstPrimaryColorVariant: #a7cf8c;
-    --nursingSecondPrimaryColor: #fdfdfd;
-    --nursingSecondPrimaryColorVariant: #e0edd8;
+    --nursing-primary-color: #60a144;
+    --nursing-primary-color-variant: #0d4722;
+    
+    --nursing-secondary-color: #eae9e9;
+    --nursing-secondary-color-variant: #333333;
 
-    --nursingFirstSecondaryColor: #0d4722;
-    --nursingSecondSecondaryColor: #333333;
+    --nursing-accent-color: #69b345;
 
-    --nursingAccentColor: #69b345;
+    /* --bs-border-color: var(--nursing-primary-color-variant); */
+
+    /*Bootstrap overloads*/
+    --bs-border-color: var(--nursing-primary-color-variant);
+    --bs-border-color-translucent: var(--nursing-primary-color-variant);
 }
 
 [data-bs-theme=dark] {
-    --nursingFirstPrimaryColor: #22321b;
+    --nursing-primary-color: #0d4722;
+    --nursing-primary-color-variant: #60a144;
+    
+    --nursing-secondary-color: #333333;
+    --nursing-secondary-color-variant: #fdfdfd;
 }
 
 body {
-    background: var(--nursingFirstPrimaryColor);
+    background: var(--nursing-primary-color);
 }
 
 nav.navbar {
-    background: var(--nursingFirstSecondaryColor);
-    box-shadow: 0 0 4px 0 var(--nursingAccentColor);
+    background: var(--nursing-secondary-color);
 }
 
-div.navbar-nav > a.nav-link {
-    color: var(--nursingAccentColor);
+.navbar-nav > a.nav-link {
+    color: var(--nursing-secondary-color-variant);
     font-weight: bold;
 }
 
-div.navbar-nav > .nav-link:hover {
-    color: var(--nursingFirstPrimaryColor) !important;
+.navbar-nav a#theme-switcher.nav-link > svg {
+    fill: var(--nursing-secondary-color-variant);
+    transition: fill 0.2s;
+    width: 30px;
+}
+
+.navbar-nav > .nav-link:hover {
+    color: var(--nursing-accent-color);
+}
+
+.navbar-nav a#theme-switcher.nav-link:hover > svg {
+    fill: var(--nursing-accent-color);
+    cursor: pointer;
 }
 
 button.accordion-button.collapsed,
 button.accordion-button:not(.collapsed) {
-    color: var(--nursingFirstPrimaryColorVariant);
+    background: var(--nursing-secondary-color);
+    color: var(--nursing-secondary-color-variant);
     font-size: x-large;
-}
-
-button.accordion-button.collapsed {
-    background: var(--nursingFirstSecondaryColor);
-}
-
-button.accordion-button:not(.collapsed) {
-    background: var(--nursingSecondSecondaryColor);
 }
 
 button.accordion-button::after,
@@ -51,49 +62,36 @@ button.accordion-button:not(.collapsed)::after {
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23a7cf8c'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
 }
 
-.navbar-nav a#theme-switcher.nav-link > svg {
-    fill: var(--nursingAccentColor);
-    transition: fill 0.2s;
-    width: 30px;
-}
-
-.navbar-nav a#theme-switcher.nav-link:hover > svg {
-    fill: var(--nursingFirstPrimaryColor);
-    cursor: pointer;
-}
-
-ul.list-group {
-    --bs-list-group-border-color: var(--nursingFirstSecondaryColor);
-}
-
 table.requirement-data tr > td.p-0,
 table.requirement-data ul.list-group.list-group-flush > li.list-group-item {
-    background: var(--nursingFirstPrimaryColorVariant);
+    background: var(--nursing-primary-color);
+    color: var(--nursing-primary-color-variant);
 }
 
 table.requirement-data ul.list-group.list-group-flush > li.list-group-item:nth-of-type(even) {
-    background: var(--nursingSecondPrimaryColorVariant);
+    background: var(--nursing-primary-color-variant);
+    color: var(--nursing-primary-color);
 }
 
-ul.requirement-notes > li.list-group-item,
+.card.notes li.list-group-item,
 table.requirement-data th,
 table.requirement-data th.table-or-column,
 table.requirement-data td.table-or-column {
-    background: var(--nursingFirstPrimaryColor);
+    background: var(--nursing-secondary-color);
+    color: var(--nursing-accent-color) !important;
+}
+
+li.list-group-item {
+    --bs-list-group-color: var(--nursing-secondary-color-variant) !important;
+}
+
+ul.requirement-notes > li.list-group-item {
+    background: var(--nursing-primary-color);
 }
 
 .form-floating > textarea.form-control {
     height: 100px;
 }
-
-
-
-
-
-
-
-
-
 
 
 /* TIEN CSS */
