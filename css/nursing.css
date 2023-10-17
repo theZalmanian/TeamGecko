@@ -97,12 +97,12 @@ ul.requirement-notes > li.list-group-item {
     height: 100px;
 }
 
-form#contact-form button.btn {
+form button.btn {
     background: var(--nursing-secondary-color);
     transition: background .3s;
 }
 
-form#contact-form button.btn:hover {
+form button.btn:hover {
     background: var(--nursing-accent-color);
 }
 
@@ -232,7 +232,7 @@ form#contact-form button.btn:hover {
     #form-container{
         padding: 0px 0px;
     }
-  }
+}
 
 /* TIEN CSS
  */
