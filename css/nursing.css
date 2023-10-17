@@ -107,36 +107,34 @@ form button.btn:hover {
 }
 
 /* TIEN CSS */
-.star-rating
-{
+.star-rating {
     display: flex;
     flex-direction: row-reverse;
-    justify-content:flex-end;
-    padding: 0px 15px;
+    justify-content: flex-end;
+    padding-left: 15px;
 }
 
-.optional-question > label > span{
-    font-weight:900;
-}
-
-.radio-input {
+/* Remove radio default styling */
+input.radio-input {
     display: none;
 }
 
-.radio{
+label.radio {
     font-size: 0;
 }
 
-.radio:before{
+label.radio:before {
+    font-size: 1.8rem;
     content: "★";
-    margin: 0px 02px;
     cursor: pointer;
-    display: inline-block;
-    font-size: 30px;
     transition: ease-in-out;
 }
 
-.radio-input:checked ~ .radio {
-    color: rgb(167, 236, 119);
+input.radio-input:checked ~ label.radio {
+    color: var(--nursing-primary-color-variant);
 }
+
+input.radio-input:hover ~ label.radio {
+    color: orange;
+  }
 /* TIEN CSS */

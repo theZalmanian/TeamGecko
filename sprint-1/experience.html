@@ -51,12 +51,17 @@
             <div class="col-md-2 col-lg-3">
             </div>
             <div class="col-12 col-md-8 col-lg-6">
+                <h1 class="col-12 mb-3 text-center">
+                    Clinical Experience Questionnaire
+                </h1>
                 <form action="/vardump.php" target="_blank" method="post" id="experience-form">
                     <div class="card" id="info-form">
                         <ul class="list-group list-group-flush text-center">
                             <li class="list-group-item text-break px-2">
-                                Please fill out the following form to rate your experience on a scale of one to five stars at the clinical
-                                attended. Please be honest as we collect this data to be sure we are sending our students to clinical
+                                Please fill out the following form to rate your experience on a scale of one 
+                                to five stars at the clinical attended. Please be honest as we collect this data 
+                                to be sure we are sending our students to clinical will provide good 
+                                learning environments and opportunities!
                             </li>
                             <li class="list-group-item text-break px-2">
                                 <span class="text-danger">*</span> <b>Required</b>
@@ -64,7 +69,7 @@
                         </ul>
                     </div>
                     <!-- Question 1 -->
-                    <div class="form-floating my-2">
+                    <div class="form-floating my-1">
                         <input type="text" class="form-control" id="question-1" name="question-1" 
                             placeholder="" required>
                         <label for="question-1">
@@ -76,12 +81,12 @@
                     <!-- End of question 1 -->
         
                     <!-- question 2 -->
-                    <fieldset id="rating-question-2">
-                        <div class="question2">
-                            <p>2. I enjoyed my time at this clinical site. <span class="text-danger">*</span></p>
+                    <fieldset class="card p-3 my-1" id="rating-question-2">
+                        <div id="question-2">
+                            2. I enjoyed my time at this clinical site <span class="text-danger">*</span>
                         </div>
                         <div class="star-rating">
-                            <input class="radio-input" type="radio" id="q2-star5" name="rating-question-2" value="5" required="required">
+                            <input class="radio-input" type="radio" id="q2-star5" name="rating-question-2" value="5" required>
                             <label class="radio" for="q2-star5" title="5 stars">star5</label>
         
                             <input class="radio-input" type="radio" id="q2-star4" name="rating-question-2" value="4">
@@ -99,14 +104,13 @@
                     </fieldset>
                     <!-- End of question 2 -->
         
-        
                     <!-- questions 3 -->
-                    <fieldset id="rating-question-3">
-                        <div class="question3">
-                            <p>3. The clinical staff was supportive of my role. <span class="text-danger">*</span></p>
+                    <fieldset class="card p-3 my-1" id="rating-question-3">
+                        <div id="question-3">
+                            3. The clinical staff was supportive of my role <span class="text-danger">*</span>
                         </div>
                         <div class="star-rating">
-                            <input class="radio-input" type="radio" id="q3-star5" name="rating-question-3" value="5" required="required">
+                            <input class="radio-input" type="radio" id="q3-star5" name="rating-question-3" value="5" required>
                             <label class="radio" for="q3-star5" title="5 stars">star5</label>
         
                             <input class="radio-input" type="radio" id="q3-star4" name="rating-question-3" value="4">
@@ -125,12 +129,12 @@
                     <!-- end of question 3 -->
         
                     <!-- question 4 -->
-                    <fieldset id="rating-question-4">
-                        <div class="question4">
-                            <p>4. The site helped facilitate my learning objectives. <span class="text-danger">*</span></p>
+                    <fieldset class="card p-3 my-1" id="rating-question-4">
+                        <div class="question-4">
+                            4. The site helped facilitate my learning objectives. <span class="text-danger">*</span>
                         </div>
                         <div class="star-rating">
-                            <input class="radio-input" type="radio" id="q4-star5" name="rating-question-4" value="5" required="required">
+                            <input class="radio-input" type="radio" id="q4-star5" name="rating-question-4" value="5" required>
                             <label class="radio" for="q4-star5" title="5 stars">star5</label>
         
                             <input class="radio-input" type="radio" id="q4-star4" name="rating-question-4" value="4">
@@ -149,12 +153,12 @@
                     <!-- end of question 4-->
         
                     <!-- question 5 -->
-                    <fieldset id="rating-question-5">
-                        <div class="question5">
-                            <p>5. My preceptor helped facilitate my learning objectives. <span class="text-danger">*</span></p>
+                    <fieldset class="card p-3 my-1" id="rating-question-5">
+                        <div class="question-5">
+                            5. My preceptor helped facilitate my learning objectives. <span class="text-danger">*</span>
                         </div>
                         <div class="star-rating">
-                            <input class="radio-input" type="radio" id="q5-star5" name="rating-question-5" value="5" required="required">
+                            <input class="radio-input" type="radio" id="q5-star5" name="rating-question-5" value="5" required>
                             <label class="radio" for="q5-star5" title="5 stars">star5</label>
         
                             <input class="radio-input" type="radio" id="q5-star4" name="rating-question-5" value="4">
@@ -173,12 +177,12 @@
                     <!-- end of question 5 -->
         
                     <!-- question 6 -->
-                    <fieldset id="rating-question-6">
-                        <div class="question6">
-                            <p>6. I would recommend this site to another student. <span class="text-danger">*</span></p>
+                    <fieldset class="card p-3 my-1" id="rating-question-6">
+                        <div class="question-6">
+                            6. I would recommend this site to another student. <span class="text-danger">*</span>
                         </div>
                         <div class="star-rating">
-                            <input class="radio-input" type="radio" id="q6-star5" name="rating-question-6" value="5" required="required">
+                            <input class="radio-input" type="radio" id="q6-star5" name="rating-question-6" value="5" required>
                             <label class="radio" for="q6-star5" title="5 stars">star5</label>
         
                             <input class="radio-input" type="radio" id="q6-star4" name="rating-question-6" value="4">
@@ -196,23 +200,27 @@
                     </fieldset>
                     <!-- end of question 6-->
 
-                    <div class="optional-question my-2">
+                    <div class="my-1" id="optional-questions">
                         <!-- question 7 -->
-                        <label for="question-7">
-                            7. If you have any comments you would like to leave about the site or 
-                            staff at this facility please add below.
-                        </label>
-                        <textarea class="form-control" name="question-7" id="question-7" placeholder=""></textarea>
+                        <div class="card p-3 my-1">
+                            <label class="mb-2" for="question-7">
+                                7. If you have any comments you would like to leave about the site or 
+                                staff at this facility please add below.
+                            </label>
+                            <textarea class="form-control" name="question-7" id="question-7" rows="2"></textarea>
+                        </div>
                         <!-- end of question 7 -->
         
                         <!-- question 8-->
-                        <label for="question-8" class="text-wrap">
-                            8. If you have any feedback you would like to leave about your clinical
-                            instructor please add below. <b>None of the instructors will see this.</b> We
-                            will just be using this to gage if an instructor needs to improve in areas,
-                            or to highlight instructors who go above and beyond.
-                        </label>
-                        <textarea class="form-control" id="question-8"  name="question-8" placeholder=""></textarea>
+                        <div class="card p-3 my-1">
+                            <label class="mb-2" for="question-8">
+                                8. If you have any feedback you would like to leave about your clinical
+                                instructor please add below. <b>None of the instructors will see this.</b> We
+                                will just be using this to gage if an instructor needs to improve in areas,
+                                or to highlight instructors who go above and beyond.
+                            </label>
+                            <textarea class="form-control" id="question-8" name="question-8" rows="2"></textarea>    
+                        </div>
                         <!-- end of question 8 -->
                     </div>
                     <button class="btn w-100 py-2 my-2" id="submit-experience">Submit</button>
