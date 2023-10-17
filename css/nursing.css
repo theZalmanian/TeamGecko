@@ -7,9 +7,9 @@
 
     --nursing-accent-color: #69b345;
 
-    /* --bs-border-color: var(--nursing-primary-color-variant); */
-
     /*Bootstrap overloads*/
+    --bs-body-bg: var(--nursing-secondary-color);
+    --bs-body-color: var(--nursing-secondary-color-variant);
     --bs-border-color: var(--nursing-primary-color-variant);
     --bs-border-color-translucent: var(--nursing-primary-color-variant);
 }
@@ -50,6 +50,10 @@ nav.navbar {
     cursor: pointer;
 }
 
+a.active {
+    color: var(--nursing-accent-color) !important;
+}
+
 button.accordion-button.collapsed,
 button.accordion-button:not(.collapsed) {
     background: var(--nursing-secondary-color);
@@ -86,11 +90,20 @@ li.list-group-item {
 }
 
 ul.requirement-notes > li.list-group-item {
-    background: var(--nursing-primary-color);
+    background: var(--nursing-secondary-color);
 }
 
 .form-floating > textarea.form-control {
     height: 100px;
+}
+
+form#contact-form button.btn {
+    background: var(--nursing-secondary-color);
+    transition: background .3s;
+}
+
+form#contact-form button.btn:hover {
+    background: var(--nursing-accent-color);
 }
 
 
