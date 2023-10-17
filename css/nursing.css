@@ -7,6 +7,8 @@
 
     --nursing-accent-color: #69b345;
 
+    --accordion-dropdown-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23a7cf8c'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+
     /*Bootstrap overloads*/
     --bs-body-bg: var(--nursing-secondary-color);
     --bs-body-color: var(--nursing-secondary-color-variant);
@@ -54,16 +56,25 @@ a.active {
     color: var(--nursing-accent-color) !important;
 }
 
+/******************
+** REQUIREMENTS ***
+******************/
+
 button.accordion-button.collapsed,
 button.accordion-button:not(.collapsed) {
     background: var(--nursing-secondary-color);
     color: var(--nursing-secondary-color-variant);
     font-size: x-large;
+    transition: background .3s ease-in-out;
+}
+
+button.accordion-button:hover {
+    background: var(--nursing-accent-color);
 }
 
 button.accordion-button::after,
 button.accordion-button:not(.collapsed)::after {
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23a7cf8c'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+    background-image: var(--accordion-dropdown-icon);
 }
 
 table.requirement-data tr > td.p-0,
@@ -93,6 +104,10 @@ ul.requirement-notes > li.list-group-item {
     background: var(--nursing-secondary-color);
 }
 
+/******************
+***** CONTACT *****
+******************/
+
 .form-floating > textarea.form-control {
     height: 100px;
 }
@@ -106,7 +121,10 @@ form button.btn:hover {
     background: var(--nursing-accent-color);
 }
 
-/* TIEN CSS */
+/******************
+*** EXPERIENCE ****
+******************/
+
 .star-rating {
     display: flex;
     flex-direction: row-reverse;
@@ -131,11 +149,7 @@ label.radio:before {
     transition: color .2s ease-in-out;
 }
 
+input.radio-input:hover ~ label.radio,
 input.radio-input:checked ~ label.radio {
     color: var(--nursing-accent-color);
 }
-
-input.radio-input:hover ~ label.radio {
-    color: var(--nursing-accent-color);
-}
-/* TIEN CSS */
