@@ -116,11 +116,7 @@ form button.btn:hover {
 
 /* Remove radio default styling */
 input.radio-input {
-    display: none;
-}
-
-label.radio {
-    font-size: 0;
+    opacity: 0;
 }
 
 label.radio:before {
