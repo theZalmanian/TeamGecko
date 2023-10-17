@@ -127,14 +127,14 @@ label.radio:before {
     font-size: 1.8rem;
     content: "★";
     cursor: pointer;
-    transition: ease-in-out;
+    transition: color .2s ease-in-out;
 }
 
 input.radio-input:checked ~ label.radio {
-    color: var(--nursing-primary-color-variant);
+    color: var(--nursing-accent-color);
 }
 
 input.radio-input:hover ~ label.radio {
-    color: orange;
-  }
+    color: var(--nursing-accent-color);
+}
 /* TIEN CSS */
