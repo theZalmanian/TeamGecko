@@ -68,13 +68,13 @@ button.accordion-button:not(.collapsed)::after {
 
 table.requirement-data tr > td.p-0,
 table.requirement-data ul.list-group.list-group-flush > li.list-group-item {
-    background: var(--nursing-primary-color);
-    color: var(--nursing-primary-color-variant);
+    background: var(--nursing-primary-color-variant);
+    color: var(--nursing-primary-color);
 }
 
 table.requirement-data ul.list-group.list-group-flush > li.list-group-item:nth-of-type(even) {
-    background: var(--nursing-primary-color-variant);
-    color: var(--nursing-primary-color);
+    background: var(--nursing-primary-color);
+    color: var(--nursing-primary-color-variant);
 }
 
 .card.notes li.list-group-item,
