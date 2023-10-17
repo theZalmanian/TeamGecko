@@ -119,6 +119,11 @@ input.radio-input {
     opacity: 0;
 }
 
+label.radio {
+    font-size: 0;
+}
+
+/* Style radios as stars */
 label.radio:before {
     font-size: 1.8rem;
     content: "★";
