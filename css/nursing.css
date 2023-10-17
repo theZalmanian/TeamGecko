@@ -106,7 +106,6 @@ form button.btn:hover {
     background: var(--nursing-accent-color);
 }
 
-
 /* TIEN CSS */
 .star-rating
 {
@@ -123,9 +122,11 @@ form button.btn:hover {
 .radio-input {
     display: none;
 }
+
 .radio{
     font-size: 0;
 }
+
 .radio:before{
     content: "★";
     margin: 0px 02px;
