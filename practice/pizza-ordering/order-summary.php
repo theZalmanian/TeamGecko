@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +10,7 @@
     <link rel="stylesheet" href="/css/gecko.css">
 </head>
 <body>
-    <?php echo '<p>POST</p>'; ?>
-    <?php echo var_dump($_POST); ?>
+    <p>POST</p>
+    Pizza Size: <?php echo $_POST["pizza-size"] ?>
 </body>
 </html>
