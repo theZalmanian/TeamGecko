@@ -10,18 +10,34 @@
     <link rel="stylesheet" href="/css/gecko.css">
 </head>
 <body>
-    Pizza Size: <?php echo $_POST["pizza-size"] ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1 col-lg-2">
+            </div>
+            <div class="col-12 col-md-10 col-lg-8 text-center">
+                <div class="card p-3">
+                    <!--Display pizza size-->
+                    <?php echo "<h3> Pizza Size: " . $_POST["pizza-size"] . "</h3>"  ?>
 
-    <?php
-        if($_POST["pizza-size"] == "s") {
-            echo "<h1>" . "Cost: 20.99"  . "</h1>";
-        }
-        elseif($_POST["pizza-size"] == "m") {
-            echo "<h1>" . "Cost: 35.99"  . "</h1>";
-        }
-        elseif($_POST["pizza-size"] == "l") {
-            echo "<h1>" . "Cost: 55.99"  . "</h1>";
-        }
-    ?>
+                    <!--Display customer name-->
+                    <?php echo "<h3> Customer Name: " . $_POST["customer-name"] . "</h3>" ?>
+
+                    <?php
+                        if($_POST["pizza-size"] == "s") {
+                            echo "<h1>" . "Cost: 20.99"  . "</h1>";
+                        }
+                        elseif($_POST["pizza-size"] == "m") {
+                            echo "<h1>" . "Cost: 35.99"  . "</h1>";
+                        }
+                        elseif($_POST["pizza-size"] == "l") {
+                            echo "<h1>" . "Cost: 55.99"  . "</h1>";
+                        }
+                    ?>
+                </div>
+            </div>
+            <div class="col-md-1 col-lg-2">
+            </div>
+        </div>
+    </div>
 </body>
 </html>
