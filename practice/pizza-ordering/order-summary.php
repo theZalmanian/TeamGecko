@@ -10,7 +10,18 @@
     <link rel="stylesheet" href="/css/gecko.css">
 </head>
 <body>
-    <p>POST</p>
     Pizza Size: <?php echo $_POST["pizza-size"] ?>
+
+    <?php
+        if($_POST["pizza-size"] == "s") {
+            echo "<h1>" . "Cost: 20.99"  . "</h1>";
+        }
+        elseif($_POST["pizza-size"] == "m") {
+            echo "<h1>" . "Cost: 35.99"  . "</h1>";
+        }
+        elseif($_POST["pizza-size"] == "l") {
+            echo "<h1>" . "Cost: 55.99"  . "</h1>";
+        }
+    ?>
 </body>
 </html>
