@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,61 +13,67 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
         </div>
-        <div class="col-12 col-md-6">
-            <div class="card text-center p-3">
-                <!--Display customer name-->
-                <?php echo "<h3>" . $_POST["customer-name"] . "</h3>" ?>
+        <div class="col-12 col-md-4">
+            <div class="card text-center mt-3">
+                <ul class="list-group list-group-flush">
+                    <!--Display customer name-->
+                    <?php echo "<li class='list-group-item h1 mb-0'>" . $_POST["customer-name"] . "</li>" ?>
 
-                <!--Display pizza size-->
-                <?php
+                    <!--Display pizza size-->
+                    <?php echo "<li class='list-group-item h3 mb-0'> Pizza Size: " . $_POST["pizza-size"] . "</li>"  ?>
 
-                echo "<h3> Pizza Size: " . $_POST["pizza-size"] . "</h3>"  ?>
+                    <!--Display selected toppings-->
+                    <li class='list-group-item'>
+                        <h3>Toppings:</h3>
+                        <ul class="list-group list-group-flush">
+                            <?php
+                            // if the customer wanted no cheese
+                            if( isset($_POST["no-cheese"]) ) {
+                                // display cheese
+                                echo "<li class='list-group-item'>" . "No Cheese" . "</li>";
+                            }
 
-                <h3>Toppings:</h3>
-                <ul>
+                            // if the customer wanted half cheese
+                            if( isset($_POST["half-cheese"]) ) {
+                                // display cheese
+                                echo "<li class='list-group-item'>" . "Half Cheese" . "</li>";
+                            }
+
+                            // if the customer wanted cheese
+                            if( isset($_POST["cheese"]) ) {
+                                // display cheese
+                                echo "<li class='list-group-item'>" . "Cheese" . "</li>";
+                            }
+
+                            // if the customer wanted parmesan
+                            if( isset($_POST["parmesan"]) ) {
+                                // display parmesan
+                                echo "<li class='list-group-item'>" . "Parmesan" . "</li>";
+                            }
+                            ?>
+                        </ul>
+                    </li>
+
+                    <!--Display pizza cost-->
                     <?php
-                    // if the customer wanted no cheese
-                    if( isset($_POST["no-cheese"]) ) {
-                        // display cheese
-                        echo "<li>" . "No Cheese" . "</li>";
+                    echo "<li class='list-group-item h3 mb-0'>Total Cost: $";
+                    if($_POST["pizza-size"] == "S") {
+                        echo "20.99";
                     }
-
-                    // if the customer wanted half cheese
-                    if( isset($_POST["half-cheese"]) ) {
-                        // display cheese
-                        echo "<li>" . "Half Cheese" . "</li>";
+                    elseif($_POST["pizza-size"] == "M") {
+                        echo "35.99";
                     }
-
-                    // if the customer wanted cheese
-                    if( isset($_POST["cheese"]) ) {
-                        // display cheese
-                        echo "<li>" . "Cheese" . "</li>";
+                    elseif($_POST["pizza-size"] == "L") {
+                        echo "55.99";
                     }
-
-                    // if the customer wanted parmesan
-                    if( isset($_POST["parmesan"]) ) {
-                        // display parmesan
-                        echo "<li>" . "Parmesan" . "</li>";
-                    }
+                    echo "</li>";
                     ?>
                 </ul>
-
-                <?php
-                if($_POST["pizza-size"] == "S") {
-                    echo "<h3>" . "Cost: $20.99"  . "</h3>";
-                }
-                elseif($_POST["pizza-size"] == "M") {
-                    echo "<h3>" . "Cost: $35.99"  . "</h3>";
-                }
-                elseif($_POST["pizza-size"] == "L") {
-                    echo "<h3>" . "Cost: $55.99"  . "</h3>";
-                }
-                ?>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
         </div>
     </div>
 </div>
