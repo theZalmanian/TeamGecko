@@ -26,11 +26,11 @@
                 if( isset($customerName) && isset($pizzaSize)) {
                 ?>
                     <ul class="list-group list-group-flush">
-                        <!--Display customer name-->
-                        <?php echo "<li class='list-group-item h1 mb-0'>" . $customerName . "</li>" ?>
-
-                        <!--Display pizza size-->
-                        <?php echo "<li class='list-group-item h3 mb-0'> Pizza Size: " . $pizzaSize . "</li>"  ?>
+                        <!--Display customer name and pizza size-->
+                        <?php
+                        echo "<li class='list-group-item h1 mb-0'>{$customerName}</li>";
+                        echo "<li class='list-group-item h3 mb-0'>Pizza Size: {$pizzaSize}</li>";
+                        ?>
 
                         <!--Display selected toppings-->
                         <li class='list-group-item'>
@@ -40,25 +40,25 @@
                                 // if the customer wanted no cheese
                                 if( isset($_POST["no-cheese"]) ) {
                                     // display cheese
-                                    echo "<li class='list-group-item'>" . "No Cheese" . "</li>";
+                                    echo "<li class='list-group-item'>No Cheese</li>";
                                 }
 
                                 // if the customer wanted half cheese
                                 if( isset($_POST["half-cheese"]) ) {
                                     // display cheese
-                                    echo "<li class='list-group-item'>" . "Half Cheese" . "</li>";
+                                    echo "<li class='list-group-item'>Half Cheese</li>";
                                 }
 
                                 // if the customer wanted cheese
                                 if( isset($_POST["cheese"]) ) {
                                     // display cheese
-                                    echo "<li class='list-group-item'>" . "Cheese" . "</li>";
+                                    echo "<li class='list-group-item'>Cheese</li>";
                                 }
 
                                 // if the customer wanted parmesan
                                 if( isset($_POST["parmesan-cheese"]) ) {
                                     // display parmesan
-                                    echo "<li class='list-group-item'>" . "Parmesan" . "</li>";
+                                    echo "<li class='list-group-item'>Parmesan</li>";
                                 }
                                 ?>
                             </ul>
@@ -66,24 +66,27 @@
 
                         <!--Display pizza cost-->
                         <?php
-                        echo "<li class='list-group-item h3 mb-0'>Total Cost: $";
+                        // determine total cost based on pizza size
+                        $totalCost = "$";
                         if($pizzaSize == "S") {
-                            echo "20.99";
+                            $totalCost .= "20.99";
                         }
                         elseif($pizzaSize == "M") {
-                            echo "35.99";
+                            $totalCost .= "35.99";
                         }
                         elseif($pizzaSize == "L") {
-                            echo "55.99";
+                            $totalCost .= "55.99";
                         }
-                        echo "</li>";
+
+                        // display total cost
+                        echo "<li class='list-group-item h3 mb-0'>Total Cost: {$totalCost}</li>";
                         ?>
                     </ul>
                 <?php
                 }
 
                 else {
-                    echo "<li class='list-group-item h2 p-3 mb-0'><a class='nav-link' href='/practice/pizza-ordering'>" . "Click here to order" . "</a></li>";
+                    echo "<li class='list-group-item h2 p-3 mb-0'><a class='nav-link' href='/practice/pizza-ordering'>Click here to order</a></li>";
                 }
                 ?>
             </div>
