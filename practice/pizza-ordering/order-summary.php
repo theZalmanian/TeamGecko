@@ -18,15 +18,19 @@
         <div class="col-12 col-md-8 col-lg-4">
             <div class="card text-center mt-3">
                 <?php
+                // Get the customer name and pizza size inputs
+                $customerName = $_POST["customer-name"];
+                $pizzaSize = $_POST["pizza-size"];
+
                 // Check if order data is present in $_POST
-                if( isset($_POST["customer-name"]) && isset($_POST["pizza-size"] )) {
+                if( isset($customerName) && isset($pizzaSize)) {
                 ?>
                     <ul class="list-group list-group-flush">
                         <!--Display customer name-->
-                        <?php echo "<li class='list-group-item h1 mb-0'>" . $_POST["customer-name"] . "</li>" ?>
+                        <?php echo "<li class='list-group-item h1 mb-0'>" . $customerName . "</li>" ?>
 
                         <!--Display pizza size-->
-                        <?php echo "<li class='list-group-item h3 mb-0'> Pizza Size: " . $_POST["pizza-size"] . "</li>"  ?>
+                        <?php echo "<li class='list-group-item h3 mb-0'> Pizza Size: " . $pizzaSize . "</li>"  ?>
 
                         <!--Display selected toppings-->
                         <li class='list-group-item'>
@@ -63,13 +67,13 @@
                         <!--Display pizza cost-->
                         <?php
                         echo "<li class='list-group-item h3 mb-0'>Total Cost: $";
-                        if($_POST["pizza-size"] == "S") {
+                        if($pizzaSize == "S") {
                             echo "20.99";
                         }
-                        elseif($_POST["pizza-size"] == "M") {
+                        elseif($pizzaSize == "M") {
                             echo "35.99";
                         }
-                        elseif($_POST["pizza-size"] == "L") {
+                        elseif($pizzaSize == "L") {
                             echo "55.99";
                         }
                         echo "</li>";
