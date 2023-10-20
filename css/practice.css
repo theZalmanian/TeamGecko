@@ -13,6 +13,10 @@ nav, .dropdown-menu, .card, .list-group-item {
     box-shadow: 0 0 4px 0 var(--geckoAccentColor);
 }
 
+.input-heading.card, button.btn {
+    background: var(--geckoPrimaryColor);
+}
+
 .navbar-nav .nav-link,
 .nav-item .dropdown-item {
     color: var(--geckoAccentColor);
@@ -41,6 +45,8 @@ a {
     text-decoration: none;
 }
 
-.input-group-text > label.btn:hover {
-    background: var(--geckoSecondaryColor) !important;
+.input-group-text > label.btn:hover,
+button.btn:hover {
+    background: var(--geckoAccentColor);
+    color: var(--geckoPrimaryColor);
 }

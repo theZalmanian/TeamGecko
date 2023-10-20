@@ -97,31 +97,40 @@
                     <div class="card p-3">
                         <h1>2x Cheese Pizza Shop</h1>
                         <div class="form-floating my-2">
-                            <input type="text" class="form-control" id="pizza-size" name="pizza-size" 
-                                    placeholder="" required>
-                            <label for="pizza-size">Pizza Size</label>
-                        </div>
-                        <div class="form-floating my-2">
                             <input type="text" class="form-control" id="customer-name" name="customer-name" 
                                     placeholder="" required>
                             <label for="customer-name">Customer Name</label>
                         </div>
                         <div class="container">
+                            <h4 class="col-12 card py-2 input-heading">Pizza Size</h4>
                             <div class="row input-group-text justify-content-center py-2 my-2">
-                                <input class="btn-check" id="no-cheese" type="checkbox" name="no-cheese">
+                                <input type="radio" class="btn-check" name="pizza-size" id="small-pizza">
+                                <label class="btn col-3 m-2" for="small-pizza">Small</label>
+
+                                <input type="radio" class="btn-check" name="pizza-size" id="medium-pizza">
+                                <label class="btn col-3 m-2" for="medium-pizza">Medium</label>
+
+                                <input type="radio" class="btn-check" name="pizza-size" id="large-pizza" required>
+                                <label class="btn col-3 m-2" for="large-pizza">Large</label>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <h4 class="col-12 card py-2 input-heading">Toppings</h4>
+                            <div class="row input-group-text justify-content-center py-2 my-2">
+                                <input class="btn-check topping-check" id="no-cheese" type="checkbox" name="no-cheese">
                                 <label class="btn col-4 col-lg-2 m-2" for="no-cheese">No Cheese</label>
                 
-                                <input class="btn-check" id="half-cheese" type="checkbox" name="half-cheese">
+                                <input class="btn-check topping-check" id="half-cheese" type="checkbox" name="half-cheese">
                                 <label class="btn col-4 col-lg-2 m-2" for="half-cheese">Half Cheese</label>
         
-                                <input class="btn-check" id="cheese" type="checkbox" name="cheese">
+                                <input class="btn-check topping-check" id="cheese" type="checkbox" name="cheese">
                                 <label class="btn col-4 col-lg-2 m-2" for="cheese">Cheese</label>
                                 
-                                <input class="btn-check" id="parmesan" type="checkbox" name="parmesan-cheese">
+                                <input class="btn-check topping-check" id="parmesan" type="checkbox" name="parmesan-cheese">
                                 <label class="btn col-4 col-lg-2 m-2" for="parmesan">Parmesan</label>
                             </div>
                         </div>
-                        <button class="btn btn-success w-100 py-2 my-2" type="submit" id="submit">Submit</button>
+                        <button class="btn w-100 py-2 my-2" type="submit" id="submit">Submit</button>
                     </div>
                 </form>
             </div>
@@ -142,7 +151,7 @@
          */
         function validateCheckBox() {
             // get all topping checkboxes
-            let toppingsCheckBoxes = document.querySelectorAll('.btn-check') 
+            let toppingsCheckBoxes = document.querySelectorAll('.topping-check') 
 
             // run through all checkboxes on page
             let numChecked = 0;
