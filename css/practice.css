@@ -1,35 +1,37 @@
 :root {
-    --geckoPrimaryColor: #a3e38b;
-    --geckoSecondaryColor: #5abc34;
-    --geckoAccentColor: #107010;
+    --gecko-primary-color: #a3e38b;
+    --gecko-secondary-color: #5abc34;
+    --gecko-accent-color: #107010;
 }
 
 body {
-    background: var(--geckoPrimaryColor);
+    background: var(--gecko-primary-color);
 }
 
 nav, .dropdown-menu, .card, .list-group-item {
-    background: var(--geckoSecondaryColor);
-    box-shadow: 0 0 4px 0 var(--geckoAccentColor);
+    background: var(--gecko-secondary-color);
+    box-shadow: 0 0 4px 0 var(--gecko-accent-color);
 }
 
 .input-heading.card, button.btn {
-    background: var(--geckoPrimaryColor);
+    background: var(--gecko-primary-color);
 }
 
 .navbar-nav .nav-link,
-.nav-item .dropdown-item {
-    color: var(--geckoAccentColor);
+.nav-item .dropdown-item,
+.list-group-item > a.nav-link {
+    color: var(--gecko-accent-color);
     font-weight: bold;
 }
 
 .navbar-nav .nav-link:hover,
-.nav-item .dropdown-item:hover {
-    color: var(--geckoPrimaryColor) !important;
+.nav-item .dropdown-item:hover,
+.list-group-item > a.nav-link:hover {
+    color: var(--gecko-primary-color) !important;
 }
 
 .nav-item .dropdown-item:hover {
-    background: var(--geckoAccentColor) !important;
+    background: var(--gecko-accent-color) !important;
 }
 
 .nav-item .dropdown-item:focus {
@@ -41,12 +43,16 @@ nav, .dropdown-menu, .card, .list-group-item {
     color: black;
 }
 
-a {
-    text-decoration: none;
-}
-
 .input-group-text > label.btn:hover,
 button.btn:hover {
-    background: var(--geckoAccentColor);
-    color: var(--geckoPrimaryColor);
+    background: var(--gecko-accent-color);
+    color: var(--gecko-primary-color);
+}
+
+.card {
+    --bs-card-border-color: var(--gecko-accent-color);
+}
+
+.list-group {
+    --bs-list-group-border-color: var(--gecko-accent-color);
 }
