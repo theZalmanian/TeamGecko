@@ -10,34 +10,65 @@
     <link rel="stylesheet" href="/css/gecko.css">
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-1 col-lg-2">
-            </div>
-            <div class="col-12 col-md-10 col-lg-8 text-center">
-                <div class="card p-3">
-                    <!--Display pizza size-->
-                    <?php echo "<h3> Pizza Size: " . $_POST["pizza-size"] . "</h3>"  ?>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card text-center p-3">
+                <!--Display customer name-->
+                <?php echo "<h3>" . $_POST["customer-name"] . "</h3>" ?>
 
-                    <!--Display customer name-->
-                    <?php echo "<h3> Customer Name: " . $_POST["customer-name"] . "</h3>" ?>
+                <!--Display pizza size-->
+                <?php
 
+                echo "<h3> Pizza Size: " . $_POST["pizza-size"] . "</h3>"  ?>
+
+                <h3>Toppings:</h3>
+                <ul>
                     <?php
-                        if($_POST["pizza-size"] == "s") {
-                            echo "<h1>" . "Cost: 20.99"  . "</h1>";
-                        }
-                        elseif($_POST["pizza-size"] == "m") {
-                            echo "<h1>" . "Cost: 35.99"  . "</h1>";
-                        }
-                        elseif($_POST["pizza-size"] == "l") {
-                            echo "<h1>" . "Cost: 55.99"  . "</h1>";
-                        }
+                    // if the customer wanted no cheese
+                    if( isset($_POST["no-cheese"]) ) {
+                        // display cheese
+                        echo "<li>" . "No Cheese" . "</li>";
+                    }
+
+                    // if the customer wanted half cheese
+                    if( isset($_POST["half-cheese"]) ) {
+                        // display cheese
+                        echo "<li>" . "Half Cheese" . "</li>";
+                    }
+
+                    // if the customer wanted cheese
+                    if( isset($_POST["cheese"]) ) {
+                        // display cheese
+                        echo "<li>" . "Cheese" . "</li>";
+                    }
+
+                    // if the customer wanted parmesan
+                    if( isset($_POST["parmesan"]) ) {
+                        // display parmesan
+                        echo "<li>" . "Parmesan" . "</li>";
+                    }
                     ?>
-                </div>
-            </div>
-            <div class="col-md-1 col-lg-2">
+                </ul>
+
+                <?php
+                if($_POST["pizza-size"] == "S") {
+                    echo "<h3>" . "Cost: $20.99"  . "</h3>";
+                }
+                elseif($_POST["pizza-size"] == "M") {
+                    echo "<h3>" . "Cost: $35.99"  . "</h3>";
+                }
+                elseif($_POST["pizza-size"] == "L") {
+                    echo "<h3>" . "Cost: $55.99"  . "</h3>";
+                }
+                ?>
             </div>
         </div>
+        <div class="col-md-3">
+        </div>
     </div>
+</div>
 </body>
 </html>
