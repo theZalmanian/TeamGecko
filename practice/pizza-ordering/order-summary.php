@@ -56,7 +56,7 @@
                                 }
 
                                 // if the customer wanted parmesan
-                                if( isset($_POST["parmesan"]) ) {
+                                if( isset($_POST["parmesan-cheese"]) ) {
                                     // display parmesan
                                     echo "<li class='list-group-item'>" . "Parmesan" . "</li>";
                                 }
