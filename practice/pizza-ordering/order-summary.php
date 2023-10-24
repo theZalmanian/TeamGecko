@@ -18,12 +18,12 @@
         <div class="col-12 col-md-8 col-lg-4">
             <div class="card text-center mt-3">
                 <?php
-                // Get the customer name and pizza size inputs
+                // Get the customer's name and pizza size inputs
                 $customerName = $_POST["customer-name"];
                 $pizzaSize = $_POST["pizza-size"];
 
-                // Check if order data is present in $_POST
-                if( isset($customerName) && isset($pizzaSize)) {
+                // Check if user got here by submitting an order
+                if(isset($customerName) && isset($pizzaSize)) {
                 ?>
                     <ul class="list-group list-group-flush">
                         <!--Display customer name and pizza size-->
@@ -83,23 +83,35 @@
                         ?>
                     </ul>
                 <?php
-                    $sendingAddress = $_POST["customer-email"];
+                    // setup sending and receiving addresses
+                    $sendToAddress = $_POST["customer-email"];
+                    $sendFromAddress = "noreply@twotimescheese.com";
 
+                    // setup headers
                     $headers = "MIME-Version: 1.0" . "\r\n";
                     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    $headers .= "From: noreply@twotimescheese.com" . "\r\n";
+                    $headers .= "From: {$sendFromAddress}" . "\r\n";
 
+                    // setup subject
+                    $subject = "2x Cheese Pizza Receipt";
+
+                    // setup order summary
                     $orderSummary = "<ul>
-                                        <li>{$customerName}</li>
-                                        <li>{$pizzaSize}</li>
-                                        <li>{$totalCost}</li>
+                                        <li>Name: {$customerName}</li>
+                                        <li>Pizza Size: {$pizzaSize}</li>
+                                        <li>Total Cost: {$totalCost}</li>
                                     </ul>";
 
-                    mail($sendingAddress,"2x Cheese Pizza Receipt", $orderSummary, $headers);
+                    // send the receipt to customer
+                    mail($sendToAddress, $subject, $orderSummary, $headers);
                 }
 
+                // if user accessed the page w/o submitting an order
                 else {
-                    echo "<li class='list-group-item h2 p-3 mb-0'><a class='nav-link' href='/practice/pizza-ordering'>Click here to order</a></li>";
+                    // display a link to the order page
+                    echo "<li class='list-group-item h2 p-3 mb-0'>
+                            <a class='nav-link' href='/practice/pizza-ordering'>Click here to order</a>
+                          </li>";
                 }
 
                 ?>
