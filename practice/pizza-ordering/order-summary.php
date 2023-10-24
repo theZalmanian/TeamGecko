@@ -83,11 +83,25 @@
                         ?>
                     </ul>
                 <?php
+                    $sendingAddress = $_POST["customer-email"];
+
+                    $headers = "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $headers .= "From: noreply@twotimescheese.com" . "\r\n";
+
+                    $orderSummary = "<ul>
+                                        <li>{$customerName}</li>
+                                        <li>{$pizzaSize}</li>
+                                        <li>{$totalCost}</li>
+                                    </ul>";
+
+                    mail($sendingAddress,"2x Cheese Pizza Receipt", $orderSummary, $headers);
                 }
 
                 else {
                     echo "<li class='list-group-item h2 p-3 mb-0'><a class='nav-link' href='/practice/pizza-ordering'>Click here to order</a></li>";
                 }
+
                 ?>
             </div>
         </div>
