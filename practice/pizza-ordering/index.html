@@ -96,10 +96,15 @@
                 <form id="pizza-shop" action="/practice/pizza-ordering/order-summary.php" target="_blank" method="post">     
                     <div class="card p-3">
                         <h1>2x Cheese Pizza Shop</h1>
-                        <div class="form-floating my-2">
+                        <div class="form-floating my-1">
                             <input type="text" class="form-control" id="customer-name" name="customer-name" 
                                     placeholder="" required>
-                            <label for="customer-name">Customer Name</label>
+                            <label for="customer-name">Name</label>
+                        </div>
+                        <div class="form-floating my-2">
+                            <input type="email" class="form-control" id="customer-email" name="customer-email" 
+                                    placeholder="" required>
+                            <label for="customer-email">Email</label>
                         </div>
                         <div class="container">
                             <h4 class="col-12 card py-2 input-heading">Pizza Size</h4>
