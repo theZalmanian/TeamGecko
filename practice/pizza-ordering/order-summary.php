@@ -37,28 +37,34 @@
                             <h3>Toppings:</h3>
                             <ul class="list-group list-group-flush">
                                 <?php
+                                $toppings = array();
+
                                 // if the customer wanted no cheese
                                 if( isset($_POST["no-cheese"]) ) {
-                                    // display cheese
+                                    // display no cheese
                                     echo "<li class='list-group-item'>No Cheese</li>";
+                                    $toppings[] = "No Cheese";
                                 }
 
                                 // if the customer wanted half cheese
                                 if( isset($_POST["half-cheese"]) ) {
-                                    // display cheese
+                                    // display half cheese
                                     echo "<li class='list-group-item'>Half Cheese</li>";
+                                    $toppings[] = "Half Cheese";
                                 }
 
                                 // if the customer wanted cheese
                                 if( isset($_POST["cheese"]) ) {
                                     // display cheese
                                     echo "<li class='list-group-item'>Cheese</li>";
+                                    $toppings[] = "Cheese";
                                 }
 
                                 // if the customer wanted parmesan
                                 if( isset($_POST["parmesan-cheese"]) ) {
                                     // display parmesan
                                     echo "<li class='list-group-item'>Parmesan</li>";
+                                    $toppings[] = "Parmesan";
                                 }
                                 ?>
                             </ul>
@@ -95,10 +101,16 @@
                     // setup subject
                     $subject = "2x Cheese Pizza Receipt";
 
+                    $toppingsString = "";
+                    for($i = 0; $i < count($toppings); $i++) {
+                        $toppingsString .= "<li>{$toppings[$i]}</li>" . "\r\n";
+                    }
+
                     // setup order summary
                     $orderSummary = "<ul>
                                         <li>Name: {$customerName}</li>
                                         <li>Pizza Size: {$pizzaSize}</li>
+                                        {$toppingsString}
                                         <li>Total Cost: {$totalCost}</li>
                                     </ul>";
 
