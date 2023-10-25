@@ -37,34 +37,32 @@
                             <h3>Toppings:</h3>
                             <ul class="list-group list-group-flush">
                                 <?php
-                                $toppings = array();
+                                // setup array to keep track of all selected toppings
+                                $selectedToppings = array();
 
                                 // if the customer wanted no cheese
                                 if( isset($_POST["no-cheese"]) ) {
-                                    // display no cheese
-                                    echo "<li class='list-group-item'>No Cheese</li>";
-                                    $toppings[] = "No Cheese";
+                                    $selectedToppings[] = "No Cheese";
                                 }
 
                                 // if the customer wanted half cheese
                                 if( isset($_POST["half-cheese"]) ) {
-                                    // display half cheese
-                                    echo "<li class='list-group-item'>Half Cheese</li>";
-                                    $toppings[] = "Half Cheese";
+                                    $selectedToppings[] = "Half Cheese";
                                 }
 
                                 // if the customer wanted cheese
                                 if( isset($_POST["cheese"]) ) {
-                                    // display cheese
-                                    echo "<li class='list-group-item'>Cheese</li>";
-                                    $toppings[] = "Cheese";
+                                    $selectedToppings[] = "Cheese";
                                 }
 
                                 // if the customer wanted parmesan
                                 if( isset($_POST["parmesan-cheese"]) ) {
-                                    // display parmesan
-                                    echo "<li class='list-group-item'>Parmesan</li>";
-                                    $toppings[] = "Parmesan";
+                                    $selectedToppings[] = "Parmesan";
+                                }
+
+                                // run through the toppings array and display all selected toppings
+                                foreach ($selectedToppings as $currTopping) {
+                                    echo "<li class='list-group-item'>{$currTopping}</li>";
                                 }
                                 ?>
                             </ul>
@@ -93,7 +91,7 @@
                     $sendToAddress = $_POST["customer-email"];
                     $sendFromAddress = "noreply@twotimescheese.com";
 
-                    // setup headers
+                    // setup headers for html email
                     $headers = "MIME-Version: 1.0" . "\r\n";
                     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     $headers .= "From: {$sendFromAddress}" . "\r\n";
@@ -101,18 +99,24 @@
                     // setup subject
                     $subject = "2x Cheese Pizza Receipt";
 
-                    $toppingsString = "";
-                    for($i = 0; $i < count($toppings); $i++) {
-                        $toppingsString .= "<li>{$toppings[$i]}</li>" . "\r\n";
-                    }
+                    // add all selected toppings from array to display string
+                    $toppingsEmailDisplay = implode(", ", $selectedToppings) . "\r\n";
 
                     // setup order summary
-                    $orderSummary = "<ul>
-                                        <li>Name: {$customerName}</li>
-                                        <li>Pizza Size: {$pizzaSize}</li>
-                                        {$toppingsString}
-                                        <li>Total Cost: {$totalCost}</li>
-                                    </ul>";
+                    $orderSummary = "<html lang='en'>
+                                        <body>
+                                            <h2>{$subject}</h2>
+                                            <p>Hey {$customerName}! Thanks for placing an order at 2x Cheese Pizza.</p>
+                                            <h3>Your order was:</h3>
+                                            <p><strong>Size</strong>: {$pizzaSize}</p>
+                                            <p><strong>Toppings</strong>: {$toppingsEmailDisplay}</p>
+                                            <h3>Total Cost: {$totalCost}</h3>
+                                            <br>
+                                            <a href='www.geckos.greenriverdev.com/practice/pizza-ordering/'>
+                                            Liked your pizza? Come place another order!!
+                                            </a>
+                                        </body>
+                                    </html>";
 
                     // send the receipt to customer
                     mail($sendToAddress, $subject, $orderSummary, $headers);
