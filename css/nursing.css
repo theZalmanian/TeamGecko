@@ -153,3 +153,12 @@ input.radio-input:hover ~ label.radio-label,
 input.radio-input:checked ~ label.radio-label {
     color: var(--nursing-accent-color);
 }
+
+button#submit-experience {
+    background: #60a144;
+}
+
+button#submit-experience:hover {
+    background: #107010;
+    color: #60a144;
+}
