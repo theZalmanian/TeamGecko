@@ -137,19 +137,19 @@ input.radio-input {
     opacity: 0;
 }
 
-label.radio {
+label.radio-label {
     font-size: 0;
 }
 
 /* Style radios as stars */
-label.radio:before {
+label.radio-label:before {
     font-size: 1.8rem;
     content: "★";
     cursor: pointer;
     transition: color .2s ease-in-out;
 }
 
-input.radio-input:hover ~ label.radio,
-input.radio-input:checked ~ label.radio {
+input.radio-input:hover ~ label.radio-label,
+input.radio-input:checked ~ label.radio-label {
     color: var(--nursing-accent-color);
 }
