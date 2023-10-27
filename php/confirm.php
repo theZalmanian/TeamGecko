@@ -92,41 +92,51 @@
                         return displayQuestion($questionNum, $questionText, $response);
                     }
 
+                    // setup variables to hold Experience Survey form inputs
+                    $siteAttended = $_POST["q1-site-attended"];
+                    $enjoyedSite = $_POST["q2-enjoyed-site"];
+                    $staffSupportive = $_POST["q3-staff-supportive"];
+                    $siteLearningObjectives = $_POST["q4-site-learning-objectives"];
+                    $preceptorLearningObjectives = $_POST["q5-preceptor-learning-objectives"];
+                    $recommendSite = $_POST["q6-recommend-site"];
+                    $siteOrStaffFeedback = $_POST["q7-site-or-staff-feedback"];
+                    $instructorFeedback = $_POST["q8-instructor-feedback"];
+
                     // check that all required questions were answered on the Experience Survey
-                    if( isset($_POST["q1-site-attended"]) 
-                        && isset($_POST["q2-enjoyed-site"])
-                        && isset($_POST["q3-staff-supportive"]) 
-                        && isset($_POST["q4-site-learning-objectives"])
-                        && isset($_POST["q5-preceptor-learning-objectives"]) 
-                        && isset($_POST["q6-recommend-site"]) ) {
+                    if( isset($siteAttended) 
+                        && isset($enjoyedSite)
+                        && isset($staffSupportive) 
+                        && isset($siteLearningObjectives)
+                        && isset($preceptorLearningObjectives) 
+                        && isset($recommendSite) ) {
                 ?>
                         <form class="my-2" action="/php/receipt.php" method="post">
                             <?php 
                                 // display questions and responses for questions 1 - 6 (required)
-                                echo displayTextQuestion(1, "What Clinical Site did you attend?", $_POST["q1-site-attended"], true); 
-                                echo displayStarQuestion(2, "I enjoyed my time at this clinical site", $_POST["q2-enjoyed-site"]);
-                                echo displayStarQuestion(3, "The clinical staff was supportive of my role", $_POST["q3-staff-supportive"]);
-                                echo displayStarQuestion(4, "The site helped facilitate my learning objectives.", $_POST["q4-site-learning-objectives"]);
-                                echo displayStarQuestion(5, "My preceptor helped facilitate my learning objectives.", $_POST["q5-preceptor-learning-objectives"]);
-                                echo displayStarQuestion(6, "I would recommend this site to another student.", $_POST["q6-recommend-site"]);
+                                echo displayTextQuestion(1, "What Clinical Site did you attend?", $siteAttended, true); 
+                                echo displayStarQuestion(2, "I enjoyed my time at this clinical site", $enjoyedSite);
+                                echo displayStarQuestion(3, "The clinical staff was supportive of my role", $staffSupportive);
+                                echo displayStarQuestion(4, "The site helped facilitate my learning objectives.", $siteLearningObjectives);
+                                echo displayStarQuestion(5, "My preceptor helped facilitate my learning objectives.", $preceptorLearningObjectives);
+                                echo displayStarQuestion(6, "I would recommend this site to another student.", $recommendSite);
                             
                                 // if they were answered, display questions and responses for questions 7 & 8 (optional)
-                                if( !empty($_POST["q7-site-or-staff-feedback"]) ) {
+                                if( !empty($siteOrStaffFeedback) ) {
                                     $questionText = "If you have any comments you would like to leave about the site or staff at this facility please add below.";
                                     
-                                    echo displayTextQuestion(7, $questionText, $_POST["q7-site-or-staff-feedback"], false);
+                                    echo displayTextQuestion(7, $questionText, $siteOrStaffFeedback, false);
                                 }
 
-                                if( !empty($_POST["q8-instructor-feedback"]) ) {
+                                if( !empty($instructorFeedback) ) {
                                     $questionText = "If you have any feedback you would like to leave about your 
                                     clinical instructor please add below. <strong>None of the instructors will see this</strong>.
                                     We will just be using this to gage if an instructor needs to improve in areas,
                                     or to highlight instructors who go above and beyond.";
 
-                                    echo displayTextQuestion(8, $questionText, $_POST["q8-instructor-feedback"], false);
+                                    echo displayTextQuestion(8, $questionText, $instructorFeedback, false);
                                 }
                             ?>
-                            <div class="card container p-3 my-1">
+                            <div class="card container p-2 my-1">
                                 <div class="row justify-content-center">
                                     <button class="col-4 btn py-2 m-2" id="submit-experience">Confirm</button>
                                     <a class="col-4 btn btn-danger py-2 m-2" href="/sprint-2/experience.html">Cancel</a>
