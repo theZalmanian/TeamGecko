@@ -21,7 +21,7 @@
                     // setup function to set up radios
                     function displayStars($numStarsSelected) {
                         // setup display string
-                        $display = "You selected: ";
+                        $display = "<strong>You selected</strong>: ";
 
                         // display the number of stars chosen by user
                         for ($currStar = 0; $currStar < $numStarsSelected; $currStar++) {
@@ -44,7 +44,9 @@
                             <li class="list-group-item">
                                 1. What Clinical Site did you attend? <span class="text-danger">*</span>
                             </li>
-                            <li class="list-group-item"><?php echo $_POST["q1-site-attended"]; ?></li>
+                            <li class="list-group-item">
+                                <strong>You said</strong>: <?php echo $_POST["q1-site-attended"]; ?>
+                            </li>
                         </ul>
                     </div>
                     <!-- End of question 1 -->
@@ -114,35 +116,45 @@
                     </div>
                     <!-- end of question 6-->
 
-                    <div class="my-1" id="optional-questions">
+                    <div class="my-1">
                         <!-- question 7 -->
-                        <div class="card p-3 my-1">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    7. If you have any comments you would like to leave about the site or
-                                    staff at this facility please add below.
-                                </li>
-                                <li class="list-group-item">
-                                    <?php echo $_POST["q7-site-or-staff-feedback"]; ?>
-                                </li>
-                            </ul>
-                        </div>
+                        <?php if( !empty($_POST["q7-site-or-staff-feedback"]) ) { ?>
+                            <div class="card p-3 my-1">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        7. If you have any comments you would like to leave about the site or
+                                        staff at this facility please add below.
+                                    </li>
+                                    <li class="list-group-item">
+
+                                        <p class="m-0">
+                                        <strong>You said</strong>: <?php echo $_POST["q7-site-or-staff-feedback"]; ?>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        <?php } ?>
                         <!-- end of question 7 -->
 
                         <!-- question 8-->
-                        <div class="card p-3 my-1">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    8. If you have any feedback you would like to leave about your clinical
-                                    instructor please add below. <strong>None of the instructors will see this</strong>.
-                                    We will just be using this to gage if an instructor needs to improve in areas,
-                                    or to highlight instructors who go above and beyond.
-                                </li>
-                                <li class="list-group-item">
-                                    <?php echo $_POST["q8-instructor-feedback"]; ?>
-                                </li>
-                            </ul>
-                        </div>
+                        <?php if( !empty($_POST["q8-instructor-feedback"]) ) { ?>
+                            <div class="card p-3 my-1">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        8. If you have any feedback you would like to leave about your clinical
+                                        instructor please add below. <strong>None of the instructors will see this</strong>.
+                                        We will just be using this to gage if an instructor needs to improve in areas,
+                                        or to highlight instructors who go above and beyond.
+                                    </li>
+                                    <li class="list-group-item">
+        
+                                        <p class="m-0">
+                                            <strong>You said</strong>: <?php echo $_POST["q8-instructor-feedback"]; ?>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        <?php } ?>
                         <!-- end of question 8 -->
                     </div>
                     <div class="card container">
