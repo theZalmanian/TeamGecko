@@ -25,7 +25,7 @@
                      */
                     function displayStars($numStars) {
                         // setup display string
-                        $display = "<strong>You selected</strong>: ";
+                        $display = "<strong>You selected:</strong>" . " ";
 
                         // add the given number of # stars to the display
                         for ($currStar = 0; $currStar < $numStars; $currStar++) {
@@ -36,18 +36,18 @@
                     }
 
                     /**
-                     * Constructs a bootstrap card element containing the given question, along with a response to it
-                     * @param int $questionNum The number of the question being displayed
-                     * @param string $questionText The text making up the question
+                     * Constructs a Bootstrap card element containing the given question, along with a response to it
+                     * @param int $questionNum The question's number on the form
+                     * @param string $questionText The question itself
                      * @param string $response The given response to that question
-                     * @return string A bootstrap card element containing a question and the given response to it
+                     * @return string A Bootstrap card element containing a question and the given response to it
                      */
                     function displayQuestion($questionNum, $questionText, $response) {
-                        // setup display string w/ the given values
-                        $display = "<div class='card p-3 my-1'>
+                        // setup display card w/ the given values
+                        $displayCard = "<div class='card p-3 my-1'>
                                         <ul class='list-group list-group-flush'>
                                         <li class='list-group-item'>
-                                            {$questionNum}. {$questionText} <span class='text-danger'>*</span>
+                                            {$questionNum}. {$questionText}
                                         </li>
                                         <li class='list-group-item'>
                                             {$response} 
@@ -55,7 +55,41 @@
                                         </ul>
                                     </div>";
        
-                        return $display;
+                        return $displayCard;
+                    }
+
+                    /**
+                     * Constructs and returns a Bootstrap card element containing the given question, 
+                     * along with the # of stars selected in response
+                     * @param int $questionNum The question's number on the form
+                     * @param string $questionText The question itself
+                     * @param int $numStars The # of stars selected in response to the given question
+                     * @return string A Bootstrap card element containing a question and the # of stars selected for it 
+                     */
+                    function displayStarQuestion($questionNum, $questionText, $numStars) {
+                        // construct the card and display the selected # of stars
+                        return displayQuestion($questionNum, $questionText, displayStars($numStars));
+                    }
+
+                    /**
+                     * Constructs and returns a Bootstrap card element containing the given question, 
+                     * along with a response to it
+                     * @param int $questionNum The question's number on the form
+                     * @param string $questionText The question itself
+                     * @param string $response The given response to that question
+                     * @param boolean $questionRequired True if question must be answered; otherwise False
+                     * @return string A Bootstrap card element containing a question and the given response to it
+                     */
+                    function displayTextQuestion($questionNum, $questionText, $response, $questionRequired) {
+                        $response = "<strong>You said:</strong> {$response}";
+
+                        // if the given question was required
+                        if($questionRequired) {
+                            // add the required span to end of it
+                            $questionText = "{$questionText} <span class='text-danger'>*</span>";
+                        }
+
+                        return displayQuestion($questionNum, $questionText, $response);
                     }
 
                     // check that all required questions were answered on the Experience Survey
@@ -67,76 +101,31 @@
                         && isset($_POST["q6-recommend-site"]) ) {
                 ?>
                         <form class="my-2" action="/php/receipt.php" method="post">
-                            <!-- Question 1 -->
-                            <div class="card p-3 my-1">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        1. What Clinical Site did you attend? <span class="text-danger">*</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong>You said</strong>: <?php echo $_POST["q1-site-attended"]; ?>
-                                    </li>
-                                </ul>
-                            </div>
-                            <?php echo displayQuestion(1, "What Clinical Site did you attend?", 
-                                                        "<strong>You said</strong>" . $_POST["q1-site-attended"]); ?>
-                            <!-- End of question 1 -->
+                            <?php 
+                                // display questions and responses for questions 1 - 6 (required)
+                                echo displayTextQuestion(1, "What Clinical Site did you attend?", $_POST["q1-site-attended"], true); 
+                                echo displayStarQuestion(2, "I enjoyed my time at this clinical site", $_POST["q2-enjoyed-site"]);
+                                echo displayStarQuestion(3, "The clinical staff was supportive of my role", $_POST["q3-staff-supportive"]);
+                                echo displayStarQuestion(4, "The site helped facilitate my learning objectives.", $_POST["q4-site-learning-objectives"]);
+                                echo displayStarQuestion(5, "My preceptor helped facilitate my learning objectives.", $_POST["q5-preceptor-learning-objectives"]);
+                                echo displayStarQuestion(6, "I would recommend this site to another student.", $_POST["q6-recommend-site"]);
+                            
+                                // if they were answered, display questions and responses for questions 7 & 8 (optional)
+                                if( !empty($_POST["q7-site-or-staff-feedback"]) ) {
+                                    $questionText = "If you have any comments you would like to leave about the site or staff at this facility please add below.";
+                                    
+                                    echo displayTextQuestion(7, $questionText, $_POST["q7-site-or-staff-feedback"], false);
+                                }
 
-                            <!-- question 2 -->
-                            <?php echo displayQuestion(2, "I enjoyed my time at this clinical site", displayStars($_POST["q2-enjoyed-site"])); ?>
-                            <!-- End of question 2 -->
+                                if( !empty($_POST["q8-instructor-feedback"]) ) {
+                                    $questionText = "If you have any feedback you would like to leave about your 
+                                    clinical instructor please add below. <strong>None of the instructors will see this</strong>.
+                                    We will just be using this to gage if an instructor needs to improve in areas,
+                                    or to highlight instructors who go above and beyond.";
 
-                            <!-- questions 3 -->
-                            <?php echo displayQuestion(3, "The clinical staff was supportive of my role", displayStars($_POST["q3-staff-supportive"])); ?>
-                            <!-- end of question 3 -->
-
-                            <!-- question 4 -->
-                            <?php echo displayQuestion(4, "The site helped facilitate my learning objectives.", displayStars($_POST["q4-site-learning-objectives"])); ?>
-                            <!-- end of question 4-->
-
-                            <!-- question 5 -->
-                            <?php echo displayQuestion(5, "My preceptor helped facilitate my learning objectives.", displayStars($_POST["q5-preceptor-learning-objectives"])); ?>
-                            <!-- end of question 5 -->
-
-                            <!-- question 6 -->
-                            <?php echo displayQuestion(6, "I would recommend this site to another student.", displayStars($_POST["q6-recommend-site"])); ?>
-                            <!-- end of question 6-->
-
-                            <div class="my-1">
-                                <!-- question 7 -->
-                                <?php if( !empty($_POST["q7-site-or-staff-feedback"]) ) { ?>
-                                    <div class="card p-3 my-1">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                7. If you have any comments you would like to leave about the site or
-                                                staff at this facility please add below.
-                                            </li>
-                                            <li class="list-group-item">
-                                                <strong>You said</strong>: <?php echo $_POST["q7-site-or-staff-feedback"]; ?>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                <?php } ?>
-                                <!-- end of question 7 -->
-
-                                <!-- question 8-->
-                                <?php if( !empty($_POST["q8-instructor-feedback"]) ) { ?>
-                                    <div class="card p-3 my-1">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                8. If you have any feedback you would like to leave about your clinical
-                                                instructor please add below. <strong>None of the instructors will see this</strong>.
-                                                We will just be using this to gage if an instructor needs to improve in areas,
-                                                or to highlight instructors who go above and beyond.
-                                            </li>
-                                            <li class="list-group-item">
-                                                <strong>You said</strong>: <?php echo $_POST["q8-instructor-feedback"]; ?>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                <?php } ?>
-                                <!-- end of question 8 -->
-                            </div>
+                                    echo displayTextQuestion(8, $questionText, $_POST["q8-instructor-feedback"], false);
+                                }
+                            ?>
                             <div class="card container p-3 my-1">
                                 <div class="row justify-content-center">
                                     <button class="col-4 btn py-2 m-2" id="submit-experience">Confirm</button>
