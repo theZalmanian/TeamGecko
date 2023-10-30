@@ -9,11 +9,13 @@
 
     --accordion-dropdown-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23a7cf8c'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
 
-    /*Bootstrap overloads*/
+    /** Bootstrap overloads **/
     --bs-body-bg: var(--nursing-secondary-color);
     --bs-body-color: var(--nursing-secondary-color-variant);
     --bs-border-color: var(--nursing-primary-color-variant);
     --bs-border-color-translucent: var(--nursing-primary-color-variant);
+    
+    --bs-danger: #F02D3A;
 }
 
 [data-bs-theme=dark] {
@@ -23,6 +25,29 @@
     --nursing-secondary-color: #333333;
     --nursing-secondary-color-variant: #fdfdfd;
 }
+
+/** Bootstrap overloads **/
+.text-danger {
+    color: var(--bs-danger);
+}
+
+.btn.btn-danger {
+    background: var(--bs-danger);
+}
+
+.btn.btn-danger:hover {
+    background: #D20F1C;
+}
+
+button.btn.btn-success {
+    background: var(--nursing-accent-color);
+}
+
+button.btn.btn-success:hover {
+    background: #579339;
+}
+
+/** General Styling **/
 
 body {
     background: var(--nursing-primary-color);
@@ -118,7 +143,7 @@ form button.btn {
 }
 
 form button.btn:hover {
-    background: var(--nursing-accent-color);
+    background: var(--nursing-accent-color); 
 }
 
 /******************
@@ -152,13 +177,4 @@ label.radio-label:before {
 input.radio-input:hover ~ label.radio-label,
 input.radio-input:checked ~ label.radio-label {
     color: var(--nursing-accent-color);
-}
-
-button#submit-experience {
-    background: #60a144;
-}
-
-button#submit-experience:hover {
-    background: #107010;
-    color: #60a144;
 }

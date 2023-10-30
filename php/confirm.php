@@ -17,22 +17,38 @@
         </div>
         <div class="col-12 col-md-8 col-lg-6">
             <div class="mt-3">
-                <?php
-                    /**
+                <?php 
+                 /**
                      * Constructs and returns a string made up of the given # of stars: ★
                      * @param int $numStars The # of stars to be generated and displayed
                      * @return string A string displaying "You selected:" in bold, followed by the given # of stars
                      */
                     function displayStars($numStars) {
-                        // setup display string
-                        $display = "<strong>You selected:</strong>" . " ";
-
                         // add the given number of # stars to the display
+                        $display = "";
                         for ($currStar = 0; $currStar < $numStars; $currStar++) {
                             $display .= "★";
                         }
 
                         return $display;
+                    }
+
+                    /**
+                     * Returns an HTML span signifying that an input is required
+                     * @return string an HTML span signifying that an input is required
+                     */
+                    function displayRequired() {
+                        return " " . "<span class='text-danger'>*</span>";
+                    }
+
+
+                    /**
+                     * Returns the given message inside of an HTML strong element
+                     * @param string $message The message being displayed inside an HTML strong element
+                     * @return string the given message inside of an HTML strong element
+                     */
+                    function displayStrong($message) {
+                        return "<strong>{$message}</strong>" . " ";
                     }
 
                     /**
@@ -67,8 +83,13 @@
                      * @return string A Bootstrap card element containing a question and the # of stars selected for it 
                      */
                     function displayStarQuestion($questionNum, $questionText, $numStars) {
+                        $response = displayStrong("You selected:") . displayStars($numStars);
+
+                        // all star questions are required
+                        $questionText .= displayRequired();
+
                         // construct the card and display the selected # of stars
-                        return displayQuestion($questionNum, $questionText, displayStars($numStars));
+                        return displayQuestion($questionNum, $questionText, $response);
                     }
 
                     /**
@@ -81,17 +102,19 @@
                      * @return string A Bootstrap card element containing a question and the given response to it
                      */
                     function displayTextQuestion($questionNum, $questionText, $response, $questionRequired) {
-                        $response = "<strong>You said:</strong> {$response}";
+                        $response = displayStrong("You said:") . $response;
 
                         // if the given question was required
                         if($questionRequired) {
-                            // add the required span to end of it
-                            $questionText = "{$questionText} <span class='text-danger'>*</span>";
+                            // add the required span after it
+                            $questionText .= displayRequired();
                         }
 
+                        // construct the card and display the given response
                         return displayQuestion($questionNum, $questionText, $response);
                     }
-
+                ?>
+                <?php
                     // setup variables to hold Experience Survey form inputs
                     $siteAttended = $_POST["q1-site-attended"];
                     $enjoyedSite = $_POST["q2-enjoyed-site"];
@@ -112,8 +135,11 @@
                 ?>
                         <form class="my-2" action="/php/receipt.php" method="post">
                             <?php 
+                                // setup flag to keep track of textbox requirement status
+                                $textQuestionRequired = true;
+
                                 // display questions and responses for questions 1 - 6 (required)
-                                echo displayTextQuestion(1, "What Clinical Site did you attend?", $siteAttended, true); 
+                                echo displayTextQuestion(1, "What Clinical Site did you attend?", $siteAttended, $textQuestionRequired); 
                                 echo displayStarQuestion(2, "I enjoyed my time at this clinical site", $enjoyedSite);
                                 echo displayStarQuestion(3, "The clinical staff was supportive of my role", $staffSupportive);
                                 echo displayStarQuestion(4, "The site helped facilitate my learning objectives.", $siteLearningObjectives);
@@ -124,7 +150,7 @@
                                 if( !empty($siteOrStaffFeedback) ) {
                                     $questionText = "If you have any comments you would like to leave about the site or staff at this facility please add below.";
                                     
-                                    echo displayTextQuestion(7, $questionText, $siteOrStaffFeedback, false);
+                                    echo displayTextQuestion(7, $questionText, $siteOrStaffFeedback, !$textQuestionRequired);
                                 }
 
                                 if( !empty($instructorFeedback) ) {
@@ -133,13 +159,13 @@
                                     We will just be using this to gage if an instructor needs to improve in areas,
                                     or to highlight instructors who go above and beyond.";
 
-                                    echo displayTextQuestion(8, $questionText, $instructorFeedback, false);
+                                    echo displayTextQuestion(8, $questionText, $instructorFeedback, !$textQuestionRequired);
                                 }
                             ?>
                             <div class="card container p-2 my-1">
                                 <div class="row justify-content-center">
-                                    <button class="col-4 btn py-2 m-2" id="submit-experience">Confirm</button>
-                                    <a class="col-4 btn btn-danger py-2 m-2" href="/sprint-2/experience.html">Cancel</a>
+                                    <button class="col-5 btn btn-success py-2 m-2" id="submit-experience">Confirm</button>
+                                    <a class="col-5 btn btn-danger py-2 m-2" href="/sprint-2/experience.html">Cancel</a>
                                 </div>
                             </div>
                         </form>
