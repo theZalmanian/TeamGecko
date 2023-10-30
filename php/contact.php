@@ -37,31 +37,23 @@
 
                             $subject = "Nursing Nucleus Contact Page";
 
-                            $contactPage = "<ul>
-                                            <il>Name: $name </il><br>
-                                            <il>Email: $email </il><br>
-                                            <il>Phone: $phone </il><br>
-                                            <il>Message:$message</il>
-                                            </ul>";
+                            // setup email content with given data
+                            $emailContent = "<ul>
+                                                <il>Name: $name</il>
+                                                <il>Email: $email</il>";
 
-                            if ($phone == ""){
-
-                                $contactPage = "<ul>
-                                            <il>Name: $name </il><br>
-                                            <il>Email: $email </il><br>
-                                            <il>Message:$message</il>
-                                            </ul>";
-                            } else {
-                                $contactPage = "<ul>
-                                            <il>Name: $name </il><br>
-                                            <il>Email: $email </il><br>
-                                            <il>Phone: $phone </il><br>
-                                            <il>Message:$message</il>
-                                            </ul>";
+                            // only add phone to message if it was given
+                            if ( !empty($phone) ){
+                                $emailContent .= "<il>Phone: $phone </il>";
+                            } 
+                            
+                            else {
+                                $emailContent = "<il>Message:$message</il>
+                                                </ul>";
                             }
 
                             // attempt to send email with given data
-                            $messageSent = mail($sendToAddress,$subject,$contactPage,$headers);
+                            $messageSent = mail($sendToAddress, $subject, $emailContent, $headers);
 
                             // if the message was sent, display success 
                             if($messageSent) {
