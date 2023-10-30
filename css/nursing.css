@@ -39,11 +39,13 @@
     background: #D20F1C;
 }
 
-button.btn.btn-success {
+button.btn.btn-success,
+a.btn.btn-success {
     background: var(--nursing-accent-color);
 }
 
-button.btn.btn-success:hover {
+button.btn.btn-success:hover,
+a.btn.btn-success:hover {
     background: #579339;
 }
 

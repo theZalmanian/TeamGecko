@@ -41,7 +41,6 @@
                         return " " . "<span class='text-danger'>*</span>";
                     }
 
-
                     /**
                      * Returns the given message inside of an HTML strong element
                      * @param string $message The message being displayed inside an HTML strong element
@@ -173,12 +172,20 @@
                     }
 
                     else {
-                        echo "<div class='h4 p-3 mb-0'>
-                                <p>
-                                    Please fill out the Clinical Experience Questionnaire:
+                        echo "<div class='card p-3 my-1 text-center'>
+                                <h4>
+                                    Error: No submission received from
+                                    <br>
+                                    Clinical Experience Questionnaire.
+                                </h4>
+                              </div>";
+
+                        echo "<div class='card p-3 my-1 text-center'>
+                                <p class='h4'>
+                                    Please fill out the survey and try again:
                                 </p>
-                                <a class='nav-link btn' href='/sprint-2/experience.html'>
-                                    Experience Form
+                                <a class='btn btn-success py-2 m-2' href='/sprint-2/experience.html'>
+                                    Experience Survey
                                 </a>
                               </div>";
                     }
