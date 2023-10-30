@@ -26,9 +26,11 @@
 
                         // check that all required inputs were submitted on the Contact form
                         if( isset($name) && isset($email) && isset($message) ) {
+                            // setup sending and receiving addresses
                             $sendToAddress = "";
                             $sendFromAddress = "NursingNucleus@greenriverdev.com";
 
+                            // setup headers for html email
                             $headers = "MIME-Version: 1.0" . "\r\n";
                             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                             $headers .= "From: $sendFromAddress" . "\r\n";
@@ -58,7 +60,18 @@
                                             </ul>";
                             }
 
-                            mail($sendToAddress,$subject,$contactPage,$headers);
+                            // attempt to send email with given data
+                            $messageSent = mail($sendToAddress,$subject,$contactPage,$headers);
+
+                            // if the message was sent, display success 
+                            if($messageSent) {
+                                echo "<h1>Your message was sent successfully!</h1>";
+                            }
+
+                            // if message was not sent, display error
+                            else {
+                                echo "<h1>Error: Your message could not be sent at this time. Try again later.</h1>";
+                            }
                         }
                         
                         // otherwise display error and link to contact form
