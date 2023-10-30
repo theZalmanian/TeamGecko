@@ -18,59 +18,66 @@
             <div class="col-12 col-md-8 col-lg-6">
                 <div class="my-3">
                     <?php
+                        // setup variables to hold Contact form inputs
                         $name = $_POST["name"];
                         $email = $_POST["email"];
                         $phone = $_POST["phone"];
                         $message = $_POST["message"];
 
-                        $sendToAddress = "";
-                        $sendFromAddress = "NursingNucleus@greenriverdev.com";
+                        // check that all required inputs were submitted on the Contact form
+                        if( isset($name) && isset($email) && isset($message) ) {
+                            $sendToAddress = "";
+                            $sendFromAddress = "NursingNucleus@greenriverdev.com";
 
-                        $headers = "MIME-Version: 1.0" . "\r\n";
-                        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                        $headers .= "From: $sendFromAddress" . "\r\n";
+                            $headers = "MIME-Version: 1.0" . "\r\n";
+                            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                            $headers .= "From: $sendFromAddress" . "\r\n";
 
-                        $subject = "Nursing Nucleus Contact Page";
-
-                        $contactPage = "<ul>
-                                        <il>Name: $name </il><br>
-                                        <il>Email: $email </il><br>
-                                        <il>Phone: $phone </il><br>
-                                        <il>Message:$message</il>
-                                        </ul>";
-
-                        if ($phone == ""){
+                            $subject = "Nursing Nucleus Contact Page";
 
                             $contactPage = "<ul>
-                                        <il>Name: $name </il><br>
-                                        <il>Email: $email </il><br>
-                                        <il>Message:$message</il>
-                                        </ul>";
-                        } else {
-                            $contactPage = "<ul>
-                                        <il>Name: $name </il><br>
-                                        <il>Email: $email </il><br>
-                                        <il>Phone: $phone </il><br>
-                                        <il>Message:$message</il>
-                                        </ul>";
+                                            <il>Name: $name </il><br>
+                                            <il>Email: $email </il><br>
+                                            <il>Phone: $phone </il><br>
+                                            <il>Message:$message</il>
+                                            </ul>";
+
+                            if ($phone == ""){
+
+                                $contactPage = "<ul>
+                                            <il>Name: $name </il><br>
+                                            <il>Email: $email </il><br>
+                                            <il>Message:$message</il>
+                                            </ul>";
+                            } else {
+                                $contactPage = "<ul>
+                                            <il>Name: $name </il><br>
+                                            <il>Email: $email </il><br>
+                                            <il>Phone: $phone </il><br>
+                                            <il>Message:$message</il>
+                                            </ul>";
+                            }
+
+                            mail($sendToAddress,$subject,$contactPage,$headers);
                         }
+                        
+                        // otherwise display error and link to contact form
+                        else {
+                            echo "<div class='card p-3 my-1 text-center'>
+                                    <h4>
+                                        Error: No submission received from Contact Form.
+                                    </h4>
+                                </div>";
 
-                        mail($sendToAddress,$subject,$contactPage,$headers);
-
-                        echo "<div class='card p-3 my-1 text-center'>
-                                <h4>
-                                    Error: No submission received from Contact Form.
-                                </h4>
-                            </div>";
-
-                        echo "<div class='card p-3 my-1 text-center'>
-                                <p class='h4'>
-                                    Please fill out the form and try again:
-                                </p>
-                                <a class='btn btn-success py-2 m-2' href='/sprint-2/contact.html'>
-                                    Contact
-                                </a>
-                            </div>";
+                            echo "<div class='card p-3 my-1 text-center'>
+                                    <h4>
+                                        Please fill out the form and try again:
+                                    </h4>
+                                    <a class='btn btn-success py-2 m-2' href='/sprint-2/contact.html'>
+                                        Contact
+                                    </a>
+                                </div>";
+                        }
                     ?>
                 </div>
             </div>

@@ -17,102 +17,6 @@
             </div>
             <div class="col-12 col-md-8 col-lg-6">
                 <div class="my-3">
-                    <?php 
-                    /**
-                         * Constructs and returns a string made up of the given # of stars: ★
-                         * @param int $numStars The # of stars to be generated and displayed
-                         * @return string A string displaying "You selected:" in bold, followed by the given # of stars
-                         */
-                        function displayStars($numStars) {
-                            // add the given number of # stars to the display
-                            $display = "";
-                            for ($currStar = 0; $currStar < $numStars; $currStar++) {
-                                $display .= "★";
-                            }
-
-                            return $display;
-                        }
-
-                        /**
-                         * Returns an HTML span signifying that an input is required
-                         * @return string an HTML span signifying that an input is required
-                         */
-                        function displayRequired() {
-                            return " " . "<span class='text-danger'>*</span>";
-                        }
-
-                        /**
-                         * Returns the given message inside of an HTML strong element
-                         * @param string $message The message being displayed inside an HTML strong element
-                         * @return string the given message inside of an HTML strong element
-                         */
-                        function displayStrong($message) {
-                            return "<strong>{$message}</strong>" . " ";
-                        }
-
-                        /**
-                         * Constructs a Bootstrap card element containing the given question, along with a response to it
-                         * @param int $questionNum The question's number on the form
-                         * @param string $questionText The question itself
-                         * @param string $response The given response to that question
-                         * @return string A Bootstrap card element containing a question and the given response to it
-                         */
-                        function displayQuestion($questionNum, $questionText, $response) {
-                            // setup display card w/ the given values
-                            $displayCard = "<div class='card p-3 my-1'>
-                                            <ul class='list-group list-group-flush'>
-                                            <li class='list-group-item'>
-                                                {$questionNum}. {$questionText}
-                                            </li>
-                                            <li class='list-group-item'>
-                                                {$response} 
-                                            </li>
-                                            </ul>
-                                        </div>";
-        
-                            return $displayCard;
-                        }
-
-                        /**
-                         * Constructs and returns a Bootstrap card element containing the given question, 
-                         * along with the # of stars selected in response
-                         * @param int $questionNum The question's number on the form
-                         * @param string $questionText The question itself
-                         * @param int $numStars The # of stars selected in response to the given question
-                         * @return string A Bootstrap card element containing a question and the # of stars selected for it 
-                         */
-                        function displayStarQuestion($questionNum, $questionText, $numStars) {
-                            $response = displayStrong("You selected:") . displayStars($numStars);
-
-                            // all star questions are required
-                            $questionText .= displayRequired();
-
-                            // construct the card and display the selected # of stars
-                            return displayQuestion($questionNum, $questionText, $response);
-                        }
-
-                        /**
-                         * Constructs and returns a Bootstrap card element containing the given question, 
-                         * along with a response to it
-                         * @param int $questionNum The question's number on the form
-                         * @param string $questionText The question itself
-                         * @param string $response The given response to that question
-                         * @param boolean $questionRequired True if question must be answered; otherwise False
-                         * @return string A Bootstrap card element containing a question and the given response to it
-                         */
-                        function displayTextQuestion($questionNum, $questionText, $response, $questionRequired) {
-                            $response = displayStrong("You said:") . $response;
-
-                            // if the given question was required
-                            if($questionRequired) {
-                                // add the required span after it
-                                $questionText .= displayRequired();
-                            }
-
-                            // construct the card and display the given response
-                            return displayQuestion($questionNum, $questionText, $response);
-                        }
-                    ?>
                     <?php
                         // setup variables to hold Experience Survey form inputs
                         $siteAttended = $_POST["q1-site-attended"];
@@ -171,19 +75,18 @@
                     <?php
                         }
 
+                        // otherwise display error and link to experience survey
                         else {
                             echo "<div class='card p-3 my-1 text-center'>
                                     <h4>
-                                        Error: No submission received from
-                                        <br>
-                                        Clinical Experience Questionnaire.
+                                        Error: No submission received from Experience Survey.
                                     </h4>
                                 </div>";
 
                             echo "<div class='card p-3 my-1 text-center'>
-                                    <p class='h4'>
+                                    <h4>
                                         Please fill out the survey and try again:
-                                    </p>
+                                    </h4>
                                     <a class='btn btn-success py-2 m-2' href='/sprint-2/experience.html'>
                                         Experience Survey
                                     </a>
@@ -198,3 +101,100 @@
     </div>
 </body>
 </html>
+
+<?php 
+    /**
+     * Constructs and returns a string made up of the given # of stars: ★
+     * @param int $numStars The # of stars to be generated and displayed
+     * @return string A string displaying "You selected:" in bold, followed by the given # of stars
+     */
+    function displayStars($numStars) {
+        // add the given number of # stars to the display
+        $display = "";
+        for ($currStar = 0; $currStar < $numStars; $currStar++) {
+            $display .= "★";
+        }
+
+        return $display;
+    }
+
+    /**
+     * Returns an HTML span signifying that an input is required
+     * @return string an HTML span signifying that an input is required
+     */
+    function displayRequired() {
+        return " " . "<span class='text-danger'>*</span>";
+    }
+
+    /**
+     * Returns the given message inside of an HTML strong element
+     * @param string $message The message being displayed inside an HTML strong element
+     * @return string the given message inside of an HTML strong element
+     */
+    function displayStrong($message) {
+        return "<strong>{$message}</strong>" . " ";
+    }
+
+    /**
+     * Constructs a Bootstrap card element containing the given question, along with a response to it
+     * @param int $questionNum The question's number on the form
+     * @param string $questionText The question itself
+     * @param string $response The given response to that question
+     * @return string A Bootstrap card element containing a question and the given response to it
+     */
+    function displayQuestion($questionNum, $questionText, $response) {
+        // setup display card w/ the given values
+        $displayCard = "<div class='card p-3 my-1'>
+                        <ul class='list-group list-group-flush'>
+                        <li class='list-group-item'>
+                            {$questionNum}. {$questionText}
+                        </li>
+                        <li class='list-group-item'>
+                            {$response} 
+                        </li>
+                        </ul>
+                    </div>";
+
+        return $displayCard;
+    }
+
+    /**
+     * Constructs and returns a Bootstrap card element containing the given question, 
+     * along with the # of stars selected in response
+     * @param int $questionNum The question's number on the form
+     * @param string $questionText The question itself
+     * @param int $numStars The # of stars selected in response to the given question
+     * @return string A Bootstrap card element containing a question and the # of stars selected for it 
+     */
+    function displayStarQuestion($questionNum, $questionText, $numStars) {
+        $response = displayStrong("You selected:") . displayStars($numStars);
+
+        // all star questions are required
+        $questionText .= displayRequired();
+
+        // construct the card and display the selected # of stars
+        return displayQuestion($questionNum, $questionText, $response);
+    }
+
+    /**
+     * Constructs and returns a Bootstrap card element containing the given question, 
+     * along with a response to it
+     * @param int $questionNum The question's number on the form
+     * @param string $questionText The question itself
+     * @param string $response The given response to that question
+     * @param boolean $questionRequired True if question must be answered; otherwise False
+     * @return string A Bootstrap card element containing a question and the given response to it
+     */
+    function displayTextQuestion($questionNum, $questionText, $response, $questionRequired) {
+        $response = displayStrong("You said:") . $response;
+
+        // if the given question was required
+        if($questionRequired) {
+            // add the required span after it
+            $questionText .= displayRequired();
+        }
+
+        // construct the card and display the given response
+        return displayQuestion($questionNum, $questionText, $response);
+    }
+?>
