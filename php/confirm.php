@@ -16,7 +16,7 @@
         <div class="col-md-2 col-lg-3">
         </div>
         <div class="col-12 col-md-8 col-lg-6">
-            <div class="mt-3">
+            <div class="my-3">
                 <?php 
                  /**
                      * Constructs and returns a string made up of the given # of stars: ★
@@ -132,43 +132,43 @@
                         && isset($siteLearningObjectives)
                         && isset($preceptorLearningObjectives) 
                         && isset($recommendSite) ) {
+                            // setup flag to keep track of textbox requirement status
+                            $textQuestionRequired = true;
+
+                            // display questions and responses for questions 1 - 6 (required)
+                            echo displayTextQuestion(1, "What Clinical Site did you attend?", $siteAttended, $textQuestionRequired); 
+                            echo displayStarQuestion(2, "I enjoyed my time at this clinical site", $enjoyedSite);
+                            echo displayStarQuestion(3, "The clinical staff was supportive of my role", $staffSupportive);
+                            echo displayStarQuestion(4, "The site helped facilitate my learning objectives.", $siteLearningObjectives);
+                            echo displayStarQuestion(5, "My preceptor helped facilitate my learning objectives.", $preceptorLearningObjectives);
+                            echo displayStarQuestion(6, "I would recommend this site to another student.", $recommendSite);
+                        
+                            // if they were answered, display questions and responses for questions 7 & 8 (optional)
+                            if( !empty($siteOrStaffFeedback) ) {
+                                $questionText = "If you have any comments you would like to leave about the site or staff at this facility please add below.";
+                                
+                                echo displayTextQuestion(7, $questionText, $siteOrStaffFeedback, !$textQuestionRequired);
+                            }
+
+                            if( !empty($instructorFeedback) ) {
+                                $questionText = "If you have any feedback you would like to leave about your 
+                                clinical instructor please add below. <strong>None of the instructors will see this</strong>.
+                                We will just be using this to gage if an instructor needs to improve in areas,
+                                or to highlight instructors who go above and beyond.";
+
+                                echo displayTextQuestion(8, $questionText, $instructorFeedback, !$textQuestionRequired);
+                            }
                 ?>
-                        <form class="my-2" action="/php/receipt.php" method="post">
-                            <?php 
-                                // setup flag to keep track of textbox requirement status
-                                $textQuestionRequired = true;
+                            <form class="my-1" action="/php/receipt.php" method="post">
+                                <input type="hidden" name="survey-submitted" value="confirmed">
 
-                                // display questions and responses for questions 1 - 6 (required)
-                                echo displayTextQuestion(1, "What Clinical Site did you attend?", $siteAttended, $textQuestionRequired); 
-                                echo displayStarQuestion(2, "I enjoyed my time at this clinical site", $enjoyedSite);
-                                echo displayStarQuestion(3, "The clinical staff was supportive of my role", $staffSupportive);
-                                echo displayStarQuestion(4, "The site helped facilitate my learning objectives.", $siteLearningObjectives);
-                                echo displayStarQuestion(5, "My preceptor helped facilitate my learning objectives.", $preceptorLearningObjectives);
-                                echo displayStarQuestion(6, "I would recommend this site to another student.", $recommendSite);
-                            
-                                // if they were answered, display questions and responses for questions 7 & 8 (optional)
-                                if( !empty($siteOrStaffFeedback) ) {
-                                    $questionText = "If you have any comments you would like to leave about the site or staff at this facility please add below.";
-                                    
-                                    echo displayTextQuestion(7, $questionText, $siteOrStaffFeedback, !$textQuestionRequired);
-                                }
-
-                                if( !empty($instructorFeedback) ) {
-                                    $questionText = "If you have any feedback you would like to leave about your 
-                                    clinical instructor please add below. <strong>None of the instructors will see this</strong>.
-                                    We will just be using this to gage if an instructor needs to improve in areas,
-                                    or to highlight instructors who go above and beyond.";
-
-                                    echo displayTextQuestion(8, $questionText, $instructorFeedback, !$textQuestionRequired);
-                                }
-                            ?>
-                            <div class="card container p-2 my-1">
-                                <div class="row justify-content-center">
-                                    <button class="col-5 btn btn-success py-2 m-2" id="submit-experience">Confirm</button>
-                                    <a class="col-5 btn btn-danger py-2 m-2" href="/sprint-2/experience.html">Cancel</a>
+                                <div class="card container p-2 my-1">
+                                    <div class="row justify-content-center">
+                                        <button class="col-5 btn btn-success py-2 m-2" id="submit-experience">Confirm</button>
+                                        <a class="col-5 btn btn-danger py-2 m-2" href="/sprint-2/experience.html">Cancel</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
                 <?php
                     }
 

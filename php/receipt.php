@@ -17,6 +17,7 @@
         </div>
         <div class="col-12 col-md-8 col-lg-4">
             <div class="card text-center mt-3">
+                <?php echo $_POST["survey-submitted"]; ?>
             </div>
         </div>
         <div class="col-md-2 col-lg-4">
