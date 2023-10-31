@@ -37,33 +37,8 @@
 
                             $subject = "Nursing Nucleus Contact Page";
 
-                            // setup email content with given data
-                            $emailContent = "<html lang='en'>
-                                            <head>
-                                                <title>Nursing Nucleus Contact Page</title>
-                                                <style>
-                                                    ul {
-                                                        list-style-type: none
-                                                    }
-                                                </style>
-                                            </head>
-                                            <body>
-                                            <ul>
-                                                <li>Name: $name</li>
-                                                <li>Email: $email</li>";
-
-                            // only add phone to message if it was given
-                            if ( !empty($phone) ){
-                                $emailContent .= "<li>Phone: $phone </li>";
-                            } 
-                            
-                            $emailContent .= "<li>Message: $message</li>
-                                            </ul>
-                                            </body>
-                                            </html";
-
                             // attempt to send email with given data
-                            $messageSent = mail($sendToAddress, $subject, $emailContent, $headers);
+                            $messageSent = mail($sendToAddress, $subject, setupEmailContent(), $headers);
 
                             // if the message was sent, display success 
                             if($messageSent) {
@@ -98,6 +73,44 @@
 </html>
 
 <?php
+    /**
+     * Generates and returns HTML content for the email message based on contact form data
+     * @return string HTML content for the email message
+     */
+    function setupEmailContent() {
+        // retrieve form variables from global scope
+        global $name, $email, $phone, $message;
+
+        // setup most of email content
+        $emailContent = "<html lang='en'>
+                        <head>
+                            <title>Nursing Nucleus Contact Page</title>
+                            <style>
+                                ul {
+                                    list-style-type: none;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                        <ul>
+                            <li>Name: $name</li>
+                            <li>Email: $email</li>";
+
+        // only add the phone number to the message if it was provided
+        if ( !empty($phone) ) {
+            $emailContent .= "<li>Phone: $phone </li>";
+        } 
+
+        // Add the message to the end of email content
+        $emailContent .= "<li>Message: $message</li>
+                        </ul>
+                        </body>
+                        </html";
+
+        // Return the generated email content
+        return $emailContent;
+    }
+
     /**
      * Returns a Bootstrap card containing the given error message
      * @param string $errorMessage The error message being displayed in the Bootstrap card
