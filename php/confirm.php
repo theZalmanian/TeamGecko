@@ -77,20 +77,14 @@
 
                         // otherwise display error and link to experience survey
                         else {
-                            echo "<div class='card p-3 my-1 text-center'>
-                                    <h4>
-                                        Error: No submission received from Experience Survey.
-                                    </h4>
-                                </div>";
+                            echo displayError("No submission received from Experience Survey.");
 
-                            echo "<div class='card p-3 my-1 text-center'>
-                                    <h4>
-                                        Please fill out the survey and try again:
-                                    </h4>
-                                    <a class='btn btn-success py-2 m-2' href='/sprint-2/experience.html'>
-                                        Experience Survey
-                                    </a>
-                                </div>";
+                            echo displayCardWithContent("<h4>
+                                                            Please fill out the survey and try again:
+                                                        </h4>
+                                                        <a class='btn btn-success py-2 m-2' href='/sprint-2/experience.html'>
+                                                            Experience Survey
+                                                        </a>");
                         }
                     ?>
                 </div>
@@ -103,6 +97,29 @@
 </html>
 
 <?php 
+    /**
+     * Returns a Bootstrap card containing the given error message
+     * @param string $errorMessage The error message being displayed in the Bootstrap card
+     * @return string a Bootstrap card containing the given error message
+     */
+    function displayError($errorMessage) {
+        // setup error content
+        $errorContent = "<h4>
+                            Error: {$errorMessage}
+                        </h4>";
+
+        return displayCardWithContent($errorContent);
+    }
+
+    /**
+     * Returns a Bootstrap card containing the given HTML content
+     * @param string $content The HTML element(s) being displayed in the Bootstrap card
+     * @return string a Bootstrap card containing the given HTML content
+     */
+    function displayCardWithContent($content) {
+        return "<div class='card p-3 my-1 text-center'>{$content}</div>";
+    }
+
     /**
      * Constructs and returns a string made up of the given # of stars: ★
      * @param int $numStars The # of stars to be generated and displayed

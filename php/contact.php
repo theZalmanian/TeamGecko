@@ -13,9 +13,9 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-2 col-lg-3">
+            <div class="col-md-2 col-lg-4">
             </div>
-            <div class="col-12 col-md-8 col-lg-6">
+            <div class="col-12 col-md-8 col-lg-4">
                 <div class="my-3">
                     <?php
                         // setup variables to hold Contact form inputs
@@ -38,57 +38,86 @@
                             $subject = "Nursing Nucleus Contact Page";
 
                             // setup email content with given data
-                            $emailContent = "<ul>
-                                                <il>Name: $name</il>
-                                                <il>Email: $email</il>";
+                            $emailContent = "<html lang='en'>
+                                            <head>
+                                                <title>Nursing Nucleus Contact Page</title>
+                                                <style>
+                                                    ul {
+                                                        list-style-type: none
+                                                    }
+                                                </style>
+                                            </head>
+                                            <body>
+                                            <ul>
+                                                <li>Name: $name</li>
+                                                <li>Email: $email</li>";
 
                             // only add phone to message if it was given
                             if ( !empty($phone) ){
-                                $emailContent .= "<il>Phone: $phone </il>";
+                                $emailContent .= "<li>Phone: $phone </li>";
                             } 
                             
-                            else {
-                                $emailContent = "<il>Message:$message</il>
-                                                </ul>";
-                            }
+                            $emailContent .= "<li>Message: $message</li>
+                                            </ul>
+                                            </body>
+                                            </html";
 
                             // attempt to send email with given data
                             $messageSent = mail($sendToAddress, $subject, $emailContent, $headers);
 
                             // if the message was sent, display success 
                             if($messageSent) {
-                                echo "<h1>Your message was sent successfully!</h1>";
+                                echo displayCardWithContent("<h4>Your message was sent successfully!</h4>");
                             }
 
                             // if message was not sent, display error
                             else {
-                                echo "<h1>Error: Your message could not be sent at this time. Try again later.</h1>";
+                                echo displayError("Your message could not be sent at this time. Try again later.");
                             }
                         }
                         
                         // otherwise display error and link to contact form
                         else {
-                            echo "<div class='card p-3 my-1 text-center'>
-                                    <h4>
-                                        Error: No submission received from Contact Form.
-                                    </h4>
-                                </div>";
-
-                            echo "<div class='card p-3 my-1 text-center'>
-                                    <h4>
-                                        Please fill out the form and try again:
-                                    </h4>
-                                    <a class='btn btn-success py-2 m-2' href='/sprint-2/contact.html'>
-                                        Contact
-                                    </a>
-                                </div>";
+                            echo displayError("No submission received from Contact Form.");
+                            
+                            echo displayCardWithContent("<h4>
+                                                            Please fill out the form and try again:
+                                                        </h4>
+                                                        <a class='btn btn-success py-2 m-2' href='/sprint-2/contact.html'>
+                                                            Contact
+                                                        </a>");
                         }
                     ?>
                 </div>
             </div>
-            <div class="col-md-2 col-lg-3">
+            <div class="col-md-2 col-lg-4">
             </div>
         </div>
     </div>
 </body>
 </html>
+
+<?php
+    /**
+     * Returns a Bootstrap card containing the given error message
+     * @param string $errorMessage The error message being displayed in the Bootstrap card
+     * @return string a Bootstrap card containing the given error message
+     */
+    function displayError($errorMessage) {
+        // setup error content
+        $errorContent = "<h4>
+                            Error: {$errorMessage}
+                        </h4>";
+
+        return displayCardWithContent($errorContent);
+    }
+
+    /**
+     * Returns a Bootstrap card containing the given HTML content
+     * @param string $content The HTML element(s) being displayed in the Bootstrap card
+     * @return string a Bootstrap card containing the given HTML content
+     */
+    function displayCardWithContent($content) {
+        return "<div class='card p-3 my-1 text-center'>{$content}</div>";
+    }
+?>
