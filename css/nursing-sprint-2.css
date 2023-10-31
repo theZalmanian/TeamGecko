@@ -104,23 +104,26 @@ button.accordion-button:not(.collapsed)::after {
     background-image: var(--accordion-dropdown-icon);
 }
 
-table.requirement-data tr > td.p-0,
-table.requirement-data ul.list-group.list-group-flush > li.list-group-item {
+.requirement-data ul.list-group.list-group-flush > li.list-group-item.h5 {
     background: var(--nursing-primary-color-variant);
     color: var(--nursing-primary-color);
+    font-weight: bold;
 }
 
-table.requirement-data ul.list-group.list-group-flush > li.list-group-item:nth-of-type(even) {
+.requirement-data ul.list-group.list-group-flush > li.list-group-item {
     background: var(--nursing-primary-color);
     color: var(--nursing-primary-color-variant);
 }
 
 .card.notes li.list-group-item,
-table.requirement-data th,
-table.requirement-data th.table-or-column,
-table.requirement-data td.table-or-column {
-    background: var(--nursing-secondary-color);
+.requirement-notes li,
+.requirement-data .or-row {
+    background: var(--nursing-secondary-color) !important;
     color: var(--nursing-accent-color) !important;
+}
+
+.requirement-notes li {
+    font-weight: bold;
 }
 
 li.list-group-item {
