@@ -1,8 +1,8 @@
 <?php
-    // get month and year data
-    $currMonthNum = date("m", time());
-    $currMonthChar = date("M", time());
-    $currYear = date("y", time());
+    // get current month and year data
+    $currMonthNum = date("m");
+    $currMonthChar = date("M");
+    $currYear = date("y");
     
     // generate four random digits 0 - 9
     $firstDigit = rand(0, 9);
@@ -24,7 +24,7 @@
     }
 
     // if July, Aug, Sep
-    if($currMonthNum >= 7 &&  $currMonthNum <= 9 ) {
+    if($currMonthNum >= 7 && $currMonthNum <= 9 ) {
         $backgroundColor = "red"; // background will be red
     }
 
@@ -59,10 +59,10 @@
             <div class="col-md-4">
             </div>
             <div class="col-12 col-md-4 mt-3">
-                <div class="card text-center p-5 bg-<?php echo $backgroundColor?>">
+                <div class="card text-center p-5 bg-<?php echo $backgroundColor; ?>">
                     <div class="p-4">
                         <h5>
-                            Submitted on <?php echo "{$currMonthNum}/{$currYear}"?>
+                            Submitted on <?php echo "{$currMonthNum}/{$currYear}"; ?>
                         </h5>
                         <h1>
                             <?php echo $receiptCode; ?>
