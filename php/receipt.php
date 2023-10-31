@@ -1,30 +1,40 @@
 <?php
-    $monthNumber = date("m", time());
-    $monthLetters = date("M", time());
-    $years = date("y", time());
-    $color = "";
-    $random1 = rand(0, 9);
-    $random2 = rand(0, 9);
-    $random3 = rand(0, 9);
-    $random4 = rand(0, 9);
+    // get month and year data
+    $currMonthNum = date("m", time());
+    $currMonthChar = date("M", time());
+    $currYear = date("y", time());
+    
+    // generate four random digits 0 - 9
+    $firstDigit = rand(0, 9);
+    $secondDigit = rand(0, 9);
+    $thirdDigit = rand(0, 9);
+    $fourthDigit = rand(0, 9);
 
-    if($monthNumber <= 3)
-    {
-        $color = "info";
-    }
-    else if($monthNumber == 4 || $monthNumber == 5 || $monthNumber == 6 )
-    {
-        $color = "success";
-    }
-    else if($monthNumber == 7 || $monthNumber == 8 || $monthNumber == 9 )
-    {
-        $color = "danger";
-    }
-    else
-    {
-        $color = "orange";
+    // select background color based on month
+    $backgroundColor = "";
+    
+    // if Jan, Feb, or Mar
+    if($currMonthNum >= 1 && $currMonthNum <= 3) {
+        $backgroundColor = "blue"; // background will be blue
     }
 
+    // if Apr, May, June
+    if($currMonthNum >= 4 && $currMonthNum <= 6 ) {
+        $backgroundColor = "green"; // background will be green
+    }
+
+    // if July, Aug, Sep
+    if($currMonthNum >= 7 &&  $currMonthNum <= 9 ) {
+        $backgroundColor = "red"; // background will be red
+    }
+
+    // if Oct, Nov, Dec
+    if($currMonthNum >= 10 && $currMonthNum <= 12) {
+        $backgroundColor = "orange"; // background will be orange
+    }
+
+    // setup code (First letter of month, four random digits, last two digits of year)
+    $receiptCode = "{$currMonthChar[0]}{$firstDigit}{$secondDigit}{$thirdDigit}{$fourthDigit}{$currYear}";
 ?>
 
 <!DOCTYPE html>
@@ -43,13 +53,13 @@
 <div class="container">
     <div class="row d-flex align-items-center justify-content-center">
         <div class="col-12 col-md-8 col-lg-4">
-            <div class="card text-center p-4 mt-3 bg-<?php echo $color?> ">
+            <div class="card text-center p-4 mt-3 bg-<?php echo $backgroundColor?>">
                 <div class="p-4">
-                    <h5>Submitted on <?php echo "${monthNumber}/${years}"?></h5>
+                    <h5>
+                        Submitted on <?php echo "{$currMonthNum}/{$currYear}"?>
+                    </h5>
                     <h1>
-                        <?php
-                        echo "${monthLetters[0]}${random1}${random2}${random3}${random4}${years}";
-                        ?>
+                        <?php echo $receiptCode; ?>
                     </h1>
                 </div>
                 <div>
