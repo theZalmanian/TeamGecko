@@ -50,26 +50,85 @@
     <link rel="stylesheet" href="/css/nursing-sprint-2.css">
 </head>
 <body>
-<div class="container">
-    <div class="row d-flex align-items-center justify-content-center">
-        <div class="col-12 col-md-8 col-lg-4">
-            <div class="card text-center p-4 mt-3 bg-<?php echo $backgroundColor?>">
-                <div class="p-4">
-                    <h5>
-                        Submitted on <?php echo "{$currMonthNum}/{$currYear}"?>
-                    </h5>
-                    <h1>
-                        <?php echo $receiptCode; ?>
-                    </h1>
-                </div>
-                <div>
-                    <p class="py-2">
-                        Screenshot this page as a receipt for your instructor
-                    </p>
+    <div class="container">
+        <div class="row">
+        <?php
+            // check that user came here from confirm.php
+            if( isset($_POST["survey-submitted"]) && $_POST["survey-submitted"] == "confirmed" ) {
+        ?>
+            <div class="col-md-4">
+            </div>
+            <div class="col-12 col-md-4 mt-3">
+                <div class="card text-center p-5 bg-<?php echo $backgroundColor?>">
+                    <div class="p-4">
+                        <h5>
+                            Submitted on <?php echo "{$currMonthNum}/{$currYear}"?>
+                        </h5>
+                        <h1>
+                            <?php echo $receiptCode; ?>
+                        </h1>
+                    </div>
+                    <div>
+                        <p class="py-2">
+                            Screenshot this page as a receipt for your instructor
+                        </p>
+                    </div>
                 </div>
             </div>
+            <div class="col-md-4">
+            </div>
+        <?php
+            }
+
+            // otherwise display error and link to experience survey
+            else { 
+        ?>
+                <div class="col-md-2 col-lg-3">
+                </div>
+                <div class="col-12 col-md-8 col-lg-6 mt-3">
+                <?php
+                    echo displayError("No submission received from Experience Survey.");
+
+                    echo displayCardWithContent("<h4>
+                                                    Please fill out the survey and try again:
+                                                </h4>
+                                                <a class='btn btn-success py-2 m-2' href='/sprint-2/experience.html'>
+                                                    Experience Survey
+                                                </a>");
+
+                ?>
+                </div>
+                <div class="col-md-2 col-lg-3">
+                </div>
+        <?php
+            }
+        ?>
         </div>
     </div>
-</div>
 </body>
 </html>
+
+<?php 
+    /**
+     * Returns a Bootstrap card containing the given error message
+     * @param string $errorMessage The error message being displayed in the Bootstrap card
+     * @return string a Bootstrap card containing the given error message
+     */
+    function displayError($errorMessage) {
+        // setup error content
+        $errorContent = "<h4>
+                            Error: {$errorMessage}
+                        </h4>";
+
+        return displayCardWithContent($errorContent);
+    }
+
+    /**
+     * Returns a Bootstrap card containing the given HTML content
+     * @param string $content The HTML element(s) being displayed in the Bootstrap card
+     * @return string a Bootstrap card containing the given HTML content
+     */
+    function displayCardWithContent($content) {
+        return "<div class='card p-3 my-1 text-center'>{$content}</div>";
+    }
+?>
