@@ -16,6 +16,7 @@
     --bs-border-color-translucent: var(--nursing-primary-color-variant);
     
     --bs-danger: #F02D3A;
+    --bs-orange: #F28123;
 }
 
 [data-bs-theme=dark] {
@@ -37,6 +38,10 @@
 
 .btn.btn-danger:hover {
     background: #D20F1C;
+}
+
+.bg-orange {
+    background: var(--bs-orange) !important;
 }
 
 button.btn.btn-success,
