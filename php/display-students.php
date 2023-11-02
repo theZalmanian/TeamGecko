@@ -1,6 +1,6 @@
 <?php
     // connect to DB 
-    require '/home/geckosgr/db-connect.php';
+    require '/home/geckosgr/db-connect-practice.php';
 
     // setup SELECT Query
     $selectAllStudents = "SELECT * FROM student";
