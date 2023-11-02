@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience Survey</title>
+    <link rel="icon" type="image/x-icon" href="/nursing-images/nursing-logo.png">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/nursing-sprint-3.css">
+    
+    <!--Implement theme switcher-->
+    <script src="/js/theme-switcher.js"></script>
+</head>
+<body>
+    <!--Start of Nav-->
+    <nav class="navbar sticky-top navbar-expand-md mb-3 border-bottom">
+        <div class="container">
+            <div class="navbar-brand">
+                <img src="/nursing-images/nursing-logo.png" height="60" alt="GRC Nursing Program founded 1965">
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-nav"
+                    aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse flex-row-reverse" id="navbar-nav">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/sprint-2/requirements.html">
+                        Clinical Requirements
+                    </a>
+                    <a class="nav-link active disabled" href="/sprint-2/experience.html" aria-current="page">
+                        Experience Survey
+                    </a>
+                    <a class="nav-link" href="/sprint-2/contact.html">
+                        Contact
+                    </a>
+                    <a class="nav-link" id="theme-switcher">
+                        <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+                            <path id="theme-icon" d="M 27.9999 51.9063 C 41.0546 51.9063 51.9063 41.0781 51.9063 28 C 51.9063 14.9453 41.0312 4.0937 27.9765 4.0937 C 14.8983 4.0937 4.0937 14.9453 4.0937 28 C 4.0937 41.0781 14.9218 51.9063 27.9999 51.9063 Z M 27.9999 47.9219 C 16.9374 47.9219 8.1014 39.0625 8.1014 28 C 8.1014 16.9609 16.9140 8.0781 27.9765 8.0781 C 39.0155 8.0781 47.8983 16.9609 47.9219 28 C 47.9454 39.0625 39.0390 47.9219 27.9999 47.9219 Z M 34.7030 33.2031 C 27.6014 33.2031 23.0546 28.75 23.0546 21.6484 C 23.0546 20.1719 23.4530 18.0859 23.8749 16.9844 C 23.9921 16.6797 24.0155 16.4922 24.0155 16.3750 C 24.0155 16.0234 23.7343 15.6250 23.2421 15.6250 C 23.0780 15.6250 22.7968 15.6484 22.4921 15.7656 C 17.6405 17.6875 14.3827 22.9375 14.3827 28.4453 C 14.3827 36.1563 20.2655 41.6641 27.9765 41.6641 C 33.6014 41.6641 38.4530 38.1953 40.1405 33.9531 C 40.2577 33.6484 40.2812 33.3437 40.2812 33.25 C 40.2812 32.7578 39.8827 32.4297 39.5077 32.4297 C 39.3671 32.4297 39.2030 32.4531 38.9452 32.5234 C 37.9609 32.8750 36.3202 33.2031 34.7030 33.2031 Z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--End of Nav-->
+    <main class="container" id="experience">
+        <div class="row">
+            <div class="col-md-2 col-lg-3">
+            </div>
+            <div class="col-12 col-md-8 col-lg-6">
+                <h1 class="col-12 mb-3 text-center">
+                    Clinical Experience Questionnaire
+                </h1>
+                <div class="card" id="info-form">
+                    <ul class="list-group list-group-flush text-center">
+                        <li class="list-group-item text-break px-2">
+                            Please fill out the following form to rate your experience on a scale of one 
+                            to five stars at the clinical attended. Please be honest as we collect this data 
+                            to be sure we are sending our students to clinical will provide good 
+                            learning environments and opportunities!
+                        </li>
+                        <li class="list-group-item text-break px-2">
+                            <span class="text-danger">*</span> 
+                            <strong>Required</strong>
+                        </li>
+                    </ul>
+                </div>
+                <form class="my-2" action="/php/confirm.php" method="post" id="experience-form">
+                    <!-- Question 1 -->
+                    <div class="card p-3 my-1">
+                        <label class="mb-2" for="q1-site-attended">
+                            1. What Clinical Site did you attend? <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control" id="q1-site-attended" name="q1-site-attended" required>
+                    </div>
+                    <!-- End of question 1 -->
+        
+                    <!-- question 2 -->
+                    <fieldset class="card p-3 my-1">
+                        <legend class="question-text col-form-label p-0">
+                            2. I enjoyed my time at this clinical site <span class="text-danger">*</span>
+                        </legend>
+                        <div class="star-rating">
+                            <input class="radio-input" type="radio" id="question2-star5" 
+                                name="q2-enjoyed-site" value="5" required>
+                            <label class="radio-label" for="question2-star5" title="5 stars">star5</label>
+        
+                            <input class="radio-input" type="radio" id="question2-star4" 
+                                name="q2-enjoyed-site" value="4">
+                            <label class="radio-label" for="question2-star4" title="4 stars">star4</label>
+        
+                            <input class="radio-input" type="radio" id="question2-star3" 
+                                name="q2-enjoyed-site" value="3">
+                            <label class="radio-label" for="question2-star3" title="3 stars">star3</label>
+        
+                            <input class="radio-input" type="radio" id="question2-star2" 
+                                name="q2-enjoyed-site" value="2">
+                            <label class="radio-label" for="question2-star2" title="2 stars">star2</label>
+        
+                            <input class="radio-input" type="radio" id="question2-star1" 
+                                name="q2-enjoyed-site" value="1">
+                            <label class="radio-label" for="question2-star1" title="1 star">star1</label>
+                        </div>
+                    </fieldset>
+                    <!-- End of question 2 -->
+        
+                    <!-- questions 3 -->
+                    <fieldset class="card p-3 my-1">
+                        <legend class="question-text col-form-label p-0">
+                            3. The clinical staff was supportive of my role <span class="text-danger">*</span>
+                        </legend>
+                        <div class="star-rating">
+                            <input class="radio-input" type="radio" id="question3-star5"
+                                name="q3-staff-supportive" value="5" required>
+                            <label class="radio-label" for="question3-star5" title="5 stars">star5</label>
+        
+                            <input class="radio-input" type="radio" id="question3-star4"
+                                name="q3-staff-supportive" value="4">
+                            <label class="radio-label" for="question3-star4" title="4 stars">star4</label>
+        
+                            <input class="radio-input" type="radio" id="question3-star3"
+                                name="q3-staff-supportive" value="3">
+                            <label class="radio-label" for="question3-star3" title="3 stars">star3</label>
+        
+                            <input class="radio-input" type="radio" id="question3-star2"
+                                name="q3-staff-supportive" value="2">
+                            <label class="radio-label" for="question3-star2" title="2 stars">star2</label>
+        
+                            <input class="radio-input" type="radio" id="question3-star1"
+                                name="q3-staff-supportive" value="1">
+                            <label class="radio-label" for="question3-star1" title="1 star">star1</label>
+                        </div>
+                    </fieldset>
+                    <!-- end of question 3 -->
+        
+                    <!-- question 4 -->
+                    <fieldset class="card p-3 my-1">
+                        <legend class="question-text col-form-label p-0">
+                            4. The site helped facilitate my learning objectives. <span class="text-danger">*</span>
+                        </legend>
+                        <div class="star-rating">
+                            <input class="radio-input" type="radio" id="question4-star5" 
+                                name="q4-site-learning-objectives" value="5" required>
+                            <label class="radio-label" for="question4-star5" title="5 stars">star5</label>
+        
+                            <input class="radio-input" type="radio" id="question4-star4" 
+                                name="q4-site-learning-objectives" value="4">
+                            <label class="radio-label" for="question4-star4" title="4 stars">star4</label>
+        
+                            <input class="radio-input" type="radio" id="question4-star3" 
+                                name="q4-site-learning-objectives" value="3">
+                            <label class="radio-label" for="question4-star3" title="3 stars">star3</label>
+        
+                            <input class="radio-input" type="radio" id="question4-star2" 
+                                name="q4-site-learning-objectives" value="2">
+                            <label class="radio-label" for="question4-star2" title="2 stars">star2</label>
+        
+                            <input class="radio-input" type="radio" id="question4-star1" 
+                                name="q4-site-learning-objectives" value="1">
+                            <label class="radio-label" for="question4-star1" title="1 star">star1</label>
+                        </div>
+                    </fieldset>
+                    <!-- end of question 4-->
+        
+                    <!-- question 5 -->
+                    <fieldset class="card p-3 my-1">
+                        <legend class="question-text col-form-label p-0">
+                            5. My preceptor helped facilitate my learning objectives. <span class="text-danger">*</span>
+                        </legend>
+                        <div class="star-rating">
+                            <input class="radio-input" type="radio" id="question5-star5" 
+                                name="q5-preceptor-learning-objectives" value="5" required>
+                            <label class="radio-label" for="question5-star5" title="5 stars">star5</label>
+        
+                            <input class="radio-input" type="radio" id="question5-star4" 
+                                name="q5-preceptor-learning-objectives" value="4">
+                            <label class="radio-label" for="question5-star4" title="4 stars">star4</label>
+        
+                            <input class="radio-input" type="radio" id="question5-star3" 
+                                name="q5-preceptor-learning-objectives" value="3">
+                            <label class="radio-label" for="question5-star3" title="3 stars">star3</label>
+        
+                            <input class="radio-input" type="radio" id="question5-star2" 
+                                name="q5-preceptor-learning-objectives" value="2">
+                            <label class="radio-label" for="question5-star2" title="2 stars">star2</label>
+        
+                            <input class="radio-input" type="radio" id="question5-star1" 
+                                name="q5-preceptor-learning-objectives" value="1">
+                            <label class="radio-label" for="question5-star1" title="1 star">star1</label>
+                        </div>
+                    </fieldset>
+                    <!-- end of question 5 -->
+        
+                    <!-- question 6 -->
+                    <fieldset class="card p-3 my-1">
+                        <legend class="question-text col-form-label p-0">
+                            6. I would recommend this site to another student. <span class="text-danger">*</span>
+                        </legend>
+                        <div class="star-rating">
+                            <input class="radio-input" type="radio" id="question6-star5" 
+                                name="q6-recommend-site" value="5" required>
+                            <label class="radio-label" for="question6-star5" title="5 stars">star5</label>
+        
+                            <input class="radio-input" type="radio" id="question6-star4" 
+                                name="q6-recommend-site" value="4">
+                            <label class="radio-label" for="question6-star4" title="4 stars">star4</label>
+        
+                            <input class="radio-input" type="radio" id="question6-star3" 
+                                name="q6-recommend-site" value="3">
+                            <label class="radio-label" for="question6-star3" title="3 stars">star3</label>
+        
+                            <input class="radio-input" type="radio" id="question6-star2" 
+                                name="q6-recommend-site" value="2">
+                            <label class="radio-label" for="question6-star2" title="2 stars">star2</label>
+        
+                            <input class="radio-input" type="radio" id="question6-star1" 
+                                name="q6-recommend-site" value="1">
+                            <label class="radio-label" for="question6-star1" title="1 star">star1</label>
+                        </div>
+                    </fieldset>
+                    <!-- end of question 6-->
+
+                    <div class="my-1" id="optional-questions">
+                        <!-- question 7 -->
+                        <div class="card p-3 my-1">
+                            <label class="mb-2" for="q7-site-or-staff-feedback">
+                                7. If you have any comments you would like to leave about the site or 
+                                staff at this facility please add below.
+                            </label>
+                            <textarea class="form-control" id="q7-site-or-staff-feedback" 
+                                name="q7-site-or-staff-feedback" rows="2"></textarea>
+                        </div>
+                        <!-- end of question 7 -->
+        
+                        <!-- question 8-->
+                        <div class="card p-3 my-1">
+                            <label class="mb-2" for="q8-instructor-feedback">
+                                8. If you have any feedback you would like to leave about your clinical
+                                instructor please add below. <strong>None of the instructors will see this</strong>. 
+                                We will just be using this to gage if an instructor needs to improve in areas,
+                                or to highlight instructors who go above and beyond.
+                            </label>
+                            <textarea class="form-control" id="q8-instructor-feedback" 
+                                name="q8-instructor-feedback" rows="2"></textarea>    
+                        </div>
+                        <!-- end of question 8 -->
+                    </div>
+                    <div class="card p-3 my-1">
+                        <button class="btn btn-success py-2 border" id="submit-experience">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-2 col-lg-3">
+            </div>
+        </div>  
+    </main>
+</body>
+</html>
