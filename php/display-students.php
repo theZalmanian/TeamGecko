@@ -16,6 +16,8 @@
         $lastName = $currRow["last"];
         $birthdate = $currRow["birthdate"];
 
+
+
         // display the current student's data
         echo "<p>({$sid}) {$firstName} {$lastName} - {$birthdate}</p>";
     }
