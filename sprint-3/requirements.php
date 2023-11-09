@@ -1,22 +1,5 @@
 <?php 
-    // connect to DB 
-    require '/home/geckosgr/db-connect-nursing.php';
-
-    // setup SELECT Query
-    $selectQuery = "SELECT * FROM ClinicalRequirements";
-
-    // execute SELECT Query
-    $allRequirements = mysqli_query($dbConnection, $selectQuery);
-
-    // run through rows returned from query
-    while ($currRow = mysqli_fetch_assoc($allRequirements)) {
-        $title = $currRow["RequirementTitle"];
-        $option1 = $currRow["Option1"];
-
-        // echo $option1 . "\n";
-    }
-
-    function accordionItem($title, $targetID, $note, $option1, $option2 = "") {
+    function accordionItem($title, $targetID, $note, $option1, $option2) {
         $accordionContent = "<div class='accordion-item'>";
         
         $accordionContent .= accordionHeader($title, $targetID) . "<div class='accordion-collapse collapse' id='{$targetID}-info'>" . accordionBody($note, $option1, $option2) . "</div>" ;
@@ -36,7 +19,7 @@
         return $headerContent;
     }
 
-    function accordionBody($note, $option1, $option2 = "") {
+    function accordionBody($note, $option1, $option2) {
         $bodyContent = "<div class='accordion-body p-0'>";
         
         if($note != "") {
@@ -172,257 +155,32 @@
                 </div>
 
                 <div class="accordion mb-3 my-2" id="requirements-accordion">
-                <?php echo accordionItem("Tuberculosis Test", "tuberculosis-test", "Expires Yearly", "2-step PPD\n- Must be two separate 2-step PPD tests done initially done approximately 2 weeks apart\n- Document must show induration in millimeter, date placed, and date read", "QuantiFERON\n- Results must be negative"); ?>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#hepatitis-b-titer-info"
-                                    aria-expanded="false" aria-controls="hepatitis-b-titer-info">
-                                Hepatitis B Titer
-                            </button>
-                        </h2>
-                        <div class="accordion-collapse collapse" id="hepatitis-b-titer-info">
-                            <div class="accordion-body p-0">
-                                <div class="px-3 m-0 align-middle requirement-data">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item h5 mb-0">
-                                            Titer
-                                        </li>
-                                        <li class="list-group-item">
-                                            - Only Anti-HBs or HepB SaB test are accepted
-                                        </li>
-                                    </ul>
-                                    <h3 class="or-row text-center py-2 m-0">
-                                        <strong>OR</strong>
-                                    </h3>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item h5 mb-0">
-                                            Declination Form
-                                        </li>
-                                        <li class="list-group-item">
-                                            - If currently in process of vaccine series or titer, or if non-converter
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#mmr-vaccine-titer-info"
-                                    aria-expanded="false" aria-controls="mmr-vaccine-titer-info">
-                                MMR Vaccine or Titer
-                            </button>
-                        </h2>
-                        <div class="accordion-collapse collapse" id="mmr-vaccine-titer-info">
-                            <div class="accordion-body p-0">
-                                <div class="px-3 m-0 align-middle requirement-data">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item h5 mb-0">
-                                            2 documented vaccine dates
-                                        </li>
-                                    </ul>
-                                    <h3 class="or-row text-center py-2 m-0">
-                                        <strong>OR</strong>
-                                    </h3>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item h5 mb-0">
-                                            Titer
-                                        </li>
-                                        <li class="list-group-item">
-                                            - Separate titer needed for Measles, Mumps, and Rubella
-                                            <br>
-                                            - If result is negative/low/equivocal must get booster dose
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#varicella-vaccine-titer-info"
-                                    aria-expanded="false" aria-controls="varicella-vaccine-titer-info">
-                                Varicella Vaccine or Titer
-                            </button>
-                        </h2>
-                        <div class="accordion-collapse collapse" id="varicella-vaccine-titer-info">
-                            <div class="accordion-body p-0">
-                                <div class="requirement-notes">
-                                    <ul class="list-group list-group-flush text-center">
-                                        <li class="list-group-item">
-                                            History of Chickenpox not accepted
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="px-3 m-0 align-middle requirement-data">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item h5 mb-0">
-                                            2 documented vaccine dates
-                                        </li>
-                                    </ul>
-                                    <h3 class="or-row text-center py-2 m-0">
-                                        <strong>OR</strong>
-                                    </h3>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item h5 mb-0">
-                                            Titer
-                                        </li>
-                                        <li class="list-group-item">
-                                            - If result is negative/low/equivocal must get booster dose
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#tdap-vaccine-info"
-                                    aria-expanded="false" aria-controls="tdap-vaccine-info">
-                                Tdap Vaccine
-                            </button>
-                        </h2>
-                        <div class="accordion-collapse collapse" id="tdap-vaccine-info">
-                            <div class="accordion-body p-0">
-                                <div class="px-3 m-0 align-middle requirement-data">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            - Date must be within last 10 years
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#flu-vaccine-info"
-                                    aria-expanded="false" aria-controls="flu-vaccine-info">
-                                Flu Vaccine
-                            </button>
-                        </h2>
-                        <div class="accordion-collapse collapse" id="flu-vaccine-info">
-                            <div class="accordion-body p-0">
-                                <div class="requirement-notes">
-                                    <ul class="list-group list-group-flush text-center">
-                                        <li class="list-group-item">
-                                            Expires Yearly
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="px-3 m-0 align-middle requirement-data">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            - Vaccine must be for current season (Sept thru August)
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#covid19-vaccine-info"
-                                    aria-expanded="false" aria-controls="covid19-vaccine-info">
-                                Covid 19 Vaccine Series
-                            </button>
-                        </h2>
-                        <div class="accordion-collapse collapse" id="covid19-vaccine-info">
-                            <div class="accordion-body p-0">
-                                <div class="requirement-notes">
-                                    <ul class="list-group list-group-flush text-center">
-                                        <li class="list-group-item">
-                                            Proof must include manufacturer
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="px-3 m-0 align-middle requirement-data">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            - Pfizer, Moderna, and Janssen are the only ones we accept currently
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#covid-booster-info"
-                                    aria-expanded="false" aria-controls="covid-booster-info">
-                                Covid Booster
-                            </button>
-                        </h2>
-                        <div class="accordion-collapse collapse" id="covid-booster-info">
-                            <div class="accordion-body p-0">
-                                <div class="requirement-notes">
-                                    <ul class="list-group list-group-flush text-center">
-                                        <li class="list-group-item">
-                                            Proof must include manufacturer
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="px-3 m-0 align-middle requirement-data">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            - Only one dose required currently, but may change in the future
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#cpr-card-info"
-                                    aria-expanded="false" aria-controls="cpr-card-info">
-                                CPR Card
-                            </button>
-                        </h2>
-                        <div class="accordion-collapse collapse" id="cpr-card-info">
-                            <div class="accordion-body p-0">
-                                <div class="px-3 m-0 align-middle requirement-data">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            - Must be American Heart Association Basic Life Support
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#professional-liability-info"
-                                    aria-expanded="false" aria-controls="professional-liability-info">
-                                Professional Liability
-                            </button>
-                        </h2>
-                        <div class="accordion-collapse collapse" id="professional-liability-info">
-                            <div class="accordion-body p-0">
-                                <div class="px-3 m-0 align-middle requirement-data">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            - <strong>CANNOT</strong> attend lab or clinical prior to purchasing
-                                            <br>
-                                            - Expires end of each school year (08/31)
-                                            <br>
-                                            - Purchase at <strong>Cashier’s Office</strong> 253-833-9111 ext. 3399
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                        // connect to DB 
+                        require '/home/geckosgr/db-connect-nursing.php';
+
+                        // setup SELECT Query
+                        $selectQuery = "SELECT * FROM ClinicalRequirements";
+
+                        // execute SELECT Query
+                        $allRequirements = mysqli_query($dbConnection, $selectQuery);
+
+                        $targetCount = 0;
+                        // run through rows returned from query
+                        while ($currRow = mysqli_fetch_assoc($allRequirements)) {
+                            // get each column from current row
+                            $title = $currRow["RequirementTitle"];
+                            $notes = $currRow["RequirementNotes"];
+                            $option1 = $currRow["Option1"];
+                            $option2 = $currRow["Option2"];
+
+                            $target = "item-";
+                            $targetCount++;
+
+                            // generate an accordion item for the row
+                            echo accordionItem($title, $target . $targetCount, $notes, $option1, $option2);
+                        }
+                    ?>
                 </div>
 
                 <div class="card my-2 notes">
