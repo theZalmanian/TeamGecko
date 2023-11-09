@@ -61,7 +61,9 @@
 
                     if ($querySuccess) {
                         echo "Pizza order inserted successfully!";
-                    } else {
+                    }
+
+                    else {
                         echo "Error: " . mysqli_error($dbConnection);
                     }
 
