@@ -14,7 +14,103 @@
 
         echo $title;
     }
+
+    function accordionHeader($title, $targetID) {
+        $headerContent = "<h2 class='accordion-header'>
+                            <button class='accordion-button collapsed' type='button'
+                                    data-bs-toggle='collapse' data-bs-target='#{$targetID}-info'
+                                    aria-expanded='false' aria-controls='{$targetID}-info'>
+                                {$title}
+                            </button>
+                        </h2>";
+
+        return $headerContent;
+    }
+
+    function accordionBody() {
+        $note = "";
+
+        $bodyContent = "<div class='accordion-body p-0'>";
+        
+        if($note != "") {
+            $bodyContent .= requirementNotes($note);
+        }
+
+        $bodyContent .= "</div>";
+
+        return $bodyContent;
+    }
+
+    function requirementNotes($note) {
+        $noteContent = "<div class='requirement-notes'>
+                            <ul class='list-group list-group-flush text-center'>
+                                <li class='list-group-item'>
+                                    {$note}
+                                </li>
+                            </ul>
+                        </div>";
+
+        return $noteContent;
+    }
+
+    function requirementData() {
+        $dataContent = "<div class='px-3 m-0 align-middle requirement-data'>";
+        $dataContent .= requirementOption();
+
+        // if() {
+        //     $dataContent .= "<h3 class='or-row text-center py-2 m-0'>OR</h3>;"
+        // }
+
+        $dataContent .= "</div>";
+
+        return $dataContent;
+    }
+
+    function accordionItem($title, $targetID) {
+        $accordionContent = accordionHeader($title, $targetID) . "<div class='accordion-collapse collapse' id='{$targetID}-info'>" . accordionBody() . "</div>" ;
+       
+        return $accordionContent;
+    }
+
+    function requirementOption($optionTitle, $optionText = "") {
+        $optionContent = "<ul class='list-group list-group-flush'>
+                            <li class='list-group-item h5 mb-0'>
+                                {$optionTitle}
+                            </li>";
+
+        if($optionContent != "") {
+            $optionContent .= "<li class='list-group-item'>
+                                    {$optionText};
+                                </li>";
+        }
+
+        $optionContent .= "</ul>";
+
+        return $optionContent;
+    }
 ?>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item h5 mb-0">
+            2-step PPD
+        </li>
+        <li class="list-group-item">
+            - Must be two separate 2-step PPD tests done initially done
+            approximately 2 weeks apart
+            <br>
+            - Document must show induration in millimeter, date placed,
+            and date read
+        </li>
+    </ul>
+    <h3 class="or-row text-center py-2 m-0">OR</h3>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item h5 mb-0">
+            QuantiFERON
+        </li>
+        <li class="list-group-item">
+            - Results must be negative
+        </li>
+    </ul>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -84,13 +180,7 @@
 
                 <div class="accordion mb-3 my-2" id="requirements-accordion">
                     <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#tuberculosis-test-info"
-                                    aria-expanded="false" aria-controls="tuberculosis-test-info">
-                                Tuberculosis Test
-                            </button>
-                        </h2>
+                        <?php echo accordionHeader("Tuberculosis Testing", "tuberculosis-test"); ?>
                         <div class="accordion-collapse collapse" id="tuberculosis-test-info">
                             <div class="accordion-body p-0">
                                 <div class="requirement-notes">
