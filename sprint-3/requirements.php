@@ -11,8 +11,17 @@
     // run through rows returned from query
     while ($currRow = mysqli_fetch_assoc($allRequirements)) {
         $title = $currRow["RequirementTitle"];
+        $option1 = $currRow["Option1"];
 
-        echo $title;
+        // echo $option1 . "\n";
+    }
+
+    function accordionItem($title, $targetID, $note, $option1, $option2 = "") {
+        $accordionContent = "<div class='accordion-item'>";
+        
+        $accordionContent .= accordionHeader($title, $targetID) . "<div class='accordion-collapse collapse' id='{$targetID}-info'>" . accordionBody($note, $option1, $option2) . "</div>" ;
+       
+        return $accordionContent .= "</div>";
     }
 
     function accordionHeader($title, $targetID) {
@@ -27,14 +36,14 @@
         return $headerContent;
     }
 
-    function accordionBody() {
-        $note = "";
-
+    function accordionBody($note, $option1, $option2 = "") {
         $bodyContent = "<div class='accordion-body p-0'>";
         
         if($note != "") {
             $bodyContent .= requirementNotes($note);
         }
+
+        $bodyContent .= requirementData($option1, $option2);
 
         $bodyContent .= "</div>";
 
@@ -53,64 +62,48 @@
         return $noteContent;
     }
 
-    function requirementData() {
+    function requirementData($option1, $option2) {
         $dataContent = "<div class='px-3 m-0 align-middle requirement-data'>";
-        $dataContent .= requirementOption();
+        $dataContent .= requirementOption($option1);
 
-        // if() {
-        //     $dataContent .= "<h3 class='or-row text-center py-2 m-0'>OR</h3>;"
-        // }
+        if($option2 != "") {
+            $dataContent .= "<h3 class='or-row text-center py-2 m-0'>
+                                <b>OR</b>
+                            </h3>";
+            $dataContent .= requirementOption($option2);
+        }
 
         $dataContent .= "</div>";
 
         return $dataContent;
     }
 
-    function accordionItem($title, $targetID) {
-        $accordionContent = accordionHeader($title, $targetID) . "<div class='accordion-collapse collapse' id='{$targetID}-info'>" . accordionBody() . "</div>" ;
-       
-        return $accordionContent;
-    }
-
-    function requirementOption($optionTitle, $optionText = "") {
+    function requirementOption($option) {
+        $optionTitle = "";
+        $optionText = "";
+    
+        $optionLines = explode("\n", $option);
+    
+        $optionTitle = trim(array_shift($optionLines));
+    
+        $optionText = implode("\n", $optionLines);
+    
         $optionContent = "<ul class='list-group list-group-flush'>
                             <li class='list-group-item h5 mb-0'>
                                 {$optionTitle}
                             </li>";
-
-        if($optionContent != "") {
+    
+        if ($optionText != "") {
             $optionContent .= "<li class='list-group-item'>
-                                    {$optionText};
+                                    {$optionText}
                                 </li>";
         }
-
+    
         $optionContent .= "</ul>";
-
+    
         return $optionContent;
-    }
+    }    
 ?>
-
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item h5 mb-0">
-            2-step PPD
-        </li>
-        <li class="list-group-item">
-            - Must be two separate 2-step PPD tests done initially done
-            approximately 2 weeks apart
-            <br>
-            - Document must show induration in millimeter, date placed,
-            and date read
-        </li>
-    </ul>
-    <h3 class="or-row text-center py-2 m-0">OR</h3>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item h5 mb-0">
-            QuantiFERON
-        </li>
-        <li class="list-group-item">
-            - Results must be negative
-        </li>
-    </ul>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -179,45 +172,7 @@
                 </div>
 
                 <div class="accordion mb-3 my-2" id="requirements-accordion">
-                    <div class="accordion-item">
-                        <?php echo accordionHeader("Tuberculosis Testing", "tuberculosis-test"); ?>
-                        <div class="accordion-collapse collapse" id="tuberculosis-test-info">
-                            <div class="accordion-body p-0">
-                                <div class="requirement-notes">
-                                    <ul class="list-group list-group-flush text-center">
-                                        <li class="list-group-item">
-                                            Expires Yearly
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="px-3 m-0 align-middle requirement-data">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item h5 mb-0">
-                                            2-step PPD
-                                        </li>
-                                        <li class="list-group-item">
-                                            - Must be two separate 2-step PPD tests done initially done
-                                            approximately 2 weeks apart
-                                            <br>
-                                            - Document must show induration in millimeter, date placed,
-                                            and date read
-                                        </li>
-                                    </ul>
-                                    <h3 class="or-row text-center py-2 m-0 border">
-                                        <strong>OR</strong>
-                                    </h3>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item h5 mb-0">
-                                            QuantiFERON
-                                        </li>
-                                        <li class="list-group-item">
-                                            - Results must be negative
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <?php echo accordionItem("Tuberculosis Test", "tuberculosis-test", "Expires Yearly", "2-step PPD\n- Must be two separate 2-step PPD tests done initially done approximately 2 weeks apart\n- Document must show induration in millimeter, date placed, and date read", "QuantiFERON\n- Results must be negative"); ?>
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button"

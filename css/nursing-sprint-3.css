@@ -144,10 +144,6 @@ button.accordion-button:not(.collapsed)::after {
     color: var(--nursing-accent-color) !important;
 }
 
-.or-row {
-    font-weight: bold;
-}
-
 .requirement-notes li {
     font-weight: bold;
 }
