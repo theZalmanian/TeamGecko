@@ -61,30 +61,38 @@
         return $dataContent;
     }
 
+    /**
+     * 
+     * @param string $option
+     * @return
+     */
     function requirementOption($option) {
-        $optionTitle = "";
-        $optionText = "";
-    
+        // split the given option into individual lines
         $optionLines = explode("\n", $option);
     
-        $optionTitle = trim(array_shift($optionLines));
+        // start off optionContent
+        $optionContent = "<ul class='list-group list-group-flush'>";
     
-        $optionText = implode("\n", $optionLines);
+        // run through the all lines
+        foreach ($optionLines as $currLine) {
+            // remove leading and trailing whitespace
+            $currLine = trim($currLine);
     
-        $optionContent = "<ul class='list-group list-group-flush'>
-                            <li class='list-group-item h5 mb-0'>
-                                {$optionTitle}
-                            </li>";
-    
-        if ($optionText != "") {
-            $optionContent .= "<li class='list-group-item'>
-                                    {$optionText}
-                                </li>";
+            // if the current line starts with "-", its considered an option
+            if (!empty($currLine) && $currLine[0] === '-') {
+                // remove the leading "-" and display as option
+                $optionContent .= "<li class='list-group-item'>" . substr($currLine, 1) . "</li>";
+            } 
+            
+            // if there is content, but not starting with a "-", its considered a title
+            elseif(!empty($currLine)) {
+                // display as title
+                $optionContent .= "<li class='list-group-item h5 mb-0'>{$currLine}</li>";
+            }
         }
     
-        $optionContent .= "</ul>";
-    
-        return $optionContent;
+        // close off and return option content
+        return $optionContent . "</ul>";
     }    
 ?>
 
