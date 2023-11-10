@@ -138,13 +138,13 @@ button.accordion-button:not(.collapsed)::after {
 }
 
 .card.notes li.list-group-item,
-.requirement-notes li,
+.requirement-note li,
 .requirement-data .or-row {
     background: var(--nursing-secondary-color) !important;
     color: var(--nursing-accent-color) !important;
 }
 
-.requirement-notes li {
+.requirement-note li {
     font-weight: bold;
 }
 
@@ -152,7 +152,7 @@ li.list-group-item {
     --bs-list-group-color: var(--nursing-secondary-color-variant) !important;
 }
 
-ul.requirement-notes > li.list-group-item {
+ul.requirement-note > li.list-group-item {
     background: var(--nursing-secondary-color);
 }
 
