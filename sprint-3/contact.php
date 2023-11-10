@@ -24,16 +24,16 @@
             <div class="col-md-2 col-lg-3">
             </div>
             <div class="col-12 col-md-8 col-lg-6">
-                <h1 class="col-12 mb-3 text-center">
+                <h1 class="card col-12 py-3 mb-1 text-center">
                     Contact
                 </h1>
-                <form action="/php/contact.php" method="post">
+                <form class="mb-3" action="/php/contact.php" method="post" id="contact-form">
                     <div class="card p-3 my-1">
                         <div class="contact form-floating">
                             <input type="text" class="form-control" id="name" name="name"
                                 placeholder="" required>
                             <label for="name">
-                                Name <span class="text-danger">*</span>
+                                Name <?php echo displayRequired(); ?>
                             </label>
                         </div>
                     </div>
@@ -41,7 +41,9 @@
                         <div class="contact form-floating">
                         <input type="email" class="form-control" id="email" name="email" 
                             placeholder="" required>
-                        <label for="email">Email Address <span class="text-danger">*</span></label>
+                        <label for="email">
+                            Email Address <?php echo displayRequired(); ?>
+                        </label>
                     </div>
                     </div>
                     <div class="card p-3 my-1">
@@ -57,7 +59,7 @@
                             <textarea class="form-control" id="message" name="message"
                                 placeholder="" required></textarea>
                             <label for="message">
-                                Message <span class="text-danger">*</span>
+                                Message <?php echo displayRequired(); ?>
                             </label>
                         </div>
                     </div>

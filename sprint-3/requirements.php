@@ -24,7 +24,7 @@
             <div class="col-md-1 col-lg-2">
             </div>
             <div class="col-12 col-md-10 col-lg-8">
-                <h1 class="col-12 mb-3 text-center">
+                <h1 class="card col-12 py-3 mb-1 text-center">
                     Green River College
                     <br>
                     Nursing Program Clinical Requirements

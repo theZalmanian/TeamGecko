@@ -24,7 +24,7 @@
             <div class="col-md-2 col-lg-3">
             </div>
             <div class="col-12 col-md-8 col-lg-6">
-                <h1 class="col-12 mb-3 text-center">
+                <h1 class="card col-12 py-3 mb-1 text-center">
                     Clinical Experience Questionnaire
                 </h1>
                 <div class="card" id="info-form">
@@ -41,7 +41,7 @@
                         </li>
                     </ul>
                 </div>
-                <form class="my-2" action="/php/confirm.php" method="post" id="experience-form">
+                <form class="mb-3" action="/php/confirm.php" method="post" id="experience-form">
                     <!-- Question 1 -->
                     <div class="card p-3 my-1">
                         <label class="mb-2" for="q1-site-attended">
