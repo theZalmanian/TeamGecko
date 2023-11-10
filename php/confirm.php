@@ -1,14 +1,18 @@
+<?php 
+    // get access to all helper methods
+    require_once("../php/helpers.php");
+
+    // save the current pages name to session
+    setCurrentPage("Confirm Submission");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Submission</title>
-    <link rel="icon" type="image/x-icon" href="/nursing-images/nursing-logo.png">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/nursing-sprint-2.css">
+    <?php 
+        // include standard nursing header metadata
+        require "../php/layouts/nursing-metadata.php";
+    ?>
 </head>
 <body>
     <div class="container">
@@ -39,18 +43,18 @@
                                 $textQuestionRequired = true;
 
                                 // display questions and responses for questions 1 - 6 (required)
-                                echo displayTextQuestion(1, "What Clinical Site did you attend?", $siteAttended, $textQuestionRequired); 
-                                echo displayStarQuestion(2, "I enjoyed my time at this clinical site", $enjoyedSite);
-                                echo displayStarQuestion(3, "The clinical staff was supportive of my role", $staffSupportive);
-                                echo displayStarQuestion(4, "The site helped facilitate my learning objectives.", $siteLearningObjectives);
-                                echo displayStarQuestion(5, "My preceptor helped facilitate my learning objectives.", $preceptorLearningObjectives);
-                                echo displayStarQuestion(6, "I would recommend this site to another student.", $recommendSite);
+                                echo generateTextQuestion(1, "What Clinical Site did you attend?", $siteAttended, $textQuestionRequired); 
+                                echo generateStarQuestion(2, "I enjoyed my time at this clinical site", $enjoyedSite);
+                                echo generateStarQuestion(3, "The clinical staff was supportive of my role", $staffSupportive);
+                                echo generateStarQuestion(4, "The site helped facilitate my learning objectives.", $siteLearningObjectives);
+                                echo generateStarQuestion(5, "My preceptor helped facilitate my learning objectives.", $preceptorLearningObjectives);
+                                echo generateStarQuestion(6, "I would recommend this site to another student.", $recommendSite);
                             
                                 // if they were answered, display questions and responses for questions 7 & 8 (optional)
                                 if( !empty($siteOrStaffFeedback) ) {
                                     $questionText = "If you have any comments you would like to leave about the site or staff at this facility please add below.";
                                     
-                                    echo displayTextQuestion(7, $questionText, $siteOrStaffFeedback, !$textQuestionRequired);
+                                    echo generateTextQuestion(7, $questionText, $siteOrStaffFeedback, !$textQuestionRequired);
                                 }
 
                                 if( !empty($instructorFeedback) ) {
@@ -59,7 +63,7 @@
                                     We will just be using this to gage if an instructor needs to improve in areas,
                                     or to highlight instructors who go above and beyond.";
 
-                                    echo displayTextQuestion(8, $questionText, $instructorFeedback, !$textQuestionRequired);
+                                    echo generateTextQuestion(8, $questionText, $instructorFeedback, !$textQuestionRequired);
                                 }
                     ?>
                                 <form class="my-1" action="/php/receipt.php" method="post">
@@ -77,14 +81,9 @@
 
                         // otherwise display error and link to experience survey
                         else {
-                            echo displayError("No submission received from Experience Survey.");
-
-                            echo displayCardWithContent("<h4>
-                                                            Please fill out the survey and try again:
-                                                        </h4>
-                                                        <a class='btn btn-success py-2 m-2' href='/sprint-2/experience.html'>
-                                                            Experience Survey
-                                                        </a>");
+                            echo displayMessageWithLink("/sprint-3/experience.php", "Experience Survey",
+                                                        "ERROR: No submission received from Experience Survey",
+                                                        "Please fill out the survey and try again");
                         }
                     ?>
                 </div>
@@ -98,49 +97,18 @@
 
 <?php 
     /**
-     * Returns a Bootstrap card containing the given error message
-     * @param string $errorMessage The error message being displayed in the Bootstrap card
-     * @return string a Bootstrap card containing the given error message
-     */
-    function displayError($errorMessage) {
-        // setup error content
-        $errorContent = "<h4>
-                            Error: {$errorMessage}
-                        </h4>";
-
-        return displayCardWithContent($errorContent);
-    }
-
-    /**
-     * Returns a Bootstrap card containing the given HTML content
-     * @param string $content The HTML element(s) being displayed in the Bootstrap card
-     * @return string a Bootstrap card containing the given HTML content
-     */
-    function displayCardWithContent($content) {
-        return "<div class='card p-3 my-1 text-center'>{$content}</div>";
-    }
-
-    /**
      * Constructs and returns a string made up of the given # of stars: ★
      * @param int $numStars The # of stars to be generated and displayed
      * @return string A string displaying "You selected:" in bold, followed by the given # of stars
      */
-    function displayStars($numStars) {
+    function generateStars($numStars) {
         // add the given number of # stars to the display
-        $display = "";
+        $stars = "";
         for ($currStar = 0; $currStar < $numStars; $currStar++) {
-            $display .= "★";
+            $stars .= "★";
         }
 
-        return $display;
-    }
-
-    /**
-     * Returns an HTML span signifying that an input is required
-     * @return string an HTML span signifying that an input is required
-     */
-    function displayRequired() {
-        return " " . "<span class='text-danger'>*</span>";
+        return $stars;
     }
 
     /**
@@ -159,9 +127,9 @@
      * @param string $response The given response to that question
      * @return string A Bootstrap card element containing a question and the given response to it
      */
-    function displayQuestion($questionNum, $questionText, $response) {
+    function generateQuestion($questionNum, $questionText, $response) {
         // setup display card w/ the given values
-        $displayCard = "<div class='card p-3 my-1'>
+        $questionCard = "<div class='card p-3 my-1'>
                             <ul class='list-group list-group-flush'>
                                 <li class='list-group-item'>
                                     {$questionNum}. {$questionText}
@@ -172,7 +140,7 @@
                             </ul>
                         </div>";
 
-        return $displayCard;
+        return $questionCard;
     }
 
     /**
@@ -183,14 +151,14 @@
      * @param int $numStars The # of stars selected in response to the given question
      * @return string A Bootstrap card element containing a question and the # of stars selected for it 
      */
-    function displayStarQuestion($questionNum, $questionText, $numStars) {
-        $response = displayStrong("You selected:") . displayStars($numStars);
+    function generateStarQuestion($questionNum, $questionText, $numStars) {
+        $response = displayStrong("You selected:") . generateStars($numStars);
 
         // all star questions are required
         $questionText .= displayRequired();
 
         // construct the card and display the selected # of stars
-        return displayQuestion($questionNum, $questionText, $response);
+        return generateQuestion($questionNum, $questionText, $response);
     }
 
     /**
@@ -202,7 +170,7 @@
      * @param boolean $questionRequired True if question must be answered; otherwise False
      * @return string A Bootstrap card element containing a question and the given response to it
      */
-    function displayTextQuestion($questionNum, $questionText, $response, $questionRequired) {
+    function generateTextQuestion($questionNum, $questionText, $response, $questionRequired) {
         $response = displayStrong("You said:") . $response;
 
         // if the given question was required
@@ -212,6 +180,6 @@
         }
 
         // construct the card and display the given response
-        return displayQuestion($questionNum, $questionText, $response);
+        return generateQuestion($questionNum, $questionText, $response);
     }
 ?>

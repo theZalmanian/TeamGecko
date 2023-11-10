@@ -1,14 +1,18 @@
+<?php 
+    // get access to all helper methods
+    require_once("../php/helpers.php");
+
+    // save the current pages name to session
+    setCurrentPage("Contact");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Submission</title>
-    <link rel="icon" type="image/x-icon" href="/nursing-images/nursing-logo.png">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/nursing-sprint-2.css">
+    <?php 
+        // include standard nursing header metadata
+        require "../php/layouts/nursing-metadata.php";
+    ?>
 </head>
 <body>
     <div class="container">
@@ -42,25 +46,20 @@
 
                             // if the message was sent, display success 
                             if($messageSent) {
-                                echo displayCardWithContent("<h4>Your message was sent successfully!</h4>");
+                                echo displayMessage("Your message was sent successfully");
                             }
 
                             // if message was not sent, display error
                             else {
-                                echo displayError("Your message could not be sent at this time. Try again later.");
+                                echo displayMessage("ERROR: Your message could not be sent at this time", "Please try again later");
                             }
                         }
                         
                         // otherwise display error and link to contact form
-                        else {
-                            echo displayError("No submission received from Contact Form.");
-                            
-                            echo displayCardWithContent("<h4>
-                                                            Please fill out the form and try again:
-                                                        </h4>
-                                                        <a class='btn btn-success py-2 m-2' href='/sprint-2/contact.html'>
-                                                            Contact
-                                                        </a>");
+                        else {                            
+                            echo displayMessageWithLink("/sprint-3/contact.php", "Contact Form",
+                                                        "ERROR: No submission received from Contact Form.",
+                                                        "Please fill out the form and try again");
                         }
                     ?>
                 </div>
@@ -109,28 +108,5 @@
 
         // Return the generated email content
         return $emailContent;
-    }
-
-    /**
-     * Returns a Bootstrap card containing the given error message
-     * @param string $errorMessage The error message being displayed in the Bootstrap card
-     * @return string a Bootstrap card containing the given error message
-     */
-    function displayError($errorMessage) {
-        // setup error content
-        $errorContent = "<h4>
-                            Error: {$errorMessage}
-                        </h4>";
-
-        return displayCardWithContent($errorContent);
-    }
-
-    /**
-     * Returns a Bootstrap card containing the given HTML content
-     * @param string $content The HTML element(s) being displayed in the Bootstrap card
-     * @return string a Bootstrap card containing the given HTML content
-     */
-    function displayCardWithContent($content) {
-        return "<div class='card p-3 my-1 text-center'>{$content}</div>";
     }
 ?>

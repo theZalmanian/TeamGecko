@@ -23,6 +23,10 @@
         $_SESSION["currentPage"] = $pageTitle;
     }
 
+    /******************
+    ***** DISPLAY *****
+    ******************/
+
     /**
      * Returns a Bootstrap Alert to be displayed containing the given title and message, 
      * along with the given link styled as a button at the bottom
@@ -38,7 +42,7 @@
                            <hr>
                            <h4>{$message}</h4>
                            <hr>
-                           <a class='btn py-2 m-2 border' href='{$linkHref}'>{$linkText}</a>";
+                           <a class='btn btn-success py-2 m-2 border' href='{$linkHref}'>{$linkText}</a>";
 
         // place and return message content inside Bootstrap Alert
         return displayBootstrapAlert($messageContent);
@@ -70,6 +74,18 @@
                     {$content}
                 </div>";
     }
+
+    /**
+     * Returns an HTML span signifying that an input is required
+     * @return string an HTML span signifying that an input is required
+     */
+    function displayRequired() {
+        return " " . "<span class='text-danger'>*</span>";
+    }
+
+    /******************
+    ******* SQL *******
+    ******************/
 
     /**
      * Executes the given SQL query and returns the result
