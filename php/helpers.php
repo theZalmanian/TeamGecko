@@ -70,4 +70,18 @@
                     {$content}
                 </div>";
     }
+
+    /**
+     * Executes the given SQL query and returns the result
+     *
+     * @param string $query The SQL query to be executed
+     * @return mixed Returns a mysqli_result object for successful SELECT queries, or true/false for other types of queries
+     */
+    function executeQuery($query) {
+        // connect to database
+        require_once('/home/geckosgr/db-connect-nursing.php');
+
+        // execute and return query
+        return mysqli_query($dbConnection, $query);
+    }
 ?>

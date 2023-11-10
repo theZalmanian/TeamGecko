@@ -1,18 +1,88 @@
 <?php 
-    /**
-     * Executes the given SQL query and returns the result
-     *
-     * @param string $query The SQL query to be executed
-     * @return mixed Returns a mysqli_result object for successful SELECT queries, or true/false for other types of queries
-     */
-    function executeQuery($query) {
-        // connect to database
-        require_once('/home/geckosgr/db-connect-nursing.php');
+    // get access to all helper methods
+    require_once("../php/helpers.php");
 
-        // execute and return query
-        return mysqli_query($dbConnection, $query);
-    }
+    // save the current pages name to session
+    setCurrentPage("Clinical Requirements");
+?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Requirements</title>
+    <link rel="icon" type="image/x-icon" href="/nursing-images/nursing-logo.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/nursing-sprint-3.css">
+
+    <!--Implement theme switcher-->
+    <script src="/js/theme-switcher.js"></script>
+</head>
+<body>
+    <?php 
+        // display site navigation
+        require_once("../php/layouts/navigation.php");
+    ?>
+    <main class="container" id="requirements">
+        <div class="row">
+            <div class="col-md-1 col-lg-2">
+            </div>
+            <div class="col-12 col-md-10 col-lg-8">
+                <h1 class="col-12 mb-3 text-center">
+                    Green River College
+                    <br>
+                    Nursing Program Clinical Requirements
+                </h1>
+                <div class="card my-2 notes">
+                    <ul class="list-group list-group-flush text-center">
+                        <li class="list-group-item text-break px-2">
+                            <strong>2660*All vaccination proof must include full name, date of birth, and date of vaccine, titer (blood draw), or test</strong>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="accordion mb-3 my-2" id="requirements-accordion">
+                    <?php
+                        // setup and execute SELECT Query
+                        $allRequirements = executeQuery("SELECT * FROM ClinicalRequirements");
+
+                        $targetCount = 0;
+                        // run through rows returned from query
+                        while ($currRow = mysqli_fetch_assoc($allRequirements)) {
+                            // get each column from current row
+                            $title = $currRow["RequirementTitle"];
+                            $notes = $currRow["RequirementNotes"];
+                            $option1 = $currRow["Option1"];
+                            $option2 = $currRow["Option2"];
+
+                            $targetID = "item-{$targetCount}";
+                            $targetCount++; // update the target count for next row
+
+                            // generate an accordion item for the row
+                            echo generateAccordionItem($title, $targetID, $notes, $option1, $option2);
+                        }
+                    ?>
+                </div>
+
+                <div class="card my-2 notes">
+                    <ul class="list-group list-group-flush text-center">
+                        <li class="list-group-item text-break px-2">
+                            <b>If you have any questions about the requirements, you can email me at csavage@greenriver.edu</b>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-1 col-lg-2">
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+
+<?php 
     /**
      * Generates and returns a Bootstrap Accordion item using the given data
      * @param string $title The title of the Accordion item, to be displayed in the header
@@ -151,79 +221,3 @@
         return $optionContent . "</ul>";
     }    
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clinical Requirements</title>
-    <link rel="icon" type="image/x-icon" href="/nursing-images/nursing-logo.png">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/nursing-sprint-3.css">
-
-    <!--Implement theme switcher-->
-    <script src="/js/theme-switcher.js"></script>
-</head>
-<body>
-    <?php 
-        // display site navigation
-        require_once("../php/layouts/navigation.php");
-    ?>
-    <main class="container" id="requirements">
-        <div class="row">
-            <div class="col-md-1 col-lg-2">
-            </div>
-            <div class="col-12 col-md-10 col-lg-8">
-                <h1 class="col-12 mb-3 text-center">
-                    Green River College
-                    <br>
-                    Nursing Program Clinical Requirements
-                </h1>
-                <div class="card my-2 notes">
-                    <ul class="list-group list-group-flush text-center">
-                        <li class="list-group-item text-break px-2">
-                            <strong>2660*All vaccination proof must include full name, date of birth, and date of vaccine, titer (blood draw), or test</strong>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="accordion mb-3 my-2" id="requirements-accordion">
-                    <?php
-                        // setup and execute SELECT Query
-                        $allRequirements = executeQuery("SELECT * FROM ClinicalRequirements");
-
-                        $targetCount = 0;
-                        // run through rows returned from query
-                        while ($currRow = mysqli_fetch_assoc($allRequirements)) {
-                            // get each column from current row
-                            $title = $currRow["RequirementTitle"];
-                            $notes = $currRow["RequirementNotes"];
-                            $option1 = $currRow["Option1"];
-                            $option2 = $currRow["Option2"];
-
-                            $targetID = "item-{$targetCount}";
-                            $targetCount++; // update the target count for next row
-
-                            // generate an accordion item for the row
-                            echo generateAccordionItem($title, $targetID, $notes, $option1, $option2);
-                        }
-                    ?>
-                </div>
-
-                <div class="card my-2 notes">
-                    <ul class="list-group list-group-flush text-center">
-                        <li class="list-group-item text-break px-2">
-                            <b>If you have any questions about the requirements, you can email me at csavage@greenriver.edu</b>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-1 col-lg-2">
-            </div>
-        </div>
-    </main>
-</body>
-</html>

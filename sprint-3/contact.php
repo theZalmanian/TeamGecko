@@ -1,3 +1,11 @@
+<?php 
+    // get access to all helper methods
+    require_once("../php/helpers.php");
+
+    // save the current pages name to session
+    setCurrentPage("Contact");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
