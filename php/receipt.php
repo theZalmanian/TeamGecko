@@ -81,7 +81,8 @@
             </div>
         <?php
             }
-        if( isset($siteAttended)
+        // Levi's changes ?
+            if( isset($siteAttended)
             && isset($enjoyedSite)
             && isset($staffSupportive)
             && isset($siteLearningObjectives)
