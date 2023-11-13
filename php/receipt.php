@@ -1,4 +1,10 @@
 <?php
+    // get access to all helper methods
+    require_once("../php/helpers.php");
+
+    // save the current pages name to session
+    setCurrentPage("Submission Receipt");
+
     // get current month and year data
     $currMonthNum = date("m");
     $currMonthChar = date("M");
@@ -40,14 +46,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Submission</title>
-    <link rel="icon" type="image/x-icon" href="/nursing-images/nursing-logo.png">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/nursing-sprint-2.css">
+    <?php 
+        // include standard nursing header metadata
+        require "../php/layouts/nursing-metadata.php";
+    ?>
 </head>
 <body>
     <div class="container">
@@ -79,24 +81,31 @@
             </div>
         <?php
             }
+        if( isset($siteAttended)
+            && isset($enjoyedSite)
+            && isset($staffSupportive)
+            && isset($siteLearningObjectives)
+            && isset($preceptorLearningObjectives)
+            && isset($recommendSite)
+            && isset($siteOrStaffFeedback)
+            && isset($instructorFeedback)) {
+            executeQuery("INSERT INTO ExperienceFormSubmissions (SiteAttended, EnjoyedSite, StaffSupportive, SiteLearningObjectives, PreceptorLearningObjectives, RecommendSite, SiteOrStaffFeedback, InstructorFeedback) 
+                        VALUES('{$siteAttended}', '{$enjoyedSite}', '{$staffSupportive}', 
+                        '{$siteLearningObjectives}', '{$preceptorLearningObjectives}', 
+                        '{$recommendSite}', '{$siteOrStaffFeedback}', '{$instructorFeedback}')");
 
+        }
             // otherwise display error and link to experience survey
             else { 
         ?>
                 <div class="col-md-2 col-lg-3">
                 </div>
-                <div class="col-12 col-md-8 col-lg-6 mt-3">
-                <?php
-                    echo displayError("No submission received from Experience Survey.");
-
-                    echo displayCardWithContent("<h4>
-                                                    Please fill out the survey and try again:
-                                                </h4>
-                                                <a class='btn btn-success py-2 m-2' href='/sprint-2/experience.html'>
-                                                    Experience Survey
-                                                </a>");
-
-                ?>
+                <div class="col-12 col-md-8 col-lg-6">
+                    <?php
+                        echo displayMessageWithLink("/sprint-3/experience.php", "Experience Survey",
+                                                    "ERROR: No submission received from Experience Survey",
+                                                    "Please fill out the survey and try again");
+                    ?>
                 </div>
                 <div class="col-md-2 col-lg-3">
                 </div>
@@ -107,28 +116,3 @@
     </div>
 </body>
 </html>
-
-<?php 
-    /**
-     * Returns a Bootstrap card containing the given error message
-     * @param string $errorMessage The error message being displayed in the Bootstrap card
-     * @return string a Bootstrap card containing the given error message
-     */
-    function displayError($errorMessage) {
-        // setup error content
-        $errorContent = "<h4>
-                            Error: {$errorMessage}
-                        </h4>";
-
-        return displayCardWithContent($errorContent);
-    }
-
-    /**
-     * Returns a Bootstrap card containing the given HTML content
-     * @param string $content The HTML element(s) being displayed in the Bootstrap card
-     * @return string a Bootstrap card containing the given HTML content
-     */
-    function displayCardWithContent($content) {
-        return "<div class='card p-3 my-1 text-center'>{$content}</div>";
-    }
-?>
