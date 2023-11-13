@@ -97,21 +97,6 @@
 
 <?php 
     /**
-     * Constructs and returns a string made up of the given # of stars: ★
-     * @param int $numStars The # of stars to be generated and displayed
-     * @return string A string displaying "You selected:" in bold, followed by the given # of stars
-     */
-    function generateStars($numStars) {
-        // add the given number of # stars to the display
-        $stars = "";
-        for ($currStar = 0; $currStar < $numStars; $currStar++) {
-            $stars .= "★";
-        }
-
-        return $stars;
-    }
-
-    /**
      * Returns the given message inside of an HTML strong element
      * @param string $message The message being displayed inside an HTML strong element
      * @return string the given message inside of an HTML strong element
