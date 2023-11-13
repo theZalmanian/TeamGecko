@@ -47,19 +47,7 @@
                         <label class="mb-2" for="q1-site-attended">
                             1. What Clinical Site did you attend? <span class="text-danger">*</span>
                         </label>
-                        <input list="q1-site-attended" class="form-control" name="q1-site-attended" required >
-                        <datalist id="q1-site-attended">
-                            <?php
-                            require '/home/geckosgr/db-connect-nursing.php';
-
-                            $sqlCode = "SELECT * FROM ExperienceFormSubmissions; ";
-                            $displayResult = mysqli_query($dbConnection, $sqlCode);
-                            while ($row = mysqli_fetch_assoc($displayResult)) {
-                                $siteAttended = $row["SiteAttended"];
-                                echo '<option value="'.$siteAttended.'"> </option>';
-                            }
-                            ?>
-                        </datalist>
+                        <input type="text" class="form-control" id="q1-site-attended" name="q1-site-attended" required>
                     </div>
                     <!-- End of question 1 -->
         
