@@ -16,7 +16,18 @@
     $thirdDigit = rand(0, 9);
     $fourthDigit = rand(0, 9);
 
-    // select background color based on month
+  // setup variables to hold Experience Survey form inputs
+    $siteAttended = $_POST["q1-site-attended"];
+    $enjoyedSite = $_POST["q2-enjoyed-site"];
+    $staffSupportive = $_POST["q3-staff-supportive"];
+    $siteLearningObjectives = $_POST["q4-site-learning-objectives"];
+    $preceptorLearningObjectives = $_POST["q5-preceptor-learning-objectives"];
+    $recommendSite = $_POST["q6-recommend-site"];
+    $siteOrStaffFeedback = $_POST["q7-site-or-staff-feedback"];
+    $instructorFeedback = $_POST["q8-instructor-feedback"];
+
+
+// select background color based on month
     $backgroundColor = "";
     
     // if Jan, Feb, or Mar
