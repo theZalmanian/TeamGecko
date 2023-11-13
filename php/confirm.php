@@ -67,7 +67,6 @@
                                 }
                     ?>
                                 <form class="my-1" action="/php/receipt.php" method="post">
-                                    //Levi's changes?
                                     <input type="hidden" name="q1-site-attended" value="<?php echo $siteAttended ?>">
                                     <input type="hidden" name="q2-enjoyed-site" value="<?php echo $enjoyedSite?>">
                                     <input type="hidden" name="q3-staff-supportive" value="<?php echo $staffSupportive?>">
