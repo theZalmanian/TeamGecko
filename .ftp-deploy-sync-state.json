@@ -1,8 +1,14 @@
 {
     "description": "DO NOT DELETE THIS FILE. This file is used to keep track of which files have been synced in the most recent deployment. If you delete this file a resync will need to be done (which can take a while) - read more: https://github.com/SamKirkland/FTP-Deploy-Action",
     "version": "1.0.0",
-    "generatedTime": 1697222588268,
+    "generatedTime": 1699873488412,
     "data": [
+        {
+            "type": "file",
+            "name": ".ftp-deploy-sync-state.json",
+            "size": 5987,
+            "hash": "48ee8a1d8c8b45b9ebb806ff5dee19dddbe6ebbedb4644f6c3bc5731bf02f5c6"
+        },
         {
             "type": "file",
             "name": ".htaccess",
@@ -24,8 +30,8 @@
         {
             "type": "file",
             "name": "index.html",
-            "size": 12740,
-            "hash": "6f3af17bb29f5de95c66f21eea18a1156cb008d611686710104a7e1f0c3932c6"
+            "size": 15123,
+            "hash": "56ae4b57e32c76dbc694ac7bd723334a0635dcb5aca351af6f78e99c72a68754"
         },
         {
             "type": "folder",
@@ -37,17 +43,23 @@
         },
         {
             "type": "folder",
-            "name": "practice"
+            "name": "php"
         },
         {
             "type": "folder",
             "name": "sprint-1"
         },
         {
-            "type": "file",
-            "name": "vardump.php",
-            "size": 245,
-            "hash": "29f32b7cf1fb68d65ecf360bfbdb26bff15a925b512774a802dd31ef3cc1c6e8"
+            "type": "folder",
+            "name": "practice"
+        },
+        {
+            "type": "folder",
+            "name": "sprint-2"
+        },
+        {
+            "type": "folder",
+            "name": "sprint-3"
         },
         {
             "type": "file",
@@ -58,8 +70,8 @@
         {
             "type": "file",
             "name": ".idea/deployment.xml",
-            "size": 598,
-            "hash": "da1abfc5f614c73883780c3bd5c4585f5e2756506ccdb7b5ef46bd02ef24ef35"
+            "size": 528,
+            "hash": "ec4ca15e01a814c5d16c7c30d65236ad2ec5addb890c45b99c952cd1043f932f"
         },
         {
             "type": "file",
@@ -94,20 +106,32 @@
         {
             "type": "file",
             "name": "css/gecko.css",
-            "size": 1014,
-            "hash": "a9e5cef90aca12a6b21745620ca713255d371d782a5c57b6586247cb981a763c"
+            "size": 953,
+            "hash": "d3692b8376dc733cf650713bfd8e60615cc7dd8d5dc84c15f2e827b1d9e04db3"
         },
         {
             "type": "file",
-            "name": "css/nursing.css",
-            "size": 2012,
-            "hash": "4bf8297e56ee0727d576d3c27de34be6c792437e689d64a751d3bd71462935d7"
+            "name": "css/nursing-sprint-1.css",
+            "size": 3886,
+            "hash": "77b34463e81e80446101f0d851bfbd2c60b2b3ce84d3c2f4c36449fa4ed0fa7e"
+        },
+        {
+            "type": "file",
+            "name": "css/nursing-sprint-2.css",
+            "size": 4637,
+            "hash": "94b9bc69ccfa5a5ae446241a642211f74741f19aea2ef9fe4ff0fbd37b5f6c49"
         },
         {
             "type": "file",
             "name": "css/practice.css",
-            "size": 887,
-            "hash": "2aad123731b89f1f8da27f036d7266912879e15a808dd4a6179b5f7584121748"
+            "size": 1209,
+            "hash": "78f328ce89850a3e9a85f0da88d0a37284beff0f174726e1334fb482f8bbfe9c"
+        },
+        {
+            "type": "file",
+            "name": "css/nursing-sprint-3.css",
+            "size": 4921,
+            "hash": "53821f25072e11f406413c098a55515be86b2f5f1977f3934a71ef194267f657"
         },
         {
             "type": "file",
@@ -135,9 +159,15 @@
         },
         {
             "type": "file",
+            "name": "js/responsive-accordion-toggle.js",
+            "size": 2394,
+            "hash": "ec478d6b18c81a2f5414a0a168834b5f46f24eb4db0588c432254673cdf06619"
+        },
+        {
+            "type": "file",
             "name": "js/theme-switcher.js",
-            "size": 1920,
-            "hash": "993a2ab123ef2213d4799886228852de652f079e65ea51708c8b00929dd6aa34"
+            "size": 7570,
+            "hash": "84fdd18115cd1ba71e5c24087cf45f82b591e02830806efef7f479bea2a9d120"
         },
         {
             "type": "file",
@@ -146,38 +176,144 @@
             "hash": "bc87455e363667f833f240004a3b5e5ce9de2a32afe44b461aa37a9967f3c245"
         },
         {
+            "type": "file",
+            "name": "php/add-pizza-order.php",
+            "size": 3367,
+            "hash": "3f8590bde1d2616794df72669a734e7a0b94635377c92141c0e7e42d5ce6922b"
+        },
+        {
+            "type": "file",
+            "name": "php/confirm.php",
+            "size": 8771,
+            "hash": "1a0b015f1c3c62ba4ce03aa9843f8f85b13ab25cef169ad8dd9077e9598f4c91"
+        },
+        {
+            "type": "file",
+            "name": "php/contact.php",
+            "size": 4315,
+            "hash": "ef9da5f62862e8ccce05652587f7049bc23a2019ee0c04645bf0eebeabfc2b5f"
+        },
+        {
+            "type": "file",
+            "name": "php/helpers.php",
+            "size": 4546,
+            "hash": "5dc9915a981102cdbd2fa1839d22e9012914a65ed1291a523d739013be42c320"
+        },
+        {
+            "type": "file",
+            "name": "php/display-students.php",
+            "size": 662,
+            "hash": "2fdfcfa45ed3b6587444c32d55ac122ba531a6c35a3ee90814d26796454652d5"
+        },
+        {
+            "type": "folder",
+            "name": "php/layouts"
+        },
+        {
+            "type": "file",
+            "name": "php/order-summary.php",
+            "size": 6922,
+            "hash": "79ee867dfa7e2a6024b5fb1390e8520b3f7c45b8735704b5af5f246800a93676"
+        },
+        {
+            "type": "file",
+            "name": "php/receipt.php",
+            "size": 3352,
+            "hash": "d20cf48ed8a08bebeb06a7b3e8e423bdc3f046544dff36b2ccfc5dc6ca22d4f9"
+        },
+        {
+            "type": "file",
+            "name": "php/vardump.php",
+            "size": 321,
+            "hash": "afe847531e7effc9b04c57a6d1cd4f3cf413fe4345bdeb5784736a3f4daa0e65"
+        },
+        {
+            "type": "file",
+            "name": "php/view-entries.php",
+            "size": 1980,
+            "hash": "b78e61cb6794412a461c0e6119ed2685c4c08c16901df17457fac47faf1b2a1e"
+        },
+        {
+            "type": "file",
+            "name": "php/view-pizza-orders.php",
+            "size": 2475,
+            "hash": "528f446d4878ea1b568de2785e16b55f6c27d7afd89e26853be5daf1aa70afd5"
+        },
+        {
+            "type": "file",
+            "name": "sprint-1/contact.html",
+            "size": 5318,
+            "hash": "4b6f76fef71e943760916fe6e12f596732afc2baf87b695c0c028a5dd17c2d49"
+        },
+        {
+            "type": "file",
+            "name": "sprint-1/experience.html",
+            "size": 15020,
+            "hash": "3e4ee04f8b3320086ce94794d9e951c0ab374205b81f53da056f272d54d6db6a"
+        },
+        {
+            "type": "file",
+            "name": "sprint-1/requirements.html",
+            "size": 28183,
+            "hash": "a97f020721afe075949aae13616c9ac492705d972d1b8ca26ba5f8b934a37010"
+        },
+        {
             "type": "folder",
             "name": "practice/pizza-ordering"
         },
         {
             "type": "file",
-            "name": "sprint-1/contact.html",
-            "size": 3198,
-            "hash": "8deed8a38f06ac549619a47f647097619511b79005d2360b03891761bee47061"
+            "name": "sprint-2/contact.html",
+            "size": 5946,
+            "hash": "87992609f090d99233161618050f4487eca556ca733574108daa6b21bc4da0bc"
         },
         {
             "type": "file",
-            "name": "sprint-1/experience.html",
-            "size": 1999,
-            "hash": "497d2f4760dcc96477a3e93fb44ec86f444bad428d0ef0f41c1d6dc6418385f0"
+            "name": "sprint-2/experience.html",
+            "size": 16551,
+            "hash": "79a87171d8da6b3078f8531a475ad42a5f7701d2d5a865cd3cfc0d66680ad885"
         },
         {
             "type": "file",
-            "name": "sprint-1/requirements.html",
-            "size": 29050,
-            "hash": "1e6bca8ff54d6addeaa8cf3b5f837e0d339e2349a9f2e4eeb413ed0336757b10"
+            "name": "sprint-2/requirements.html",
+            "size": 22981,
+            "hash": "247e35081394b112585ad8f1c04831cbdb464b27ef61b851db68d3e430afce5e"
+        },
+        {
+            "type": "file",
+            "name": "sprint-3/contact.php",
+            "size": 3074,
+            "hash": "b000a8b6ec8c76733b7d8b32e8d2808b43a83965968760352717eec262c582e1"
+        },
+        {
+            "type": "file",
+            "name": "sprint-3/experience.php",
+            "size": 13592,
+            "hash": "dfc547953ac3a28331694c24eb584648af1ad65ab24570a5ffca1651af9231a3"
+        },
+        {
+            "type": "file",
+            "name": "sprint-3/requirements.php",
+            "size": 9446,
+            "hash": "cac7dfdccbddb3ab8fdf5b23dd126d8e3fb93f7ac1d17596993d631efb5bd7e5"
+        },
+        {
+            "type": "file",
+            "name": "php/layouts/navigation.php",
+            "size": 3521,
+            "hash": "718dded7468d31674e6028ce08e18bdc5c3b46c31994dfcc1f3da9945c75b02a"
+        },
+        {
+            "type": "file",
+            "name": "php/layouts/nursing-metadata.php",
+            "size": 891,
+            "hash": "08869adb23ab8237628e973acb672ead2341c4e2fc284f1800d11a28b76f3703"
         },
         {
             "type": "file",
             "name": "practice/pizza-ordering/index.html",
-            "size": 7977,
-            "hash": "6af92c592d5c94b271497056fdd7afb5b9e253841160326749bf70947f579ceb"
-        },
-        {
-            "type": "file",
-            "name": "practice/pizza-ordering/script.js",
-            "size": 49,
-            "hash": "a5e101429afbb070babd4e4d460ee1c8f4cc5cb6430fab81f00411a33de2534c"
+            "size": 9884,
+            "hash": "2941579c18fed5781e2bfcaaed9fa920aac43c16dbb369c82de81f7725407b28"
         }
     ]
 }
