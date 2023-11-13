@@ -16,23 +16,28 @@
 </head>
 <body>
 	<?php
-		// get all experience form submissions from DB 
-		$allSubmissions = executeQuery("SELECT * FROM ExperienceFormSubmissions");
+	
+		// get all experience form submissions from DB, ordered by clinical site
+		$allSubmissions = executeQuery("SELECT * 
+										FROM ExperienceFormSubmissions 
+										ORDER BY SiteAttended");
 
 		// run through all returned submissions
-		while ($row = mysqli_fetch_assoc($allSubmissions)) {
+		while ($currSubmission = mysqli_fetch_assoc($allSubmissions)) {
 			// get all relevant columns of current row
-			$siteAttended = $row["SiteAttended"];
-			$enjoySite = $row["EnjoyedSite"];
-			$staffSupportive = $row["StaffSupportive"];
-			$siteLearningObjectives = $row["SiteLearningObjectives"];
-			$preceptorLearningObjective = $row["PreceptorLearningObjectives"];
-			$recommendSite = $row["RecommendSite"];
-			$siteOrStaffFeedback = $row["SiteOrStaffFeedback"];
-			$instructorFeedback = $row["InstructorFeedback"];
+			$siteAttended = $currSubmission["SiteAttended"];
+			$starQuestions = array(
+				$currSubmission["EnjoyedSite"],
+				$currSubmission["StaffSupportive"],
+				$currSubmission["SiteLearningObjectives"],
+				$currSubmission["PreceptorLearningObjectives"],
+				$currSubmission["RecommendSite"]
+			);
+			$siteOrStaffFeedback = $currSubmission["SiteOrStaffFeedback"];
+			$instructorFeedback = $currSubmission["InstructorFeedback"];
 
-			// display the current student's data
-			echo "<table class='table'>
+			// display the current submission in a table format
+			$table = "<table class='table'>
 					<thead>
 						<tr>
 							<th>Site Attended</th>
@@ -47,17 +52,19 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>${siteAttended}</td>
-							<td>${enjoySite}</td>
-							<td>${staffSupportive}</td>
-							<td>${siteLearningObjectives}</td>
-							<td>${preceptorLearningObjective}</td>
-							<td>${recommendSite}</td>
-							<td>${siteOrStaffFeedback}</td>
-							<td>${instructorFeedback}</td>
+							<td>${siteAttended}</td>";
+
+							for($i = 0; $i < count($starQuestions); $i++) {
+								$table .= "<td>" . generateStars($starQuestions[$i]) . "</td>";
+							}
+							
+				$table .= "<td>" . generateStars($siteOrStaffFeedback) . "</td>
+							<td>" . generateStars($instructorFeedback) . "</td>
 						</tr>
 					</tbody>
 				</table>";
+
+			echo $table;
 		}
 	?>
 </body>
