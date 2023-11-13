@@ -15,40 +15,50 @@
     ?>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <?php
-			// get all experience form submissions from DB 
-			$allSubmissions = executeQuery("SELECT * FROM ExperienceFormSubmissions");
+	<?php
+		// get all experience form submissions from DB 
+		$allSubmissions = executeQuery("SELECT * FROM ExperienceFormSubmissions");
 
-			// run through all returned submissions
-			while ($row = mysqli_fetch_assoc($allSubmissions)) {
-				// get all relevant columns of current row
-				$siteAttended = $row["SiteAttended"];
-				$enjoySite = $row["EnjoyedSite"];
-				$staffSupportive = $row["StaffSupportive"];
-				$siteLearningObjectives = $row["SiteLearningObjectives"];
-				$preceptorLearningObjective = $row["PreceptorLearningObjectives"];
-				$recommendSite = $row["RecommendSite"];
-				$siteOrStaffFeedback = $row["SiteOrStaffFeedback"];
-				$instructorFeedback = $row["InstructorFeedback"];
+		// run through all returned submissions
+		while ($row = mysqli_fetch_assoc($allSubmissions)) {
+			// get all relevant columns of current row
+			$siteAttended = $row["SiteAttended"];
+			$enjoySite = $row["EnjoyedSite"];
+			$staffSupportive = $row["StaffSupportive"];
+			$siteLearningObjectives = $row["SiteLearningObjectives"];
+			$preceptorLearningObjective = $row["PreceptorLearningObjectives"];
+			$recommendSite = $row["RecommendSite"];
+			$siteOrStaffFeedback = $row["SiteOrStaffFeedback"];
+			$instructorFeedback = $row["InstructorFeedback"];
 
-				// display the current student's data
-				echo "<div class='text-center col-12 col-md-5 mt-3'>
-						<ul class='list-group text-start'> 
-							<li class='list-group-item'>Site Attended: ${siteAttended}</li>
-							<li class='list-group-item'>Enjoy site: ${enjoySite}</li>
-							<li class='list-group-item'>Staff Supportive: ${staffSupportive}</li>
-							<li class='list-group-item'>Site learning objective: ${siteLearningObjectives}</li>
-							<li class='list-group-item'>Preceptor Learning Objective : ${preceptorLearningObjective}</li>
-							<li class='list-group-item'>Recommend Site : ${recommendSite}</li>
-							<li class='list-group-item'>Site or Staff Feedback: ${siteOrStaffFeedback}</li>
-							<li class='list-group-item'>Instructor Feedback: ${instructorFeedback}</li>
-						</ul>
-					</div>";
-			}
-        ?>
-    </div>
-</div>
+			// display the current student's data
+			echo "<table class='table'>
+					<thead>
+						<tr>
+							<th>Site Attended</th>
+							<th>Enjoyed Site</th>
+							<th>Staff Supportive</th>
+							<th>Site Learning Objective</th>
+							<th>Preceptor Learning Objective</th>
+							<th>Recommend Site</th>
+							<th>Site or Staff Feedback</th>
+							<th>Instructor Feedback</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>${siteAttended}</td>
+							<td>${enjoySite}</td>
+							<td>${staffSupportive}</td>
+							<td>${siteLearningObjectives}</td>
+							<td>${preceptorLearningObjective}</td>
+							<td>${recommendSite}</td>
+							<td>${siteOrStaffFeedback}</td>
+							<td>${instructorFeedback}</td>
+						</tr>
+					</tbody>
+				</table>";
+		}
+	?>
 </body>
 </html>
