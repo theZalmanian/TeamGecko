@@ -53,39 +53,8 @@
 
 					// if the site of the current row is a different site
 					elseif($nameToCheck != $siteAttended) {
-						// calculate averages
-						$enjoySiteAverage = round($nameScore[0] / $count);
-						$staffSupportiveAverage = round($nameScore[1] / $count);
-						$siteLearningAverage = round($nameScore[2] / $count);
-						$preceptorLearningObjectiveAverage = round($nameScore[3] / $count);
-						$recommendSiteAverage = round($nameScore[4] / $count);
-
-						// display averages
-						$averageHtml = "<div class='card mb-3'>
-										<h1 class='text-center'>Average for {$nameToCheck}</h1>
-										<table class='table'>
-											<thead>
-												<tr class='text-center'>
-													<th>Enjoyed Site</th>
-													<th>Staff Supportive</th>
-													<th>Site Learning Objectives</th>
-													<th>Preceptor Learning Objectives</th>
-													<th>Recommend Site</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr class='text-center'>
-													<td>" . generateStars($enjoySiteAverage) . "</td>
-													<td>" . generateStars($staffSupportiveAverage) . "</td>
-													<td>" . generateStars($siteLearningAverage) . "</td>
-													<td>" . generateStars($preceptorLearningObjectiveAverage) . "</td>
-													<td>" . generateStars($recommendSiteAverage) . "</td>
-												</tr>
-											</tbody>
-										</table>
-										</div>";
-
-						echo $averageHtml;
+						// calculate and display averages
+						echo calculateAndGenerateSiteAverages($nameScore, $count, $nameToCheck);;
 
 						// track the new site
 						$nameToCheck = $siteAttended;
@@ -101,31 +70,6 @@
 						// display new site header
 						echo "<div class='card'><h1 class='text-center'>{$siteAttended}</h1></div>";
 					}
-
-					// setup feedback modal
-					$feedbackModal = "<div class='modal fade text-start' id='feedback-modal-{$siteCounter}' tabindex='-1' aria-labelledby='feedback-modal-label-{$siteCounter}' aria-hidden='true'>
-						<div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
-						  <div class='modal-content'>
-							<div class='modal-header'>
-							  <h1 class='modal-title fs-5' id='feedback-modal-label-{$siteCounter}'>Feedback</h1>
-							  <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-							</div>
-							<div class='modal-body'>";
-
-							if(!empty($siteOrStaffFeedback)) {
-								$feedbackModal .= "<h6><strong>Site or Staff Feedback:</strong></h6>
-													<p>{$siteOrStaffFeedback}</p>";
-							}
-							if(!empty($instructorFeedback)) {
-								$feedbackModal .= "<h6><strong>InstructorFeedback:</strong></h6>
-													<p>{$instructorFeedback}</>";
-							}
-
-					$feedbackModal .="</div>
-						  </div>
-						</div>
-					  </div>
-					  ";
 
 					// display the current submission in a table format
 					$table = "<div class='card mb-3'>
@@ -156,7 +100,7 @@
 												Feedback
 											</button>";
 
-								$table .= $feedbackModal;
+								$table .= generateFeedbackModal($siteCounter, $siteOrStaffFeedback, $instructorFeedback);
 							}
 
 							// otherwise, display empty
@@ -176,40 +120,82 @@
 				}
 
 				// Display the average for the last group of submissions
-                $enjoySiteAverage = round($nameScore[0] / $count);
-                $staffSupportiveAverage = round($nameScore[1] / $count);
-                $siteLearningAverage = round($nameScore[2] / $count);
-                $preceptorLearningObjectiveAverage = round($nameScore[3] / $count);
-                $recommendSiteAverage = round($nameScore[4] / $count);
-
-				// temp display of averages for final clinical site (fencepost)
-				$averageHtml = "<div class='card mb-3'>
-								<h1 class='text-center'>Average for {$nameToCheck}</h1>
-								<table class='table'>
-									<thead>
-										<tr class='text-center'>
-											<th>Enjoyed Site</th>
-											<th>Staff Supportive</th>
-											<th>Site Learning Objectives</th>
-											<th>Preceptor Learning Objectives</th>
-											<th>Recommend Site</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr class='text-center'>
-											<td>" . generateStars($enjoySiteAverage) . "</td>
-											<td>" . generateStars($staffSupportiveAverage) . "</td>
-											<td>" . generateStars($siteLearningAverage) . "</td>
-											<td>" . generateStars($preceptorLearningObjectiveAverage) . "</td>
-											<td>" . generateStars($recommendSiteAverage) . "</td>
-										</tr>
-									</tbody>
-								</table>
-								</div>";
-
-                echo $averageHtml;
+                echo calculateAndGenerateSiteAverages($nameScore, $count, $nameToCheck);
 			?>
 		</div>
 	</main>
 </body>
 </html>
+
+<?php 
+	/**
+	 * @param int $siteCounter 
+	 * @param string $siteOrStaffFeedback
+	 * @param string $instructorFeedback
+	 * @return string
+	 */
+	function generateFeedbackModal($siteCounter, $siteOrStaffFeedback, $instructorFeedback) {
+		// setup feedback modal
+		$feedbackModal = "<div class='modal fade text-start' id='feedback-modal-{$siteCounter}' tabindex='-1' aria-labelledby='feedback-modal-label-{$siteCounter}' aria-hidden='true'>
+		<div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
+		  <div class='modal-content'>
+			<div class='modal-header'>
+			  <h1 class='modal-title fs-5' id='feedback-modal-label-{$siteCounter}'>Feedback</h1>
+			  <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+			</div>
+			<div class='modal-body'>";
+
+			// only display feedback if given
+			if(!empty($siteOrStaffFeedback)) {
+				$feedbackModal .= "<h6><strong>Site or Staff Feedback:</strong></h6>
+									<p>{$siteOrStaffFeedback}</p>";
+			}
+			if(!empty($instructorFeedback)) {
+				$feedbackModal .= "<h6><strong>InstructorFeedback:</strong></h6>
+									<p>{$instructorFeedback}</>";
+			}
+
+		// close off and return modal
+		return $feedbackModal . "</div></div></div></div>";
+	}
+
+	/**
+	 * @param array $nameScore
+	 * @param int $count
+	 * @param string $nameToCheck
+	 * @return string
+	 */
+	function calculateAndGenerateSiteAverages($nameScore, $count, $nameToCheck) {
+		// calculate averages
+		$enjoySiteAverage = round($nameScore[0] / $count);
+		$staffSupportiveAverage = round($nameScore[1] / $count);
+		$siteLearningAverage = round($nameScore[2] / $count);
+		$preceptorLearningObjectiveAverage = round($nameScore[3] / $count);
+		$recommendSiteAverage = round($nameScore[4] / $count);
+
+		// generate and return averages
+		return "<div class='card mb-3'>
+						<h1 class='text-center'>Average for {$nameToCheck}</h1>
+						<table class='table'>
+							<thead>
+								<tr class='text-center'>
+									<th>Enjoyed Site</th>
+									<th>Staff Supportive</th>
+									<th>Site Learning Objectives</th>
+									<th>Preceptor Learning Objectives</th>
+									<th>Recommend Site</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class='text-center'>
+									<td>" . generateStars($enjoySiteAverage) . "</td>
+									<td>" . generateStars($staffSupportiveAverage) . "</td>
+									<td>" . generateStars($siteLearningAverage) . "</td>
+									<td>" . generateStars($preceptorLearningObjectiveAverage) . "</td>
+									<td>" . generateStars($recommendSiteAverage) . "</td>
+								</tr>
+							</tbody>
+						</table>
+						</div>";
+	}
+?>
