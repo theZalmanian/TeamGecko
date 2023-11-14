@@ -3,7 +3,7 @@
     require_once("../php/helpers.php");
 
     // save the current pages name to session
-    setCurrentPage("Contact");
+    setCurrentPage("Send Email");
 ?>
 
 <!DOCTYPE html>

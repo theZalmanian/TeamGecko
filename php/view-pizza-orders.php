@@ -28,13 +28,13 @@
 
                     if ($querySuccess) {
                         // display all orders in DB
-                        while ($row = mysqli_fetch_assoc($querySuccess)) {
-                            $name = $row['CustomerName'];
-                            $email = $row['CustomerEmail'];
-                            $size = $row['PizzaSize'];
-                            $toppingOne = $row['Topping1'];
-                            $toppingTwo = $row['Topping2'];
-                            $cost = $row['PizzaCost'];
+                        while ($currSite = mysqli_fetch_assoc($querySuccess)) {
+                            $name = $currSite['CustomerName'];
+                            $email = $currSite['CustomerEmail'];
+                            $size = $currSite['PizzaSize'];
+                            $toppingOne = $currSite['Topping1'];
+                            $toppingTwo = $currSite['Topping2'];
+                            $cost = $currSite['PizzaCost'];
                             echo "<p>Name: ${name} </p> <br>";
                             echo "<p>Email: ${email} </p> <br>";
                             echo "<p>Toppings: ${toppingOne} ${toppingTwo} </p> <br>";
