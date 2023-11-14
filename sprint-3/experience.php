@@ -47,7 +47,18 @@
                         <label class="mb-2" for="q1-site-attended">
                             1. What Clinical Site did you attend? <span class="text-danger">*</span>
                         </label>
-                        <input type="text" class="form-control" id="q1-site-attended" name="q1-site-attended" required>
+                        <input list="q1-site-attended" class="form-control" name="q1-site-attended" required>
+                        <datalist id="q1-site-attended">
+                            <?php
+                                // get all unique clinical sites from DB
+                                $clinicalSites = executeQuery("SELECT DISTINCT SiteAttended FROM ExperienceFormSubmissions");
+
+                                // add them all to the datalist
+                                while ($currSite = mysqli_fetch_assoc($clinicalSites)) {
+                                    echo "<option value='" . $currSite["SiteAttended"] ."'> </option>";
+                                }
+                            ?>
+                        </datalist>
                     </div>
                     <!-- End of question 1 -->
         
