@@ -23,12 +23,14 @@
 												FROM ExperienceFormSubmissions 
 												ORDER BY SiteAttended");
 
-				// run through all returned submissions
-
-				$nameScore = array(0, 0, 0, 0, 0);
+				$scoreCounters = array(0, 0, 0, 0, 0);
 				$nameToCheck = "";
 				$siteCounter = 0;
 				$count = 0;
+
+				$rowsInSite = array(); 
+
+				// run through all returned submissions
 				while ($currSubmission = mysqli_fetch_assoc($allSubmissions)) {
 					// get all relevant columns of current row
 					$siteAttended = $currSubmission["SiteAttended"];
@@ -43,73 +45,127 @@
 					// if the site is the same as the previous site
 					if($nameToCheck == $siteAttended) {
 						// increase counters
-						$nameScore[0] +=  $currSubmission["EnjoyedSite"];
-						$nameScore[1] +=  $currSubmission["StaffSupportive"];
-						$nameScore[2] +=  $currSubmission["SiteLearningObjectives"];
-						$nameScore[3] +=  $currSubmission["PreceptorLearningObjectives"];
-						$nameScore[4] +=  $currSubmission["RecommendSite"];
+						$scoreCounters[0] +=  $currSubmission["EnjoyedSite"];
+						$scoreCounters[1] +=  $currSubmission["StaffSupportive"];
+						$scoreCounters[2] +=  $currSubmission["SiteLearningObjectives"];
+						$scoreCounters[3] +=  $currSubmission["PreceptorLearningObjectives"];
+						$scoreCounters[4] +=  $currSubmission["RecommendSite"];
 						$count++;
+
+						// generate and add row to array keeping track of all rows for this clinical site
+						$rowsInSite[] = generateRow($currSubmission, $siteCounter, $siteOrStaffFeedback, $instructorFeedback);
 					}
 
 					// if the site of the current row is a different site
 					elseif($nameToCheck != $siteAttended) {
+						// add all rows belonging to the previous clinical site to table
+						$allRowsForTable = "";
+						for ($i = 0; $i < count($rowsInSite); $i++) { 
+							$allRowsForTable .= $rowsInSite[$i];
+						}
+
+						// display the table 
+						echo generateTable($allRowsForTable);
+
 						// calculate and display averages
-						echo calculateAndGenerateSiteAverages($nameScore, $count, $nameToCheck);;
+						echo calculateAndGenerateSiteAverages($scoreCounters, $count, $nameToCheck);
 
 						// track the new site
 						$nameToCheck = $siteAttended;
 
 						// reset the counters to that of the new site
-						$nameScore[0] =  $currSubmission["EnjoyedSite"];
-						$nameScore[1] =  $currSubmission["StaffSupportive"];
-						$nameScore[2] =  $currSubmission["SiteLearningObjectives"];
-						$nameScore[3] =  $currSubmission["PreceptorLearningObjectives"];
-						$nameScore[4] =  $currSubmission["RecommendSite"];
+						$scoreCounters[0] =  $currSubmission["EnjoyedSite"];
+						$scoreCounters[1] =  $currSubmission["StaffSupportive"];
+						$scoreCounters[2] =  $currSubmission["SiteLearningObjectives"];
+						$scoreCounters[3] =  $currSubmission["PreceptorLearningObjectives"];
+						$scoreCounters[4] =  $currSubmission["RecommendSite"];
 						$count = 1;
 
-						// display new site header
+						// empty the rows array
+						$rowsInSite = array(); 
+
+						// generate and add row to array keeping track of all rows for this clinical site
+						$rowsInSite[] = generateRow($currSubmission, $siteCounter, $siteOrStaffFeedback, $instructorFeedback);
+
+						// display clinical site name in header
 						echo "<div class='card'><h1 class='text-center'>{$siteAttended}</h1></div>";
 					}
-
-					// display the current submission in a table format
-					$row = "<tr class='text-center'>
-										<td>" . generateStars($currSubmission["EnjoyedSite"]) . "</td>
-										<td>" . generateStars($currSubmission["StaffSupportive"]) . "</td>
-										<td>" . generateStars($currSubmission["SiteLearningObjectives"]) . "</td>
-										<td>" . generateStars($currSubmission["PreceptorLearningObjectives"]) . "</td>
-										<td>" . generateStars($currSubmission["RecommendSite"]) . "</td>
-										<td>";
-
-							// if feedback was given
-							if(!empty($siteOrStaffFeedback) || !empty($instructorFeedback)) {
-								// display the feedback button and modal in <td>
-								$row .= "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#feedback-modal-{$siteCounter}'>
-												Feedback
-											</button>";
-
-								$row .= generateFeedbackModal($siteCounter, $siteOrStaffFeedback, $instructorFeedback);
-							}
-
-							// otherwise, display empty
-							else {
-								$row .= "N/A";
-							}
-
-					// display current row in table
-					echo generateTable($row);
 
 					$siteCounter++;
 				}
 
-				// Display the average for the last group of submissions
-                echo calculateAndGenerateSiteAverages($nameScore, $count, $nameToCheck);
+				// display the last table of submissions
+				$allRowsForTable = "";
+				for ($i = 0; $i < count($rowsInSite); $i++) { 
+					$allRowsForTable .= $rowsInSite[$i];
+				}
+
+				// display the table 
+				echo generateTable($allRowsForTable);
+
+
+				// display the average for the last group of submissions
+                echo calculateAndGenerateSiteAverages($scoreCounters, $count, $nameToCheck);
 			?>
 		</div>
 	</main>
 </body>
 </html>
 
-<?php 
+<?php
+	/**
+	 * @param mixed $currSubmission
+	 * @param int $siteCounter
+	 * @param string $siteOrStaffFeedback
+	 * @param string $instructorFeedback
+	 * @return string
+	 */
+	function generateRow($currSubmission, $siteCounter, $siteOrStaffFeedback, $instructorFeedback) {
+		// generate the current row
+		$row = "<tr class='text-center'>
+		<td>" . generateStars($currSubmission["EnjoyedSite"]) . "</td>
+		<td>" . generateStars($currSubmission["StaffSupportive"]) . "</td>
+		<td>" . generateStars($currSubmission["SiteLearningObjectives"]) . "</td>
+		<td>" . generateStars($currSubmission["PreceptorLearningObjectives"]) . "</td>
+		<td>" . generateStars($currSubmission["RecommendSite"]) . "</td>";
+
+		// display feedback, if any, and close off <tr>
+		return $row . displayFeedback($siteCounter, $siteOrStaffFeedback, $instructorFeedback) . "</tr>";
+	}
+
+	/**
+	 * 
+	 * @param int $siteCounter
+	 * @param string $siteOrStaffFeedback
+	 * @param string $instructorFeedback
+	 * @return string
+	 */
+	function displayFeedback($siteCounter, $siteOrStaffFeedback, $instructorFeedback) {
+		$feedbackDisplay = "";
+
+		// if feedback was given
+		if(!empty($siteOrStaffFeedback) || !empty($instructorFeedback)) {
+			// display the feedback button and modal in a <td>
+			$feedbackDisplay .= "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#feedback-modal-{$siteCounter}'>
+									Feedback
+								</button>";
+
+			$feedbackDisplay .= generateFeedbackModal($siteCounter, $siteOrStaffFeedback, $instructorFeedback) . "</td>";
+		}
+
+		// otherwise, display an empty <td>
+		else {
+			$feedbackDisplay = "<td>N/A</td>";
+		}
+
+		return $feedbackDisplay;
+	}
+
+	/**
+	 * 
+	 * @param string $row
+	 * @return string
+	 */
 	function generateTable($row) {
 		$table = "<div class='card mb-3'>
 					<table class='table'>
@@ -135,6 +191,7 @@
 	}
 
 	/**
+	 * 
 	 * @param int $siteCounter 
 	 * @param string $siteOrStaffFeedback
 	 * @param string $instructorFeedback
@@ -157,7 +214,7 @@
 									<p>{$siteOrStaffFeedback}</p>";
 			}
 			if(!empty($instructorFeedback)) {
-				$feedbackModal .= "<h6><strong>InstructorFeedback:</strong></h6>
+				$feedbackModal .= "<h6><strong>Instructor Feedback:</strong></h6>
 									<p>{$instructorFeedback}</>";
 			}
 
@@ -166,6 +223,7 @@
 	}
 
 	/**
+	 * 
 	 * @param array $nameScore
 	 * @param int $count
 	 * @param string $nameToCheck
