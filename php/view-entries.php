@@ -65,7 +65,7 @@
 										<h1 class='text-center'>Average for {$nameToCheck}</h1>
 										<table class='table'>
 											<thead>
-												<tr>
+												<tr class='text-center'>
 													<th>Enjoyed Site</th>
 													<th>Staff Supportive</th>
 													<th>Site Learning Objectives</th>
@@ -74,7 +74,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
+												<tr class='text-center'>
 													<td>" . generateStars($enjoySiteAverage) . "</td>
 													<td>" . generateStars($staffSupportiveAverage) . "</td>
 													<td>" . generateStars($siteLearningAverage) . "</td>
@@ -106,7 +106,7 @@
 					$table = "<div class='card mb-3'>
 								<table class='table'>
 								<thead>
-									<tr>
+									<tr class='text-center'>
 										<th>Enjoyed Site</th>
 										<th>Staff Supportive</th>
 										<th>Site Learning Objectives</th>
@@ -116,19 +116,43 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<tr class='text-center'>
 										<td>" . generateStars($currSubmission["EnjoyedSite"]) . "</td>
 										<td>" . generateStars($currSubmission["StaffSupportive"]) . "</td>
 										<td>" . generateStars($currSubmission["SiteLearningObjectives"]) . "</td>
 										<td>" . generateStars($currSubmission["PreceptorLearningObjectives"]) . "</td>
 										<td>" . generateStars($currSubmission["RecommendSite"]) . "</td>
-										<td> </td>
+										<td> 
+											<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#feedback-modal-{$siteCounter}'>
+												Feedback
+									  		</button> 
+										</td>
 									</tr>
 								</tbody>
 							</table>
 							</div>";
 
+						$feedbackModal = "<div class='modal fade' id='feedback-modal-{$siteCounter}' tabindex='-1' aria-labelledby='feedback-modal-label-{$siteCounter}' aria-hidden='true'>
+						<div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
+						  <div class='modal-content'>
+							<div class='modal-header'>
+							  <h1 class='modal-title fs-5' id='feedback-modal-label-{$siteCounter}'>Feedback</h1>
+							  <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+							</div>
+							<div class='modal-body'>
+								<h6><strong>Site or Staff Feedback:</strong></h6>
+								<p>{$siteOrStaffFeedback}</p>
+								<br>
+								<h6><strong>InstructorFeedback:</strong></h6>
+								<p>{$instructorFeedback}</p>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					  ";
+
 					echo $table;
+					echo $feedbackModal;
 
 					$siteCounter++;
 				}
@@ -145,7 +169,7 @@
 								<h1 class='text-center'>Average for {$nameToCheck}</h1>
 								<table class='table'>
 									<thead>
-										<tr>
+										<tr class='text-center'>
 											<th>Enjoyed Site</th>
 											<th>Staff Supportive</th>
 											<th>Site Learning Objectives</th>
@@ -154,7 +178,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
+										<tr class='text-center'>
 											<td>" . generateStars($enjoySiteAverage) . "</td>
 											<td>" . generateStars($staffSupportiveAverage) . "</td>
 											<td>" . generateStars($siteLearningAverage) . "</td>
