@@ -35,8 +35,6 @@
 					$siteOrStaffFeedback = $currSubmission["SiteOrStaffFeedback"];
 					$instructorFeedback = $currSubmission["InstructorFeedback"];
 
-					echo "<h1>{$siteAttended}</h1>";
-
 					if($siteCounter == 0) {
 						$nameToCheck = $siteAttended;
 					}
@@ -62,26 +60,29 @@
 						$recommendSiteAverage = round($nameScore[4] / $count);
 
 						// display averages
-						$averageHtml = "<div>
-											<h1>Average for {$nameToCheck}</h1>
-												<ul>
-													<li>
-														Enjoyed Site: " . generateStars($enjoySiteAverage) . "
-													</li>
-													<li>
-														Staff Supporting: " . generateStars($staffSupportiveAverage) . "
-													</li>
-													<li>
-														Site Learning Obs: " . generateStars($siteLearningAverage) . "
-													</li>
-													<li>
-														Preceptor Learning Obs: " . generateStars($preceptorLearningObjectiveAverage) . "
-													</li>
-													<li>
-														Recommend Site: " . generateStars($recommendSiteAverage) . "
-													</li>
-												</ul>
-									 		</div>";
+						$averageHtml = "<div class='card mb-3'>
+										<h1 class='text-center'>Average for {$nameToCheck}</h1>
+										<table class='table'>
+											<thead>
+												<tr>
+													<th>Enjoyed Site</th>
+													<th>Staff Supportive</th>
+													<th>Site Learning Objectives</th>
+													<th>Preceptor Learning Objectives</th>
+													<th>Recommend Site</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>" . generateStars($enjoySiteAverage) . "</td>
+													<td>" . generateStars($staffSupportiveAverage) . "</td>
+													<td>" . generateStars($siteLearningAverage) . "</td>
+													<td>" . generateStars($preceptorLearningObjectiveAverage) . "</td>
+													<td>" . generateStars($recommendSiteAverage) . "</td>
+												</tr>
+											</tbody>
+										</table>
+										</div>";
 
 						echo $averageHtml;
 
@@ -127,6 +128,40 @@
 
 					$siteCounter++;
 				}
+
+				// Display the average for the last group of submissions
+                $enjoySiteAverage = round($nameScore[0] / $count);
+                $staffSupportiveAverage = round($nameScore[1] / $count);
+                $siteLearningAverage = round($nameScore[2] / $count);
+                $preceptorLearningObjectiveAverage = round($nameScore[3] / $count);
+                $recommendSiteAverage = round($nameScore[4] / $count);
+
+				// temp display of averages for final clinical site (fencepost)
+				$averageHtml = "<div class='card mb-3'>
+								<h1 class='text-center'>Average for {$nameToCheck}</h1>
+								<table class='table'>
+									<thead>
+										<tr>
+											<th>Enjoyed Site</th>
+											<th>Staff Supportive</th>
+											<th>Site Learning Objectives</th>
+											<th>Preceptor Learning Objectives</th>
+											<th>Recommend Site</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>" . generateStars($enjoySiteAverage) . "</td>
+											<td>" . generateStars($staffSupportiveAverage) . "</td>
+											<td>" . generateStars($siteLearningAverage) . "</td>
+											<td>" . generateStars($preceptorLearningObjectiveAverage) . "</td>
+											<td>" . generateStars($recommendSiteAverage) . "</td>
+										</tr>
+									</tbody>
+								</table>
+								</div>";
+
+                echo $averageHtml;
 			?>
 		</div>
 	</main>
