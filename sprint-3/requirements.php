@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-1 col-lg-2">
             </div>
-            <div class="col-12 col-md-10 col-lg-8">
+            <div class="col-12 col-md-10 col-lg-8 mb-3">
                 <h1 class="card col-12 py-3 mb-1 text-center">
                     Green River College
                     <br>
@@ -37,7 +37,7 @@
                     </ul>
                 </div>
 
-                <div class="accordion mb-3 my-2" id="requirements-accordion">
+                <div class="accordion mb-2 my-2" id="requirements-accordion">
                     <?php
                         // setup and execute SELECT Query
                         $allRequirements = executeQuery("SELECT * FROM ClinicalRequirements");
@@ -60,7 +60,7 @@
                     ?>
                 </div>
 
-                <div class="card my-2 notes">
+                <div class="card notes">
                     <ul class="list-group list-group-flush text-center">
                         <li class="list-group-item text-break px-2">
                             <b>If you have any questions about the requirements, you can email me at csavage@greenriver.edu</b>

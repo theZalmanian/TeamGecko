@@ -78,8 +78,8 @@
                                     <input type="hidden" name="survey-submitted" value="confirmed">
                                     <div class="card container p-2 my-1">
                                         <div class="row justify-content-center">
-                                            <button class="col-5 btn btn-success py-2 m-2" id="submit-experience">Confirm</button>
-                                            <a class="col-5 btn btn-danger py-2 m-2" href="/sprint-2/experience.html">Cancel</a>
+                                            <button class="col-5 btn btn-success py-2 m-2 border" id="submit-experience">Confirm</button>
+                                            <a class="col-5 btn btn-danger py-2 m-2 border" href="/sprint-2/experience.html">Cancel</a>
                                         </div>
                                     </div>
                                 </form>
@@ -103,15 +103,6 @@
 </html>
 
 <?php 
-    /**
-     * Returns the given message inside of an HTML strong element
-     * @param string $message The message being displayed inside an HTML strong element
-     * @return string the given message inside of an HTML strong element
-     */
-    function displayStrong($message) {
-        return "<strong>{$message}</strong>" . " ";
-    }
-
     /**
      * Constructs a Bootstrap card element containing the given question, along with a response to it
      * @param int $questionNum The question's number on the form

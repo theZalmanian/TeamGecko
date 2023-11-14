@@ -225,3 +225,8 @@ input.radio-input:hover ~ label.radio-label,
 input.radio-input:checked ~ label.radio-label {
     color: var(--nursing-accent-color);
 }
+
+datalist > option:hover {
+    cursor: pointer;
+    background-color: var(--nursing-accent-color);
+}

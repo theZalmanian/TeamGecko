@@ -84,6 +84,15 @@
     }
 
     /**
+     * Returns the given message inside of an HTML strong element
+     * @param string $message The message being displayed inside an HTML strong element
+     * @return string the given message inside of an HTML strong element
+     */
+    function displayStrong($message) {
+        return "<strong>{$message}</strong>" . " ";
+    }
+
+    /**
      * Constructs and returns a string made up of the given # of stars: ★
      * @param int $numStars The # of stars to be generated and displayed
      * @return string A string displaying "You selected:" in bold, followed by the given # of stars
