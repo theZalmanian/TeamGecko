@@ -15,57 +15,65 @@
     ?>
 </head>
 <body>
-	<?php
-	
-		// get all experience form submissions from DB, ordered by clinical site
-		$allSubmissions = executeQuery("SELECT * 
-										FROM ExperienceFormSubmissions 
-										ORDER BY SiteAttended");
+	<main class="container">
+		<div class="row">
+			<?php
+				// get all experience form submissions from DB, ordered by clinical site
+				$allSubmissions = executeQuery("SELECT * 
+												FROM ExperienceFormSubmissions 
+												ORDER BY SiteAttended");
 
-		// run through all returned submissions
-		while ($currSubmission = mysqli_fetch_assoc($allSubmissions)) {
-			// get all relevant columns of current row
-			$siteAttended = $currSubmission["SiteAttended"];
-			$starQuestions = array(
-				$currSubmission["EnjoyedSite"],
-				$currSubmission["StaffSupportive"],
-				$currSubmission["SiteLearningObjectives"],
-				$currSubmission["PreceptorLearningObjectives"],
-				$currSubmission["RecommendSite"]
-			);
-			$siteOrStaffFeedback = $currSubmission["SiteOrStaffFeedback"];
-			$instructorFeedback = $currSubmission["InstructorFeedback"];
+				// run through all returned submissions
+				while ($currSubmission = mysqli_fetch_assoc($allSubmissions)) {
+					// get all relevant columns of current row
+					$siteAttended = $currSubmission["SiteAttended"];
+					$siteOrStaffFeedback = $currSubmission["SiteOrStaffFeedback"];
+					$instructorFeedback = $currSubmission["InstructorFeedback"];
 
-			// display the current submission in a table format
-			$table = "<table class='table'>
-					<thead>
-						<tr>
-							<th>Site Attended</th>
-							<th>Enjoyed Site</th>
-							<th>Staff Supportive</th>
-							<th>Site Learning Objective</th>
-							<th>Preceptor Learning Objective</th>
-							<th>Recommend Site</th>
-							<th>Site or Staff Feedback</th>
-							<th>Instructor Feedback</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>${siteAttended}</td>";
+					// display the current submission in a table format
+					$table = "<div class='col-12 col-md-4'>
+								<table class='table'>
+									<tbody>
+										<tr>
+											<th>Site Attended</th>
+											<td>${siteAttended}</td>
+										</tr>
+										<tr>
+											<th>Enjoyed Site</th>
+											<td>" . generateStars($currSubmission["EnjoyedSite"]) . "</td>
+										</tr>
+										<tr>
+											<th>Staff Supportive</th>
+											<td>" . generateStars($currSubmission["StaffSupportive"]) . "</td>
+										</tr>
+										<tr>
+											<th>Site Learning Objectives</th>
+											<td>" . generateStars($currSubmission["SiteLearningObjectives"]) . "</td>
+										</tr>
+										<tr>
+											<th>Preceptor Learning Objectives</th>
+											<td>" . generateStars($currSubmission["PreceptorLearningObjectives"]) . "</td>
+										</tr>
+										<tr>
+											<th>Recommend Site</th>
+											<td>" . generateStars($currSubmission["RecommendSite"]) . "</td>
+										</tr>
+										<tr>
+											<th>Site or Staff Feedback</th>
+											<td>" . generateStars($siteOrStaffFeedback) . "</td>
+										</tr>
+										<tr>
+											<th>Instructor Feedback</th>
+											<td>" . generateStars($instructorFeedback) . "</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>";
 
-							for($i = 0; $i < count($starQuestions); $i++) {
-								$table .= "<td>" . generateStars($starQuestions[$i]) . "</td>";
-							}
-							
-				$table .= "<td>" . generateStars($siteOrStaffFeedback) . "</td>
-							<td>" . generateStars($instructorFeedback) . "</td>
-						</tr>
-					</tbody>
-				</table>";
-
-			echo $table;
-		}
-	?>
+					echo $table;
+				}
+			?>
+		</div>
+	</main>
 </body>
 </html>
