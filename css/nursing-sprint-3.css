@@ -51,6 +51,7 @@ a.btn.btn-success {
 button.btn.btn-success:hover,
 a.btn.btn-success:hover {
     background: #579339;
+    color: var(--nursing-secondary-color)
 }
 
 .alert {
@@ -67,9 +68,8 @@ a.btn.btn-success:hover {
     color: var(--secondary-color-variant);
 }
 
-.table tr:hover {
+.table tbody > tr:hover > td {
     background-color: var(--nursing-accent-color);
-    color: var(--nursing-secondary-color-variant)
 }
 
 /** receipt.php **/

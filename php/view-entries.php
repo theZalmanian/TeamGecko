@@ -64,10 +64,7 @@
 						}
 
 						// display the table 
-						echo generateTable($allRowsForTable, $nameToCheck);
-
-						// calculate and display averages
-						echo calculateAndGenerateSiteAverages($scoreCounters, $count, $nameToCheck);
+						echo generateTable($allRowsForTable, $nameToCheck, $scoreCounters, $count);
 
 						// track the new site
 						$nameToCheck = $siteAttended;
@@ -97,11 +94,7 @@
 				}
 
 				// display the table 
-				echo generateTable($allRowsForTable, $siteAttended);
-
-
-				// display the average for the last group of submissions
-                echo calculateAndGenerateSiteAverages($scoreCounters, $count, $nameToCheck);
+				echo generateTable($allRowsForTable, $siteAttended, $scoreCounters, $count);
 			?>
 		</div>
 	</main>
@@ -162,17 +155,18 @@
 	/**
 	 * 
 	 * @param string $row
+	 * @param string $siteAttended
+	 * @param array $scoreCounters
+	 * @param int $count
 	 * @return string
 	 */
-	function generateTable($row, $siteAttended) {
-		$table = "<div class='card mb-3 px-3 table-responsive'>
-					<table class='table table-bordered table-striped-columns align-middle'>
+	function generateTable($row, $siteAttended, $scoreCounters, $count) {
+		$table = "<div class='card mb-3 p-3 table-responsive'>
+					<h1 class='text-center mb-3'>
+						<strong>{$siteAttended}</strong>
+					</h1>
+					<table class='table table-bordered table-striped-columns align-middle m-0'>
 						<thead>
-							<tr>
-								<h1 class='text-center my-3'>
-									<strong>{$siteAttended}</strong>
-								</h1>
-							</tr>
 							<tr class='text-center'>
 								<th>Enjoyed Site</th>
 								<th>Staff Supportive</th>
@@ -184,10 +178,11 @@
 						</thead>
 					<tbody>";
 
-		$table .= $row;
+		// add all given rows and close off table
+		$table .= $row . "</tbody></table>";
 
-		// close off and return table
-		return $table . "</tbody></table></div>";
+		// calculate and display averages in div under table 
+		return $table . calculateAndGenerateSiteAverages($scoreCounters, $count, $siteAttended) . "</div>";
 	}
 
 	/**
@@ -200,23 +195,26 @@
 	function generateFeedbackModal($siteCounter, $siteOrStaffFeedback, $instructorFeedback) {
 		// setup feedback modal
 		$feedbackModal = "<div class='modal fade text-start' id='feedback-modal-{$siteCounter}' tabindex='-1' aria-labelledby='feedback-modal-label-{$siteCounter}' aria-hidden='true'>
-		<div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
-		  <div class='modal-content'>
-			<div class='modal-header'>
-			  <h1 class='modal-title fs-5' id='feedback-modal-label-{$siteCounter}'>Feedback</h1>
-			  <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-			</div>
-			<div class='modal-body'>";
+							<div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
+								<div class='modal-content'>
+									<div class='modal-header'>
+										<h1 class='modal-title fs-5' id='feedback-modal-label-{$siteCounter}'>
+											<strong>Feedback</strong>
+										</h1>
+										<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'>
+										</button>
+									</div>
+									<div class='modal-body'>";
 
-			// only display feedback if given
-			if(!empty($siteOrStaffFeedback)) {
-				$feedbackModal .= "<h6><strong>Site or Staff Feedback:</strong></h6>
-									<p>{$siteOrStaffFeedback}</p>";
-			}
-			if(!empty($instructorFeedback)) {
-				$feedbackModal .= "<h6><strong>Instructor Feedback:</strong></h6>
-									<p>{$instructorFeedback}</>";
-			}
+		// only display feedback if given
+		if(!empty($siteOrStaffFeedback)) {
+			$feedbackModal .= "<h6><strong>Site or Staff Feedback:</strong></h6>
+								<p>{$siteOrStaffFeedback}</p>";
+		}
+		if(!empty($instructorFeedback)) {
+			$feedbackModal .= "<h6><strong>Instructor Feedback:</strong></h6>
+								<p>{$instructorFeedback}</p>";
+		}
 
 		// close off and return modal
 		return $feedbackModal . "</div></div></div></div>";
@@ -224,42 +222,44 @@
 
 	/**
 	 * 
-	 * @param array $nameScore
+	 * @param array $scoreCounters
 	 * @param int $count
 	 * @param string $nameToCheck
 	 * @return string
 	 */
-	function calculateAndGenerateSiteAverages($nameScore, $count, $nameToCheck) {
+	function calculateAndGenerateSiteAverages($scoreCounters, $count, $nameToCheck) {
 		// calculate averages
-		$enjoySiteAverage = round($nameScore[0] / $count);
-		$staffSupportiveAverage = round($nameScore[1] / $count);
-		$siteLearningAverage = round($nameScore[2] / $count);
-		$preceptorLearningObjectiveAverage = round($nameScore[3] / $count);
-		$recommendSiteAverage = round($nameScore[4] / $count);
+		$enjoySiteAverage = round($scoreCounters[0] / $count);
+		$staffSupportiveAverage = round($scoreCounters[1] / $count);
+		$siteLearningAverage = round($scoreCounters[2] / $count);
+		$preceptorLearningObjectiveAverage = round($scoreCounters[3] / $count);
+		$recommendSiteAverage = round($scoreCounters[4] / $count);
 
 		// generate and return averages
-		return "<div class='card mb-3'>
-						<h1 class='text-center'>Average for {$nameToCheck}</h1>
-						<table class='table'>
-							<thead>
-								<tr class='text-center'>
-									<th>Enjoyed Site</th>
-									<th>Staff Supportive</th>
-									<th>Site Learning <br> Objectives</th>
-									<th>Preceptor Learning <br> Objectives</th>
-									<th>Recommend Site</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class='text-center'>
-									<td>" . generateStars($enjoySiteAverage) . "</td>
-									<td>" . generateStars($staffSupportiveAverage) . "</td>
-									<td>" . generateStars($siteLearningAverage) . "</td>
-									<td>" . generateStars($preceptorLearningObjectiveAverage) . "</td>
-									<td>" . generateStars($recommendSiteAverage) . "</td>
-								</tr>
-							</tbody>
-						</table>
-						</div>";
+		return "<div>
+					<h1 class='text-center my-3'>
+						<strong>Average Ratings</strong>
+					</h1>
+					<table class='table table-bordered table-striped-columns align-middle m-0'>
+						<thead>
+							<tr class='text-center'>
+								<th>Enjoyed Site</th>
+								<th>Staff Supportive</th>
+								<th>Site Learning <br> Objectives</th>
+								<th>Preceptor Learning <br> Objectives</th>
+								<th>Recommend Site</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class='text-center'>
+								<td>" . generateStars($enjoySiteAverage) . "</td>
+								<td>" . generateStars($staffSupportiveAverage) . "</td>
+								<td>" . generateStars($siteLearningAverage) . "</td>
+								<td>" . generateStars($preceptorLearningObjectiveAverage) . "</td>
+								<td>" . generateStars($recommendSiteAverage) . "</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>";
 	}
 ?>
