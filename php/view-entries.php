@@ -72,20 +72,7 @@
 					}
 
 					// display the current submission in a table format
-					$table = "<div class='card mb-3'>
-								<table class='table'>
-								<thead>
-									<tr class='text-center'>
-										<th>Enjoyed Site</th>
-										<th>Staff Supportive</th>
-										<th>Site Learning Objectives</th>
-										<th>Preceptor Learning Objectives</th>
-										<th>Recommend Site</th>
-										<th>Feedback</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class='text-center'>
+					$row = "<tr class='text-center'>
 										<td>" . generateStars($currSubmission["EnjoyedSite"]) . "</td>
 										<td>" . generateStars($currSubmission["StaffSupportive"]) . "</td>
 										<td>" . generateStars($currSubmission["SiteLearningObjectives"]) . "</td>
@@ -96,25 +83,20 @@
 							// if feedback was given
 							if(!empty($siteOrStaffFeedback) || !empty($instructorFeedback)) {
 								// display the feedback button and modal in <td>
-								$table .= "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#feedback-modal-{$siteCounter}'>
+								$row .= "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#feedback-modal-{$siteCounter}'>
 												Feedback
 											</button>";
 
-								$table .= generateFeedbackModal($siteCounter, $siteOrStaffFeedback, $instructorFeedback);
+								$row .= generateFeedbackModal($siteCounter, $siteOrStaffFeedback, $instructorFeedback);
 							}
 
 							// otherwise, display empty
 							else {
-								$table .= "N/A";
+								$row .= "N/A";
 							}
 
-							$table .= 	"</td>
-									</tr>
-								</tbody>
-							</table>
-							</div>";
-
-					echo $table;
+					// display current row in table
+					echo generateTable($row);
 
 					$siteCounter++;
 				}
@@ -128,6 +110,30 @@
 </html>
 
 <?php 
+	function generateTable($row) {
+		$table = "<div class='card mb-3'>
+					<table class='table'>
+					<thead>
+						<tr class='text-center'>
+							<th>Enjoyed Site</th>
+							<th>Staff Supportive</th>
+							<th>Site Learning Objectives</th>
+							<th>Preceptor Learning Objectives</th>
+							<th>Recommend Site</th>
+							<th>Feedback</th>
+						</tr>
+					</thead>
+					<tbody>";
+
+		$table .= $row;
+
+		$table .= 	"</tbody>
+				</table>
+				</div>";
+
+		return $table;
+	}
+
 	/**
 	 * @param int $siteCounter 
 	 * @param string $siteOrStaffFeedback
