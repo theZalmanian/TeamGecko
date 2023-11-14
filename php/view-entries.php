@@ -37,6 +37,7 @@
 
 					if($siteCounter == 0) {
 						$nameToCheck = $siteAttended;
+						echo "<div class='card'><h1 class='text-center'>{$siteAttended}</h1></div>";
 					}
 
 					// if the site is the same as the previous site
@@ -96,13 +97,16 @@
 						$nameScore[3] =  $currSubmission["PreceptorLearningObjectives"];
 						$nameScore[4] =  $currSubmission["RecommendSite"];
 						$count = 1;
+
+						// display new site header
+						echo "<div class='card'><h1 class='text-center'>{$siteAttended}</h1></div>";
 					}
 
 					// display the current submission in a table format
-					$table = "<table class='table'>
+					$table = "<div class='card mb-3'>
+								<table class='table'>
 								<thead>
 									<tr>
-										<th>Site Attended</th>
 										<th>Enjoyed Site</th>
 										<th>Staff Supportive</th>
 										<th>Site Learning Objectives</th>
@@ -113,7 +117,6 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>${siteAttended}</td>
 										<td>" . generateStars($currSubmission["EnjoyedSite"]) . "</td>
 										<td>" . generateStars($currSubmission["StaffSupportive"]) . "</td>
 										<td>" . generateStars($currSubmission["SiteLearningObjectives"]) . "</td>
@@ -122,7 +125,8 @@
 										<td> </td>
 									</tr>
 								</tbody>
-							</table>";
+							</table>
+							</div>";
 
 					echo $table;
 
