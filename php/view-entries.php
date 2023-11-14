@@ -102,6 +102,31 @@
 						echo "<div class='card'><h1 class='text-center'>{$siteAttended}</h1></div>";
 					}
 
+					// setup feedback modal
+					$feedbackModal = "<div class='modal fade text-start' id='feedback-modal-{$siteCounter}' tabindex='-1' aria-labelledby='feedback-modal-label-{$siteCounter}' aria-hidden='true'>
+						<div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
+						  <div class='modal-content'>
+							<div class='modal-header'>
+							  <h1 class='modal-title fs-5' id='feedback-modal-label-{$siteCounter}'>Feedback</h1>
+							  <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+							</div>
+							<div class='modal-body'>";
+
+							if(!empty($siteOrStaffFeedback)) {
+								$feedbackModal .= "<h6><strong>Site or Staff Feedback:</strong></h6>
+													<p>{$siteOrStaffFeedback}</p>";
+							}
+							if(!empty($instructorFeedback)) {
+								$feedbackModal .= "<h6><strong>InstructorFeedback:</strong></h6>
+													<p>{$instructorFeedback}</>";
+							}
+
+					$feedbackModal .="</div>
+						  </div>
+						</div>
+					  </div>
+					  ";
+
 					// display the current submission in a table format
 					$table = "<div class='card mb-3'>
 								<table class='table'>
@@ -122,37 +147,30 @@
 										<td>" . generateStars($currSubmission["SiteLearningObjectives"]) . "</td>
 										<td>" . generateStars($currSubmission["PreceptorLearningObjectives"]) . "</td>
 										<td>" . generateStars($currSubmission["RecommendSite"]) . "</td>
-										<td> 
-											<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#feedback-modal-{$siteCounter}'>
+										<td>";
+
+							// if feedback was given
+							if(!empty($siteOrStaffFeedback) || !empty($instructorFeedback)) {
+								// display the feedback button and modal in <td>
+								$table .= "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#feedback-modal-{$siteCounter}'>
 												Feedback
-									  		</button> 
-										</td>
+											</button>";
+
+								$table .= $feedbackModal;
+							}
+
+							// otherwise, display empty
+							else {
+								$table .= "N/A";
+							}
+
+							$table .= 	"</td>
 									</tr>
 								</tbody>
 							</table>
 							</div>";
 
-						$feedbackModal = "<div class='modal fade' id='feedback-modal-{$siteCounter}' tabindex='-1' aria-labelledby='feedback-modal-label-{$siteCounter}' aria-hidden='true'>
-						<div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
-						  <div class='modal-content'>
-							<div class='modal-header'>
-							  <h1 class='modal-title fs-5' id='feedback-modal-label-{$siteCounter}'>Feedback</h1>
-							  <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-							</div>
-							<div class='modal-body'>
-								<h6><strong>Site or Staff Feedback:</strong></h6>
-								<p>{$siteOrStaffFeedback}</p>
-								<br>
-								<h6><strong>InstructorFeedback:</strong></h6>
-								<p>{$instructorFeedback}</p>
-							</div>
-						  </div>
-						</div>
-					  </div>
-					  ";
-
 					echo $table;
-					echo $feedbackModal;
 
 					$siteCounter++;
 				}
