@@ -39,7 +39,6 @@
 
 					if($siteCounter == 0) {
 						$nameToCheck = $siteAttended;
-						echo "<div class='card'><h1 class='text-center'>{$siteAttended}</h1></div>";
 					}
 
 					// if the site is the same as the previous site
@@ -65,7 +64,7 @@
 						}
 
 						// display the table 
-						echo generateTable($allRowsForTable);
+						echo generateTable($allRowsForTable, $nameToCheck);
 
 						// calculate and display averages
 						echo calculateAndGenerateSiteAverages($scoreCounters, $count, $nameToCheck);
@@ -86,9 +85,6 @@
 
 						// generate and add row to array keeping track of all rows for this clinical site
 						$rowsInSite[] = generateRow($currSubmission, $siteCounter, $siteOrStaffFeedback, $instructorFeedback);
-
-						// display clinical site name in header
-						echo "<div class='card'><h1 class='text-center'>{$siteAttended}</h1></div>";
 					}
 
 					$siteCounter++;
@@ -101,7 +97,7 @@
 				}
 
 				// display the table 
-				echo generateTable($allRowsForTable);
+				echo generateTable($allRowsForTable, $siteAttended);
 
 
 				// display the average for the last group of submissions
@@ -146,8 +142,10 @@
 		// if feedback was given
 		if(!empty($siteOrStaffFeedback) || !empty($instructorFeedback)) {
 			// display the feedback button and modal in a <td>
-			$feedbackDisplay .= "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#feedback-modal-{$siteCounter}'>
-									Feedback
+			$feedbackDisplay .= "<td>
+								<button type='button' class='btn btn-success border' data-bs-toggle='modal' 
+									data-bs-target='#feedback-modal-{$siteCounter}'>
+									View
 								</button>";
 
 			$feedbackDisplay .= generateFeedbackModal($siteCounter, $siteOrStaffFeedback, $instructorFeedback) . "</td>";
@@ -166,28 +164,30 @@
 	 * @param string $row
 	 * @return string
 	 */
-	function generateTable($row) {
-		$table = "<div class='card mb-3'>
-					<table class='table'>
-					<thead>
-						<tr class='text-center'>
-							<th>Enjoyed Site</th>
-							<th>Staff Supportive</th>
-							<th>Site Learning Objectives</th>
-							<th>Preceptor Learning Objectives</th>
-							<th>Recommend Site</th>
-							<th>Feedback</th>
-						</tr>
-					</thead>
+	function generateTable($row, $siteAttended) {
+		$table = "<div class='card mb-3 px-3 table-responsive'>
+					<table class='table table-bordered table-striped-columns align-middle'>
+						<thead>
+							<tr>
+								<h1 class='text-center my-3'>
+									<strong>{$siteAttended}</strong>
+								</h1>
+							</tr>
+							<tr class='text-center'>
+								<th>Enjoyed Site</th>
+								<th>Staff Supportive</th>
+								<th>Site Learning <br> Objectives</th>
+								<th>Preceptor Learning <br> Objectives</th>
+								<th>Recommend Site</th>
+								<th>Feedback</th>
+							</tr>
+						</thead>
 					<tbody>";
 
 		$table .= $row;
 
-		$table .= 	"</tbody>
-				</table>
-				</div>";
-
-		return $table;
+		// close off and return table
+		return $table . "</tbody></table></div>";
 	}
 
 	/**
@@ -245,8 +245,8 @@
 								<tr class='text-center'>
 									<th>Enjoyed Site</th>
 									<th>Staff Supportive</th>
-									<th>Site Learning Objectives</th>
-									<th>Preceptor Learning Objectives</th>
+									<th>Site Learning <br> Objectives</th>
+									<th>Preceptor Learning <br> Objectives</th>
 									<th>Recommend Site</th>
 								</tr>
 							</thead>

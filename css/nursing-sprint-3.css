@@ -67,6 +67,11 @@ a.btn.btn-success:hover {
     color: var(--secondary-color-variant);
 }
 
+.table tr:hover {
+    background-color: var(--nursing-accent-color);
+    color: var(--nursing-secondary-color-variant)
+}
+
 /** receipt.php **/
 .bg-blue {
     background: var(--bs-blue);
