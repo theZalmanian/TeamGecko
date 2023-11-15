@@ -24,9 +24,9 @@
 												ORDER BY SiteAttended");
 
 				$totalSiteRatings = array(0, 0, 0, 0, 0);
-				$nameToCheck = "";
+				$currClinicalSite = "";
 				$clinicalSiteCount = 0;
-				$rowCount = 0;
+				$numRows = 0;
 
 				$rowsInSite = array(); 
 
@@ -54,48 +54,33 @@
 					$instructorFeedback = $currSubmission["InstructorFeedback"];
 
 					if($clinicalSiteCount == 0) {
-						$nameToCheck = $siteAttended;
-					}
-
-					// if the site is the same as the previous site
-					if($nameToCheck == $siteAttended) {
-						// increase counters
-						updateRatingsTracker($submissionRatings);
-						$rowCount++;
-
-						// generate and add row to array keeping track of all rows for this clinical site
-						$rowsInSite[] = generateTableRow($currSubmission);
+						$currClinicalSite = $siteAttended;
 					}
 
 					// if the site of the current row is a different site
-					elseif($nameToCheck != $siteAttended) {
-						// add all rows belonging to the previous clinical site to table
-						$allRowsForTable = implode("", $rowsInSite);
-
-						// display the table 
-						echo generateTable($allRowsForTable, $nameToCheck, $totalSiteRatings, $rowCount);
+					if($currClinicalSite != $siteAttended) {
+						displayTable($rowsInSite, $currClinicalSite, $numRows);
 
 						// track the new site
-						$nameToCheck = $siteAttended;
+						$currClinicalSite = $siteAttended;
 
-						// reset the counters to that of the new site
-						resetRatingsTracker();
-						$rowCount = 1;
-
-						// empty the rows array
+						// reset the trackers
 						$rowsInSite = array(); 
-
-						// generate and add row to array keeping track of all rows for this clinical site
-						$rowsInSite[] = generateTableRow($currSubmission);
+						resetRatingsTracker();
+						$numRows = 1;
 					}
+
+					updateRatingsTracker($submissionRatings);
+					$numRows++;
+
+					// generate and add row to array keeping track of all rows for this clinical site
+					$rowsInSite[] = generateTableRow($currSubmission);
 
 					$clinicalSiteCount++;
 				}
 
 				// display the last table of submissions
-				$allRowsForTable = implode("", $rowsInSite);
-
-				echo generateTable($allRowsForTable, $siteAttended, $totalSiteRatings, $rowCount);
+				displayTable($rowsInSite, $currClinicalSite, $numRows);
 			?>
 		</div>
 	</main>
@@ -103,6 +88,14 @@
 </html>
 
 <?php
+	function displayTable($rowsInSite, $currClinicalSite, $numRows) {
+		// add all rows belonging to the previous clinical site to table
+		$allRowsForTable = implode("", $rowsInSite);
+
+		// display the table 
+		echo generateTable($allRowsForTable, $currClinicalSite, $numRows);
+	}
+
 	function updateRatingsTracker($ratings) {
 		global $totalSiteRatings;
 
@@ -214,13 +207,12 @@
 	 * 
 	 * @param string $rowContent
 	 * @param string $clinicalSiteName
-	 * @param array $totalSiteRatings
-	 * @param int $rowCount
+	 * @param int $numRows
 	 * @return string
 	 */
-	function generateTable($rowContent, $clinicalSiteName, $totalSiteRatings, $rowCount) {
+	function generateTable($rowContent, $clinicalSiteName, $numRows) {
 		// generate clinical site averages using given data
-		$averageRatings = generateSiteAverages($totalSiteRatings, $rowCount);
+		$averageRatings = generateSiteAverages($numRows);
 
 		// generate and return table using given data
 		return "<div class='card mb-3 p-3 table-responsive'>
@@ -248,18 +240,13 @@
 
 	/**
 	 * 
-	 * @param array $totalSiteRatings
-	 * @param int $rowCount
+	 * @param int $numRows
 	 * @return string
 	 */
-	function generateSiteAverages($totalSiteRatings, $rowCount) {
-		$formattedAverages = array(
-			generateStars( round($totalSiteRatings[0] / $rowCount) ),
-			generateStars( round($totalSiteRatings[1] / $rowCount) ),
-			generateStars( round($totalSiteRatings[2] / $rowCount) ),
-			generateStars( round($totalSiteRatings[3] / $rowCount) ),
-			generateStars( round($totalSiteRatings[4] / $rowCount) ),
-		);
+	function generateSiteAverages($numRows) {
+		global $totalSiteRatings;
+
+		$formattedAverages = calculateSiteAverages($totalSiteRatings, $numRows);
 
 		$averagesContent = "";
 		for($i = 0; $i < count($formattedAverages); $i++) {
@@ -287,5 +274,15 @@
 						</tbody>
 					</table>
 				</div>";
+	}
+
+	function calculateSiteAverages($totalSiteRatings, $numRows) {
+		return array(
+			generateStars( round($totalSiteRatings[0] / $numRows) ),
+			generateStars( round($totalSiteRatings[1] / $numRows) ),
+			generateStars( round($totalSiteRatings[2] / $numRows) ),
+			generateStars( round($totalSiteRatings[3] / $numRows) ),
+			generateStars( round($totalSiteRatings[4] / $numRows) ),
+		);
 	}
 ?>
