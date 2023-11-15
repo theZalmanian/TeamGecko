@@ -17,7 +17,7 @@
 <body>
     <?php 
         // display site navigation
-        require_once("../php/layouts/navigation-sprint-3.php");
+        require_once("../php/layouts/navigation-sprint-4.php");
     ?>
     <main class="container" id="requirements">
         <div class="row">
