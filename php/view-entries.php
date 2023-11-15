@@ -9,9 +9,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <?php 
+	<?php 
         // include standard nursing header metadata
-        require "../php/layouts/nursing-metadata.php";
+        require_once("../php/layouts/nursing-metadata.php");
     ?>
 </head>
 <body>
@@ -23,10 +23,10 @@
 												FROM ExperienceFormSubmissions 
 												ORDER BY SiteAttended");
 
-				$scoreCounters = array(0, 0, 0, 0, 0);
+				$ratingsTracker = array(0, 0, 0, 0, 0);
 				$nameToCheck = "";
-				$siteCounter = 0;
-				$count = 0;
+				$clinicalSiteCount = 0;
+				$rowCount = 0;
 
 				$rowsInSite = array(); 
 
@@ -34,25 +34,30 @@
 				while ($currSubmission = mysqli_fetch_assoc($allSubmissions)) {
 					// get all relevant columns of current row
 					$siteAttended = $currSubmission["SiteAttended"];
+					$enjoyedSite = $currSubmission["EnjoyedSite"];
+					$staffSupportive = $currSubmission["StaffSupportive"];
+					$siteLearningObjectives = $currSubmission["SiteLearningObjectives"];
+					$preceptorLearningObjectives = $currSubmission["PreceptorLearningObjectives"];
+					$recommendSite = $currSubmission["RecommendSite"];
 					$siteOrStaffFeedback = $currSubmission["SiteOrStaffFeedback"];
 					$instructorFeedback = $currSubmission["InstructorFeedback"];
 
-					if($siteCounter == 0) {
+					if($clinicalSiteCount == 0) {
 						$nameToCheck = $siteAttended;
 					}
 
 					// if the site is the same as the previous site
 					if($nameToCheck == $siteAttended) {
 						// increase counters
-						$scoreCounters[0] +=  $currSubmission["EnjoyedSite"];
-						$scoreCounters[1] +=  $currSubmission["StaffSupportive"];
-						$scoreCounters[2] +=  $currSubmission["SiteLearningObjectives"];
-						$scoreCounters[3] +=  $currSubmission["PreceptorLearningObjectives"];
-						$scoreCounters[4] +=  $currSubmission["RecommendSite"];
-						$count++;
+						$ratingsTracker[0] +=  $enjoyedSite;
+						$ratingsTracker[1] +=  $staffSupportive;
+						$ratingsTracker[2] +=  $siteLearningObjectives;
+						$ratingsTracker[3] +=  $preceptorLearningObjectives;
+						$ratingsTracker[4] +=  $recommendSite;
+						$rowCount++;
 
 						// generate and add row to array keeping track of all rows for this clinical site
-						$rowsInSite[] = generateRow($currSubmission, $siteCounter, $siteOrStaffFeedback, $instructorFeedback);
+						$rowsInSite[] = generateRow($currSubmission);
 					}
 
 					// if the site of the current row is a different site
@@ -64,27 +69,27 @@
 						}
 
 						// display the table 
-						echo generateTable($allRowsForTable, $nameToCheck, $scoreCounters, $count);
+						echo generateTable($allRowsForTable, $nameToCheck, $ratingsTracker, $rowCount);
 
 						// track the new site
 						$nameToCheck = $siteAttended;
 
 						// reset the counters to that of the new site
-						$scoreCounters[0] =  $currSubmission["EnjoyedSite"];
-						$scoreCounters[1] =  $currSubmission["StaffSupportive"];
-						$scoreCounters[2] =  $currSubmission["SiteLearningObjectives"];
-						$scoreCounters[3] =  $currSubmission["PreceptorLearningObjectives"];
-						$scoreCounters[4] =  $currSubmission["RecommendSite"];
-						$count = 1;
+						$ratingsTracker[0] =  $enjoyedSite;
+						$ratingsTracker[1] =  $staffSupportive;
+						$ratingsTracker[2] =  $siteLearningObjectives;
+						$ratingsTracker[3] =  $preceptorLearningObjectives;
+						$ratingsTracker[4] =  $recommendSite;
+						$rowCount = 1;
 
 						// empty the rows array
 						$rowsInSite = array(); 
 
 						// generate and add row to array keeping track of all rows for this clinical site
-						$rowsInSite[] = generateRow($currSubmission, $siteCounter, $siteOrStaffFeedback, $instructorFeedback);
+						$rowsInSite[] = generateRow($currSubmission);
 					}
 
-					$siteCounter++;
+					$clinicalSiteCount++;
 				}
 
 				// display the last table of submissions
@@ -93,8 +98,7 @@
 					$allRowsForTable .= $rowsInSite[$i];
 				}
 
-				// display the table 
-				echo generateTable($allRowsForTable, $siteAttended, $scoreCounters, $count);
+				echo generateTable($allRowsForTable, $siteAttended, $ratingsTracker, $rowCount);
 			?>
 		</div>
 	</main>
@@ -103,23 +107,29 @@
 
 <?php
 	/**
-	 * @param mixed $currSubmission
-	 * @param int $siteCounter
-	 * @param string $siteOrStaffFeedback
-	 * @param string $instructorFeedback
+	 * 
+	 * @param array $rowData
 	 * @return string
 	 */
-	function generateRow($currSubmission, $siteCounter, $siteOrStaffFeedback, $instructorFeedback) {
-		// generate the current row
-		$row = "<tr class='text-center'>
-		<td>" . generateStars($currSubmission["EnjoyedSite"]) . "</td>
-		<td>" . generateStars($currSubmission["StaffSupportive"]) . "</td>
-		<td>" . generateStars($currSubmission["SiteLearningObjectives"]) . "</td>
-		<td>" . generateStars($currSubmission["PreceptorLearningObjectives"]) . "</td>
-		<td>" . generateStars($currSubmission["RecommendSite"]) . "</td>";
+	function generateRow($rowData) {
+		// setup array to hold all <td>'s generated for the <tr> being returned using the given data
+		$formattedData = array(
+			generateStars($rowData["EnjoyedSite"]),
+			generateStars($rowData["StaffSupportive"]),
+			generateStars($rowData["SiteLearningObjectives"]),
+			generateStars($rowData["PreceptorLearningObjectives"]),
+			generateStars($rowData["RecommendSite"]),
+			displayFeedback($rowData["SiteOrStaffFeedback"], $rowData["InstructorFeedback"])
+		);
 
-		// display feedback, if any, and close off <tr>
-		return $row . displayFeedback($siteCounter, $siteOrStaffFeedback, $instructorFeedback) . "</tr>";
+		// generate <td>'s for the current <tr> using the formatted data generated using the submission data
+		$rowContent = "";
+		for( $i = 0; $i < count($formattedData); $i++ ) {
+			$rowContent .= "<td>{$formattedData[$i]}</td>";
+		}
+
+		// return row content wrapped in a <tr>
+		return "<tr class='text-center'>" . $rowContent . "</tr>";
 	}
 
 	/**
@@ -129,76 +139,43 @@
 	 * @param string $instructorFeedback
 	 * @return string
 	 */
-	function displayFeedback($siteCounter, $siteOrStaffFeedback, $instructorFeedback) {
-		$feedbackDisplay = "";
+	function displayFeedback($siteOrStaffFeedback, $instructorFeedback) {
+		global $clinicalSiteCount;
 
 		// if feedback was given
 		if(!empty($siteOrStaffFeedback) || !empty($instructorFeedback)) {
-			// display the feedback button and modal in a <td>
-			$feedbackDisplay .= "<td>
-								<button type='button' class='btn btn-success border' data-bs-toggle='modal' 
-									data-bs-target='#feedback-modal-{$siteCounter}'>
-									View
-								</button>";
+			// generate feedback modal
+			$feedbackModal = generateFeedbackModal($siteOrStaffFeedback, $instructorFeedback);
 
-			$feedbackDisplay .= generateFeedbackModal($siteCounter, $siteOrStaffFeedback, $instructorFeedback) . "</td>";
+			// add the feedback button and modal to display
+			return "<button type='button' class='btn btn-success border' data-bs-toggle='modal' 
+						data-bs-target='#feedback-modal-{$clinicalSiteCount}'>
+						View
+					</button>
+					{$feedbackModal}";
 		}
 
-		// otherwise, display an empty <td>
+		// otherwise, display as empty
 		else {
-			$feedbackDisplay = "<td>N/A</td>";
+			return "N/A";
 		}
-
-		return $feedbackDisplay;
 	}
 
 	/**
 	 * 
-	 * @param string $row
-	 * @param string $siteAttended
-	 * @param array $scoreCounters
-	 * @param int $count
-	 * @return string
-	 */
-	function generateTable($row, $siteAttended, $scoreCounters, $count) {
-		$table = "<div class='card mb-3 p-3 table-responsive'>
-					<h1 class='text-center mb-3'>
-						<strong>{$siteAttended}</strong>
-					</h1>
-					<table class='table table-bordered table-striped-columns align-middle m-0'>
-						<thead>
-							<tr class='text-center'>
-								<th>Enjoyed Site</th>
-								<th>Staff Supportive</th>
-								<th>Site Learning <br> Objectives</th>
-								<th>Preceptor Learning <br> Objectives</th>
-								<th>Recommend Site</th>
-								<th>Feedback</th>
-							</tr>
-						</thead>
-					<tbody>";
-
-		// add all given rows and close off table
-		$table .= $row . "</tbody></table>";
-
-		// calculate and display averages in div under table 
-		return $table . calculateAndGenerateSiteAverages($scoreCounters, $count, $siteAttended) . "</div>";
-	}
-
-	/**
-	 * 
-	 * @param int $siteCounter 
 	 * @param string $siteOrStaffFeedback
 	 * @param string $instructorFeedback
 	 * @return string
 	 */
-	function generateFeedbackModal($siteCounter, $siteOrStaffFeedback, $instructorFeedback) {
+	function generateFeedbackModal($siteOrStaffFeedback, $instructorFeedback) {
+		global $clinicalSiteCount;
+
 		// setup feedback modal
-		$feedbackModal = "<div class='modal fade text-start' id='feedback-modal-{$siteCounter}' tabindex='-1' aria-labelledby='feedback-modal-label-{$siteCounter}' aria-hidden='true'>
+		$feedbackModal = "<div class='modal fade text-start' id='feedback-modal-{$clinicalSiteCount}' tabindex='-1' aria-labelledby='feedback-modal-label-{$clinicalSiteCount}' aria-hidden='true'>
 							<div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
 								<div class='modal-content'>
 									<div class='modal-header'>
-										<h1 class='modal-title fs-5' id='feedback-modal-label-{$siteCounter}'>
+										<h1 class='modal-title fs-5' id='feedback-modal-label-{$clinicalSiteCount}'>
 											<strong>Feedback</strong>
 										</h1>
 										<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'>
@@ -222,20 +199,60 @@
 
 	/**
 	 * 
-	 * @param array $scoreCounters
-	 * @param int $count
-	 * @param string $nameToCheck
+	 * @param string $rowContent
+	 * @param string $clinicalSiteName
+	 * @param array $ratingsTracker
+	 * @param int $rowCount
 	 * @return string
 	 */
-	function calculateAndGenerateSiteAverages($scoreCounters, $count, $nameToCheck) {
-		// calculate averages
-		$enjoySiteAverage = round($scoreCounters[0] / $count);
-		$staffSupportiveAverage = round($scoreCounters[1] / $count);
-		$siteLearningAverage = round($scoreCounters[2] / $count);
-		$preceptorLearningObjectiveAverage = round($scoreCounters[3] / $count);
-		$recommendSiteAverage = round($scoreCounters[4] / $count);
+	function generateTable($rowContent, $clinicalSiteName, $ratingsTracker, $rowCount) {
+		// generate clinical site averages using given data
+		$averageRatings = generateSiteAverages($ratingsTracker, $rowCount);
 
-		// generate and return averages
+		// generate and return table using given data
+		return "<div class='card mb-3 p-3 table-responsive'>
+					<h1 class='text-center mb-3'>
+						<strong>{$clinicalSiteName}</strong>
+					</h1>
+					<table class='table table-bordered table-striped-columns align-middle m-0'>
+						<thead>
+							<tr class='text-center'>
+								<th>Enjoyed Site</th>
+								<th>Staff Supportive</th>
+								<th>Site Learning <br> Objectives</th>
+								<th>Preceptor Learning <br> Objectives</th>
+								<th>Recommend Site</th>
+								<th>Feedback</th>
+							</tr>
+						</thead>
+						<tbody>
+							{$rowContent}
+						</tbody>
+					</table>
+					{$averageRatings}
+				</div>";
+	}
+
+	/**
+	 * 
+	 * @param array $ratingsTracker
+	 * @param int $rowCount
+	 * @return string
+	 */
+	function generateSiteAverages($ratingsTracker, $rowCount) {
+		$formattedAverages = array(
+			generateStars( round($ratingsTracker[0] / $rowCount) ),
+			generateStars( round($ratingsTracker[1] / $rowCount) ),
+			generateStars( round($ratingsTracker[2] / $rowCount) ),
+			generateStars( round($ratingsTracker[3] / $rowCount) ),
+			generateStars( round($ratingsTracker[4] / $rowCount) ),
+		);
+
+		$averagesContent = "";
+		for($i = 0; $i < count($formattedAverages); $i++) {
+			$averagesContent .= "<td>{$formattedAverages[$i]}</td>";
+		}
+
 		return "<div>
 					<h1 class='text-center my-3'>
 						<strong>Average Ratings</strong>
@@ -252,11 +269,7 @@
 						</thead>
 						<tbody>
 							<tr class='text-center'>
-								<td>" . generateStars($enjoySiteAverage) . "</td>
-								<td>" . generateStars($staffSupportiveAverage) . "</td>
-								<td>" . generateStars($siteLearningAverage) . "</td>
-								<td>" . generateStars($preceptorLearningObjectiveAverage) . "</td>
-								<td>" . generateStars($recommendSiteAverage) . "</td>
+								{$averagesContent}
 							</tr>
 						</tbody>
 					</table>
