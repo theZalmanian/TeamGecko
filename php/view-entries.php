@@ -23,7 +23,7 @@
 												FROM ExperienceFormSubmissions 
 												ORDER BY SiteAttended");
 
-				$ratingsTracker = array(0, 0, 0, 0, 0);
+				$totalSiteRatings = array(0, 0, 0, 0, 0);
 				$nameToCheck = "";
 				$clinicalSiteCount = 0;
 				$rowCount = 0;
@@ -34,11 +34,22 @@
 				while ($currSubmission = mysqli_fetch_assoc($allSubmissions)) {
 					// get all relevant columns of current row
 					$siteAttended = $currSubmission["SiteAttended"];
-					$enjoyedSite = $currSubmission["EnjoyedSite"];
-					$staffSupportive = $currSubmission["StaffSupportive"];
-					$siteLearningObjectives = $currSubmission["SiteLearningObjectives"];
-					$preceptorLearningObjectives = $currSubmission["PreceptorLearningObjectives"];
-					$recommendSite = $currSubmission["RecommendSite"];
+					
+					/**
+					 * 0 -> Enjoyed Site
+					 * 1 -> Staff Supportive
+					 * 2 -> Site Learning Objectives
+					 * 3 -> Preceptor Learning Objectives
+					 * 4 -> Recommend Site
+					 */
+					$submissionRatings = array(
+						$currSubmission["EnjoyedSite"],
+						$currSubmission["StaffSupportive"],
+						$currSubmission["SiteLearningObjectives"],
+						$currSubmission["PreceptorLearningObjectives"],
+						$currSubmission["RecommendSite"]
+					);
+					
 					$siteOrStaffFeedback = $currSubmission["SiteOrStaffFeedback"];
 					$instructorFeedback = $currSubmission["InstructorFeedback"];
 
@@ -49,56 +60,42 @@
 					// if the site is the same as the previous site
 					if($nameToCheck == $siteAttended) {
 						// increase counters
-						$ratingsTracker[0] +=  $enjoyedSite;
-						$ratingsTracker[1] +=  $staffSupportive;
-						$ratingsTracker[2] +=  $siteLearningObjectives;
-						$ratingsTracker[3] +=  $preceptorLearningObjectives;
-						$ratingsTracker[4] +=  $recommendSite;
+						updateRatingsTracker($submissionRatings);
 						$rowCount++;
 
 						// generate and add row to array keeping track of all rows for this clinical site
-						$rowsInSite[] = generateRow($currSubmission);
+						$rowsInSite[] = generateTableRow($currSubmission);
 					}
 
 					// if the site of the current row is a different site
 					elseif($nameToCheck != $siteAttended) {
 						// add all rows belonging to the previous clinical site to table
-						$allRowsForTable = "";
-						for ($i = 0; $i < count($rowsInSite); $i++) { 
-							$allRowsForTable .= $rowsInSite[$i];
-						}
+						$allRowsForTable = implode("", $rowsInSite);
 
 						// display the table 
-						echo generateTable($allRowsForTable, $nameToCheck, $ratingsTracker, $rowCount);
+						echo generateTable($allRowsForTable, $nameToCheck, $totalSiteRatings, $rowCount);
 
 						// track the new site
 						$nameToCheck = $siteAttended;
 
 						// reset the counters to that of the new site
-						$ratingsTracker[0] =  $enjoyedSite;
-						$ratingsTracker[1] =  $staffSupportive;
-						$ratingsTracker[2] =  $siteLearningObjectives;
-						$ratingsTracker[3] =  $preceptorLearningObjectives;
-						$ratingsTracker[4] =  $recommendSite;
+						resetRatingsTracker();
 						$rowCount = 1;
 
 						// empty the rows array
 						$rowsInSite = array(); 
 
 						// generate and add row to array keeping track of all rows for this clinical site
-						$rowsInSite[] = generateRow($currSubmission);
+						$rowsInSite[] = generateTableRow($currSubmission);
 					}
 
 					$clinicalSiteCount++;
 				}
 
 				// display the last table of submissions
-				$allRowsForTable = "";
-				for ($i = 0; $i < count($rowsInSite); $i++) { 
-					$allRowsForTable .= $rowsInSite[$i];
-				}
+				$allRowsForTable = implode("", $rowsInSite);
 
-				echo generateTable($allRowsForTable, $siteAttended, $ratingsTracker, $rowCount);
+				echo generateTable($allRowsForTable, $siteAttended, $totalSiteRatings, $rowCount);
 			?>
 		</div>
 	</main>
@@ -106,12 +103,28 @@
 </html>
 
 <?php
+	function updateRatingsTracker($ratings) {
+		global $totalSiteRatings;
+
+		for ($i = 0; $i < count($ratings); $i++) {
+			$totalSiteRatings[$i] += $ratings[$i];
+		}
+	}
+
+	function resetRatingsTracker() {
+		global $totalSiteRatings;
+
+		for ($i = 0; $i < count($totalSiteRatings); $i++) {
+			$totalSiteRatings[$i] = 0;
+		}
+	}
+
 	/**
 	 * 
 	 * @param array $rowData
 	 * @return string
 	 */
-	function generateRow($rowData) {
+	function generateTableRow($rowData) {
 		// setup array to hold all <td>'s generated for the <tr> being returned using the given data
 		$formattedData = array(
 			generateStars($rowData["EnjoyedSite"]),
@@ -201,13 +214,13 @@
 	 * 
 	 * @param string $rowContent
 	 * @param string $clinicalSiteName
-	 * @param array $ratingsTracker
+	 * @param array $totalSiteRatings
 	 * @param int $rowCount
 	 * @return string
 	 */
-	function generateTable($rowContent, $clinicalSiteName, $ratingsTracker, $rowCount) {
+	function generateTable($rowContent, $clinicalSiteName, $totalSiteRatings, $rowCount) {
 		// generate clinical site averages using given data
-		$averageRatings = generateSiteAverages($ratingsTracker, $rowCount);
+		$averageRatings = generateSiteAverages($totalSiteRatings, $rowCount);
 
 		// generate and return table using given data
 		return "<div class='card mb-3 p-3 table-responsive'>
@@ -235,17 +248,17 @@
 
 	/**
 	 * 
-	 * @param array $ratingsTracker
+	 * @param array $totalSiteRatings
 	 * @param int $rowCount
 	 * @return string
 	 */
-	function generateSiteAverages($ratingsTracker, $rowCount) {
+	function generateSiteAverages($totalSiteRatings, $rowCount) {
 		$formattedAverages = array(
-			generateStars( round($ratingsTracker[0] / $rowCount) ),
-			generateStars( round($ratingsTracker[1] / $rowCount) ),
-			generateStars( round($ratingsTracker[2] / $rowCount) ),
-			generateStars( round($ratingsTracker[3] / $rowCount) ),
-			generateStars( round($ratingsTracker[4] / $rowCount) ),
+			generateStars( round($totalSiteRatings[0] / $rowCount) ),
+			generateStars( round($totalSiteRatings[1] / $rowCount) ),
+			generateStars( round($totalSiteRatings[2] / $rowCount) ),
+			generateStars( round($totalSiteRatings[3] / $rowCount) ),
+			generateStars( round($totalSiteRatings[4] / $rowCount) ),
 		);
 
 		$averagesContent = "";
