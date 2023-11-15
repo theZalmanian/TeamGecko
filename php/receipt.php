@@ -16,18 +16,7 @@
     $thirdDigit = rand(0, 9);
     $fourthDigit = rand(0, 9);
 
-  // setup variables to hold Experience Survey form inputs
-    $siteAttended = $_POST["q1-site-attended"];
-    $enjoyedSite = $_POST["q2-enjoyed-site"];
-    $staffSupportive = $_POST["q3-staff-supportive"];
-    $siteLearningObjectives = $_POST["q4-site-learning-objectives"];
-    $preceptorLearningObjectives = $_POST["q5-preceptor-learning-objectives"];
-    $recommendSite = $_POST["q6-recommend-site"];
-    $siteOrStaffFeedback = $_POST["q7-site-or-staff-feedback"];
-    $instructorFeedback = $_POST["q8-instructor-feedback"];
-
-
-// select background color based on month
+    // select background color based on month
     $backgroundColor = "";
     
     // if Jan, Feb, or Mar
@@ -59,7 +48,7 @@
 <head>
     <?php 
         // include standard nursing header metadata
-        require "../php/layouts/nursing-metadata.php";
+        require_once("../php/layouts/nursing-metadata.php");
     ?>
 </head>
 <body>
@@ -92,19 +81,31 @@
             </div>
         <?php
             }
-        // Levi's changes
+
+            // setup variables to hold Experience Survey form inputs
+            $siteAttended = $_POST["q1-site-attended"];
+            $enjoyedSite = $_POST["q2-enjoyed-site"];
+            $staffSupportive = $_POST["q3-staff-supportive"];
+            $siteLearningObjectives = $_POST["q4-site-learning-objectives"];
+            $preceptorLearningObjectives = $_POST["q5-preceptor-learning-objectives"];
+            $recommendSite = $_POST["q6-recommend-site"];
+            $siteOrStaffFeedback = $_POST["q7-site-or-staff-feedback"];
+            $instructorFeedback = $_POST["q8-instructor-feedback"];
+
+            // if all Experience Survey data came through
             if( isset($siteAttended)
-            && isset($enjoyedSite)
-            && isset($staffSupportive)
-            && isset($siteLearningObjectives)
-            && isset($preceptorLearningObjectives)
-            && isset($recommendSite)
-            && isset($siteOrStaffFeedback)
-            && isset($instructorFeedback)) {
-            executeQuery("INSERT INTO ExperienceFormSubmissions (SiteAttended, EnjoyedSite, StaffSupportive, SiteLearningObjectives, PreceptorLearningObjectives, RecommendSite, SiteOrStaffFeedback, InstructorFeedback) 
-                        VALUES('{$siteAttended}', '{$enjoyedSite}', '{$staffSupportive}', 
-                        '{$siteLearningObjectives}', '{$preceptorLearningObjectives}', 
-                        '{$recommendSite}', '{$siteOrStaffFeedback}', '{$instructorFeedback}')");
+                && isset($enjoyedSite)
+                && isset($staffSupportive)
+                && isset($siteLearningObjectives)
+                && isset($preceptorLearningObjectives)
+                && isset($recommendSite)
+                && isset($siteOrStaffFeedback)
+                && isset($instructorFeedback)) {
+                // insert the submission into DB
+                executeQuery("INSERT INTO ExperienceFormSubmissions (SiteAttended, EnjoyedSite, StaffSupportive, SiteLearningObjectives, PreceptorLearningObjectives, RecommendSite, SiteOrStaffFeedback, InstructorFeedback) 
+                                VALUES('{$siteAttended}', '{$enjoyedSite}', '{$staffSupportive}', 
+                                        '{$siteLearningObjectives}', '{$preceptorLearningObjectives}', 
+                                        '{$recommendSite}', '{$siteOrStaffFeedback}', '{$instructorFeedback}')");
 
         }
             // otherwise display error and link to experience survey

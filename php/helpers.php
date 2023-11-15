@@ -95,7 +95,7 @@
     /**
      * Constructs and returns a string made up of the given # of stars: ★
      * @param int $numStars The # of stars to be generated and displayed
-     * @return string A string displaying "You selected:" in bold, followed by the given # of stars
+     * @return string A string containing the given # of stars: ★
      */
     function generateStars($numStars) {
         // add the given number of # stars to the display

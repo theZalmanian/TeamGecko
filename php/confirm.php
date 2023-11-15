@@ -67,15 +67,17 @@
                                 }
                     ?>
                                 <form class="my-1" action="/php/receipt.php" method="post">
-                                    <input type="hidden" name="q1-site-attended" value="<?php echo $siteAttended ?>">
-                                    <input type="hidden" name="q2-enjoyed-site" value="<?php echo $enjoyedSite?>">
-                                    <input type="hidden" name="q3-staff-supportive" value="<?php echo $staffSupportive?>">
-                                    <input type ="hidden" name="q4-site-learning-objectives" value="<?php echo $siteLearningObjectives ?>">
-                                    <input type ="hidden" name="q5-preceptor-learning-objectives" value="<?php echo $preceptorLearningObjectives ?>">
-                                    <input type ="hidden" name="q6-recommend-site" value="<?php echo $recommendSite?>">
-                                    <input type ="hidden" name="q7-site-or-staff-feedback" value="<?php echo $siteOrStaffFeedback?>">
-                                    <input type ="hidden" name="q8-instructor-feedback" value="<?php echo $instructorFeedback?>">
                                     <input type="hidden" name="survey-submitted" value="confirmed">
+
+                                    <input type="hidden" name="q1-site-attended" value="<?php echo $siteAttended; ?>">
+                                    <input type="hidden" name="q2-enjoyed-site" value="<?php echo $enjoyedSite; ?>">
+                                    <input type="hidden" name="q3-staff-supportive" value="<?php echo $staffSupportive; ?>">
+                                    <input type="hidden" name="q4-site-learning-objectives" value="<?php echo $siteLearningObjectives; ?>">
+                                    <input type="hidden" name="q5-preceptor-learning-objectives" value="<?php echo $preceptorLearningObjectives; ?>">
+                                    <input type="hidden" name="q6-recommend-site" value="<?php echo $recommendSite; ?>">
+                                    <input type="hidden" name="q7-site-or-staff-feedback" value="<?php echo $siteOrStaffFeedback; ?>">
+                                    <input type="hidden" name="q8-instructor-feedback" value="<?php echo $instructorFeedback; ?>">
+
                                     <div class="card container p-2 my-1">
                                         <div class="row justify-content-center">
                                             <button class="col-5 btn btn-success py-2 m-2 border" id="submit-experience">Confirm</button>
