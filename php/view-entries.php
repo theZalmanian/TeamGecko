@@ -4,6 +4,32 @@
 
     // save the current pages name to session
     setCurrentPage("View Entries");
+
+	/**
+	 * The name of the current clinical site
+	 */
+	$currClinicalSite = "";
+	
+	/**
+	 * The number of submissions processed from DB belonging to the current clinical site
+	 */
+	$currSubmissionCount = 0;
+
+	/**
+	 * The total number of submissions processed from DB
+	 */
+	$totalSubmissionCount = 0;
+
+	/**
+	 * An array containing the total ratings for each aspect of the current clinical site:
+	 * [Enjoyed Site, Staff Supportive, Site Learning Objectives, Preceptor Learning Objectives, Recommend Site]
+	 */
+	$ratingTotals = array(0, 0, 0, 0, 0);
+
+	/**
+	 * An array containing formatted submission rows belonging to the current clinical site
+	 */
+	$formattedSubmissionRows = array(); 
 ?>
 
 <!DOCTYPE html>
@@ -23,16 +49,9 @@
 												FROM ExperienceFormSubmissions 
 												ORDER BY SiteAttended");
 
-				$ratingTotals = array(0, 0, 0, 0, 0);
-				$currClinicalSite = "";
-				$clinicalSiteCount = 0;
-				$submissionCount = 0;
-
-				$formattedSubmissionRows = array(); 
-
 				// run through all returned submissions
 				while ($currSubmission = mysqli_fetch_assoc($allSubmissions)) {
-					// get the clinical site name
+					// get the current submission's corresponding clinical site
 					$siteAttended = $currSubmission["SiteAttended"];
 					
 					/**
@@ -51,34 +70,40 @@
 						$currSubmission["RecommendSite"]
 					);
 
-					if($clinicalSiteCount == 0) {
+					// if the current row is the first one being received from DB
+					if($totalSubmissionCount == 0) {
 						$currClinicalSite = $siteAttended;
 					}
 
-					// if the site of the current row is a different site
+					// if the current row belongs to a different 
+					// clinical site than the one tracked
 					if($currClinicalSite != $siteAttended) {
-						displayClinicalSite($currClinicalSite, $formattedSubmissionRows, $submissionCount);
+						// display the data for the previous clinical site
+						displayClinicalSite($currClinicalSite, $formattedSubmissionRows, $currSubmissionCount);
 
 						// track the new site
 						$currClinicalSite = $siteAttended;
 
-						// reset the trackers
+						// reset other trackers
 						$formattedSubmissionRows = array(); 
+						$currSubmissionCount = 1;
 						resetRatingTotals();
-						$submissionCount = 1;
 					}
 
+					// update the rating totals with the current submissions ratings
 					updateRatingTotals($submissionRatings);
-					$submissionCount++;
 
-					// generate and add row to array keeping track of all rows for this clinical site
-					$formattedSubmissionRows[] = generateSubmissionRow($currSubmission);
+					// a new submission has been tracked
+					$currSubmissionCount++;
+					$totalSubmissionCount++;
 
-					$clinicalSiteCount++;
+					// format the data of the current submission row, 
+					// and track with other rows belonging to the current clinical site
+					$formattedSubmissionRows[] = generateFormattedSubmissionRow($currSubmission);
 				}
 
-				// display the last table of submissions
-				displayClinicalSite($currClinicalSite, $formattedSubmissionRows, $submissionCount);
+				// display the data of the last clinical site (fencepost)
+				displayClinicalSite($currClinicalSite, $formattedSubmissionRows, $currSubmissionCount);
 			?>
 		</div>
 	</main>
@@ -141,7 +166,7 @@
 	 * @param array $currSubmission the current experience form submission received from the DB
 	 * @return string an HTML table row containing the data formatted appropriately
 	 */
-	function generateSubmissionRow($currSubmission) {
+	function generateFormattedSubmissionRow($currSubmission) {
 		// format and store the given data in array
 		$formattedData = array(
 			generateStars($currSubmission["EnjoyedSite"]),
@@ -166,12 +191,12 @@
 	 * Generates a Bootstrap Modal displaying the given feedback (if any). As both fields are optional, only the sections given (not empty) are displayed. If both fields are given as empty, a simple "N/A" is displayed instead
 	 * @param string $siteOrStaffFeedback Feedback regarding the clinical site or the staff working there (Optional)
 	 * @param string $instructorFeedback Feedback regarding the students instructor at the clinical site (Optional)
-	 * @global int $clinicalSiteCount Used for Modal ID
+	 * @global int $totalSubmissionCount Used for Modal ID
 	 * @return string a Bootstrap modal displaying the given feedback (if any), along with a corresponding toggle button; otherwise "N/A"
 	 */
 	function displayFeedback($siteOrStaffFeedback, $instructorFeedback) {
 		// grab the clinical site count for the modal ID
-		global $clinicalSiteCount;
+		global $totalSubmissionCount;
 
 		// if feedback was given
 		if(!empty($siteOrStaffFeedback) || !empty($instructorFeedback)) {
@@ -180,7 +205,7 @@
 
 			// return the generated Modal and corresponding toggle button
 			return "<button type='button' class='btn btn-success border' data-bs-toggle='modal' 
-						data-bs-target='#feedback-modal-{$clinicalSiteCount}'>
+						data-bs-target='#submission-{$totalSubmissionCount}-feedback-modal'>
 						View
 					</button>
 					{$feedbackModal}";
@@ -196,19 +221,19 @@
 	 * Generates a Bootstrap Modal displaying the given feedback. As both fields are optional, only the sections given (not empty) are displayed
 	 * @param string $siteOrStaffFeedback Feedback regarding the clinical site or the staff working there (Optional)
 	 * @param string $instructorFeedback Feedback regarding the students instructor at the clinical site (Optional)
-	 * @global int $clinicalSiteCount Used for Modal ID
+	 * @global int $totalSubmissionCount Used for Modal ID
 	 * @return string a Bootstrap modal displaying the given feedback
 	 */
 	function generateFeedbackModal($siteOrStaffFeedback, $instructorFeedback) {
 		// grab the clinical site count for the modal ID
-		global $clinicalSiteCount;
+		global $totalSubmissionCount;
 
 		// setup feedback Modal
-		$feedbackModal = "<div class='modal fade text-start' id='feedback-modal-{$clinicalSiteCount}' tabindex='-1' aria-labelledby='feedback-modal-label-{$clinicalSiteCount}' aria-hidden='true'>
+		$feedbackModal = "<div class='modal fade text-start' id='submission-{$totalSubmissionCount}-feedback-modal' tabindex='-1' aria-labelledby='feedback-modal-label-{$totalSubmissionCount}' aria-hidden='true'>
 							<div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
 								<div class='modal-content'>
 									<div class='modal-header'>
-										<h1 class='modal-title fs-5' id='feedback-modal-label-{$clinicalSiteCount}'>
+										<h1 class='modal-title fs-5' id='submission-{$totalSubmissionCount}-feedback-modal'>
 											" . displayStrong("Feedback") . "
 										</h1>
 										<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'>
