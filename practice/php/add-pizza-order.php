@@ -1,3 +1,11 @@
+<?php
+    // get the customers name
+    $customerName = $_POST["customer-name"];
+
+    // save it in the array
+    setcookie("customer-name", $customerName, time()+3600, "/");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/practice.css">
+
 </head>
 <body>
 <div class="container">
@@ -22,7 +31,6 @@
                     require '/home/geckosgr/db-connect-pizza.php';
 
                     // get pizza order form fields
-                    $customerName = $_POST["customer-name"];
                     $customerEmail = $_POST["customer-email"];
                     $pizzaSize = $_POST["pizza-size"];
 
@@ -53,7 +61,7 @@
                     $totalCosts = array("S" => "20.99", "M" => "35.99", "L" => "55.99");
 
                     // setup query to insert order with given data into DB
-                    $insertQuery = "INSERT INTO PizzaOrder (CustomerName, CustomerEmail, PizzaSize, Topping1, Topping2, PizzaCost) 
+                    $insertQuery = "INSERT INTO PizzaOrder (CustomerName, CustomerEmail, PizzaSize, Topping1, Topping2, PizzaCost)
                                         VALUES ('{$customerName}', '{$customerEmail}', '{$pizzaSize}', '{$selectedToppings[0]}', '{$selectedToppings[1]}', '{$totalCosts[$pizzaSize]}')";
 
                     // Execute the query

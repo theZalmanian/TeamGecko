@@ -1,3 +1,12 @@
+<?php
+    // check if name cookie is stored
+    $customerName = "";
+    if( isset($_COOKIE["customer-name"]) ) {
+        // get the customers name
+        $customerName = $_COOKIE["customer-name"];
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +41,7 @@
                             Practice
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item active disabled" aria-current="page" href="/practice/pizza-ordering/index.html">
+                            <a class="dropdown-item active disabled" aria-current="page" href="/practice/pizza-ordering/index.php">
                                 Order Pizza
                             </a>
                             <hr class="dropdown-divider">
@@ -148,7 +157,7 @@
                         <h1>2x Cheese Pizza</h1>
                         <div class="form-floating my-1">
                             <input type="text" class="form-control" id="customer-name" name="customer-name" 
-                                    placeholder="" required>
+                                    placeholder="" required value="<?php echo $customerName ?>">
                             <label for="customer-name">Name</label>
                         </div>
                         <div class="form-floating my-2">
