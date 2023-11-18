@@ -17,30 +17,28 @@
 <body>
 	<main class="container mt-3">
 		<div class="row">
-            <form class="my-1" action="/" method="post">
+            <form class="my-1" action="/php/save-requirements.php" method="post" target="_blank">
+                <input type="hidden" value="confirmed" name="confirm-edits">
                 <?php 
                     // setup and execute SELECT Query
                     $allRequirements = executeQuery("SELECT * FROM ClinicalRequirements");
 
-                    $targetCount = 0;
                     // run through rows returned from query
                     while ($currRow = mysqli_fetch_assoc($allRequirements)) {
                         // get each column from current row
+                        $requirementID = $currRow["RequirementID"];
                         $title = $currRow["RequirementTitle"];
                         $notes = $currRow["RequirementNotes"];
                         $option1 = $currRow["Option1"];
                         $option2 = $currRow["Option2"];
 
-                        // generate an accordion item for the row
-                        $targetID = "requirement-{$targetCount}";
-                        $targetCount++;
-
-                        echo displayRequirement($title, $notes, $option1, $option2, $targetID);
+                        // display the current requirement in editable inputs
+                        echo displayRequirement($title, $notes, $option1, $option2, $requirementID);
                     }                
                 ?>
                 <div class="card container p-2 my-1">
                     <div class="row justify-content-center">
-                        <button class="col-5 btn btn-success py-2 m-2 border" id="submit-save-requirements">Save All Changes</button>
+                        <button class="col-5 btn btn-success py-2 m-2 border" id="save-requirements">Save All Changes</button>
                         <a class="col-5 btn btn-danger py-2 m-2 border" href="/sprint-4/requirements.php">Cancel</a>
                     </div>
                 </div>
@@ -61,40 +59,11 @@
      */
     function displayRequirement($title, $notes, $option1, $option2, $targetID) {
         return "<div class='card mb-3 p-3'>
-                    " . generateBootstrapFloatingLabelTextbox("title-{$targetID}", "Title", $title, true) . "
-                    " . generateBootstrapFloatingLabelTextbox("notes-{$targetID}", "Notes", $notes, false) . "
-                    " . displayOptionTextarea("option1-{$targetID}", "Option 1", $option1, true) . "
-                    " . displayOptionTextarea("option2-{$targetID}", "Option 2", $option2, false) . "
+                    " . generateBootstrapFloatingLabelTextbox("{$targetID}-RequirementTitle", "Title", $title, true) . "
+                    " . generateBootstrapFloatingLabelTextbox("{$targetID}-RequirementNotes", "Notes", $notes, false) . "
+                    " . displayOptionTextarea("{$targetID}-Option1", "Option 1", $option1, true) . "
+                    " . displayOptionTextarea("{$targetID}-Option2", "Option 2", $option2, false) . "
                 </div>";
-    }
-
-    function generateOptionInputs($optionInputLabel, $option) {
-        // split the given option into individual lines
-        $optionLines = explode("\n", $option);
-
-        // start off option content
-        $optionContent = "<ul class='list-group list-group-flush'>";
-    
-        // run through all lines in the given option
-        foreach ($optionLines as $currLine) {
-            // remove leading and trailing whitespace
-            $currLine = trim($currLine);
-    
-            // if the current line starts with "-", its considered an option
-            if (!empty($currLine) && $currLine[0] === '-') {
-                // remove the leading "-" and add to display as option
-                $optionContent .= "<li class='list-group-item'>" . substr($currLine, 1) . "</li>";
-            } 
-            
-            // if there is content, but not starting with a "-", its considered a title
-            elseif(!empty($currLine)) {
-                // add to display as title
-                $optionContent .= "<li class='list-group-item h5 mb-0'>{$currLine}</li>";
-            }
-        }
-    
-        // close off and return option content
-        return $optionContent . "</ul>";
     }
 
     /**
@@ -104,7 +73,7 @@
      */
     function generateBootstrapFloatingLabelTextbox($inputID, $inputLabelText, $value, $isRequired) {
         if($isRequired) {
-            return "<div class='contact form-floating'>
+            return "<div class='contact form-floating mb-2'>
                         <input type='text' class='form-control' id='{$inputID}' name='{$inputID}'
                             placeholder='' value='{$value}' required>
                         <label for='{$inputID}'>
