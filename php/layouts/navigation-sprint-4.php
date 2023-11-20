@@ -1,7 +1,4 @@
 <?php
-    // get access to all helper methods
-    require_once("/home/geckosgr/public_html/php/helpers.php"); 
-
     /**
      * A collection of all pages in the navigation and their corresponding links
      */
@@ -10,24 +7,6 @@
         "Experience Survey" => "/sprint-4/experience.php",
         "Contact" => "/sprint-4/contact.php"
     );
-
-    /**
-     * Checks if the given page name matches the current page,
-     * and returns the corresponding class attributes to be added to a link if so
-     * @param string $pageName The name of the page being checked
-     * @return string a string containing the active and disabled classes if match; otherwise empty string
-     */
-    function isActive($pageName) {
-        // if the given page name matches that of the current page
-        if($pageName === getCurrentPage()) {
-            // return the active and disabled attributes to be
-            // added to that link's class list
-            return " " . "active disabled";
-        }
-
-        // otherwise return empty string
-        return "";
-    }
 ?>
 
 <nav class="navbar sticky-top navbar-expand-md mb-3 border-bottom">
@@ -59,3 +38,26 @@
         </div>
     </div>
 </nav>
+
+<?php                 
+    /**
+     * Checks if the given page title matches the current page's title,
+     * and returns the corresponding class attributes to be added to a link if so
+     * @param string $pageTitle The name of the page being checked
+     * @return string a string containing the active and disabled classes if match; otherwise empty string
+     */
+    function isActive($pageTitle) {
+        // include the current page's title
+        global $currPageTitle;
+
+        // if the given page name matches that of the current page
+        if($pageTitle === $currPageTitle) {
+            // return the active and disabled attributes to be
+            // added to that link's class list
+            return " " . "active disabled";
+        }
+
+        // otherwise return empty string
+        return "";
+    }
+?>
