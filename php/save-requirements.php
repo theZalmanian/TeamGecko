@@ -27,64 +27,40 @@
                 <?php
                     // if page was accessed from edit-requirements.php
                     if(isset($_POST["confirm-edits"]) && $_POST["confirm-edits"] === "confirmed") {
-                        // loop through the post data
                         $debugCount = 0;
-                        foreach ($_POST as $key => $value) {
-                            if($key != "confirm-edits") {
+                        // loop through the post data
+                        foreach ($_POST as $currKey => $currValue) {
+                            if($currKey != "confirm-edits") {
                                 $debugCount++;
-                                $data = explode("-", $key);
+                                // separate the key into ID and column
+                                $splitKey = explode("-", $currKey);
+                                $currRequirementID = $data[0];
+                                $currColumnName = $data[1];
 
-                                $requirementID = $data[0];
-                                $column = $data[1];
-
-                                // connect to database
-                                require_once('/home/geckosgr/db-connect-nursing.php');
-                                
-                                // setup select query 
-                                $selectQuery = "SELECT * FROM ClinicalRequirements WHERE RequirementID = {$requirementID}";
-
-                                $selectResult = mysqli_query($dbConnection, $selectQuery);
+                                // get the version of current requirement stored in DB
+                                $selectResult = executeQuery("SELECT * 
+                                                              FROM ClinicalRequirements 
+                                                              WHERE RequirementID = {$currRequirementID}");
 
                                 $requirementInDB = mysqli_fetch_assoc($selectResult);
 
-                                if($requirementInDB[$column] != $value) {
-                                    // setup the update query
-                                    $updateQuery = "UPDATE ClinicalRequirements SET {$column} = '{$value}' WHERE RequirementID = {$requirementID}";
-    
-                                    // execute the query
-                                    $result = mysqli_query($dbConnection, $updateQuery);
+                                // only update if the current value is not the same as that stored in DB
+                                if($requirementInDB[$currColumnName] != $currValue) {
+                                    // update the column with the given value
+                                    $result = executeQuery("UPDATE ClinicalRequirements 
+                                                            SET {$currColumnName} = '{$currValue}' 
+                                                            WHERE RequirementID = {$currRequirementID}");
 
                                     // display result
                                     if ($result) {
                                         echo "<p>({$debugCount}) Update successful!</p>";
-                                    } else {
+                                    } 
+                                    
+                                    else {
                                         echo "<p>Update failed: " . mysqli_error($dbConnection) . "</p>";
                                     }
                                 }
                             }
-                        }
-                    }
-
-                    function updateRequirement($requirementID, $column, $value) {
-                        // connect to database
-                        require_once('/home/geckosgr/db-connect-nursing.php');
-                        
-                        // setup select query 
-                        $selectQuery = "SELECT {$column} FROM ClinicalRequirements WHERE RequirementID = {$requirementID}";
-
-                        // setup the update query
-                        $updateQuery = "UPDATE ClinicalRequirements SET {$column} = '{$value}' WHERE RequirementID = {$requirementID}";
-
-                        // echo $updateQuery;
-                        // echo "<br><br>";
-
-                        // execute the query
-                        $result = mysqli_query($dbConnection, $updateQuery);
-
-                        if ($result) {
-                            echo "<p>Update successful!</p>";
-                        } else {
-                            echo "<p>Update failed: " . mysqli_error($dbConnection) . "</p>";
                         }
                     }
                 ?>

@@ -88,20 +88,20 @@
     ******************/
 
     /**
-     * Executes the given SQL query and returns the result
+     * Opens a connection to the DB, executes the given query, closes the DB connection, and returns the result
      *
      * @param string $query The SQL query to be executed
      * @return mixed Returns a mysqli_result object for successful SELECT queries, or true/false for other types of queries
      */
     function executeQuery($query) {
-        // connect to database
-        require_once('/home/geckosgr/db-connect-nursing.php');
+        // open connection to DB
+        $dbConnection = connectDB();
 
         // execute query and capture result
         $result = mysqli_query($dbConnection, $query);
 
         // close connection to DB
-        mysqli_close($dbConnection);
+        disconnectDB($dbConnection);
 
         return $result;
     }

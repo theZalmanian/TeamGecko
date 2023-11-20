@@ -8,6 +8,9 @@
     define("PHP_PATH", PUBLIC_HTML_PATH . "/php");
     define("LAYOUTS_PATH", PHP_PATH . "/layouts");
 
+    // provide DB credentials and connect/disconnect functions
+    require_once('/home/geckosgr/db-connect-nursing.php');
+
     // include all PHP helper functions
     require_once(PHP_PATH . "/helpers.php");
 ?>

@@ -21,7 +21,8 @@
                 <input type="hidden" value="confirmed" name="confirm-edits">
                 <?php 
                     // setup and execute SELECT Query
-                    $allRequirements = executeQuery("SELECT * FROM ClinicalRequirements");
+                    $allRequirements = executeQuery("SELECT * 
+                                                     FROM ClinicalRequirements");
 
                     // run through rows returned from query
                     while ($currRow = mysqli_fetch_assoc($allRequirements)) {
