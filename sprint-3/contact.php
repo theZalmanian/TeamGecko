@@ -1,9 +1,9 @@
 <?php 
-    // get access to all helper methods
-    require_once("../php/helpers.php");
-
-    // save the current pages name to session
-    setCurrentPage("Contact");
+    // get access to all PHP helpers
+    require_once("/home/geckosgr/public_html/initial.php");
+    
+    // store the current page's title for dynamic HTML generation
+    $currPageTitle = "Contact";
 ?>
 
 <!DOCTYPE html>

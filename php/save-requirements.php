@@ -1,12 +1,9 @@
 <?php 
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    
-    // get access to all helper methods
-    require_once("../php/helpers.php");
+    // get access to all PHP helpers
+    require_once("/home/geckosgr/public_html/initial.php");
 
-    // save the current pages name to session
-    setCurrentPage("Save Requirements");
+    // store the current page's title for dynamic HTML generation
+    $currPageTitle = "Save Requirements";
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +11,7 @@
 <head>
     <?php 
         // include standard nursing header metadata
-        require_once("../php/layouts/nursing-metadata.php");
+        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
     ?>
 </head>
 <body>

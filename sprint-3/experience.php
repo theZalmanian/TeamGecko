@@ -1,9 +1,9 @@
 <?php 
-    // get access to all helper methods
-    require_once("../php/helpers.php");
+    // get access to all PHP helpers
+    require_once("/home/geckosgr/public_html/initial.php");
 
     // save the current pages name to session
-    setCurrentPage("Experience Survey");
+    $currPageTitle = "Experience Survey";
 ?>
 
 <!DOCTYPE html>
@@ -11,13 +11,13 @@
 <head>
     <?php 
         // include standard nursing header metadata
-        require_once("../php/layouts/nursing-metadata.php");
+        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
     ?>
 </head>
 <body>
     <?php 
         // display site navigation
-        require_once("../php/layouts/navigation-sprint-3.php");
+        require_once(LAYOUTS_PATH . "/navigation-sprint-3.php");
     ?>
     <main class="container" id="experience">
         <div class="row">

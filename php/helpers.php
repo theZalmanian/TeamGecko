@@ -1,18 +1,4 @@
 <?php 
-    // only start a session if one does not exist yet
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-
-    /**
-     * Sets the current page in Session Storage to be the given page
-     * @param string $pageTitle The page being saved as the current page in Session Storage
-     */
-    function setCurrentPage($pageTitle) {
-        // save the given pages name to session as the current page
-        $_SESSION["currentPage"] = $pageTitle;
-    }
-
     /******************
     ***** DISPLAY *****
     ******************/
