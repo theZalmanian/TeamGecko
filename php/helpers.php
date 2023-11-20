@@ -1,28 +1,4 @@
 <?php 
-    // only start a session if one does not exist yet
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-
-    /**
-     * Gets and returns the page that is currently open from Session Storage, if any
-     * @return string the page that is currently open from Session Storage, if present; otherwise empty string
-     */
-    function getCurrentPage() {
-        // return the page that is currently open from Session Storage, 
-        // if one is not present, return an empty string
-        return isset($_SESSION["currentPage"]) ? $_SESSION["currentPage"] : ""; 
-    }
-
-    /**
-     * Sets the current page in Session Storage to be the given page
-     * @param string $pageTitle The page being saved as the current page in Session Storage
-     */
-    function setCurrentPage($pageTitle) {
-        // save the given pages name to session as the current page
-        $_SESSION["currentPage"] = $pageTitle;
-    }
-
     /******************
     ***** DISPLAY *****
     ******************/
@@ -108,7 +84,7 @@
     }
 
     /******************
-    ******* SQL *******
+    ****** MySQL ******
     ******************/
 
     /**
@@ -121,7 +97,12 @@
         // connect to database
         require_once('/home/geckosgr/db-connect-nursing.php');
 
-        // execute and return query
-        return mysqli_query($dbConnection, $query);
+        // execute query and capture result
+        $result = mysqli_query($dbConnection, $query);
+
+        // close connection to DB
+        mysqli_close($dbConnection);
+
+        return $result;
     }
 ?>

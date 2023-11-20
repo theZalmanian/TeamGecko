@@ -1,11 +1,6 @@
-<?php 
-    // get access to all helper methods
-    require_once("/home/geckosgr/public_html/php/helpers.php");
-?> 
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><?php echo getCurrentPage(); ?></title>
+<title><?php echo $currPageTitle; ?></title>
 <link rel="icon" type="image/x-icon" href="/nursing-images/nursing-logo.png">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
