@@ -51,15 +51,16 @@
 
                             // if message was not sent, display error
                             else {
-                                echo displayMessage("ERROR: Your message could not be sent at this time", "Please try again later");
+                                echo displayMessage("Please try again later", 
+                                                    "ERROR: Your message could not be sent at this time");
                             }
                         }
                         
                         // otherwise display error and link to contact form
                         else {                            
                             echo displayMessageWithLink("/sprint-3/contact.php", "Contact Form",
-                                                        "ERROR: No submission received from Contact Form.",
-                                                        "Please fill out the form and try again");
+                                                        "Please fill out the form and try again",
+                                                        "ERROR: No submission received from Contact Form.");
                         }
                     ?>
                 </div>
