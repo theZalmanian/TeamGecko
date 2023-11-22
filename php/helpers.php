@@ -91,7 +91,7 @@
      * Opens a connection to the DB, executes the given query, closes the DB connection, and returns the result
      *
      * @param string $query The SQL query to be executed
-     * @return mixed Returns a mysqli_result object for successful SELECT queries, or true/false for other types of queries
+     * @return mixed Returns a mysqli_result object for successful SELECT queries, and true/false for CREATE, UPDATE, and DELETE queries
      */
     function executeQuery($query) {
         // open connection to DB
