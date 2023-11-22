@@ -5,9 +5,15 @@
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Save Requirements";
 
-	$lastRequirementID = -1;
+    /**
+     * The RequirementID of the last requirement retrieved from DB
+     */
+	$lastRequirementID = 0; 
 
-    $requirementInDB = array();
+    /**
+     * The last Clinical Requirement retrieved from the DB
+     */
+    $lastRequirement = array();
 ?>
 
 <!DOCTYPE html>
@@ -25,41 +31,48 @@
             </div>
             <div class="col-12 col-md-8 col-lg-4">
                 <?php
-                    $updateCount = "";
                     // if page was accessed from edit-requirements.php
                     if(isset($_POST["confirm-edits"]) && $_POST["confirm-edits"] === "confirmed") {
-                        // loop through the post data
-                        foreach ($_POST as $currKey => $currValue) {
-                            if($currKey != "confirm-edits") {
-                                // separate the key into ID and column
-                                $splitKey = explode("-", $currKey);
+                        // loop through the data stored in _$POST
+                        foreach ($_POST as $postKey => $postValue) {
+                            // ignore confirmation flag stored in _$POST
+                            if($postKey != "confirm-edits") {
+                                // separate the key into ID and column name
+                                $splitKey = explode("-", $postKey);
                                 $currRequirementID = $splitKey[0];
                                 $currColumnName = $splitKey[1];
 
+                                // if the requirement received from _$POST has not been retrieved from DB
                                 if($currRequirementID != $lastRequirementID) {
                                     // get the version of current requirement stored in DB
                                     $selectResult = executeQuery("SELECT *
                                                                   FROM ClinicalRequirements 
                                                                   WHERE RequirementID = '{$currRequirementID}'");
 
-                                    $requirementInDB = mysqli_fetch_assoc($selectResult);
-
+                                    // save it externally, and update ID tracker
+                                    $lastRequirement = mysqli_fetch_assoc($selectResult);
                                     $lastRequirementID = $currRequirementID;
                                 }
 
-                                // only update if the current value is not the same as that stored in DB
-                                if($requirementInDB[$currColumnName] != $currValue) {
-                                    // update the column with the given value
-                                    executeQuery("UPDATE ClinicalRequirements 
-                                                  SET {$currColumnName} = '{$currValue}' 
-                                                  WHERE RequirementID = '{$currRequirementID}'");
+                                // only update if the value given for the current column 
+                                // is not the same as the one stored in DB
+                                if($lastRequirement[$currColumnName] != $postValue) {
+                                    $result = executeQuery("UPDATE ClinicalRequirements 
+                                                            SET {$currColumnName} = '{$postValue}' 
+                                                            WHERE RequirementID = '{$currRequirementID}'");
+
+                                    // if update failed, display which column failed to update, for which requirement
+                                    if(!$result) { 
+                                        echo displayMessage("Failed to update {$currColumnName} for " . $lastRequirement["RequirementTitle"],
+                                                            "ERROR: Update Failed");
+                                    }
                                 }
                             }
                         }
                         
+                        // display success, and link to Clinical Requirements page
                         echo displayMessageWithLink("/sprint-4/requirements.php", "Clinical Requirements",
-                                                    "All changes were saved successfully");
-                    
+                                                    "Changes were saved successfully");
                     }
                 ?>
             </div>
