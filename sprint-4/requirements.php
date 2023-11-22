@@ -40,7 +40,8 @@
                 <div class="accordion mb-2 my-2" id="requirements-accordion">
                     <?php
                         // setup and execute SELECT Query
-                        $allRequirements = executeQuery("SELECT * FROM ClinicalRequirements");
+                        $allRequirements = executeQuery("SELECT * 
+                                                         FROM ClinicalRequirements");
 
                         $targetCount = 0;
                         // run through rows returned from query

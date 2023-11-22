@@ -40,7 +40,7 @@
                                 // get the version of current requirement stored in DB
                                 $selectResult = executeQuery("SELECT * 
                                                               FROM ClinicalRequirements 
-                                                              WHERE RequirementID = {$currRequirementID}");
+                                                              WHERE RequirementID = '{$currRequirementID}'");
 
                                 $requirementInDB = mysqli_fetch_assoc($selectResult);
 
@@ -49,7 +49,7 @@
                                     // update the column with the given value
                                     $result = executeQuery("UPDATE ClinicalRequirements 
                                                             SET {$currColumnName} = '{$currValue}' 
-                                                            WHERE RequirementID = {$currRequirementID}");
+                                                            WHERE RequirementID = '{$currRequirementID}'");
 
                                     // display result
                                     if ($result) {
