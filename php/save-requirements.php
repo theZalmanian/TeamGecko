@@ -74,6 +74,11 @@
                         echo displayMessageWithLink("/sprint-4/requirements.php", "Clinical Requirements",
                                                     "Changes were saved successfully");
                     }
+                    else {
+                        echo displayMessageWithLink( PHP_PATH . "/edit-requirements.php", "Edit Clinical Requirements",
+                                                    "Please edit Clinical Requirements there and try again",
+                                                    "ERROR: No changes received from Edit Requirements");
+                    }
                 ?>
             </div>
             <div class="col-md-2 col-lg-4">
