@@ -173,6 +173,16 @@ ul.requirement-note > li.list-group-item {
 }
 
 /******************
+****** EDIT *******
+** REQUIREMENTS ***
+******************/
+
+nav#scrollspy > .navbar-nav > a.nav-link:hover
+, nav#scrollspy > .navbar-nav > a.nav-link.active {
+    border-left: 2.5px solid var(--nursing-secondary-color-variant);
+}
+
+/******************
 ***** CONTACT *****
 ******************/
 
