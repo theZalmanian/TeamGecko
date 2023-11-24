@@ -63,7 +63,7 @@
 
                                     // if update failed, display which column failed to update, for which requirement
                                     if(!$result) { 
-                                        echo displayMessage("Failed to update {$currColumnName} for " . $lastRequirement["RequirementTitle"],
+                                        echo generateMessage("Failed to update {$currColumnName} for " . $lastRequirement["RequirementTitle"],
                                                             "ERROR: Update Failed");
                                     }
                                 }
@@ -71,11 +71,11 @@
                         }
                         
                         // display success, and link to Clinical Requirements page
-                        echo displayMessageWithLink("/sprint-4/requirements.php", "Clinical Requirements",
+                        echo generateMessageWithLink("/sprint-4/requirements.php", "Clinical Requirements",
                                                     "Changes were saved successfully");
                     }
                     else {
-                        echo displayMessageWithLink( PHP_PATH . "/edit-requirements.php", "Edit Clinical Requirements",
+                        echo generateMessageWithLink( PHP_PATH . "/edit-requirements.php", "Edit Clinical Requirements",
                                                     "Please edit Clinical Requirements there and try again",
                                                     "ERROR: No changes received from Edit Requirements");
                     }

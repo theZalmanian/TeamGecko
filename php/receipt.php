@@ -115,7 +115,7 @@
                 </div>
                 <div class="col-12 col-md-8 col-lg-6">
                     <?php
-                        echo displayMessageWithLink("/sprint-3/experience.php", "Experience Survey",
+                        echo generateMessageWithLink("/sprint-3/experience.php", "Experience Survey",
                                                     "Please fill out the survey and try again",
                                                     "ERROR: No submission received from Experience Survey");
                     ?>

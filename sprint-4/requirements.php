@@ -161,7 +161,7 @@
      */
     function generateRequirementData($option1, $option2 = "") {
         // start off data content
-        $dataContent = "<div class='px-3 m-0 requirement-data'>";
+        $dataContent = "<div class='p-3 pt-0 m-0 requirement-data'>";
 
         // generate and add the first option to display (required)
         $dataContent .= generateRequirementOption($option1);

@@ -90,7 +90,7 @@
 
                         // otherwise display error and link to experience survey
                         else {
-                            echo displayMessageWithLink("/sprint-3/experience.php", "Experience Survey",
+                            echo generateMessageWithLink("/sprint-3/experience.php", "Experience Survey",
                                                         "Please fill out the survey and try again",
                                                         "ERROR: No submission received from Experience Survey");
                         }
