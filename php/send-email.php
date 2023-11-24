@@ -17,9 +17,9 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-2 col-lg-4">
+            <div class="col-md-2">
             </div>
-            <div class="col-12 col-md-8 col-lg-4">
+            <div class="col-12 col-md-8">
                 <div class="my-3">
                     <?php
                         // setup variables to hold Contact form inputs
@@ -42,7 +42,7 @@
                             $subject = "Nursing Nucleus Contact Page";
 
                             // attempt to send email with given data
-                            $messageSent = mail($sendToAddress, $subject, setupEmailContent(), $headers);
+                            $messageSent = mail($sendToAddress, $subject, generateEmailContent(), $headers);
 
                             // if the message was sent, display success 
                             if($messageSent) {
@@ -52,20 +52,20 @@
                             // if message was not sent, display error
                             else {
                                 echo generateMessage("Please try again later", 
-                                                    "ERROR: Your message could not be sent at this time");
+                                                     "ERROR: Your message could not be sent at this time");
                             }
                         }
                         
                         // otherwise display error and link to contact form
                         else {                            
-                            echo generateMessageWithLink("/sprint-3/contact.php", "Contact Form",
-                                                        "Please fill out the form and try again",
-                                                        "ERROR: No submission received from Contact Form.");
+                            echo generateMessageWithLink("/sprint-4/contact.php", "Contact Form",
+                                                         "Please fill out the form and try again",
+                                                         "ERROR: No submission received from Contact Form");
                         }
                     ?>
                 </div>
             </div>
-            <div class="col-md-2 col-lg-4">
+            <div class="col-md-2">
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
      * Generates and returns HTML content for the email message based on contact form data
      * @return string HTML content for the email message
      */
-    function setupEmailContent() {
+    function generateEmailContent() {
         // retrieve form variables from global scope
         global $name, $email, $phone, $message;
 
@@ -104,8 +104,8 @@
         // Add the message to the end of email content
         $emailContent .= "<li>Message: $message</li>
                         </ul>
-                        </body>
-                        </html";
+                    </body>
+                </html";
 
         // Return the generated email content
         return $emailContent;

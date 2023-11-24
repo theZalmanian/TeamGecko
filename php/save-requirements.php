@@ -27,9 +27,9 @@
 <body>
 	<main class="container mt-3">
 		<div class="row">
-            <div class="col-md-2 col-lg-4">
+            <div class="col-md-2">
             </div>
-            <div class="col-12 col-md-8 col-lg-4">
+            <div class="col-12 col-md-8">
                 <?php
                     // if page was accessed from edit-requirements.php
                     if(isset($_POST["confirm-edits"]) && $_POST["confirm-edits"] === "confirmed") {
@@ -64,7 +64,7 @@
                                     // if update failed, display which column failed to update, for which requirement
                                     if(!$result) { 
                                         echo generateMessage("Failed to update {$currColumnName} for " . $lastRequirement["RequirementTitle"],
-                                                            "ERROR: Update Failed");
+                                                             "ERROR: Update Failed");
                                     }
                                 }
                             }
@@ -72,16 +72,16 @@
                         
                         // display success, and link to Clinical Requirements page
                         echo generateMessageWithLink("/sprint-4/requirements.php", "Clinical Requirements",
-                                                    "Changes were saved successfully");
+                                                     "Changes were saved successfully");
                     }
                     else {
-                        echo generateMessageWithLink( PHP_PATH . "/edit-requirements.php", "Edit Clinical Requirements",
-                                                    "Please edit Clinical Requirements there and try again",
-                                                    "ERROR: No changes received from Edit Requirements");
+                        echo generateMessageWithLink("/php/edit-requirements.php", "Edit Clinical Requirements",
+                                                     "Please edit Clinical Requirements there and try again",
+                                                     "ERROR: No changes received from Edit Requirements");
                     }
                 ?>
             </div>
-            <div class="col-md-2 col-lg-4">
+            <div class="col-md-2">
             </div>
         </div>
     </main>
