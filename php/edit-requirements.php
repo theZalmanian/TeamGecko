@@ -90,81 +90,8 @@
         </div>
     </main>
 
-    <script>
-        "use strict"; // make JS be more like Java
-
-        // when the page loads
-        window.addEventListener('load', function () {
-            // setup to respond to page resizing 
-            window.addEventListener('resize', modifyScrollspy);
-
-            setupButtonOnClick("scrollspy-toggler", toggleScrollspy);
-
-            // setup when page first loads, in case user is on mobile
-            modifyScrollspy();
-        })
-
-        /**
-         * The standard mobile breakpoint is 576px
-         */ 
-        const MOBILE_BREAKPOINT = 765;
-
-        /**
-         * Returns true if the current window is <= 576px; otherwise false
-         */ 
-        function screenIsMobile() {
-            return window.innerWidth < MOBILE_BREAKPOINT;
-        }
-
-        function toggleScrollspy() {
-            const scrollspyContainer = getByID("scrollspy-container");
-
-            if(scrollspyContainer.classList.contains("collapse")) {
-                scrollspyContainer.classList.remove("collapse");
-            }
-            else {
-                scrollspyContainer.classList.add("collapse");
-            }
-        }
-
-        function modifyScrollspy() {   
-            const scrollspyContainer = getByID("scrollspy-container");
-
-            // if the screen is currently mobile-sized
-            if (screenIsMobile()) {
-                scrollspyContainer.classList.remove("h-100", "border-bottom-0", "rounded-bottom-0");
-                scrollspyContainer.classList.add("collapse");
-            } 
-            
-            // if the screen size changed, but is not small enough to be considered mobile 
-            else {
-                scrollspyContainer.classList.add("h-100", "border-bottom-0", "rounded-bottom-0");
-                scrollspyContainer.classList.remove("collapse");
-            }
-        }
-
-        /**
-         * Shortened form of the document.getElementById method
-         * @param elementID The element's id
-         * @returns The corresponding HTML Element
-         */
-        function getByID(elementID) {
-            return document.getElementById(elementID);
-        }
-
-        /**
-         * Sets up an onclick event for the given button using the given function
-         * @param {number} buttonID The button's id
-         * @param useFunction The function to be called when button is clicked
-         */
-        function setupButtonOnClick(buttonID, useFunction) {
-            // get the button
-            const button = getByID(buttonID);
-
-            // set it's onclick event
-            button.addEventListener("click", useFunction);
-        }
-    </script>
+    <!--Include dynamic scrollspy for mobile-->
+    <script src="/js/responsive-scrollspy-toggle.js"></script>
 </body>
 </html>
 
