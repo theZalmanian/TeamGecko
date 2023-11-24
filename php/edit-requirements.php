@@ -27,22 +27,6 @@
 
         // display the current requirement in editable inputs
         $allRequirementsDisplay[] = displayRequirement($title, $notes, $option1, $option2, $requirementID);
-    }     
-    
-    function displayScrollspy() {
-        global $allRequirementTitles;
-
-        $scrollSpy = "<div class='card col-12 mb-3 mb-md-0 h-100 border-bottom-0 rounded-bottom-0' id='scrollspy-container'>
-                            <nav class='navbar p-3 rounded-3 sticky-md-top' id='scrollspy'>
-                                <div class='navbar-nav'>";
-
-        for ($i = 1; $i <= count($allRequirementTitles); $i++) {
-            $scrollSpy .= "<a class='nav-link ps-2 py-0 my-2' href='#spy-{$i}'>
-                               {$allRequirementTitles[$i - 1]}
-                            </a>";
-        }
-
-        return $scrollSpy . "</div></nav></div>";
     }
 ?>
 
@@ -54,23 +38,24 @@
         require_once(LAYOUTS_PATH . "/nursing-metadata.php");
     ?>
 </head>
-<body>
+<body data-bs-spy='scroll' data-bs-target='#scrollspy' data-bs-smooth-scroll='true'>
 	<main class="container mt-3">
         <div class="row">
             <div class="col-md-3 col-lg-3">
-                <button id="scrollspy-toggler" class="btn btn-success d-md-none w-100 py-2 mb-2 border">
-                    Go to Clinical Site
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
-                    </svg>
-                </button>
+                <div class="card col-12 d-md-none mb-3 p-3">
+                    <button id="scrollspy-toggler" class="btn btn-success w-100 py-2 border">
+                        Go to Clinical Site
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
+                        </svg>
+                    </button>
+                </div>
                 <?php 
-                    echo displayScrollspy();
+                    echo displayBootstrapScrollspy($allRequirementTitles);
                 ?>
             </div>
             <div class="col-12 col-md-9 col-lg-9">
-                <form class="container" action="/php/save-requirements.php" method="post"
-                    data-bs-spy='scroll' data-bs-target='#scrollspy' data-bs-smooth-scroll='true'>
+                <form class="container" action="/php/save-requirements.php" method="post">
                     <input type="hidden" value="confirmed" name="confirm-edits">
                     <div class="row justify-content-center">
                         <?php

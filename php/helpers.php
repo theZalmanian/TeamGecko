@@ -66,6 +66,31 @@
                     {$content}
                 </div>";
     }
+    
+    /**
+     * Generates and returns a Bootstrap Scrollspy tracking and linking to all items in the given array.
+     * The Scrollspy should be generated on the side of a page, and will stick to the top, following the scroll till bottom of page is reached
+     * @param array $scrollspyDisplayTitles An array containing titles corresponding to the HTML content being tracked and linked to by Scrollspy
+     * @return string a Bootstrap Scrollspy tracking and linking to the given items
+     */
+    function displayBootstrapScrollspy($scrollspyDisplayTitles) {
+        // setup links to all given items
+        $scrollspyLinks = "";
+        for ($i = 1; $i <= count($scrollspyDisplayTitles); $i++) {
+            $scrollspyLinks .= "<a class='nav-link ps-2 py-0 my-2' href='#spy-{$i}'>
+                                    {$scrollspyDisplayTitles[$i - 1]}
+                                </a>";
+        }
+
+        // return Bootstrap scrollspy containing links leading to each of the given items
+        return "<div class='card col-12 mb-3 mb-md-0 h-100 border-bottom-0 rounded-bottom-0' id='scrollspy-container'>
+                    <nav class='navbar p-3 rounded-3 sticky-md-top' id='scrollspy'>
+                        <div class='navbar-nav'>
+                            {$scrollspyLinks}
+                        </div>
+                    </nav>
+                </div>";
+    }
 
     /**
      * Returns an HTML span signifying that an input is required
