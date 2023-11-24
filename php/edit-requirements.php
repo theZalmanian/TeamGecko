@@ -5,14 +5,20 @@
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Edit Requirements";
 
+    /**
+     * An array containing the Titles of all Requirements stored in DB
+     */
     $allRequirementTitles = array();
-    $allRequirementsDisplay = array();
-?>
 
-<?php 
+    /**
+     * An array containing a Bootstrap Card for each Clinical Requirement in the DB
+     * Each card has four inputs, one for each field a Clinical Requirement contains
+     */
+    $allRequirementCards = array();
+
     // setup and execute SELECT Query
     $allRequirements = executeQuery("SELECT * 
-                                    FROM ClinicalRequirements");
+                                     FROM ClinicalRequirements");
 
     // run through rows returned from query
     while ($currRow = mysqli_fetch_assoc($allRequirements)) {
@@ -23,10 +29,11 @@
         $option1 = $currRow["Option1"];
         $option2 = $currRow["Option2"];
 
+        // save the current requirement's title 
         $allRequirementTitles[] = $title;
 
-        // display the current requirement in editable inputs
-        $allRequirementsDisplay[] = displayRequirement($title, $notes, $option1, $option2, $requirementID);
+        // display the current requirement's data in editable inputs
+        $allRequirementCards[] = generateRequirementInputs($requirementID, $title, $notes, $option1, $option2);
     }
 ?>
 
@@ -42,6 +49,7 @@
 	<main class="container mt-3">
         <div class="row">
             <div class="col-md-3 col-lg-3">
+                <!--Button only accessible on mobile layout, used to toggle scrollspy-->
                 <div class="card col-12 d-md-none mb-3 p-3">
                     <button id="scrollspy-toggler" class="btn btn-success w-100 py-2 border">
                         Go to Clinical Site
@@ -51,7 +59,8 @@
                     </button>
                 </div>
                 <?php 
-                    echo displayBootstrapScrollspy($allRequirementTitles);
+                    // generate scrollspy to track and link requirements
+                    echo generateBootstrapScrollspy($allRequirementTitles);
                 ?>
             </div>
             <div class="col-12 col-md-9 col-lg-9">
@@ -59,8 +68,14 @@
                     <input type="hidden" value="confirmed" name="confirm-edits">
                     <div class="row justify-content-center">
                         <?php
-                            foreach ($allRequirementsDisplay as $requirementDisplay) {
-                                echo $requirementDisplay;
+                            /**
+                             * Global counter of # of HTML elements tracked by scrollspy
+                             */
+                            $scrollspyElementsCount = 0;
+
+                            // run through and display all generated requirement cards
+                            foreach ($allRequirementCards as $currRequirementCard) {
+                                echo $currRequirementCard;
                             }
                         ?>
                         <div class="card col-12 col-md-10 p-3 border-bottom-0 rounded-0 sticky-bottom">
@@ -81,78 +96,31 @@
 </html>
 
 <?php
-    $spyCounter = 0;
-
     /**
-     * 
-     * @param string $title
-     * @param string $notes
-     * @param string $option1
-     * @param string $option2
-     * @return string 
+     * Generates and returns a Bootstrap Card containing a Bootstrap Floating Label input for each of 
+     * the given parameters (except ID). If a value was provided, it will be stored within the generated input
+     * @param int $requirementID The requirement's ID, used in the generated inputs ID attributes
+     * @param string $title The title value stored for the requirement in DB, placed within textbox
+     * @param string $notes (Optional) The notes value stored for the requirement in DB, placed within textbox if given
+     * @param string $option1 The first option value stored for the requirement in DB, placed within textarea
+     * @param string $option2 (Optional) The second option value stored for the requirement in DB, placed within textarea if given
+     * @return string a Bootstrap Card containing the given values placed within individual Bootstrap Floating Label inputs so they may be edited
      */
-    function displayRequirement($title, $notes, $option1, $option2, $targetID) {
-        global $spyCounter;
-
-        $spyCounter++;
-
-        return "<div class='card col-12 col-md-10 mx-md-1 mb-3 p-3' id='spy-{$spyCounter}'>
-                    " . generateBootstrapFloatingLabelTextbox("{$targetID}-RequirementTitle", "Title", $title, true) . "
-                    " . generateBootstrapFloatingLabelTextbox("{$targetID}-RequirementNotes", "Notes", $notes, false) . "
-                    " . displayOptionTextarea("{$targetID}-Option1", "Option 1", $option1, true) . "
-                    " . displayOptionTextarea("{$targetID}-Option2", "Option 2", $option2, false) . "
-                </div>";
-    }
-
-    /**
-     * @param string $inputID
-     * @param string $inputLabelText
-     * @return string
-     */
-    function generateBootstrapFloatingLabelTextbox($inputID, $inputLabelText, $value, $isRequired) {
-        if($isRequired) {
-            return "<div class='contact form-floating my-2'>
-                        <input type='text' class='form-control' id='{$inputID}' name='{$inputID}'
-                            placeholder='' value='{$value}' required>
-                        <label for='{$inputID}'>
-                            {$inputLabelText}" . displayRequired() . "
-                        </label>
-                    </div>";
-        }
+    function generateRequirementInputs($requirementID, $title, $notes, $option1, $option2) {
+        /**
+         * Global counter of # of HTML elements tracked by scrollspy
+         */
+        global $scrollspyElementsCount; 
         
-        else {
-            return "<div class='contact form-floating my-2'>
-                        <input type='text' class='form-control' id='{$inputID}' name='{$inputID}'
-                            placeholder='' value='{$value}'>
-                        <label for='{$inputID}'>
-                            {$inputLabelText}
-                        </label>
-                    </div>";
-        }
-    }
+        // another element is tracked by scrollspy
+        $scrollspyElementsCount++;
 
-    /**
-     * @param string $inputID
-     * @param string $inputLabelText
-     * @return string
-     */
-    function displayOptionTextarea($inputID, $inputLabelText, $value, $isRequired) {
-        if($isRequired) {
-            return "<div class='contact form-floating my-2'>
-                        <textarea class='form-control' id='{$inputID}' name='{$inputID}' placeholder='' required>{$value}</textarea>
-                        <label for='{$inputID}'>
-                            {$inputLabelText}" . displayRequired() . "
-                        </label>
-                    </div>";
-        }
-
-        else {
-            return "<div class='contact form-floating my-2'>
-                    <textarea class='form-control' id='{$inputID}' name='{$inputID}' placeholder=''>{$value}</textarea>
-                    <label for='{$inputID}'>
-                        {$inputLabelText}
-                    </label>
+        // generate requirement inputs using given data and place within Card
+        return "<div class='card col-12 col-md-10 mx-md-1 mb-3 p-3' id='spy-{$scrollspyElementsCount}'>
+                    " . generateBootstrapFloatingTextBox("{$requirementID}-RequirementTitle", "Title", true, $title) . "
+                    " . generateBootstrapFloatingTextBox("{$requirementID}-RequirementNotes", "Notes", false, $notes) . "
+                    " . generateBootstrapFloatingTextArea("{$requirementID}-Option1", "Option 1", true, $option1) . "
+                    " . generateBootstrapFloatingTextArea("{$requirementID}-Option2", "Option 2", false, $option2) . "
                 </div>";
-        }
     }
 ?>
