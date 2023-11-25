@@ -30,6 +30,89 @@
 	 * An array containing formatted submission rows belonging to the current clinical site
 	 */
 	$formattedSubmissionRows = array(); 
+
+	/**
+     * An array containing the Names of all Clinical Sites that have submission stored in DB
+     */
+    $allClinicalSiteNames = array();
+
+	/**
+     * An array containing a Bootstrap Card for each Clinical Site that has a submission in the DB
+     * Each card contains a table with a row for each submission, along with a calculation of 
+	 * average ratings for the site at the bottom
+     */
+	$allClinicalSiteCards = array();
+
+	// get all experience form submissions from DB, ordered by clinical site
+	$allSubmissions = executeQuery("SELECT * 
+									FROM ExperienceFormSubmissions 
+									ORDER BY SiteAttended");
+
+	// run through all returned submissions
+	while ($currSubmission = mysqli_fetch_assoc($allSubmissions)) {
+		// get the current submission's corresponding clinical site
+		$siteAttended = $currSubmission["SiteAttended"];
+		
+		/**
+		 * All ratings containing within the current submission:
+		 * 0 -> Enjoyed Site
+		 * 1 -> Staff Supportive
+		 * 2 -> Site Learning Objectives
+		 * 3 -> Preceptor Learning Objectives
+		 * 4 -> Recommend Site
+		 */
+		$submissionRatings = array(
+			$currSubmission["EnjoyedSite"],
+			$currSubmission["StaffSupportive"],
+			$currSubmission["SiteLearningObjectives"],
+			$currSubmission["PreceptorLearningObjectives"],
+			$currSubmission["RecommendSite"]
+		);
+
+		// if the current row is the first one being received from DB
+		if($totalSubmissionCount == 0) {
+			$currClinicalSite = $siteAttended;
+		}
+
+		// if the current row belongs to a different 
+		// clinical site than the one tracked
+		if($currClinicalSite != $siteAttended) {
+			// save the name of the current clinical site to be used for scrollspy
+			$allClinicalSiteNames[] = $currClinicalSite;
+
+			//  save the data for the previous clinical site in a generated display card
+			$allClinicalSiteCards[] = generateClinicalSiteDisplay($formattedSubmissionRows
+																	, $currClinicalSite
+																	, $currSubmissionCount);
+
+			// track the new site
+			$currClinicalSite = $siteAttended;
+
+			// reset other trackers
+			$formattedSubmissionRows = array(); 
+			$currSubmissionCount = 0;
+			resetRatingTotals();
+		}
+
+		// update the rating totals with the current submissions ratings
+		updateRatingTotals($submissionRatings);
+
+		// a new submission has been tracked
+		$currSubmissionCount++;
+		$totalSubmissionCount++;
+
+		// format the data of the current submission row, 
+		// and track with other rows belonging to the current clinical site
+		$formattedSubmissionRows[] = generateFormattedSubmissionRow($currSubmission);
+	}
+
+	// save the name of the current clinical site to be used for scrollspy
+	$allClinicalSiteNames[] = $currClinicalSite;
+
+	// save the data for the previous clinical site in a generated display card
+	$allClinicalSiteCards[] = generateClinicalSiteDisplay($formattedSubmissionRows
+															, $currClinicalSite
+															, $currSubmissionCount);
 ?>
 
 <!DOCTYPE html>
@@ -40,91 +123,46 @@
         require_once(LAYOUTS_PATH . "/nursing-metadata.php");
     ?>
 </head>
-<body>
+<body data-bs-spy='scroll' data-bs-target='#scrollspy' data-bs-smooth-scroll='true'>
 	<main class="container mt-3">
 		<div class="row">
-			<?php
-				// get all experience form submissions from DB, ordered by clinical site
-				$allSubmissions = executeQuery("SELECT * 
-												FROM ExperienceFormSubmissions 
-												ORDER BY SiteAttended");
-
-				// run through all returned submissions
-				while ($currSubmission = mysqli_fetch_assoc($allSubmissions)) {
-					// get the current submission's corresponding clinical site
-					$siteAttended = $currSubmission["SiteAttended"];
-					
+			<div class="col-md-3 col-lg-3">
+                <!--Button only accessible on mobile layout, used to toggle scrollspy-->
+                <div class="card col-12 d-md-none mb-3 p-3">
+                    <button id="scrollspy-toggler" class="btn btn-success w-100 py-2 border">
+                        Go to Clinical Site
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
+                        </svg>
+                    </button>
+                </div>
+                <?php 
+                    // generate scrollspy to track and link clinical sites
+                    echo generateBootstrapScrollspy($allClinicalSiteNames);
+                ?>
+            </div>
+            <div class="col-12 col-md-9 col-lg-9">
+				<?php
 					/**
-					 * All ratings containing within the current submission:
-					 * 0 -> Enjoyed Site
-					 * 1 -> Staff Supportive
-					 * 2 -> Site Learning Objectives
-					 * 3 -> Preceptor Learning Objectives
-					 * 4 -> Recommend Site
+					 * Global counter of # of HTML elements tracked by scrollspy
 					 */
-					$submissionRatings = array(
-						$currSubmission["EnjoyedSite"],
-						$currSubmission["StaffSupportive"],
-						$currSubmission["SiteLearningObjectives"],
-						$currSubmission["PreceptorLearningObjectives"],
-						$currSubmission["RecommendSite"]
-					);
+					$scrollspyElementsCount = 0;
 
-					// if the current row is the first one being received from DB
-					if($totalSubmissionCount == 0) {
-						$currClinicalSite = $siteAttended;
+					// run through and display all generated clinical site cards
+					foreach ($allClinicalSiteCards as $currClinicalSiteCard) {
+						echo $currClinicalSiteCard;
 					}
-
-					// if the current row belongs to a different 
-					// clinical site than the one tracked
-					if($currClinicalSite != $siteAttended) {
-						// display the data for the previous clinical site
-						displayClinicalSite($currClinicalSite, $formattedSubmissionRows, $currSubmissionCount);
-
-						// track the new site
-						$currClinicalSite = $siteAttended;
-
-						// reset other trackers
-						$formattedSubmissionRows = array(); 
-						$currSubmissionCount = 1;
-						resetRatingTotals();
-					}
-
-					// update the rating totals with the current submissions ratings
-					updateRatingTotals($submissionRatings);
-
-					// a new submission has been tracked
-					$currSubmissionCount++;
-					$totalSubmissionCount++;
-
-					// format the data of the current submission row, 
-					// and track with other rows belonging to the current clinical site
-					$formattedSubmissionRows[] = generateFormattedSubmissionRow($currSubmission);
-				}
-
-				// display the data of the last clinical site (fencepost)
-				displayClinicalSite($currClinicalSite, $formattedSubmissionRows, $currSubmissionCount);
-			?>
+				?>
+			</div>
 		</div>
 	</main>
+
+	<!--Include dynamic scrollspy for mobile-->
+	<script src="/js/responsive-scrollspy-toggle.js"></script>
 </body>
 </html>
 
 <?php
-	/**
-	 * Displays a Bootstrap card containing the following content, generated using the given data:
-	 * A header displaying the site name, a table containing the given submission rows, and a section of average ratings for the current clinical site at the bottom	 * @param string $clinicalSiteName The name of the current clinical site
-     * @param array $formattedSubmissionRows An array of formatted submission rows belonging to the current clinical site
- 	 * @param int $submissionCount The number of submissions belonging to the current clinical site 
-	 */
-	function displayClinicalSite($clinicalSiteName, $formattedSubmissionRows, $submissionCount) {
-		// add all formatted submission rows together
-		$tableContent = implode("", $formattedSubmissionRows);
-
-		// display the current clinical site's data on page
-		echo generateClinicalSiteDisplay($tableContent, $clinicalSiteName, $submissionCount);
-	}
-
 	/**
 	 * Adds the values in the given $ratings array to the corresponding rating total in $ratingTotals
 	 * @param array $ratings An array containing the rating columns of the current experience form submission
@@ -257,9 +295,9 @@
 	}
 
 	/**
-	 * Generates a Bootstrap card containing the following content, generated using the given data:
+	 * Generates and returns a Bootstrap card containing the following content, generated using the given data:
 	 * A header displaying the site name, a table containing the given submission rows, and a section of average ratings for the current clinical site at the bottom
-	 * @param string $formattedSubmissionRows The submission rows pulled from the DB belonging to the current clinical site, formatted appropriately within HTML table rows
+	 * @param array $formattedSubmissionRows The submission rows pulled from the DB belonging to the current clinical site, formatted appropriately within HTML table rows
 	 * @param string $clinicalSiteName The name of the current clinical site
 	 * @param int $submissionCount The number of submissions belonging to the current clinical site 
 	 * @return string
@@ -271,11 +309,22 @@
 		 */
 		global $ratingTotals;
 
+		/**
+         * Global counter of # of HTML elements tracked by scrollspy
+         */
+        global $scrollspyElementsCount; 
+
+		// add all formatted submission rows together
+		$tableContent = implode("", $formattedSubmissionRows);
+        
+        // another element is tracked by scrollspy
+        $scrollspyElementsCount++;
+
 		// generate clinical site averages using given data
 		$averageRatings = generateRatingAverages($ratingTotals, $submissionCount);
 
 		// generate and return table using given data
-		return "<div class='card mb-3 p-3 table-responsive'>
+		return "<div class='card mb-3 p-3 table-responsive' id='spy-{$scrollspyElementsCount}'>
 					<h1 class='text-center mb-3'>
 						<strong>{$clinicalSiteName}</strong>
 					</h1>
@@ -291,7 +340,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							{$formattedSubmissionRows}
+							{$tableContent}
 						</tbody>
 					</table>
 					{$averageRatings}
