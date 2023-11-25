@@ -137,17 +137,15 @@
         // setup links to all given items
         $scrollspyLinks = "";
         for ($i = 1; $i <= count($scrollspyDisplayTitles); $i++) {
-            $scrollspyLinks .= "<a class='nav-link ps-2 py-0 my-2' href='#spy-{$i}'>
+            $scrollspyLinks .= "<a class='nav-link spy-link ps-2 py-0 my-2' href='#spy-{$i}'>
                                     {$scrollspyDisplayTitles[$i - 1]}
                                 </a>";
         }
 
         // return Bootstrap scrollspy containing links leading to each of the given items
         return "<div class='card col-12 mb-3 mb-md-0 h-100 border-bottom-0 rounded-bottom-0' id='scrollspy-container'>
-                    <nav class='navbar p-3 rounded-3 sticky-md-top' id='scrollspy'>
-                        <div class='navbar-nav'>
-                            {$scrollspyLinks}
-                        </div>
+                    <nav class='p-3 rounded-3 sticky-md-top' id='scrollspy'>
+                        {$scrollspyLinks}
                     </nav>
                 </div>";
     }
