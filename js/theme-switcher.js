@@ -3,14 +3,14 @@
 // when the page loads
 window.addEventListener("load", function() {  
     // if the theme is set to dark mode in local storage
-    if(localStorage.getItem(THEME_STORAGE_KEY) === "dark") {
+    if(localStorage.Cookies.get(THEME_STORAGE_KEY) === "dark") {
         // swap the theme to dark (light mode is default on load)
         swapTheme();
     } 
     
     // if the "Theme Switcher" button exists on the page
     if(getByID("theme-switcher") != null) {     
-        // setup its onclick to toggle between light and dark mode
+        // set up its onclick to toggle between light and dark mode
         setupButtonOnClick("theme-switcher", swapTheme);
     }
 })
@@ -46,7 +46,7 @@ function swapTheme() {
         setThemeSwitcherIcon(moonPath);
 
         // save current theme to local storage
-        localStorage.setItem(THEME_STORAGE_KEY, "light");
+        localStorage.Cookies.set(THEME_STORAGE_KEY, "light");
     }
 
     // if the theme is light mode (not dark mode)
@@ -58,7 +58,7 @@ function swapTheme() {
         setThemeSwitcherIcon(sunPath);
 
         // save current theme to local storage
-        localStorage.setItem(THEME_STORAGE_KEY, "dark");
+        localStorage.Cookies.set(THEME_STORAGE_KEY, "dark");
     }
 
     // if on mobile, collapse nav after theme switcher clicked
@@ -87,7 +87,7 @@ function setThemeSwitcherIcon(svgPath) {
 
     // if it exists on the page
     if(themeIcon != null) {
-        // set it's path to the given path
+        // set its path to the given path
         themeIcon.setAttribute('d', svgPath);
     }
 }
