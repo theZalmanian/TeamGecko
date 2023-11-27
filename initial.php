@@ -8,6 +8,9 @@
     define("PHP_PATH", PUBLIC_HTML_PATH . "/php");
     define("LAYOUTS_PATH", PHP_PATH . "/layouts");
 
+    // define cookie keys
+    define("SUBMITTED_SURVEY_KEY", "submitted-survey");
+
     // provide DB credentials and connect/disconnect functions
     require_once('/home/geckosgr/db-connect-nursing.php');
 

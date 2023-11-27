@@ -1,14 +1,13 @@
 <?php 
     // get access to all PHP helpers
-global $AlreadySubmitted;
-if(isset($_COOKIE[$AlreadySubmitted])){
-    echo "You have already submitted a survey, come back later";
-}
-require_once("/home/geckosgr/public_html/initial.php");
+    require_once("/home/geckosgr/public_html/initial.php");
+
+    if(isset($_COOKIE[SUBMITTED_SURVEY_KEY]) && $_COOKIE[SUBMITTED_SURVEY_KEY] === "1"){
+        echo generateMessage("You have already submitted a survey, come back later", "Survey Submission Detected");
+    }
 
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Experience Survey";
-
 ?>
 
 <!DOCTYPE html>
@@ -17,10 +16,6 @@ require_once("/home/geckosgr/public_html/initial.php");
     <?php 
         // include standard nursing header metadata
         require_once(LAYOUTS_PATH . "/nursing-metadata.php");
-
-    if(isset($_COOKIE[$AlreadySubmitted])){
-        echo "You have already submitted a survey, come back later";
-    }
     ?>
 </head>
 <body>

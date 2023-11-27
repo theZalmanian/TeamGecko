@@ -4,9 +4,10 @@
 
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Submission Receipt";
-    $cookie_name = "cookie";
+
     $AlreadySubmitted = $_POST["survey-submitted"] && $_POST["survey-submitted"] == "confirmed" ;
-    setcookie($cookie_name,$AlreadySubmitted,time() + (86400 * 30), "/");
+    setcookie(SUBMITTED_SURVEY_KEY, $AlreadySubmitted, time() + (86400 * 30), "/");
+
     /**
      * A numeric representation of the current month
      */
@@ -60,10 +61,10 @@
     <main class="container">
         <div class="row">
         <?php
-        // check that user came here from confirm.php
+            // check that user came here from confirm.php
             if( isset($_POST["survey-submitted"]) && $_POST["survey-submitted"] == "confirmed" ) {
 
-                ?>
+        ?>
             <div class="col-md-4">
             </div>
             <div class="col-12 col-md-4 mt-3">
