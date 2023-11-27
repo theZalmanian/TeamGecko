@@ -3,7 +3,7 @@
 // when the page loads
 window.addEventListener("load", function() {  
     // if the theme is set to dark mode in local storage
-    if(localStorage.Cookies.get(THEME_STORAGE_KEY) === "dark") {
+    if(Cookies.get(THEME_STORAGE_KEY) === "dark") {
         // swap the theme to dark (light mode is default on load)
         swapTheme();
     } 
@@ -46,7 +46,7 @@ function swapTheme() {
         setThemeSwitcherIcon(moonPath);
 
         // save current theme to local storage
-        localStorage.Cookies.set(THEME_STORAGE_KEY, "light");
+        Cookies.set(THEME_STORAGE_KEY, "light", { path: '' });
     }
 
     // if the theme is light mode (not dark mode)
@@ -58,7 +58,7 @@ function swapTheme() {
         setThemeSwitcherIcon(sunPath);
 
         // save current theme to local storage
-        localStorage.Cookies.set(THEME_STORAGE_KEY, "dark");
+        Cookies.set(THEME_STORAGE_KEY, "dark", { path: '' });
     }
 
     // if on mobile, collapse nav after theme switcher clicked
