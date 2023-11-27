@@ -1,11 +1,21 @@
 <?php
     /**
-     * A collection of all pages in the navigation and their corresponding links
+     * A collection of pages visible by ALL USERS in the navigation,
+     * and their corresponding links
      */
-    $navigationPages = array(
+    $publicNavigationPages = array(
         "Clinical Requirements" => "/sprint-4/requirements.php",
         "Experience Survey" => "/sprint-4/experience.php",
         "Contact" => "/sprint-4/contact.php"
+    );
+
+    /**
+     * A collection of pages visible by only ADMINS in the navigation,
+     * and their corresponding links
+     */
+    $adminNavigationPages = array( 
+        "View Entries" => "/php/view-entries.php",
+        "Edit Requirements" => "/php/edit-requirements.php"
     );
 ?>
 
@@ -21,12 +31,37 @@
         <div class="collapse navbar-collapse flex-row-reverse" id="navbar-nav">
             <div class="navbar-nav">
                 <?php 
-                    // generate a link for each stored navigation page
-                    foreach ($navigationPages as $pageLabel => $pageLink) {
+                    // generate a link for each public navigation page
+                    foreach ($publicNavigationPages as $pageLabel => $pageLink) {
                         echo "<a class='nav-link" . isActive($pageLabel) . "' href='{$pageLink}'>
                                 {$pageLabel}       
-                            </a>";
+                             </a>";
                     } 
+
+                    $isAdmin = true;
+
+                    // if the user is currently logged on as an admin
+                    if ($isAdmin) {
+                        // generate a link for each ADMIN navigation page
+                        $adminLinks = "";
+                        foreach ($adminNavigationPages as $pageLabel => $pageLink) {
+                            $adminLinks .= "<a class='dropdown-item" . isActive($pageLabel) . "' href='{$pageLink}'>
+                                                {$pageLabel}       
+                                            </a>";
+
+                            $adminLinks .= "<hr class='dropdown-divider'>";
+                        } 
+
+                        echo "<div class='dropdown-center nav-item'>
+                                <button class='nav-link dropdown-toggle' type='button' 
+                                    data-bs-toggle='dropdown' aria-expanded='false'>
+                                    " . displayStrong("Admin") . "
+                                </button>
+                                <div class='dropdown-menu'>
+                                    {$adminLinks}
+                                </div>
+                            </div>";
+                    }
                 ?>
                 <a class="nav-link" id="theme-switcher">
                     <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
