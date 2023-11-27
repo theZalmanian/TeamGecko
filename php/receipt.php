@@ -5,9 +5,6 @@
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Submission Receipt";
 
-    $AlreadySubmitted = $_POST["survey-submitted"] && $_POST["survey-submitted"] == "confirmed" ;
-    setcookie(SUBMITTED_SURVEY_KEY, $AlreadySubmitted, time() + (86400 * 30), "/");
-
     /**
      * A numeric representation of the current month
      */
@@ -47,6 +44,12 @@
     $recommendSite = $_POST["q6-recommend-site"];
     $siteOrStaffFeedback = $_POST["q7-site-or-staff-feedback"];
     $instructorFeedback = $_POST["q8-instructor-feedback"];
+
+    // if the survey has been submitted
+    if( isset($_POST["survey-submitted"]) && $_POST["survey-submitted"] == "confirmed" ) {
+        // set a cookie tracking that for the next month, across the whole site
+        setcookie(SUBMITTED_SURVEY_KEY, "confirmed", time() + (86400 * 30), "/");
+    }
 ?>
 
 <!DOCTYPE html>
