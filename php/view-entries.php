@@ -230,7 +230,7 @@
 
 		// if the current row has not been displayed to an admin user before, setup notifiers
 		$seenStatusDisplay = displaySeenStatus($currSubmission["Seen"]);
-		$newSubmissionClass = $currSubmission["Seen"] ? "bg-warning" : "";
+		$newSubmissionClass = $currSubmission["Seen"] ? "" : "bg-warning";
 
 		// return all <td>'s wrapped in a <tr>
 		return "<tr class='text-center {$newSubmissionClass}'>{$seenStatusDisplay}" . $formattedSubmissionRows . "</tr>";
@@ -239,11 +239,11 @@
 	/**
 	 * Generates and returns an HTML td containing a Bootstrap badge if the current submission row has 
 	 * not been seen, otherwise an empty td 
-	 * @param boolean $notSeen Whether the current submission has been displayed and seen by an admin before
+	 * @param boolean $seen Whether the current submission has been displayed and seen by an admin before
 	 * @return string an HTML td containing a Bootstrap badge if not seen, otherwise an empty td
 	 */
-    function displaySeenStatus($notSeen) {
-		if($notSeen) {
+    function displaySeenStatus($seen) {
+		if(!$seen) {
 			return "<td>
 						<span class='badge rounded-pill bg-success border'>
 							NEW
