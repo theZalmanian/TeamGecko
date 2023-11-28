@@ -44,17 +44,16 @@
      */
 	$allClinicalSiteCards = array();
 
-	// get all experience form submissions from DB, ordered by clinical site
+	// get all experience form submissions from DB, ordered by clinical site, 
+	// with newest submissions at the top
 	$allSubmissions = executeQuery("SELECT * 
 									FROM ExperienceFormSubmissions 
-									ORDER BY SiteAttended ;");
+									ORDER BY SiteAttended, Seen");
 
 	// run through all returned submissions
 	while ($currSubmission = mysqli_fetch_assoc($allSubmissions)) {
 		// get the current submission's corresponding clinical site
 		$siteAttended = $currSubmission["SiteAttended"];
-        $seen = $currSubmission["Seen"];
-        executeQuery("UPDATE ExperienceFormSubmissions SET Seen = 1 ");
 
 		/**
 		 * All ratings containing within the current submission:
@@ -103,6 +102,11 @@
 		// a new submission has been tracked
 		$currSubmissionCount++;
 		$totalSubmissionCount++;
+
+		// update the current submission to be "seen" in the DB, as it is about to be displayed
+        executeQuery("UPDATE ExperienceFormSubmissions 
+						SET Seen = 1
+						WHERE SubmissionID = {$currSubmission['SubmissionID']}");
 
 		// format the data of the current submission row, 
 		// and track with other rows belonging to the current clinical site
@@ -210,7 +214,7 @@
 	function generateFormattedSubmissionRow($currSubmission) {
 		// format and store the given data in array
 		$formattedData = array(
-			generateSeenText($currSubmission["Seen"]),
+			displaySeenStatus($currSubmission["Seen"]),
 			generateStars($currSubmission["EnjoyedSite"]),
 			generateStars($currSubmission["StaffSupportive"]),
 			generateStars($currSubmission["SiteLearningObjectives"]),
@@ -228,19 +232,21 @@
 		// return all <td>'s wrapped in a <tr>
 		return "<tr class='text-center'>" . $row . "</tr>";
 	}
-    //Generate if there is a false or true in the seen method
 
-    function generateSeenText($seen)
-    {
-        if($seen == 0  || $seen == null)
-        {
-            $newMessage = "NEW";
-        }
-        else
-        {
-            $newMessage = " ";
-        }
-        return $newMessage;
+	/**
+	 * 
+	 * @param boolean $seenBefore
+	 * @return string
+	 */
+    function displaySeenStatus($seenBefore) {
+        // if this submission was not seen before
+		if(!$seenBefore) {
+			// display new
+            return "NEW";
+        } 
+		
+		// otherwise display nothing
+		return "";
     }
 
 	/**
