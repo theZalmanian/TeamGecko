@@ -90,10 +90,10 @@
                 // insert the submission into DB
                 executeQuery("INSERT INTO ExperienceFormSubmissions (SiteAttended, EnjoyedSite, StaffSupportive, 
                                           SiteLearningObjectives, PreceptorLearningObjectives, 
-                                          RecommendSite, SiteOrStaffFeedback, InstructorFeedback) 
+                                          RecommendSite, SiteOrStaffFeedback, InstructorFeedback, Seen) 
                                 VALUES('{$siteAttended}', '{$enjoyedSite}', '{$staffSupportive}', 
                                        '{$siteLearningObjectives}', '{$preceptorLearningObjectives}', 
-                                       '{$recommendSite}', '{$siteOrStaffFeedback}', '{$instructorFeedback}')");
+                                       '{$recommendSite}', '{$siteOrStaffFeedback}', '{$instructorFeedback}, 1')");
 
         }
             // otherwise display error and link to experience survey

@@ -1,4 +1,5 @@
-<?php 
+<?php
+//Start a session function
     // get access to all PHP helpers
     require_once("/home/geckosgr/public_html/initial.php");
 
@@ -46,13 +47,15 @@
 	// get all experience form submissions from DB, ordered by clinical site
 	$allSubmissions = executeQuery("SELECT * 
 									FROM ExperienceFormSubmissions 
-									ORDER BY SiteAttended");
+									ORDER BY SiteAttended ;");
 
 	// run through all returned submissions
 	while ($currSubmission = mysqli_fetch_assoc($allSubmissions)) {
 		// get the current submission's corresponding clinical site
 		$siteAttended = $currSubmission["SiteAttended"];
-		
+        $seen = $currSubmission["Seen"];
+        executeQuery("UPDATE ExperienceFormSubmissions SET Seen = 1 ");
+
 		/**
 		 * All ratings containing within the current submission:
 		 * 0 -> Enjoyed Site
@@ -207,6 +210,7 @@
 	function generateFormattedSubmissionRow($currSubmission) {
 		// format and store the given data in array
 		$formattedData = array(
+			generateSeenText($currSubmission["Seen"]),
 			generateStars($currSubmission["EnjoyedSite"]),
 			generateStars($currSubmission["StaffSupportive"]),
 			generateStars($currSubmission["SiteLearningObjectives"]),
@@ -224,6 +228,20 @@
 		// return all <td>'s wrapped in a <tr>
 		return "<tr class='text-center'>" . $row . "</tr>";
 	}
+    //Generate if there is a false or true in the seen method
+
+    function generateSeenText($seen)
+    {
+        if($seen == 0  || $seen == null)
+        {
+            $newMessage = "NEW";
+        }
+        else
+        {
+            $newMessage = " ";
+        }
+        return $newMessage;
+    }
 
 	/**
 	 * Generates a Bootstrap Modal displaying the given feedback (if any). As both fields are optional, only the sections given (not empty) are displayed. If both fields are given as empty, a simple "N/A" is displayed instead
@@ -331,6 +349,7 @@
 					<table class='table table-bordered table-striped-columns align-middle m-0'>
 						<thead>
 							<tr class='text-center'>
+							    <th></th>
 								<th>Enjoyed Site</th>
 								<th>Staff Supportive</th>
 								<th>Site Learning <br> Objectives</th>
