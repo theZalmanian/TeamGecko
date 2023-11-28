@@ -10,6 +10,7 @@
 
     // define cookie keys
     define("SUBMITTED_SURVEY_KEY", "submitted-survey");
+    define("ADMIN_ROLE_KEY", "admin");
 
     // provide DB credentials and connect/disconnect functions
     require_once('/home/geckosgr/db-connect-nursing.php');

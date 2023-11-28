@@ -38,18 +38,14 @@
                              </a>";
                     } 
 
-                    $isAdmin = true;
-
                     // if the user is currently logged on as an admin
-                    if ($isAdmin) {
+                    if (isset($_COOKIE[ADMIN_ROLE_KEY]) && $_COOKIE[ADMIN_ROLE_KEY] === "current") {
                         // generate a link for each ADMIN navigation page
                         $adminLinks = "";
                         foreach ($adminNavigationPages as $pageLabel => $pageLink) {
                             $adminLinks .= "<a class='dropdown-item" . isActive($pageLabel) . "' href='{$pageLink}'>
                                                 {$pageLabel}       
                                             </a>";
-
-                            $adminLinks .= "<hr class='dropdown-divider'>";
                         } 
 
                         echo "<div class='dropdown-center nav-item'>
