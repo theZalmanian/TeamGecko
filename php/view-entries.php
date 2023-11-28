@@ -105,7 +105,7 @@
 
 		// update the current submission to be "seen" in the DB, as it is about to be displayed
         executeQuery("UPDATE ExperienceFormSubmissions 
-						SET Seen = 1
+						SET Seen = 0
 						WHERE SubmissionID = {$currSubmission['SubmissionID']}");
 
 		// format the data of the current submission row, 
@@ -211,10 +211,9 @@
 	 * @param array $currSubmission the current experience form submission received from the DB
 	 * @return string an HTML table row containing the data formatted appropriately
 	 */
-	function generateFormattedSubmissionRow($currSubmission) {
-		// format and store the given data in array
+	function generateFormattedSubmissionRow($currSubmission) {		
+		// format and store the remaining given data in array
 		$formattedData = array(
-			displaySeenStatus($currSubmission["Seen"]),
 			generateStars($currSubmission["EnjoyedSite"]),
 			generateStars($currSubmission["StaffSupportive"]),
 			generateStars($currSubmission["SiteLearningObjectives"]),
@@ -224,13 +223,19 @@
 		);
 
 		// wrap each formatted column in a <td>, and add to row
-		$row = "";
+		$formattedSubmissionRows = "";
 		for( $i = 0; $i < count($formattedData); $i++ ) {
-			$row .= "<td>{$formattedData[$i]}</td>";
+			$formattedSubmissionRows .= "<td>{$formattedData[$i]}</td>";
+		}
+
+		// if the current row has not been "seen" before
+		$notSeenDisplay = "<td></td>";
+		if(!$currSubmission["Seen"]) {
+			$notSeenDisplay = displayNotSeen();
 		}
 
 		// return all <td>'s wrapped in a <tr>
-		return "<tr class='text-center'>" . $row . "</tr>";
+		return "<tr class='text-center border'>{$notSeenDisplay}" . $formattedSubmissionRows . "</tr>";
 	}
 
 	/**
@@ -238,15 +243,10 @@
 	 * @param boolean $seenBefore
 	 * @return string
 	 */
-    function displaySeenStatus($seenBefore) {
-        // if this submission was not seen before
-		if(!$seenBefore) {
-			// display new
-            return "NEW";
-        } 
-		
-		// otherwise display nothing
-		return "";
+    function displayNotSeen() {
+        return "<td>
+					<span class='badge rounded-pill bg-danger'>NEW</span>
+				</td>";
     }
 
 	/**
@@ -352,9 +352,9 @@
 					<h1 class='text-center mb-3'>
 						<strong>{$clinicalSiteName}</strong>
 					</h1>
-					<table class='table table-bordered table-striped-columns align-middle m-0'>
+					<table class='table table-striped-columns align-middle m-0'>
 						<thead>
-							<tr class='text-center'>
+							<tr class='text-center border'>
 							    <th></th>
 								<th>Enjoyed Site</th>
 								<th>Staff Supportive</th>
@@ -396,9 +396,9 @@
 					<h1 class='text-center my-3'>
 						<strong>Average Ratings</strong>
 					</h1>
-					<table class='table table-bordered table-striped-columns align-middle m-0'>
+					<table class='table table-striped-columns align-middle m-0'>
 						<thead>
-							<tr class='text-center'>
+							<tr class='text-center border'>
 								<th>Enjoyed Site</th>
 								<th>Staff Supportive</th>
 								<th>Site Learning <br> Objectives</th>
@@ -407,7 +407,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class='text-center'>
+							<tr class='text-center border'>
 								{$averagesContent}
 							</tr>
 						</tbody>
