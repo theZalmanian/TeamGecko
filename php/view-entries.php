@@ -105,7 +105,7 @@
 
 		// update the current submission to be "seen" in the DB, as it is about to be displayed
         executeQuery("UPDATE ExperienceFormSubmissions 
-						SET Seen = 0
+						SET Seen = 1
 						WHERE SubmissionID = {$currSubmission['SubmissionID']}");
 
 		// format the data of the current submission row, 
@@ -228,25 +228,30 @@
 			$formattedSubmissionRows .= "<td>{$formattedData[$i]}</td>";
 		}
 
-		// if the current row has not been "seen" before
-		$notSeenDisplay = "<td></td>";
-		if(!$currSubmission["Seen"]) {
-			$notSeenDisplay = displayNotSeen();
-		}
+		// if the current row has not been displayed to an admin user before, setup notifiers
+		$seenStatusDisplay = displaySeenStatus($currSubmission["Seen"]);
+		$newSubmissionClass = $currSubmission["Seen"] ? "bg-warning" : "";
 
 		// return all <td>'s wrapped in a <tr>
-		return "<tr class='text-center border'>{$notSeenDisplay}" . $formattedSubmissionRows . "</tr>";
+		return "<tr class='text-center {$newSubmissionClass}'>{$seenStatusDisplay}" . $formattedSubmissionRows . "</tr>";
 	}
 
 	/**
-	 * 
-	 * @param boolean $seenBefore
-	 * @return string
+	 * Generates and returns an HTML td containing a Bootstrap badge if the current submission row has 
+	 * not been seen, otherwise an empty td 
+	 * @param boolean $notSeen Whether the current submission has been displayed and seen by an admin before
+	 * @return string an HTML td containing a Bootstrap badge if not seen, otherwise an empty td
 	 */
-    function displayNotSeen() {
-        return "<td>
-					<span class='badge rounded-pill bg-danger'>NEW</span>
-				</td>";
+    function displaySeenStatus($notSeen) {
+		if($notSeen) {
+			return "<td>
+						<span class='badge rounded-pill bg-success border'>
+							NEW
+						</span>
+					</td>";
+		}
+
+		return "<td></td>";
     }
 
 	/**
@@ -352,10 +357,10 @@
 					<h1 class='text-center mb-3'>
 						<strong>{$clinicalSiteName}</strong>
 					</h1>
-					<table class='table table-striped-columns align-middle m-0'>
+					<table class='table table-bordered table-striped-columns align-middle m-0'>
 						<thead>
-							<tr class='text-center border'>
-							    <th></th>
+							<tr class='text-center'>
+								<th></th>
 								<th>Enjoyed Site</th>
 								<th>Staff Supportive</th>
 								<th>Site Learning <br> Objectives</th>
@@ -396,9 +401,9 @@
 					<h1 class='text-center my-3'>
 						<strong>Average Ratings</strong>
 					</h1>
-					<table class='table table-striped-columns align-middle m-0'>
+					<table class='table table-bordered table-striped-columns align-middle m-0'>
 						<thead>
-							<tr class='text-center border'>
+							<tr class='text-center'>
 								<th>Enjoyed Site</th>
 								<th>Staff Supportive</th>
 								<th>Site Learning <br> Objectives</th>
@@ -407,7 +412,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class='text-center border'>
+							<tr class='text-center'>
 								{$averagesContent}
 							</tr>
 						</tbody>

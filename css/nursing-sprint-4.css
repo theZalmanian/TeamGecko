@@ -82,6 +82,10 @@
     background: var(--nursing-accent-color);
 }
 
+.table tbody > tr > td {
+    background-color: var(--bs-warning-rgb);
+}
+
 .modal-backdrop
 , .modal-backdrop.show {
     /* Disable bootstrap background styling */
