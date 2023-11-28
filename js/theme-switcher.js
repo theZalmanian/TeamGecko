@@ -1,9 +1,19 @@
 "use strict";
 
+/**
+ * The key used to store the current theme in local storage
+ */
+const THEME_STORAGE_KEY = "dark-mode";
+
+/**
+ * The attribute that sets a pages theme when added to the <html>
+ */
+const THEME_ATTRIBUTE = "data-bs-theme";
+
 // when the page loads
 window.addEventListener("load", function() {  
-    // if the theme is set to dark mode in local storage
-    if(Cookies.get(THEME_STORAGE_KEY) === "dark") {
+    // if the theme is saved as dark mode in a cookie
+    if(Cookies.get(THEME_STORAGE_KEY) === "active") {
         // swap the theme to dark (light mode is default on load)
         swapTheme();
     } 
@@ -14,16 +24,6 @@ window.addEventListener("load", function() {
         setupButtonOnClick("theme-switcher", swapTheme);
     }
 })
-
-/**
- * The key used to store the current theme in local storage
- */
-const THEME_STORAGE_KEY = "stored-theme";
-
-/**
- * The attribute that sets a pages theme when added to the <html>
- */
-const THEME_ATTRIBUTE = "data-bs-theme";
 
 /**
  * Swaps the page's theme between light and dark mode when the 
@@ -45,8 +45,8 @@ function swapTheme() {
         // set the theme icon to display a moon 
         setThemeSwitcherIcon(moonPath);
 
-        // save current theme to local storage
-        Cookies.set(THEME_STORAGE_KEY, "light", { path: '' });
+        // remove the cookie storing theme
+        Cookies.remove(THEME_STORAGE_KEY, { path: "/" });
     }
 
     // if the theme is light mode (not dark mode)
@@ -57,8 +57,8 @@ function swapTheme() {
         // set the theme icon to display a sun
         setThemeSwitcherIcon(sunPath);
 
-        // save current theme to local storage
-        Cookies.set(THEME_STORAGE_KEY, "dark", { path: '' });
+        // save current theme in global cookie 
+        Cookies.set(THEME_STORAGE_KEY, "active", { expires: 365, path: "/" });
     }
 
     // if on mobile, collapse nav after theme switcher clicked

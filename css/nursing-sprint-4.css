@@ -82,7 +82,8 @@
     background: var(--nursing-accent-color);
 }
 
-.modal-backdrop.show {
+.modal-backdrop
+, .modal-backdrop.show {
     /* Disable bootstrap background styling */
     --bs-backdrop-bg: none;
     --bs-backdrop-opacity: -;
