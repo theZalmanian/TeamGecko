@@ -93,7 +93,7 @@
                                           RecommendSite, SiteOrStaffFeedback, InstructorFeedback, Seen) 
                                 VALUES('{$siteAttended}', '{$enjoyedSite}', '{$staffSupportive}', 
                                        '{$siteLearningObjectives}', '{$preceptorLearningObjectives}', 
-                                       '{$recommendSite}', '{$siteOrStaffFeedback}', '{$instructorFeedback}, 1')");
+                                       '{$recommendSite}', '{$siteOrStaffFeedback}', '{$instructorFeedback}', '0')");
 
         }
             // otherwise display error and link to experience survey
