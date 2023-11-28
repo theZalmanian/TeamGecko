@@ -145,7 +145,7 @@
                 </div>
                 <?php 
                     // generate scrollspy to track and link clinical sites
-                    echo generateBootstrapScrollspy($allClinicalSiteNames);
+                    echo generateBootstrapScrollspy($allClinicalSiteNames, "/sprint-4/experience.php");
                 ?>
             </div>
             <div class="col-12 col-md-9 col-lg-9">
@@ -360,7 +360,7 @@
 					<table class='table table-bordered table-striped-columns align-middle m-0'>
 						<thead>
 							<tr class='text-center'>
-								<th></th>
+								<th>Status</th>
 								<th>Enjoyed Site</th>
 								<th>Staff Supportive</th>
 								<th>Site Learning <br> Objectives</th>

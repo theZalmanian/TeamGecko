@@ -60,7 +60,7 @@
                 </div>
                 <?php 
                     // generate scrollspy to track and link requirements
-                    echo generateBootstrapScrollspy($allRequirementTitles);
+                    echo generateBootstrapScrollspy($allRequirementTitles, "/sprint-4/requirements.php");
                 ?>
             </div>
             <div class="col-12 col-md-9 col-lg-9">
@@ -79,10 +79,9 @@
                             }
                         ?>
                         <div class="card col-12 col-md-10 p-3 border-bottom-0 rounded-0 sticky-bottom">
-                            <div class="row d-flex justify-content-center">
-                                <button type="submit" class="col-5 btn btn-success py-2 mx-2 border" id="save-requirements">Save All Changes</button>
-                                <a class="col-5 btn btn-danger py-2 mx-2 border" href="/sprint-4/requirements.php">Cancel</a>
-                            </div>
+                            <button type="submit" class="col-12 btn btn-success py-2 border" id="save-requirements">
+                                Save All Changes
+                            </button>
                         </div>
                     </div>
                 </form>
