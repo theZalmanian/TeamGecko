@@ -60,11 +60,11 @@
                 </div>
                 <?php 
                     // generate scrollspy to track and link requirements
-                    echo generateBootstrapScrollspy($allRequirementTitles, "/sprint-4/requirements.php");
+                    echo generateBootstrapScrollspy($allRequirementTitles, "/sprint-5/requirements.php");
                 ?>
             </div>
             <div class="col-12 col-md-9 col-lg-9">
-                <form class="container" action="/php/save-requirements.php" method="post">
+                <form class="container" action="/php/admin/save-requirements.php" method="post">
                     <input type="hidden" value="confirmed" name="confirm-edits">
                     <div class="row justify-content-center">
                         <?php

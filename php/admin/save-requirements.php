@@ -71,11 +71,11 @@
                         }
                         
                         // display success, and link to Clinical Requirements page
-                        echo generateMessageWithLink("/sprint-4/requirements.php", "Clinical Requirements",
+                        echo generateMessageWithLink("/sprint-5/requirements.php", "Clinical Requirements",
                                                      "Changes were saved successfully");
                     }
                     else {
-                        echo generateMessageWithLink("/php/edit-requirements.php", "Edit Clinical Requirements",
+                        echo generateMessageWithLink("/php/admin/edit-requirements.php", "Edit Clinical Requirements",
                                                      "Please edit Clinical Requirements there and try again",
                                                      "ERROR: No changes received from Edit Requirements");
                     }
