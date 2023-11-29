@@ -26,10 +26,11 @@
                         $name = $_POST["name"];
                         $email = $_POST["email"];
                         $phone = $_POST["phone"];
+                        $programName = $_POST["programName"];
                         $message = $_POST["message"];
 
                         // check that all required inputs were submitted on the Contact form
-                        if( isset($name) && isset($email) && isset($message) ) {
+                        if( isset($name) && isset($email) && isset($message) && isset($programName)) {
                             // setup sending and receiving addresses
                             $sendToAddress = "";
                             $sendFromAddress = "NursingNucleus@greenriverdev.com";
@@ -79,7 +80,7 @@
      */
     function generateEmailContent() {
         // retrieve form variables from global scope
-        global $name, $email, $phone, $message;
+        global $name, $email, $phone, $programName, $message;
 
         // setup most of email content
         $emailContent = "<html lang='en'>
@@ -94,18 +95,20 @@
                         <body>
                         <ul>
                             <li>Name: $name</li>
-                            <li>Email: $email</li>";
-
+                            <li>Email: $email</li>
+                           ";
         // only add the phone number to the message if it was provided
         if ( !empty($phone) ) {
             $emailContent .= "<li>Phone: $phone </li>";
         } 
 
         // Add the message to the end of email content
-        $emailContent .= "<li>Message: $message</li>
+        $emailContent .= "<li> Program Name: $programName </li>
+                           <li>Message: $message</li>
+                        
                         </ul>
                     </body>
-                </html";
+                  </html>";
 
         // Return the generated email content
         return $emailContent;

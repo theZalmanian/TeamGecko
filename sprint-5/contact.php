@@ -56,13 +56,20 @@
                     </div>
                     <div class="card p-3 my-1">
                         <div class="contact form-floating">
+                            <label for="programName"></label><input type="text" class="form-control" id="programName" name="programName" placeholder="Program Name" required>
+                            <label for="Program Name">
+                                Program Name <?php echo displayRequired(); ?>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card p-3 my-1">
+                        <div class="contact form-floating">
                             <textarea class="form-control" id="message" name="message"
                                 placeholder="" required></textarea>
                             <label for="message">
                                 Message <?php echo displayRequired(); ?>
                             </label>
                         </div>
-                    </div>
                     <div class="card p-3 my-1">
                         <button class="btn btn-success py-2 border" id="submit-contact">Submit</button>
                     </div>
