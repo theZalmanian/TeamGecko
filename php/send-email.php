@@ -58,7 +58,7 @@
                         
                         // otherwise display error and link to contact form
                         else {                            
-                            echo generateMessageWithLink("/sprint-4/contact.php", "Contact Form",
+                            echo generateMessageWithLink("/sprint-5/contact.php", "Contact Form",
                                                          "Please fill out the form and try again",
                                                          "ERROR: No submission received from Contact Form");
                         }
