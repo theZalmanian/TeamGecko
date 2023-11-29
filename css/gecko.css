@@ -48,3 +48,8 @@ a {
 .list-group {
     --bs-list-group-border-color: var(--gecko-accent-color);
 }
+
+.dropdown-center > .dropdown-menu.show {
+    transform: translateX(2.5vw);
+    margin-left: calc(-75px - 12px) !important; 
+}
