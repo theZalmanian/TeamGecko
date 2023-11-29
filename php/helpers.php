@@ -188,6 +188,27 @@
         return $stars;
     }
 
+    /**
+     * Checks if the given page title matches the current page's title,
+     * and returns the corresponding class attributes to be added to a link if so
+     * @param string $pageTitle The name of the page being checked
+     * @return string a string containing the active and disabled classes if match; otherwise empty string
+     */
+    function isActive($pageTitle) {
+        // include the current page's title
+        global $currPageTitle;
+
+        // if the given page name matches that of the current page
+        if($pageTitle === $currPageTitle) {
+            // return the active and disabled attributes to be
+            // added to that link's class list
+            return " " . "active disabled";
+        }
+
+        // otherwise return empty string
+        return "";
+    }
+
     /******************
     ****** MySQL ******
     ******************/
