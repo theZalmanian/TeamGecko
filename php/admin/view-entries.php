@@ -149,6 +149,11 @@
                 ?>
             </div>
             <div class="col-12 col-md-9 col-lg-9">
+				<div class="card p-3 mb-3">
+					<a class="btn btn-success w-100 py-2 border" id='export-spreadsheet'>
+						Export to .csv
+					</a>
+				</div>
 				<?php
 					/**
 					 * Global counter of # of HTML elements tracked by scrollspy
@@ -166,6 +171,8 @@
 
 	<!--Include dynamic scrollspy for mobile-->
 	<script src="/js/responsive-scrollspy-toggle.js"></script>
+
+	<script src="/js/export-to-spreadsheet.js"></script>
 </body>
 </html>
 
