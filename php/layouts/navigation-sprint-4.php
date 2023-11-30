@@ -14,8 +14,8 @@
      * and their corresponding links
      */
     $adminNavigationPages = array( 
-        "View Entries" => "/php/view-entries.php",
-        "Edit Requirements" => "/php/edit-requirements.php"
+        "View Entries" => "/php/admin/view-entries.php",
+        "Edit Requirements" => "/php/admin/edit-requirements.php"
     );
 ?>
 
