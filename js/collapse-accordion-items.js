@@ -2,7 +2,14 @@
 
 // when the page loads
 window.addEventListener('load', function () {
-    setupButtonOnClick("collapse-requirements", collapseAccordion);
+    const collapseButtons = getByID(accordionID).querySelectorAll('.accordion-item .accordion-button');
+
+    // run through all items in the given accordion
+    collapseButtons.forEach((currItem) => {
+        setupOnClick(currItem.id, toggleCollapseButtonVisibility);
+    });
+    
+    setupOnClick("collapse-requirements", collapseAccordion);
 })
 
 /**
@@ -12,7 +19,30 @@ const accordionID = "requirements-accordion";
 
 /**
  * 
- * @param {*} mode 
+ */
+let expandedItemCount = 0;
+
+function toggleCollapseButtonVisibility() { 
+    const collapseButton = this;
+
+    if (!collapseButton.classList.contains('collapsed')) {
+        // if any item is expanded, display the collapse button
+        getByID("collapse-requirements-container").classList.remove("d-none");
+
+        // increase the collapse counters
+        expandedItemCount++;
+    }
+    else {
+        expandedItemCount--;
+    }
+
+    if(expandedItemCount <= 0) {
+        getByID("collapse-requirements-container").classList.add("d-none");
+    }
+}
+
+/**
+ * 
  */
 function collapseAccordion() {   
     /**
@@ -35,11 +65,15 @@ function collapseAccordion() {
             collapseDiv.classList.remove('show');
         } 
     });
+
+    // now that all items are collapsed, remove the collapse button from the page,
+    // by setting it's containers display to none
+    getByID("collapse-requirements-container").classList.add("d-none");
 }
 
 /**
  * Shortened form of the document.getElementById method
- * @param elementID The element's id
+ * @param {string} elementID The element's id
  * @returns The corresponding HTML Element
  */
 function getByID(elementID) {
@@ -47,14 +81,14 @@ function getByID(elementID) {
 }
 
 /**
- * Sets up an onclick event for the given button to execute the given function
- * @param {number} buttonID The button's ID
- * @param useFunction The function to be called when button is clicked
+ * Sets up an onclick event for the given HTML element to execute the given function
+ * @param {string} elementID The element's id
+ * @param useFunction The function to be called when the element is clicked
  */
-function setupButtonOnClick(buttonID, useFunction) {
-    // get the button
-    const button = getByID(buttonID);
+function setupOnClick(elementID, useFunction) {
+    // get the element using it's ID
+    const element = getByID(elementID);
 
     // set it's onclick event
-    button.addEventListener("click", useFunction);
+    element.addEventListener("click", useFunction);
 }

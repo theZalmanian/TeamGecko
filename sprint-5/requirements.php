@@ -36,7 +36,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="card col-12 my-2 p-3">
+                <div class="card col-12 my-2 p-3 d-none" id="collapse-requirements-container">
                     <button id="collapse-requirements" class="btn btn-success w-100 py-2 border">
                         Collapse all Requirements
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
@@ -120,7 +120,7 @@
      */
     function generateAccordionHeader($title, $targetID) {
         return "<h2 class='accordion-header'>
-                    <button class='accordion-button collapsed' type='button'
+                    <button class='accordion-button collapsed' type='button' id='collapse-{$targetID}'
                             data-bs-toggle='collapse' data-bs-target='#{$targetID}'
                             aria-expanded='false' aria-controls='{$targetID}'>
                         {$title}
