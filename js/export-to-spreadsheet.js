@@ -38,12 +38,18 @@ function formatCSV() {
 
     // get and run through all clinical site containers on view-entries page
     for (const currContainer of getByClass("clinical-site-container")) {
+        // get the submissions container from within container
+        const submissionContainer = currContainer.querySelector(".submission-container");
+
+        // get the current clinical site's name
+        const clinicalSiteName = submissionContainer.querySelector("h1").innerText;
+
         // grab the <tbody>'s containing submission and average data for the current clinical site
-        const submissionsTbody = currContainer.querySelector(".submission-container table tbody");
-        const averagesTbody = currContainer.querySelector(".averages-container table tbody");
+        const submissionsTbody = submissionContainer.querySelector("table tbody");
+        // const averagesTbody = currContainer.querySelector(".averages-container table tbody");
 
         // run through all the rows, and process them for spreadsheet formatting
-        const submissionRows = processTable(submissionsTbody);
+        const submissionRows = processTable(submissionsTbody, clinicalSiteName);
         //const averagesRows = processTable(averagesTbody);
         
         // add them to the spreadsheet
@@ -55,7 +61,7 @@ function formatCSV() {
     return spreadsheetRows.join("\n"); 
 } 
 
-function processTable(currTbody) {
+function processTable(currTbody, clinicalSiteName) {
     // get all rows in current table
     const tableRows = currTbody.querySelectorAll("tr");
     
@@ -68,7 +74,10 @@ function processTable(currTbody) {
         const ratingColumns = tableRows[i].querySelectorAll("td.rating-column");
 
         // setup array to hold the values in each column
-        const rowValues = [];
+        const submissionColumns = [];
+
+        // add the clinical site name to each row as first column
+        submissionColumns.push(clinicalSiteName);
 
         // run through all rating columns in row
         for (let j = 0; j < ratingColumns.length; j++) {
@@ -77,11 +86,11 @@ function processTable(currTbody) {
             let columnValue = ratingColumns[j].classList.item(1);
 
             // will come back as value-#, only add the last character (the number), to array
-            rowValues.push( columnValue.substring( columnValue.length - 1 ) );
+            submissionColumns.push( columnValue.substring( columnValue.length - 1 ) );
         }
 
         // format all columns to one spreadsheet row
-        formattedTableRows.push(rowValues.join(","));
+        formattedTableRows.push(submissionColumns.join(","));
     }
 
     // return each spreadsheet row on it's own line
