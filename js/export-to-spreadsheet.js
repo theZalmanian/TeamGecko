@@ -21,18 +21,67 @@ function formatCSV() {
         "Preceptor Learning Objectives",
         "Recommend Site",
         "Site Or Staff Feedback",
-        "Instructor Feedback"
+        "Instructor Feedback",
+        "",
+        "",
+        "Clinical Site",
+        "Enjoyed Site Average",
+        "Staff Supportive Average",
+        "Site Learning Objectives Average",
+        "Preceptor Learning Objectives Average",
+        "Recommend Site Average",
     ];
 
     // add headers as first spreadsheet row
-    // csv format for headers is comma separated
+    // (csv format for headers is comma separated)
     spreadsheetRows.push( headers.join(',') );
-  
-    // add each submission row to 
+
+    // get and run through all clinical site containers on view-entries page
+    for (const currContainer of getByClass("clinical-site-container")) {
+        // grab the <tbody>'s containing submission and average data for the current clinical site
+        const submissionsTbody = currContainer.querySelector('.submission-container table tbody');
+        const averagesTbody = currContainer.querySelector('.averages-container table tbody');
+
+        // run through all the rows, and process them for spreadsheet formatting
+        const submissionRows = processTable(submissionsTbody);
+        //const averagesRows = processTable(averagesTbody);
+        
+        // add them to the spreadsheet
+        spreadsheetRows.push( submissionRows );
+        //spreadsheetRows.push( averagesRows.join(",") );
+    }
   
     // return all spreadsheet rows as a string, each row on it's own line
     return spreadsheetRows.join('\n') 
 } 
+
+function processTable(currTbody) {
+    // get all rows in current table
+    const tableRows = currTbody.getElementsByTagName('tr');
+
+    // setup array to hold the stripped columns
+    const rowDataArray = [];
+
+    // run through all rows
+    for (let i = 0; i < tableRows.length; i++) {
+        // get all columns in the current table
+        const currColumns = tableRows[i].getElementsByTagName('td');
+
+        // setup array to hold the stripped values in each column
+        const rowValues = [];
+
+        // run through all columns in row
+        for (let j = 0; j < currColumns.length; j++) {
+            // grab and store the value within the current <td> column
+            rowValues.push( currColumns[j].innerText.trim() );
+        }
+
+        // add all columns to one spreadsheet row
+        rowDataArray.push( rowValues.join(',') );
+    }
+
+    return rowDataArray;
+}
 
 function downloadCSV(dataCSV) { 
     // format the given converted submissions into a csv file
@@ -62,6 +111,15 @@ function downloadCSV(dataCSV) {
  */
 function getByID(elementID) {
     return document.getElementById(elementID);
+}
+
+/**
+ * Shortened form of the document.getElementsByClassName method
+ * @param {string} className The class name
+ * @returns An array of corresponding HTML Elements
+ */
+function getByClass(className) {
+    return document.getElementsByClassName(className);
 }
 
 /**

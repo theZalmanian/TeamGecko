@@ -360,26 +360,28 @@
 		$averageRatings = generateRatingAverages($ratingTotals, $submissionCount);
 
 		// generate and return table using given data
-		return "<div class='card mb-3 p-3 table-responsive' id='spy-{$scrollspyElementsCount}'>
-					<h1 class='text-center mb-3'>
-						<strong>{$clinicalSiteName}</strong>
-					</h1>
-					<table class='table table-bordered table-striped-columns align-middle m-0'>
-						<thead>
-							<tr class='text-center'>
-								<th>Status</th>
-								<th>Enjoyed Site</th>
-								<th>Staff Supportive</th>
-								<th>Site Learning <br> Objectives</th>
-								<th>Preceptor Learning <br> Objectives</th>
-								<th>Recommend Site</th>
-								<th>Feedback</th>
-							</tr>
-						</thead>
-						<tbody>
-							{$tableContent}
-						</tbody>
-					</table>
+		return "<div class='card mb-3 p-3 table-responsive clinical-site-container' id='spy-{$scrollspyElementsCount}'>
+					<div class='submission-container'>
+						<h1 class='text-center mb-3'>
+							<strong>{$clinicalSiteName}</strong>
+						</h1>
+						<table class='table table-bordered table-striped-columns align-middle m-0'>
+							<thead>
+								<tr class='text-center'>
+									<th>Status</th>
+									<th>Enjoyed Site</th>
+									<th>Staff Supportive</th>
+									<th>Site Learning <br> Objectives</th>
+									<th>Preceptor Learning <br> Objectives</th>
+									<th>Recommend Site</th>
+									<th>Feedback</th>
+								</tr>
+							</thead>
+							<tbody>
+								{$tableContent}
+							</tbody>
+						</table>
+					</div>
 					{$averageRatings}
 				</div>";
 	}
@@ -404,7 +406,7 @@
 		}
 
 		// add and return the average ratings in the following HTML structure
-		return "<div>
+		return "<div class='averages-container'>
 					<h1 class='text-center my-3'>
 						<strong>Average Ratings</strong>
 					</h1>
