@@ -237,7 +237,7 @@
 			"<td class='rating-column value-{$currSubmission["RecommendSite"]}'>" 
 				. generateStars($currSubmission["RecommendSite"]) . 
 			"</td>",
-			"<td>" 
+			"<td class='feedback-column'>" 
 				. displayFeedback($currSubmission["SiteOrStaffFeedback"], 
 								  $currSubmission["InstructorFeedback"]) . 
 			"</td>"
@@ -313,8 +313,16 @@
 		// grab the clinical site count for the modal ID
 		global $totalSubmissionCount;
 
-		// setup feedback Modal
-		$feedbackModal = "<div class='modal fade text-start' id='submission-{$totalSubmissionCount}-feedback-modal' tabindex='-1' aria-labelledby='feedback-modal-label-{$totalSubmissionCount}' aria-hidden='true'>
+		if(empty($siteOrStaffFeedback)) {
+			$siteOrStaffFeedback = "N/A";
+		}
+
+		if(empty($instructorFeedback)) {
+			$instructorFeedback = "N/A";
+		}
+
+		// generate and return feedback Modal
+		return "<div class='modal fade text-start' id='submission-{$totalSubmissionCount}-feedback-modal' tabindex='-1' aria-labelledby='feedback-modal-label-{$totalSubmissionCount}' aria-hidden='true'>
 							<div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
 								<div class='modal-content'>
 									<div class='modal-header'>
@@ -324,21 +332,15 @@
 										<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'>
 										</button>
 									</div>
-									<div class='modal-body'>";
-
-		// only display feedback if given
-		if(!empty($siteOrStaffFeedback)) {
-			$feedbackModal .= "<h6>". displayStrong("Site or Staff Feedback") . "</h6>
-								<p>{$siteOrStaffFeedback}</p>";
-		}
-
-		if(!empty($instructorFeedback)) {
-			$feedbackModal .= "<h6>". displayStrong("Instructor Feedback") . "</h6>
-								<p>{$instructorFeedback}</p>";
-		}
-
-		// close off and return feedback Modal
-		return $feedbackModal . "</div></div></div></div>";
+									<div class='modal-body'>
+										<h6>" . displayStrong("Site or Staff Feedback") . "</h6>
+										<p>{$siteOrStaffFeedback}</p>
+										<h6>" . displayStrong("Instructor Feedback") . "</h6>
+										<p>{$instructorFeedback}</p>
+									</div>
+								</div>
+							</div>
+						</div>";
 	}
 
 	/**

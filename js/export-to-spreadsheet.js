@@ -89,11 +89,33 @@ function processTable(currTbody, clinicalSiteName) {
             submissionColumns.push( columnValue.substring( columnValue.length - 1 ) );
         }
 
+        // get the feedback column
+        const feedbackColumn = tableRows[i].querySelector("td.feedback-column");
+
+        // if the feedback column has a modal
+        if(feedbackColumn.innerText != "N/A") {
+            // dig into the feedback modal and access it's body
+            const feedbackModalBody = feedbackColumn.querySelector(".modal .modal-dialog .modal-content .modal-body");
+            
+            // get both feedback values (feedback stored within <p> under <h6>)
+            const feedbackValue1 = feedbackModalBody.children[1].innerText;
+            const feedbackValue2 = feedbackModalBody.children[3].innerText;
+
+            // add feedback to spreadsheet
+            submissionColumns.push( `"${feedbackValue1}"` );
+            submissionColumns.push( `"${feedbackValue2}"` );
+        }
+        else {
+            submissionColumns.push( "N/A" );
+            submissionColumns.push( "N/A" );
+        }
+
         // format all columns to one spreadsheet row
         formattedTableRows.push(submissionColumns.join(","));
     }
 
     // return each spreadsheet row on it's own line
+    console.log(formattedTableRows.join("\n"));
     return formattedTableRows.join("\n");
 }
 
