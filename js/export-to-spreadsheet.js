@@ -1,7 +1,7 @@
 "use strict"; // make JS be more like Java
 
 // when the page loads
-window.addEventListener('load', function () {  
+window.addEventListener("load", function () {  
     let formattedRows = formatCSV(); 
 
     // setup export link
@@ -34,50 +34,54 @@ function formatCSV() {
 
     // add headers as first spreadsheet row
     // (csv format for headers is comma separated)
-    spreadsheetRows.push( headers.join(',') );
+    spreadsheetRows.push( headers.join(",") );
 
     // get and run through all clinical site containers on view-entries page
     for (const currContainer of getByClass("clinical-site-container")) {
         // grab the <tbody>'s containing submission and average data for the current clinical site
-        const submissionsTbody = currContainer.querySelector('.submission-container table tbody');
-        const averagesTbody = currContainer.querySelector('.averages-container table tbody');
+        const submissionsTbody = currContainer.querySelector(".submission-container table tbody");
+        const averagesTbody = currContainer.querySelector(".averages-container table tbody");
 
         // run through all the rows, and process them for spreadsheet formatting
         const submissionRows = processTable(submissionsTbody);
         //const averagesRows = processTable(averagesTbody);
         
         // add them to the spreadsheet
-        spreadsheetRows.push( submissionRows );
+        spreadsheetRows.push(submissionRows);
         //spreadsheetRows.push( averagesRows );
     }
   
     // return all spreadsheet rows as a string, each row on it's own line
-    return spreadsheetRows.join('\n') 
+    return spreadsheetRows.join("\n"); 
 } 
 
 function processTable(currTbody) {
     // get all rows in current table
-    const tableRows = currTbody.getElementsByTagName('tr');
-
-    // setup array to hold the stripped columns
+    const tableRows = currTbody.querySelectorAll("tr");
+    
+    // setup array to hold the rows formatted for spreadsheet
     const formattedTableRows = [];
 
-    // run through all rows
+    // run through all rows in current table
     for (let i = 0; i < tableRows.length; i++) {
-        // get all columns in the current table
-        const currColumns = tableRows[i].getElementsByTagName('td');
+        // get all rating (number) columns in the current row
+        const ratingColumns = tableRows[i].querySelectorAll("td.rating-column");
 
-        // setup array to hold the stripped values in each column
+        // setup array to hold the values in each column
         const rowValues = [];
 
-        // run through all columns in row
-        for (let j = 0; j < currColumns.length; j++) {
-            // grab and store the value within the current <td> column
-            rowValues.push( currColumns[j].innerText.trim() );
+        // run through all rating columns in row
+        for (let j = 0; j < ratingColumns.length; j++) {
+            // get the <td>'s class which stores the value of the rating column
+            // we are storing the value in the class, because they are displayed as ★'s on the page 
+            let columnValue = ratingColumns[j].classList.item(1);
+
+            // will come back as value-#, only add the last character (the number), to array
+            rowValues.push( columnValue.substring( columnValue.length - 1 ) );
         }
 
-        // add all columns to one spreadsheet row
-        formattedTableRows.push( rowValues.join(",") );
+        // format all columns to one spreadsheet row
+        formattedTableRows.push(rowValues.join(","));
     }
 
     // return each spreadsheet row on it's own line
@@ -86,19 +90,19 @@ function processTable(currTbody) {
 
 function downloadCSV(dataCSV) { 
     // format the given converted submissions into a csv file
-    const spreadsheetFile = new Blob([dataCSV], { type: 'text/csv' }); 
+    const spreadsheetFile = new Blob([dataCSV], { type: "text/csv" }); 
   
     // setup url to download newly created .csv file
-    const downloadURL = window.URL.createObjectURL(spreadsheetFile) 
+    const downloadURL = window.URL.createObjectURL(spreadsheetFile);
   
     // grab the export "button" on page
-    const exportToSpreadsheetButton = getByID('export-spreadsheet') 
+    const exportToSpreadsheetButton = getByID("export-spreadsheet"); 
   
     // set it's href to the download link 
-    exportToSpreadsheetButton.setAttribute('href', downloadURL) 
+    exportToSpreadsheetButton.setAttribute("href", downloadURL);
   
     // specify that it will be downloading the given file name
-    exportToSpreadsheetButton.setAttribute('download', 'nursing-nucleus-survey-submissions.csv'); 
+    exportToSpreadsheetButton.setAttribute("download", "nursing-nucleus-survey-submissions.csv"); 
 } 
 
 /******************

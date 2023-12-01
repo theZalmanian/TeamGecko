@@ -219,28 +219,39 @@
 	 * @return string an HTML table row containing the data formatted appropriately
 	 */
 	function generateFormattedSubmissionRow($currSubmission) {		
-		// format and store the remaining given data in array
-		$formattedData = array(
-			generateStars($currSubmission["EnjoyedSite"]),
-			generateStars($currSubmission["StaffSupportive"]),
-			generateStars($currSubmission["SiteLearningObjectives"]),
-			generateStars($currSubmission["PreceptorLearningObjectives"]),
-			generateStars($currSubmission["RecommendSite"]),
-			displayFeedback($currSubmission["SiteOrStaffFeedback"], $currSubmission["InstructorFeedback"])
+		// format and store the remaining given data in array,
+		// each column formatted in a <td>
+		$formattedColumns = array(
+			"<td class='rating-column value-{$currSubmission["EnjoyedSite"]}'>" 
+				. generateStars($currSubmission["EnjoyedSite"]) .          
+			"</td>",
+			"<td class='rating-column value-{$currSubmission["StaffSupportive"]}'>" 
+				. generateStars($currSubmission["StaffSupportive"]) . 
+			"</td>",
+			"<td class='rating-column value-{$currSubmission["SiteLearningObjectives"]}'>" 
+				. generateStars($currSubmission["SiteLearningObjectives"]) . 
+			"</td>",
+			"<td class='rating-column value-{$currSubmission["PreceptorLearningObjectives"]}'>" 
+				. generateStars($currSubmission["PreceptorLearningObjectives"]) . 
+			"</td>",
+			"<td class='rating-column value-{$currSubmission["RecommendSite"]}'>" 
+				. generateStars($currSubmission["RecommendSite"]) . 
+			"</td>",
+			"<td>" 
+				. displayFeedback($currSubmission["SiteOrStaffFeedback"], 
+								  $currSubmission["InstructorFeedback"]) . 
+			"</td>"
 		);
 
-		// wrap each formatted column in a <td>, and add to row
-		$formattedSubmissionRows = "";
-		for( $i = 0; $i < count($formattedData); $i++ ) {
-			$formattedSubmissionRows .= "<td>{$formattedData[$i]}</td>";
-		}
+		// add all columns to row
+		$rowContent = implode("", $formattedColumns);
 
 		// if the current row has not been displayed to an admin user before, setup notifiers
 		$seenStatusDisplay = displaySeenStatus($currSubmission["Seen"]);
-		$newSubmissionClass = $currSubmission["Seen"] ? "" : "bg-warning";
+		$newSubmissionClass = $currSubmission["Seen"] ? "" : " bg-warning";
 
 		// return all <td>'s wrapped in a <tr>
-		return "<tr class='text-center {$newSubmissionClass}'>{$seenStatusDisplay}" . $formattedSubmissionRows . "</tr>";
+		return "<tr class='text-center{$newSubmissionClass}'>{$seenStatusDisplay}" . $rowContent . "</tr>";
 	}
 
 	/**
