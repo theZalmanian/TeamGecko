@@ -48,7 +48,7 @@ function formatCSV() {
         
         // add them to the spreadsheet
         spreadsheetRows.push( submissionRows );
-        //spreadsheetRows.push( averagesRows.join(",") );
+        //spreadsheetRows.push( averagesRows );
     }
   
     // return all spreadsheet rows as a string, each row on it's own line
@@ -60,7 +60,7 @@ function processTable(currTbody) {
     const tableRows = currTbody.getElementsByTagName('tr');
 
     // setup array to hold the stripped columns
-    const rowDataArray = [];
+    const formattedTableRows = [];
 
     // run through all rows
     for (let i = 0; i < tableRows.length; i++) {
@@ -77,10 +77,11 @@ function processTable(currTbody) {
         }
 
         // add all columns to one spreadsheet row
-        rowDataArray.push( rowValues.join(',') );
+        formattedTableRows.push( rowValues.join(",") );
     }
 
-    return rowDataArray;
+    // return each spreadsheet row on it's own line
+    return formattedTableRows.join("\n");
 }
 
 function downloadCSV(dataCSV) { 
