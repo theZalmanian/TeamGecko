@@ -70,6 +70,7 @@
                                 Message <?php echo displayRequired(); ?>
                             </label>
                         </div>
+                    </div>
                     <div class="card p-3 my-1">
                         <button class="btn btn-success py-2 border" id="submit-contact">Submit</button>
                     </div>
