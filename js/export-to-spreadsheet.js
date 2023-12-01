@@ -21,15 +21,7 @@ function formatCSV() {
         "Preceptor Learning Objectives",
         "Recommend Site",
         "Site Or Staff Feedback",
-        "Instructor Feedback",
-        "",
-        "",
-        "Clinical Site",
-        "Enjoyed Site Average",
-        "Staff Supportive Average",
-        "Site Learning Objectives Average",
-        "Preceptor Learning Objectives Average",
-        "Recommend Site Average",
+        "Instructor Feedback"
     ];
 
     // add headers as first spreadsheet row
@@ -46,15 +38,12 @@ function formatCSV() {
 
         // grab the <tbody>'s containing submission and average data for the current clinical site
         const submissionsTbody = submissionContainer.querySelector("table tbody");
-        // const averagesTbody = currContainer.querySelector(".averages-container table tbody");
 
         // run through all the rows, and process them for spreadsheet formatting
         const submissionRows = processTable(submissionsTbody, clinicalSiteName);
-        //const averagesRows = processTable(averagesTbody);
         
         // add them to the spreadsheet
         spreadsheetRows.push(submissionRows);
-        //spreadsheetRows.push( averagesRows );
     }
   
     // return all spreadsheet rows as a string, each row on it's own line
@@ -101,7 +90,8 @@ function processTable(currTbody, clinicalSiteName) {
             const feedbackValue1 = feedbackModalBody.children[1].innerText;
             const feedbackValue2 = feedbackModalBody.children[3].innerText;
 
-            // add feedback to spreadsheet
+            // add feedback to spreadsheet 
+            // (wrapped in double quotes to indicate to CSV parser to ignore any commas)
             submissionColumns.push( `"${feedbackValue1}"` );
             submissionColumns.push( `"${feedbackValue2}"` );
         }
