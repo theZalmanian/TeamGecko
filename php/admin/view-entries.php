@@ -144,16 +144,19 @@
                     </button>
                 </div>
                 <?php 
-                    // generate scrollspy to track and link clinical sites
-                    echo generateBootstrapScrollspy($allClinicalSiteNames, "/sprint-5/experience.php");
+					// setup "download .csv" button
+					$exportButton = "<a class='col-12 btn btn-success py-2 mt-3 w-100 border' id='export-spreadsheet'>
+										Export to .csv
+									</a>";
+
+                    // generate scrollspy to track and link clinical sites, including the
+					// export button above the links
+                    echo generateBootstrapScrollspy($allClinicalSiteNames
+													, "/sprint-5/experience.php"
+													, $exportButton);
                 ?>
             </div>
             <div class="col-12 col-md-9 col-lg-9">
-				<div class="card p-3 mb-3">
-					<a class="btn btn-success w-100 py-2 border" id='export-spreadsheet'>
-						Export to .csv
-					</a>
-				</div>
 				<?php
 					/**
 					 * Global counter of # of HTML elements tracked by scrollspy

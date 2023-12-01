@@ -129,13 +129,14 @@
     
     /**
      * Generates and returns a Bootstrap Scrollspy tracking and linking to all items in the given array. 
-     * Contains a button at the bottom which contains the text "Exit" and will lead to the given path.
+     * Contains a button at the top which contains the text "Exit" and will lead to the given path.
      * The Scrollspy should be generated on the side of a page, and will stick to the top, following the scroll till bottom of page is reached
      * @param array $scrollspyDisplayTitles An array containing titles corresponding to the HTML content being tracked and linked to by Scrollspy
      * @param string $exitHref The destination path of the exit button
+     * @param string $otherContent (Optional) any other content you may want displayed after exit button and before links
      * @return string a Bootstrap Scrollspy tracking and linking to the given items
      */
-    function generateBootstrapScrollspy($scrollspyDisplayTitles, $exitHref) {
+    function generateBootstrapScrollspy($scrollspyDisplayTitles, $exitHref, $otherContent = "") {
         // setup links to all given items
         $scrollspyLinks = "";
         for ($i = 1; $i <= count($scrollspyDisplayTitles); $i++) {
@@ -150,6 +151,7 @@
                         <a class='col-12 btn btn-danger py-2 w-100 border' href='{$exitHref}'>
                             Exit
                         </a>
+                        {$otherContent}
                         <hr>
                         {$scrollspyLinks}
                     </nav>
