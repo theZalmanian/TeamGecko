@@ -81,6 +81,7 @@
         </div>
     </main>
 
+    <!--Include script that sets up "Collapse All" requirements button-->
     <script src="/js/collapse-accordion-items.js"></script>
 </body>
 </html>
