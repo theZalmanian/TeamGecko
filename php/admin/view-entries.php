@@ -1,5 +1,4 @@
 <?php
-//Start a session function
     // get access to all PHP helpers
     require_once("/home/geckosgr/public_html/initial.php");
 

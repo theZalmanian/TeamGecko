@@ -36,7 +36,7 @@
                     <a class="nav-link" href="/index.html">
                         Home
                     </a>
-                    <div class="nav-item dropdown">
+                    <div class="nav-item dropdown-center">
                         <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             Practice
                         </button>
@@ -54,93 +54,6 @@
                             </a>
                         </div>
                     </div>
-                    <div class="nav-item dropdown">
-                        <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sprint 1
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/sprint-1/requirements.html">
-                                Clinical Requirements
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item" href="/sprint-1/experience.html">
-                                Experience Survey
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item" href="/sprint-1/contact.html">
-                                Contact
-                            </a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sprint 2
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/sprint-2/requirements.html">
-                                Clinical Requirements
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item" href="/sprint-2/experience.html">
-                                Experience Survey
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item" href="/sprint-2/contact.html">
-                                Contact
-                            </a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sprint 3
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/sprint-3/requirements.php">
-                                Clinical Requirements
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item" href="/sprint-3/experience.php">
-                                Experience Survey
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item" href="/sprint-3/contact.php">
-                                Contact
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item" href="/php/view-entries.php">
-                                View Submissions
-                            </a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sprint 4
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/sprint-4/requirements.php">
-                                Clinical Requirements
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item" href="/sprint-4/experience.php">
-                                Experience Survey
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item" href="/sprint-4/contact.php">
-                                Contact
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item" href="/php/view-entries.php">
-                                View Submissions
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item" href="/php/edit-requirements.php">
-                                Edit Requirements
-                            </a>
-                        </div>
-                    </div>
-                    <a class="nav-link" href="#">
-                        Sprint 5
-                    </a>
                 </div>
             </div>
         </div>

@@ -1,4 +1,7 @@
 <?php
+    // start the session
+    session_start();
+
     // display errors (when needed)
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
