@@ -1,10 +1,16 @@
 <?php
+    // get access to all PHP helpers
+    require_once("/home/geckosgr/public_html/initial.php");
+
     // check if name cookie is stored
     $customerName = "";
     if( isset($_COOKIE["customer-name"]) ) {
         // get the customers name
         $customerName = $_COOKIE["customer-name"];
     }
+
+    // get admin flag from session
+    $isAdmin = $_SESSION["username"];
 ?>
 
 <!DOCTYPE html>
@@ -45,10 +51,12 @@
                                 Order Pizza
                             </a>
                             <hr class="dropdown-divider">
-                            <a class="dropdown-item" href="/practice/php/view-pizza-orders.php">
-                                View Pizza Orders
-                            </a>
-                            <hr class="dropdown-divider">
+                            <?php if($isAdmin === "christy@greenriver.edu") { ?>
+                                <a class="dropdown-item" href="/practice/php/view-pizza-orders.php">
+                                    View Pizza Orders
+                                </a>
+                                <hr class="dropdown-divider">
+                            <?php } ?>
                             <a class="dropdown-item" href="/practice/php/display-students.php">
                                 Display Students
                             </a>
