@@ -10,7 +10,7 @@
     }
 
     // get admin flag from session
-    $isAdmin = $_SESSION["username"];
+    $isAdmin = $_SESSION["pizza-admin"];
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +51,7 @@
                                 Order Pizza
                             </a>
                             <hr class="dropdown-divider">
-                            <?php if($isAdmin === "christy@greenriver.edu") { ?>
+                            <?php if($isAdmin) { ?>
                                 <a class="dropdown-item" href="/practice/php/view-pizza-orders.php">
                                     View Pizza Orders
                                 </a>

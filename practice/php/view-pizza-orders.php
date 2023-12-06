@@ -3,7 +3,7 @@
     require_once("/home/geckosgr/public_html/initial.php");
 
     // get admin flag from session
-    $isAdmin = $_SESSION["username"];
+    $isAdmin = $_SESSION["pizza-admin"];
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +25,7 @@
             </div>
             <div class="col-12 col-md-10">
                 <div class="container"> 
-                    <?php if($isAdmin === "christy@greenriver.edu") { ?>
+                    <?php if($isAdmin) { ?>
                         <div class="row d-flex justify-content-center"> 
                             <?php
                                 // connect to DB
