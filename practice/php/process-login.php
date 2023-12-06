@@ -27,12 +27,24 @@
         
                 if($userName === "admin" && $password === "admin") {
                     $_SESSION["pizza-admin"] = true;
+
+                    echo generateMessageWithLink("/practice/pizza-ordering/index.php", 
+                                                 "Home", 
+                                                 "Login successful"); 
+                }
+                
+                else {
+                    echo generateMessageWithLink("login.php", 
+                                                 "Login", 
+                                                 "Login failed"); 
                 }
             }
 
-            echo generateMessageWithLink("/practice/pizza-ordering/index.html", 
-                                         "Home", 
-                                         "Login successful"); 
+            else {
+                echo generateMessageWithLink("login.php", 
+                                             "Login", 
+                                             "Please log in first"); 
+            }
         ?>
     </main>
 </body>
