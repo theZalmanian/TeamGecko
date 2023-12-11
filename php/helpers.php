@@ -122,7 +122,7 @@
      * @return string a Bootstrap Alert containing the given HTML content
      */
     function generateBootstrapAlert($content) {
-        return "<div class='alert alert-light text-center my-3 border' role='alert'>
+        return "<div class='col-12 w-100 alert alert-light text-center my-3 border' role='alert'>
                     {$content}
                 </div>";
     }
@@ -252,7 +252,7 @@
         if ($result) {
             echo "<p>Query successful!</p>";
         } else {
-            echo "<p>Query failed" . mysqli_error($dbConnection)  . "</p>";
+            echo "<p>Query failed: " . mysqli_error($dbConnection)  . "</p>";
         }
 
         // close connection to DB

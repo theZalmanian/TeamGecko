@@ -379,11 +379,12 @@
 		// generate clinical site averages using given data
 		$averageRatings = generateRatingAverages($ratingTotals, $submissionCount);
 
-		$editButton = "<button type='button' class='btn btn-success border' data-bs-toggle='modal' 
+		$editButton = "<button type='button' class='btn rounded-5 mt-1' data-bs-toggle='modal' 
 							data-bs-target='#submission-{$scrollspyElementsCount}-edit-modal'
 							id='submission-{$scrollspyElementsCount}-edit-label'>
-							<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
-								<path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
+							<svg xmlns='http://www.w3.org/2000/svg' width='25' height='25' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
+								<path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
+								<path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z'/>
 							</svg>
 						</button>";
 
@@ -399,13 +400,14 @@
 									</button>
 								</div>
 								<div class='modal-body'>
-									<form action='/php/admin/save-requirements.php' method='post'>
-									<div class='input-group'>
-										<input type='text' class='form-control' value='{$clinicalSiteName}' aria-label='Clinical Site Name'>
-										<button type='submit'class='btn btn-success border'>
-											Submit
-										</button>
-									</div>
+									<form action='/php/admin/update-clinical-site-name.php' method='post'>
+										<input type='hidden' name='old-site-name' value='{$clinicalSiteName}'>
+										<div class='input-group'>
+											<input type='text' name='new-site-name' class='form-control' value='{$clinicalSiteName}' aria-label='Clinical Site Name'>
+											<button type='submit'class='btn btn-success border'>
+												Submit
+											</button>
+										</div>
 									</form>
 								</div>
 							</div>
@@ -414,12 +416,14 @@
 
 		// generate and return table using given data
 		return "<div class='card mb-3 p-3 table-responsive clinical-site-container' id='spy-{$scrollspyElementsCount}'>
-					<div class='submission-container'>
-						<h1 class='text-center mb-3'>
-							<strong>{$clinicalSiteName}</strong>
+					<div class='container submission-container'>
+						<div class='d-flex justify-content-center align-items-center mb-3 gap-1'>
+							<h1 class='text-center mb-0'>
+								<strong>{$clinicalSiteName}</strong>
+							</h1>
 							{$editButton}
-						</h1>
-						{$editModal}
+							{$editModal}
+						</div>
 						<table class='table table-bordered table-striped-columns align-middle m-0'>
 							<thead>
 								<tr class='text-center'>
