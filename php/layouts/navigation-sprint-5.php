@@ -39,6 +39,7 @@
                                     {$pageLabel}
                                 </a>";
                         }
+                        
                         // if the user is currently logged on as an admin
                         if ($_SESSION["Admin"]) {
                             // generate a link for each admin navigation page
@@ -62,8 +63,6 @@
                                         </div>
                                     </div>";
                         }
-
-
                     ?>
                     <a class="nav-link" id="theme-switcher">
                         <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
