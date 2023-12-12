@@ -174,9 +174,6 @@
                             </button>";
         }
 
-        /**
-         * The modal itself, generated using the given ID, title, and content
-         */
         $modal = "<div class='modal fade text-start' id='{$modalID}' tabindex='-1' aria-labelledby='{$modalID}-label' aria-hidden='true'>
                         <div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
                             <div class='modal-content'>
@@ -194,11 +191,9 @@
                         </div>
                     </div>";
 
-        // return the modal trigger and modal itself encased together in a div
-		return "<div>
-                    {$modalButton}
-                    {$modal}
-                </div>";
+        // return the modal trigger and modal together
+		return "{$modalButton}
+                {$modal}";
     }
 
     /**

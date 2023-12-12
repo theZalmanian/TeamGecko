@@ -82,7 +82,8 @@
                         }
                     ?>
                 </div>
-            <?php } 
+            <?php 
+                } 
 
                 elseif($_GET["operation"] === "edit-site-name") {
             ?>
@@ -118,6 +119,34 @@
                             // display success, and link to View Entries page
                             echo generateMessageWithLink("view-entries.php", "View Entries",
                                                          "Name updated successfully");
+                        }
+    
+                        else {
+                            echo generateMessage("Invalid submission");
+                        }
+                    ?>
+                </div>
+            <?php 
+                }
+            
+                elseif($_GET["operation"] === "add-requirement") { 
+            ?>
+                <div class="col-12 col-md-8">
+                    <?php
+                        if( true ) {
+                            $result = executeQuery("INSERT INTO ClinicalRequirements(RequirementTitle, RequirementNotes, Option1, Option2) 
+                                                        VALUES ('{$_POST["RequirementTitle"]}', '{$_POST["RequirementNotes"]}'
+                                                                    , '{$_POST["Option1"]}', '{$_POST["Option2"]}')");
+                            
+                        
+                            if(!$result) { 
+                                echo generateMessage("Failed to add requirement: {$result}",
+                                                     "ERROR: Insert Failed");
+                            }
+                            
+                            // display success, and link to View Entries page
+                            echo generateMessageWithLink("edit-requirements.php", "Edit Requirements",
+                                                         "Requirement added successfully");
                         }
     
                         else {
