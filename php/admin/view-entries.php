@@ -132,46 +132,61 @@
 <body data-bs-spy='scroll' data-bs-target='#scrollspy' data-bs-smooth-scroll='true'>
 	<main class="container mt-3">
 		<div class="row">
-			<div class="col-md-3 col-lg-3">
-                <!--Button only accessible on mobile layout, used to toggle scrollspy-->
-                <div class="card col-12 d-md-none mb-3 p-3">
-                    <button id="scrollspy-toggler" class="btn btn-success w-100 py-2 border">
-                        Go to Clinical Site
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
-                        </svg>
-                    </button>
-                </div>
-                <?php 
-					// setup "download .csv" button
-					$exportButton = "<a class='col-12 btn btn-success py-2 mt-3 w-100 border' id='export-spreadsheet'>
-										Export to Spreadsheet
-										<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-download' viewBox='0 0 16 16'>
-											<path d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5'/>
-											<path d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z'/>
-										</svg>
-									</a>";
+			<?php if($_SESSION["Admin"]) { ?>
+				<div class="col-md-3 col-lg-3">
+					<!--Button only accessible on mobile layout, used to toggle scrollspy-->
+					<div class="card col-12 d-md-none mb-3 p-3">
+						<button id="scrollspy-toggler" class="btn btn-success w-100 py-2 border">
+							Go to Clinical Site
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
+								<path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
+							</svg>
+						</button>
+					</div>
+					<?php 
+						// setup "download .csv" button
+						$exportButton = "<a class='col-12 btn btn-success py-2 mt-3 w-100 border' id='export-spreadsheet'>
+											Export to Spreadsheet
+											<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-download' viewBox='0 0 16 16'>
+												<path d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5'/>
+												<path d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z'/>
+											</svg>
+										</a>";
 
-                    // generate scrollspy to track and link clinical sites, including the
-					// export button above the links
-                    echo generateBootstrapScrollspy($allClinicalSiteNames
-													, "/sprint-5/experience.php"
-													, $exportButton);
-                ?>
-            </div>
-            <div class="col-12 col-md-9 col-lg-9">
-				<?php
-					/**
-					 * Global counter of # of HTML elements tracked by scrollspy
-					 */
-					$scrollspyElementsCount = 0;
+						// generate scrollspy to track and link clinical sites, including the
+						// export button above the links
+						echo generateBootstrapScrollspy($allClinicalSiteNames
+														, "/sprint-5/experience.php"
+														, $exportButton);
+					?>
+				</div>
+				<div class="col-12 col-md-9 col-lg-9">
+					<?php
+						/**
+						 * Global counter of # of HTML elements tracked by scrollspy
+						 */
+						$scrollspyElementsCount = 0;
 
-					// run through and display all generated clinical site cards
-					foreach ($allClinicalSiteCards as $currClinicalSiteCard) {
-						echo $currClinicalSiteCard;
-					}
-				?>
+						// run through and display all generated clinical site cards
+						foreach ($allClinicalSiteCards as $currClinicalSiteCard) {
+							echo $currClinicalSiteCard;
+						}
+					?>
+				</div>
 			</div>
+			<?php 
+				} 
+			
+				else {
+					echo "<div class='col-md-3 col-lg-3'>
+						</div>
+						<div class='col-12 col-md-6 col-lg-6'>" 
+							. displayAccessDenied("login.php", "Login") .
+						"</div>
+						<div class='col-md-3 col-lg-3'>
+						</div>";
+				}
+			?>
 		</div>
 	</main>
 

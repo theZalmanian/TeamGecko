@@ -53,40 +53,54 @@
 <body data-bs-spy='scroll' data-bs-target='#scrollspy' data-bs-smooth-scroll='true'>
 	<main class="container mt-3">
         <div class="row">
-            <div class="col-md-3 col-lg-3">
-                <!--Button only accessible on mobile layout, used to toggle scrollspy-->
-                <div class="card col-12 d-md-none mb-3 p-3">
-                    <button id="scrollspy-toggler" class="btn btn-success w-100 py-2 border">
-                        Go to Clinical Site
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
-                        </svg>
-                    </button>
-                </div>
-                <?php 
-                    // generate scrollspy to track and link requirements
-                    echo generateBootstrapScrollspy($allRequirementTitles, "/sprint-5/requirements.php");
-                ?>
-            </div>
-            <div class="col-12 col-md-9 col-lg-9">
-                <?php echo generateAddRequirementModal(); ?>
-                <form class="container" action="/php/admin/update-database.php?operation=edit-requirements" method="post">
-                    <input type="hidden" value="confirmed" name="confirm-edits">
-                    <div class="row justify-content-center">
-                        <?php
-                            // run through and display all generated requirement cards
-                            foreach ($allRequirementCards as $currRequirementCard) {
-                                echo $currRequirementCard;
-                            }
-                        ?>
-                        <div class="card col-12 col-md-10 p-3 border-bottom-0 rounded-0 sticky-bottom">
-                            <button type="submit" class="col-12 btn btn-success py-2 border" id="save-requirements">
-                                Save All Changes
-                            </button>
-                        </div>
+            <?php if($_SESSION["Admin"]) { ?>
+                <div class="col-md-3 col-lg-3">
+                    <!--Button only accessible on mobile layout, used to toggle scrollspy-->
+                    <div class="card col-12 d-md-none mb-3 p-3">
+                        <button id="scrollspy-toggler" class="btn btn-success w-100 py-2 border">
+                            Go to Clinical Site
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
+                            </svg>
+                        </button>
                     </div>
-                </form>
-            </div>
+                    <?php 
+                        // generate scrollspy to track and link requirements
+                        echo generateBootstrapScrollspy($allRequirementTitles, "/sprint-5/requirements.php");
+                    ?>
+                </div>
+                <div class="col-12 col-md-9 col-lg-9">
+                    <?php echo generateAddRequirementModal(); ?>
+                    <form class="container" action="/php/admin/update-database.php?operation=edit-requirements" method="post">
+                        <input type="hidden" value="confirmed" name="confirm-edits">
+                        <div class="row justify-content-center">
+                            <?php
+                                // run through and display all generated requirement cards
+                                foreach ($allRequirementCards as $currRequirementCard) {
+                                    echo $currRequirementCard;
+                                }
+                            ?>
+                            <div class="card col-12 col-md-10 p-3 border-bottom-0 rounded-0 sticky-bottom">
+                                <button type="submit" class="col-12 btn btn-success py-2 border" id="save-requirements">
+                                    Save All Changes
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            <?php 
+				} 
+			
+				else {
+					echo "<div class='col-md-3 col-lg-3'>
+						</div>
+						<div class='col-12 col-md-6 col-lg-6'>" 
+							. displayAccessDenied("login.php", "Login") .
+						"</div>
+						<div class='col-md-3 col-lg-3'>
+						</div>";
+				}
+			?>
         </div>
     </main>
 
