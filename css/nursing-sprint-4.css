@@ -105,6 +105,15 @@ a.spy-link:hover
 ***** GENERAL *****
 ******************/
 
+#admin-link {
+    text-decoration: none;
+    color: var(--nursing-secondary-color-variant);
+}
+
+#copyright {
+    background-color: var(--nursing-secondary-color);
+}
+
 body {
     background: var(--nursing-primary-color);
 }

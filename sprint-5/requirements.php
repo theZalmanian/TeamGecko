@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-1 col-lg-2">
             </div>
-            <div class="col-12 col-md-10 col-lg-8 mb-3">
+            <div class="col-12 col-md-10 col-lg-8">
                 <h1 class="card col-12 py-3 mb-1 text-center">
                     Green River College
                     <br>
@@ -80,6 +80,10 @@
             </div>
         </div>
     </main>
+    <?php 
+        // display site footer
+        require_once(LAYOUTS_PATH . "/nursing-footer.php");
+    ?>
 
     <!--Include script that sets up "Collapse All" requirements button-->
     <script src="/js/collapse-accordion-items.js"></script>

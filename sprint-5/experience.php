@@ -51,7 +51,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <form class="mb-3" action="/php/confirm.php" method="post" id="experience-form">
+                        <form action="/php/confirm.php" method="post" id="experience-form">
                             <!-- Question 1 -->
                             <div class="card p-3 my-1">
                                 <label class="mb-2" for="q1-site-attended">
@@ -254,5 +254,9 @@
             </div>
         </div>  
     </main>
+    <?php 
+        // display site footer
+        require_once(LAYOUTS_PATH . "/nursing-footer.php");
+    ?>
 </body>
 </html>
