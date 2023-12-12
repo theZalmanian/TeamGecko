@@ -86,6 +86,9 @@ function collapseAccordion() {
     // now that all items are collapsed, remove the collapse button from the page,
     // by setting it's container's display to none
     getByID("collapse-requirements-container").classList.add("d-none");
+
+    // reset counter 
+    expandedItemCount = 0;
 }
 
 /**
