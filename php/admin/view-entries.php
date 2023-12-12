@@ -292,62 +292,14 @@
 
 		// if feedback was given
 		if(!empty($siteOrStaffFeedback) || !empty($instructorFeedback)) {
-			// generate feedback Modal
-			$feedbackModal = generateFeedbackModal($siteOrStaffFeedback, $instructorFeedback);
-
-			// return the generated Modal and corresponding toggle button
-			return "<button type='button' class='btn btn-success border' data-bs-toggle='modal' 
-						data-bs-target='#submission-{$totalSubmissionCount}-feedback-modal'>
-						View
-					</button>
-					{$feedbackModal}";
+			// generate and return the modal and corresponding toggle button
+			return generateFeedbackModal($siteOrStaffFeedback, $instructorFeedback);
 		}
 
 		// otherwise, display a "no feedback" indicator
 		else {
 			return "N/A";
 		}
-	}
-
-	/**
-	 * Generates a Bootstrap Modal displaying the given feedback. As both fields are optional, only the sections given (not empty) are displayed
-	 * @param string $siteOrStaffFeedback Feedback regarding the clinical site or the staff working there (Optional)
-	 * @param string $instructorFeedback Feedback regarding the students instructor at the clinical site (Optional)
-	 * @global int $totalSubmissionCount Used for Modal ID
-	 * @return string a Bootstrap modal displaying the given feedback
-	 */
-	function generateFeedbackModal($siteOrStaffFeedback, $instructorFeedback) {
-		// grab the clinical site count for the modal ID
-		global $totalSubmissionCount;
-
-		if(empty($siteOrStaffFeedback)) {
-			$siteOrStaffFeedback = "N/A";
-		}
-
-		if(empty($instructorFeedback)) {
-			$instructorFeedback = "N/A";
-		}
-
-		// generate and return feedback Modal
-		return "<div class='modal fade text-start' id='submission-{$totalSubmissionCount}-feedback-modal' tabindex='-1' aria-labelledby='feedback-modal-label-{$totalSubmissionCount}' aria-hidden='true'>
-					<div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
-						<div class='modal-content'>
-							<div class='modal-header'>
-								<h1 class='modal-title fs-5' id='submission-{$totalSubmissionCount}-feedback-modal'>
-									" . displayStrong("Feedback") . "
-								</h1>
-								<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'>
-								</button>
-							</div>
-							<div class='modal-body'>
-								<h6>" . displayStrong("Site or Staff Feedback") . "</h6>
-								<p>{$siteOrStaffFeedback}</p>
-								<h6>" . displayStrong("Instructor Feedback") . "</h6>
-								<p>{$instructorFeedback}</p>
-							</div>
-						</div>
-					</div>
-				</div>";
 	}
 
 	/**
@@ -379,40 +331,7 @@
 		// generate clinical site averages using given data
 		$averageRatings = generateRatingAverages($ratingTotals, $submissionCount);
 
-		$editButton = "<button type='button' class='btn rounded-5 mt-1' data-bs-toggle='modal' 
-							data-bs-target='#submission-{$scrollspyElementsCount}-edit-modal'
-							id='submission-{$scrollspyElementsCount}-edit-label'>
-							<svg xmlns='http://www.w3.org/2000/svg' width='25' height='25' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
-								<path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
-								<path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z'/>
-							</svg>
-						</button>";
-
-		$editModal = "<div class='modal fade text-start' id='submission-{$scrollspyElementsCount}-edit-modal' 
-						tabindex='-1' aria-labelledby='submission-{$scrollspyElementsCount}-edit-label' aria-hidden='true'>
-						<div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
-							<div class='modal-content'>
-								<div class='modal-header'>
-									<h1 class='modal-title fs-5' id='submission-{$scrollspyElementsCount}-feedback-modal'>
-										Edit Site Name
-									</h1>
-									<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'>
-									</button>
-								</div>
-								<div class='modal-body'>
-									<form action='/php/admin/update-clinical-site-name.php' method='post'>
-										<input type='hidden' name='old-site-name' value='{$clinicalSiteName}'>
-										<div class='input-group'>
-											<input type='text' name='new-site-name' class='form-control' value='{$clinicalSiteName}' aria-label='Clinical Site Name'>
-											<button type='submit'class='btn btn-success border'>
-												Submit
-											</button>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>";
+		$editModal = generateEditSiteNameModal($clinicalSiteName);
 
 		// generate and return table using given data
 		return "<div class='card mb-3 p-3 table-responsive clinical-site-container' id='spy-{$scrollspyElementsCount}'>
@@ -421,7 +340,6 @@
 							<h1 class='text-center mb-0'>
 								<strong>{$clinicalSiteName}</strong>
 							</h1>
-							{$editButton}
 							{$editModal}
 						</div>
 						<table class='table table-bordered table-striped-columns align-middle m-0'>
@@ -443,6 +361,65 @@
 					</div>
 					{$averageRatings}
 				</div>";
+	}
+
+	/**
+	 * 
+	 */
+	function generateEditSiteNameModal($clinicalSiteName) {
+		global $scrollspyElementsCount;
+
+		$modalID = "submission-{$scrollspyElementsCount}-edit-name";
+		
+		$editButton = "<button type='button' class='btn rounded-5 mt-1' 
+							data-bs-toggle='modal' data-bs-target='#{$modalID}'>
+							<svg xmlns='http://www.w3.org/2000/svg' width='25' height='25' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
+								<path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
+								<path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z'/>
+							</svg>
+						</button>";
+
+        $editForm = "<form action='/php/admin/update-clinical-site-name.php' method='post'>
+						<input type='hidden' name='old-name' value='{$clinicalSiteName}'>
+						<div class='input-group'>
+							<input type='text' name='new-name' class='form-control' 
+								value='{$clinicalSiteName}' aria-label='Clinical Site Name'>
+							<button type='submit' class='btn btn-success border'>
+								Submit
+							</button>
+						</div>
+					</form>";
+
+        return generateBootstrapModal($modalID, displayStrong("Edit Site Name")
+										, $editForm, $editButton);
+	}
+
+	/**
+	 * Generates a Bootstrap Modal displaying the given feedback. As both fields are optional, only the sections given (not empty) are displayed
+	 * @param string $siteOrStaffFeedback Feedback regarding the clinical site or the staff working there (Optional)
+	 * @param string $instructorFeedback Feedback regarding the students instructor at the clinical site (Optional)
+	 * @global int $totalSubmissionCount Used for Modal ID
+	 * @return string a Bootstrap modal displaying the given feedback
+	 */
+	function generateFeedbackModal($siteOrStaffFeedback, $instructorFeedback) {
+		global $totalSubmissionCount;
+		
+		if(empty($siteOrStaffFeedback)) {
+			$siteOrStaffFeedback = "N/A";
+		}
+
+		if(empty($instructorFeedback)) {
+			$instructorFeedback = "N/A";
+		}
+
+        $bodyContent = "<h6>" . displayStrong("Site or Staff Feedback") . "</h6>
+                        <p>{$siteOrStaffFeedback}</p>
+                        <h6>" . displayStrong("Instructor Feedback") . "</h6>
+                        <p>{$instructorFeedback}</p>";
+
+        return generateBootstrapModal("submission-{$totalSubmissionCount}-feedback"
+										, displayStrong("Feedback")
+										, $bodyContent);
 	}
 
 	/**

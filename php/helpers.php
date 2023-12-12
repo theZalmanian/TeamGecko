@@ -159,6 +159,49 @@
     }
 
     /**
+     * 
+     * @param string $modalID
+     * @param string $modalTitle
+     * @param string $modalBodyContent
+     * @param string $modalButton
+     * @return string
+     */
+    function generateBootstrapModal($modalID, $modalTitle, $modalBodyContent, $modalButton = "") {
+        if(empty($modalButton)) {
+            $modalButton = "<button type='button' class='btn btn-success border' 
+                                data-bs-toggle='modal' data-bs-target='#{$modalID}'>
+                                View
+                            </button>";
+        }
+
+        /**
+         * The modal itself, generated using the given ID, title, and content
+         */
+        $modal = "<div class='modal fade text-start' id='{$modalID}' tabindex='-1' aria-labelledby='{$modalID}-label' aria-hidden='true'>
+                        <div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <h1 class='modal-title fs-5' id='{$modalID}-label'>
+                                        {$modalTitle}
+                                    </h1>
+                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'>
+                                    </button>
+                                </div>
+                                <div class='modal-body'>
+                                    {$modalBodyContent}
+                                </div>
+                            </div>
+                        </div>
+                    </div>";
+
+        // return the modal trigger and modal itself encased together in a div
+		return "<div>
+                    {$modalButton}
+                    {$modal}
+                </div>";
+    }
+
+    /**
      * Generates and returns an HTML span signifying that an input is required
      * @return string an HTML span signifying that an input is required
      */
