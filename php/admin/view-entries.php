@@ -379,7 +379,7 @@
 							</svg>
 						</button>";
 
-        $editForm = "<form action='/php/admin/update-clinical-site-name.php' method='post'>
+        $editForm = "<form action='/php/admin/update-database.php?operation=edit-site-name' method='post'>
 						<input type='hidden' name='old-name' value='{$clinicalSiteName}'>
 						<div class='input-group'>
 							<input type='text' name='new-name' class='form-control' 
