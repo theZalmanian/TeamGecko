@@ -145,13 +145,15 @@
         $accordionBody = "<div class='accordion-body p-0'>";
         
         // if a note was given
+        $notePresent = false;
         if(!empty($note)) {
             // generate and add it to the body at the top
             $accordionBody .= generateRequirementNotes($note);
+            $notePresent = true;
         }
 
         // generate and add all given options to body, then close off and return it
-        return $accordionBody . generateRequirementData($option1, $option2) . "</div>";
+        return $accordionBody . generateRequirementData($option1, $option2, $notePresent) . "</div>";
     }
 
     /** 
@@ -173,9 +175,13 @@
      * @param string $option2 The second requirement option (Optional: null)
      * @return string an HTML <div> containing the given option/s
      */
-    function generateRequirementData($option1, $option2 = "") {
+    function generateRequirementData($option1, $option2 = "", $notePresent) {
         // start off data content
-        $dataContent = "<div class='p-3 pt-0 m-0 requirement-data'>";
+        $dataContent = "<div class='p-3 m-0 requirement-data'>";
+
+        if($notePresent) {
+            $dataContent = "<div class='p-3 pt-0 m-0 requirement-data'>";
+        }
 
         // generate and add the first option to display (required)
         $dataContent .= generateRequirementOption($option1);
