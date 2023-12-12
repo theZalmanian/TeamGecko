@@ -15,7 +15,8 @@
      */
     $adminNavigationPages = array( 
         "View Entries" => "/php/admin/view-entries.php",
-        "Edit Requirements" => "/php/admin/edit-requirements.php"
+        "Edit Requirements" => "/php/admin/edit-requirements.php",
+        "Log Out" => "/php/admin/logout.php"
     );
 ?>
 
@@ -35,30 +36,34 @@
                         // generate a link for each public navigation page
                         foreach ($publicNavigationPages as $pageLabel => $pageLink) {
                             echo "<a class='nav-link" . isActive($pageLabel) . "' href='{$pageLink}'>
-                                    {$pageLabel}       
+                                    {$pageLabel}
                                 </a>";
-                        } 
-
+                        }
                         // if the user is currently logged on as an admin
-                        if (true) {
-                            // generate a link for each ADMIN navigation page
-                            $adminLinks = "";
+                        if ($_SESSION["Admin"]) {
+                            // generate a link for each admin navigation page
+                            $adminLinks = array();
                             foreach ($adminNavigationPages as $pageLabel => $pageLink) {
-                                $adminLinks .= "<a class='dropdown-item" . isActive($pageLabel) . "' href='{$pageLink}'>
+                                $adminLinks[] = "<a class='dropdown-item" . isActive($pageLabel) . "' href='{$pageLink}'>
                                                     {$pageLabel}       
                                                 </a>";
-                            } 
+                            }
+
+                            // break the admin links into a string separated by <hr>'s
+                            $formattedAdminLinks = implode("<hr class='dropdown-divider'>", $adminLinks);
 
                             echo "<div class='dropdown-center nav-item'>
-                                    <button class='nav-link dropdown-toggle' type='button' 
-                                        data-bs-toggle='dropdown' aria-expanded='false'>
-                                        " . displayStrong("Admin") . "
-                                    </button>
-                                    <div class='dropdown-menu'>
-                                        {$adminLinks}
-                                    </div>
-                                </div>";
+                                        <button class='nav-link dropdown-toggle' type='button' 
+                                            data-bs-toggle='dropdown' aria-expanded='false'>
+                                            " . displayStrong("Admin") . "
+                                        </button>
+                                        <div class='dropdown-menu'>
+                                            {$formattedAdminLinks}
+                                        </div>
+                                    </div>";
                         }
+
+
                     ?>
                     <a class="nav-link" id="theme-switcher">
                         <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
