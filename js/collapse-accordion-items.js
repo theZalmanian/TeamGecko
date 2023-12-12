@@ -58,7 +58,8 @@ function updateCollapseButtonVisibility() {
 }
 
 /**
- * 
+ * Runs through all accordion items and ensures they are collapsed.
+ * Once all items are collapsed, makes the collapse button disappear
  */
 function collapseAccordion() {   
     /**
