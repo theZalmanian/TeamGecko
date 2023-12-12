@@ -70,7 +70,9 @@
                     ?>
                 </div>
                 <div class="col-12 col-md-9 col-lg-9">
-                    <?php echo generateAddRequirementModal(); ?>
+                    <div class="row justify-content-center">
+                        <?php echo generateAddRequirementModal(); ?>
+                    </div>
                     <form class="container" action="/php/admin/update-database.php?operation=edit-requirements" method="post">
                         <input type="hidden" value="confirmed" name="confirm-edits">
                         <div class="row justify-content-center">
