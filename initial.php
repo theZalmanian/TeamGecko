@@ -3,8 +3,8 @@
     session_start();
 
     // display errors (when needed)
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
+    // error_reporting(E_ALL);
+    // ini_set('display_errors', 1);
 
     // define path constants
     define("PUBLIC_HTML_PATH", dirname(__FILE__));

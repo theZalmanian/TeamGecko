@@ -32,7 +32,9 @@
                                                         WHERE Email = '{$email}' 
                                                             AND Password = '{$password}'");
 
-                        if($credentialsValid) {
+                        $credentialsValid = mysqli_fetch_assoc($credentialsValid);
+
+                        if(!empty($credentialsValid)) {
                             // set them as admin in session
                             $_SESSION["Admin"] = true;
 
